@@ -1,3 +1,12 @@
+local utils = require("dreadster.utils")
+local module_name = "null-ls"
+local status_ok, _ = pcall(require, module_name)
+
+if not status_ok then
+	utils.log_module_failed_load(module_name)
+	return
+end
+
 local function addIfExecutable(list, command, value) 
     if vim.fn.executable(command) == 1 then
         table.insert(list, value)
