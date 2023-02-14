@@ -11,7 +11,7 @@ local mason_lsp = require("mason-lspconfig")
 
 mason_lsp.setup({
 	ensure_installed = {
-		"sumneko_lua",
+		"lua_ls",
 		"clangd",
 		"cmake",
 		"tsserver",
@@ -55,12 +55,13 @@ mason_lsp.setup_handlers({
 	function (server_name) -- default handler (optional)
 		lspconfig[server_name].setup({
 			capabilities = capabilities,
-			on_attach = on_attach
+			on_attach = on_attach,
+			flags = lsp_flags
 		})
 	end,
 
-	["sumneko_lua"] = function ()
-		lspconfig.sumneko_lua.setup({
+	["lua_ls"] = function ()
+		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = {
