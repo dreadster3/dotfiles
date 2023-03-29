@@ -19,3 +19,11 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.g.completeopt = {"menu", "menuone", "noselect" }
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = {"*.tf"},
+	callback  = function ()
+		vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
+		vim.api.nvim_buf_set_option(0, "filetype", "terraform")
+	end
+})
