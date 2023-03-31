@@ -97,5 +97,7 @@ return require('packer').startup(function(use)
 	use 'petertriho/nvim-scrollbar'
 
 	use { "iamcco/markdown-preview.nvim", run = "cd app && npm install"}
+
+	use "github/copilot.vim"
 end)
 

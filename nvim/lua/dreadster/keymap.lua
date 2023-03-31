@@ -22,6 +22,7 @@ nnoremap("<F10>", ":lua require('dap').step_over()<CR>")
 nnoremap("<F11>", ":lua require('dap').step_into()<CR>")
 nnoremap("<F12>", ":lua require('dap').step_out()<CR>")
 nnoremap("<leader>b", ":lua require('dap').toggle_breakpoint()<CR>")
+nnoremap("<C-a>", "ggvG")
 
 
 nnoremap('<C-f>', ':RnvimrToggle<CR>')
@@ -30,13 +31,15 @@ tnoremap('<C-r>', '<C-\\><C-n>:RnvimrResize<CR>')
 tnoremap('<C-f>', '<C-\\><C-n>:RnvimrToggle<CR>')
 
 function _G.set_terminal_keymaps()
-  local opts = { noremap = true }
-  -- vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  local opts = { noremap = true, buffer = 0 }
   -- vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-  -- vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
 nnoremap('<C-/>', ":CommentToggle<CR>")

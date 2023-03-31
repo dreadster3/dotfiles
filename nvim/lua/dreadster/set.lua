@@ -20,6 +20,8 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.g.completeopt = {"menu", "menuone", "noselect" }
 
+vim.g.copilot_assume_mapped = true
+
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = {"*.tf"},
 	callback  = function ()

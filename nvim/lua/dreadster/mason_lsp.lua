@@ -69,6 +69,9 @@ mason_lsp.setup_handlers({
 					diagnostics = {
 						globals = { 'vim' }
 					},
+					workspace = {
+						checkThirdParty = false
+					}
 				}
 			}
 		})
