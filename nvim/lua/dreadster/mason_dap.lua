@@ -14,11 +14,14 @@ mason_dap.setup({
 	ensure_installed = {
 		"python"
 	},
-	automatic_setup = true
+	automatic_setup = true,
+	handlers = {
+		function(config)
+          -- all sources with no handler get passed here
+
+          -- Keep original functionality
+          require('mason-nvim-dap').default_setup(config)
+        end,
+	}
 })
 
-mason_dap.setup_handlers({
-	function (source_name)
-		require("mason-nvim-dap.automatic_setup")(source_name)
-	end,
-})
