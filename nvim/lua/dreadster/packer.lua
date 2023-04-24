@@ -99,5 +99,8 @@ return require('packer').startup(function(use)
 	use { "iamcco/markdown-preview.nvim", run = "cd app && npm install"}
 
 	use "github/copilot.vim"
+	
+	-- Rust tools
+	use 'simrat39/rust-tools.nvim'
 end)
 

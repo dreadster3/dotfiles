@@ -51,6 +51,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
 end
 
+
 mason_lsp.setup_handlers({
 	function (server_name) -- default handler (optional)
 		lspconfig[server_name].setup({
@@ -83,6 +84,10 @@ mason_lsp.setup_handlers({
 			on_attach = on_attach,
 			single_file_support = true
 		})
+	end,
+
+	["rust_analyzer"] = function()
+		require('dreadster.rust_tools')
 	end
 })
 
