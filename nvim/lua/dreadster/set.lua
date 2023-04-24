@@ -18,7 +18,7 @@ vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.g.completeopt = {"menu", "menuone", "noselect" }
+vim.g.completeopt = {"menuone", "noselect", "noinsert" }
 
 vim.g.copilot_assume_mapped = true
 
