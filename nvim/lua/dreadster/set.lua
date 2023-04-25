@@ -29,3 +29,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.api.nvim_buf_set_option(0, "filetype", "terraform")
 	end
 })
+
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_compiler_latexmk = {
+	build_dir = "build",
+}
