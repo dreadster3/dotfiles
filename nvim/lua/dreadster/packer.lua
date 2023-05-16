@@ -20,7 +20,7 @@ return require('packer').startup(function(use)
 	use 'hrsh7th/cmp-nvim-lsp-signature-help'
 	use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-	use 'onsails/lspkind-nvim'
+	use { 'onsails/lspkind-nvim', requires = "mortepau/codicons.nvim"}
 	use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" }
 	use 'folke/neodev.nvim'
 

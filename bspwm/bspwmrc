@@ -1,11 +1,11 @@
 #! /bin/sh
 
-vmware-user &
-picom -f &
 nitrogen --restore &
+pgrep -x picom > /dev/null || picom -f &
 pgrep -x sxhkd > /dev/null || sxhkd &
 /home/dreadster/.config/polybar/launch.sh --shades &
 xsetroot -cursor_name left_ptr 
+vmware-user &
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
 

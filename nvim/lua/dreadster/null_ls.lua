@@ -55,6 +55,7 @@ addIfExecutable(sources, "prettier", formatting.prettier)
 addIfExecutable(sources, "csharpier", formatting.csharpier)
 addIfExecutable(sources, "terraform", formatting.terraform_fmt)
 addIfExecutable(sources, "rustfmt", formatting.rustfmt)
+addIfExecutable(sources, "latexindent", formatting.latexindent)
 addIfExecutable(sources, "eslint", diagnostics.eslint)
 
 null_ls.setup({
