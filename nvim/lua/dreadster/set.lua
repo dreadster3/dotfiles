@@ -22,6 +22,8 @@ vim.g.completeopt = {"menuone", "noselect", "noinsert" }
 
 vim.g.copilot_assume_mapped = true
 
+vim.g.vimtex_quickfix_open_on_warning = 0
+
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = {"*.tf"},
 	callback  = function ()
