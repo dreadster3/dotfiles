@@ -2,6 +2,7 @@ vim.opt.autoindent = true
 vim.opt.number = true
 vim.opt.ignorecase = true
 vim.opt.tabstop = 4
+
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.incsearch = true
@@ -35,4 +36,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_compiler_latexmk = {
 	build_dir = "build",
+	aux_dir = "build",
+	out_dir = "build"
 }

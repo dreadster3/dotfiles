@@ -2,3 +2,5 @@ include catppuccin-mocha
 
 set recolor true
 set adjust-open width
+
+set selection-clipboard clipboard
