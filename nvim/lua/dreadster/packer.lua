@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
 
 	-- Notifications
 	use 'rcarriga/nvim-notify'
-	use 'j-hui/fidget.nvim'
+	use {'j-hui/fidget.nvim', tag = "legacy"}
 
 	-- Terminal
 	use {"akinsho/toggleterm.nvim", tag = '*'}
