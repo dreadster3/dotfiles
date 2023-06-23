@@ -33,6 +33,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = {"*.tex"},
+	callback  = function ()
+		vim.opt_local.spell = true
+	end
+})
+
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_compiler_latexmk = {
 	build_dir = "build",
