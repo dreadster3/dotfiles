@@ -6,6 +6,7 @@ local vnoremap = remap.vnoremap
 nnoremap("<leader>e", ":NvimTreeFocus<CR>")
 nnoremap("<leader>f", ":Telescope find_files<CR>")
 nnoremap('<leader>g', ':LazyGit<CR>')
+nnoremap('<leader>gl', ":TroubleToggle<CR>")
 nnoremap('<leader>s', ':w<CR>')
 nnoremap('<leader>q', ':q<CR>')
 nnoremap('<leader>sq', ':wq<CR>')

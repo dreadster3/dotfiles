@@ -106,5 +106,6 @@ return require('packer').startup(function(use)
 	use 'HiPhish/nvim-ts-rainbow2'
 
 	use 'lervag/vimtex'
+	use 'folke/trouble.nvim'
 end)
 

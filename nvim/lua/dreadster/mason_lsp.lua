@@ -88,6 +88,15 @@ mason_lsp.setup_handlers({
 
 	["rust_analyzer"] = function()
 		require('dreadster.rust_tools')
+	end,
+
+	["grammarly"] = function()
+		lspconfig.grammarly.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			flags = lsp_flags,
+			filetypes = { "markdown", "text", "tex" }
+		})
 	end
 })
 
