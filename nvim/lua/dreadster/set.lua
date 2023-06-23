@@ -23,26 +23,3 @@ vim.g.completeopt = {"menuone", "noselect", "noinsert" }
 
 vim.g.copilot_assume_mapped = true
 
-vim.g.vimtex_quickfix_open_on_warning = 0
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = {"*.tf"},
-	callback  = function ()
-		vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
-		vim.api.nvim_buf_set_option(0, "filetype", "terraform")
-	end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = {"*.tex"},
-	callback  = function ()
-		vim.opt_local.spell = true
-	end
-})
-
-vim.g.vimtex_view_method = "zathura"
-vim.g.vimtex_compiler_latexmk = {
-	build_dir = "build",
-	aux_dir = "build",
-	out_dir = "build"
-}
