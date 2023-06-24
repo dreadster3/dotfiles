@@ -13,6 +13,11 @@ local function wordcount()
 		return ""
 	end
 
+	if vim.fn.executable("texcount") == 0 then
+		vim.notify("texcount not found", vim.log.levels.WARN)
+		return ""
+	end
+
 	local out = vim.fn.system("texcount -inc -1 -sum " .. vim.fn.expand("%"))
 	out = string.gsub(out, "%s+", "")
 
