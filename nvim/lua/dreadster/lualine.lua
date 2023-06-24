@@ -7,4 +7,25 @@ if not status_ok then
 	return
 end
 
-require('lualine').setup({})
+-- Add word count to lua line when editing tex files
+local function wordcount()
+	if vim.bo.filetype ~= "tex" then
+		return ""
+	end
+
+	local out = vim.fn.system("texcount -inc -1 -sum " .. vim.fn.expand("%"))
+	out = string.gsub(out, "%s+", "")
+
+	return out .. " words"
+end
+
+local lualine_z = {
+	'location',
+	wordcount
+}
+
+require('lualine').setup({
+	sections = {
+		lualine_z = lualine_z,
+	}
+})
