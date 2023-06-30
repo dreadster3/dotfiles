@@ -1,12 +1,4 @@
 local utils = require("dreadster.utils")
-local module_name = "fidget"
-local status_ok, _ = pcall(require, module_name)
+if not utils.check_module_installed("fidget") then return end
 
-if not status_ok then
-	utils.log_module_failed_load(module_name)
-	return
-end
-
-require("fidget").setup({
-
-})
+require("fidget").setup({})

@@ -1,28 +1,13 @@
 local utils = require("dreadster.utils")
-local module_name = "telescope"
-local status_ok, _ = pcall(require, module_name)
+if not utils.check_module_installed("telescope") then return end
 
-if not status_ok then
-	utils.log_module_failed_load(module_name)
-	return
-end
+local telescope = require("telescope")
 
-
-require('telescope').setup({
-	defaults = {
-		file_ignore_patterns = {
-			"obj",
-			"bin",
-			"node_modules"
-		}
-	},
-	extensions = {
-		media_files = {
-		  -- filetypes whitelist
-		  -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-		}
-	},
+telescope.setup({
+    defaults = {
+        file_ignore_patterns = {"obj", "bin", "node_modules", "build", "target"}
+    },
+    extensions = {}
 })
 
-require('telescope').load_extension('media_files')
-
+telescope.load_extension('media_files')
