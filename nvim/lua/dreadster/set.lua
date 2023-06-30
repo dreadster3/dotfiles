@@ -23,7 +23,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- LSP settings
-vim.g.completeopt = {"menuone", "noselect", "noinsert" }
+vim.g.completeopt = {"menuone", "noselect", "noinsert"}
 
 -- Copilot settings
 vim.g.copilot_assume_mapped = true
@@ -32,7 +32,7 @@ vim.g.copilot_assume_mapped = true
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_compiler_latexmk = {
-	build_dir = "build",
-	aux_dir = "build",
-	out_dir = "build"
+    build_dir = "build",
+    aux_dir = "build",
+    out_dir = "build"
 }

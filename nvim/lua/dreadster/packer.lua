@@ -1,111 +1,149 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local fn = vim.fn
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+-- Automatically install packer
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = fn.system({
+        "git", "clone", "--depth", "1",
+        "https://github.com/wbthomason/packer.nvim", install_path
+    })
+    print("Installing packer close and reopen Neovim...")
+    vim.cmd([[packadd packer.nvim]])
+end
 
-return require('packer').startup(function(use)
-	-- Plugin Manager
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
+  augroup end
+]])
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then return end
+
+-- Have packer use a popup window
+packer.init({
+    display = {
+        open_fn = function()
+            return require("packer.util").float({border = "rounded"})
+        end
+    }
+})
+
+return packer.startup(function(use)
+    -- Plugin Manager
     use 'wbthomason/packer.nvim'
 
-	-- Theme
-	use { "catppuccin/nvim", as = "catppuccin" }
+    -- Theme
+    use {"catppuccin/nvim", as = "catppuccin"}
 
-	-- Lsp
-	use 'neovim/nvim-lspconfig'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/nvim-cmp'
-	use 'hrsh7th/cmp-nvim-lsp-signature-help'
-	use 'L3MON4D3/LuaSnip'
+    -- Lsp
+    use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
+    use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-	use { 'onsails/lspkind-nvim', requires = "mortepau/codicons.nvim"}
-	use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" }
-	use 'folke/neodev.nvim'
+    use {'onsails/lspkind-nvim'}
+    use {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"}
+    use 'folke/neodev.nvim'
 
-	-- DAP
-	use 'mfussenegger/nvim-dap'
-	use { "rcarriga/nvim-dap-ui", requires = "mfussenegger/nvim-dap" }
-	use {"jay-babu/mason-nvim-dap.nvim", requires = {"mfussenegger/nvim-dap", "williamboman/mason.nvim"}}
-
-	-- Formatting
-	use 'jose-elias-alvarez/null-ls.nvim'
-
-	-- Fuzzy finder
-	use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {{'nvim-lua/plenary.nvim'}} }
-	use { 'nvim-telescope/telescope-media-files.nvim', requires = {{ 'nvim-lua/popup.nvim'}} }
-
-	-- Syntax Highlight
-	use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+    -- DAP
+    use 'mfussenegger/nvim-dap'
+    use {"rcarriga/nvim-dap-ui", requires = "mfussenegger/nvim-dap"}
+    use {
+        "jay-babu/mason-nvim-dap.nvim",
+        requires = {"mfussenegger/nvim-dap", "williamboman/mason.nvim"}
     }
-	use 'lewis6991/gitsigns.nvim'
 
-	-- Git
-	use 'kdheepak/lazygit.nvim'
+    -- Formatting
+    use 'jose-elias-alvarez/null-ls.nvim'
 
-	use {
-	  'nvim-tree/nvim-tree.lua',
-	  requires = {
-		'nvim-tree/nvim-web-devicons', -- optional, for file icons
-	  }
-	}
+    -- Fuzzy finder
+    use {
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
+        requires = {{'nvim-lua/plenary.nvim'}}
+    }
+    use {
+        'nvim-telescope/telescope-media-files.nvim',
+        requires = {{'nvim-lua/popup.nvim'}}
+    }
 
-	-- Notifications
-	use 'rcarriga/nvim-notify'
-	use {'j-hui/fidget.nvim', tag = "legacy"}
+    -- Syntax Highlight
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'lewis6991/gitsigns.nvim'
 
-	-- Terminal
-	use {"akinsho/toggleterm.nvim", tag = '*'}
+    -- Git
+    use 'kdheepak/lazygit.nvim'
 
-	-- Image Handling
-	use {
-		'samodostal/image.nvim',
-		requires = {
-			'nvim-lua/plenary.nvim'
-		},
-	}
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons' -- optional, for file icons
+        }
+    }
 
-	-- File Explorer
-	use 'kevinhwang91/rnvimr'
+    -- Notifications
+    use 'rcarriga/nvim-notify'
+    use {'j-hui/fidget.nvim', tag = "legacy"}
 
-	-- Automations
-	use { 'dreadster3/neovim-tasks', requires = "nvim-lua/plenary.nvim" }
-	use 'glepnir/template.nvim'
+    -- Terminal
+    use {"akinsho/toggleterm.nvim", tag = '*'}
 
-	-- Utilities
-	use {
-  		'nvim-lualine/lualine.nvim',
-  		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-	}
+    -- File Explorer
+    use 'kevinhwang91/rnvimr'
 
-	use {
-		'goolord/alpha-nvim',
-		config = function ()
-			require'alpha'.setup(require'alpha.themes.dashboard'.config)
-		end
-	}
+    -- Automations
+    use {'dreadster3/neovim-tasks', requires = "nvim-lua/plenary.nvim"}
+    use 'glepnir/template.nvim'
 
-	use 'windwp/nvim-autopairs'
-	use 'windwp/nvim-ts-autotag'
+    -- Utilities
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'nvim-tree/nvim-web-devicons', opt = true}
+    }
 
-	use 'terrortylor/nvim-comment'
+    use {'goolord/alpha-nvim'}
 
-	use {'folke/todo-comments.nvim', requires = "nvim-lua/plenary.nvim"}
-	use 'petertriho/nvim-scrollbar'
+    use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-ts-autotag'
 
-	use { "iamcco/markdown-preview.nvim", run = "cd app && npm install"}
+    use 'terrortylor/nvim-comment'
 
-	use "github/copilot.vim"
+    use {'folke/todo-comments.nvim', requires = "nvim-lua/plenary.nvim"}
+    use 'petertriho/nvim-scrollbar'
 
-	-- Rust tools
-	use 'simrat39/rust-tools.nvim'
+    use {"iamcco/markdown-preview.nvim", run = "cd app && npm install"}
 
-	use 'HiPhish/nvim-ts-rainbow2'
+    use "github/copilot.vim"
 
-	use 'lervag/vimtex'
-	use 'folke/trouble.nvim'
+    -- Rust tools
+    use 'simrat39/rust-tools.nvim'
+    use {
+        'saecki/crates.nvim',
+        tag = 'v0.3.0',
+        requires = {'nvim-lua/plenary.nvim'}
+    }
+
+    use 'HiPhish/nvim-ts-rainbow2'
+
+    use 'lervag/vimtex'
+    use 'folke/trouble.nvim'
+    use {
+        "glepnir/lspsaga.nvim",
+        requires = {
+            {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
+        }
+    }
+    use 'RRethy/vim-illuminate'
+
+    use 'ahmedkhalf/project.nvim'
+
+    if PACKER_BOOTSTRAP then require("packer").sync() end
 end)
-

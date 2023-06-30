@@ -1,15 +1,7 @@
 local utils = require("dreadster.utils")
-local module_name = "catppuccin"
-local status_ok, _ = pcall(require, module_name)
+if not utils.check_module_installed("catppuccin") then return end
 
-if not status_ok then
-	utils.log_module_failed_load(module_name)
-	return
-end
-
-require('catppuccin').setup({
-	transparent_background = "true"
-})
+require('catppuccin').setup({transparent_background = "true"})
 
 vim.opt.background = 'dark'
 

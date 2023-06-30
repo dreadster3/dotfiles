@@ -4,10 +4,7 @@ local map = vim.api.nvim_set_keymap
 local function bind(op, outer_opts)
     outer_opts = outer_opts or {noremap = true}
     return function(lhs, rhs, opts)
-        opts = vim.tbl_extend("force",
-            outer_opts,
-            opts or {}
-        )
+        opts = vim.tbl_extend("force", outer_opts, opts or {})
         map(op, lhs, rhs, opts)
     end
 end

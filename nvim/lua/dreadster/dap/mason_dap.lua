@@ -1,13 +1,8 @@
 local utils = require("dreadster.utils")
-local module_name = "mason-nvim-dap"
-local status_ok, _ = pcall(require, module_name)
-
-if not status_ok then
-	utils.log_module_failed_load(module_name)
+if not utils.check_module_installed("mason-nvim-dap") then
 	return
 end
 
-local dap = require("dap")
 local mason_dap = require("mason-nvim-dap")
 
 mason_dap.setup({
