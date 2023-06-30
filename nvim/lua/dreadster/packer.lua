@@ -41,6 +41,20 @@ return packer.startup(function(use)
 
     -- Lsp
     use 'neovim/nvim-lspconfig'
+    use {'onsails/lspkind-nvim'}
+    use {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"}
+    use 'folke/neodev.nvim'
+    use {
+        "glepnir/lspsaga.nvim",
+        requires = {
+            {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
+        }
+    }
+
+    -- Diagnostic
+    use 'folke/trouble.nvim'
+
+    -- Completion
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -49,9 +63,8 @@ return packer.startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-    use {'onsails/lspkind-nvim'}
-    use {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"}
-    use 'folke/neodev.nvim'
+    use "github/copilot.vim"
+    use 'lervag/vimtex'
 
     -- DAP
     use 'mfussenegger/nvim-dap'
@@ -75,13 +88,16 @@ return packer.startup(function(use)
         requires = {{'nvim-lua/popup.nvim'}}
     }
 
+    use 'nvim-telescope/telescope-symbols.nvim'
+
     -- Syntax Highlight
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'lewis6991/gitsigns.nvim'
 
     -- Git
     use 'kdheepak/lazygit.nvim'
+    use 'lewis6991/gitsigns.nvim'
 
+    -- File Explorer
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -109,7 +125,23 @@ return packer.startup(function(use)
         requires = {'nvim-tree/nvim-web-devicons', opt = true}
     }
 
+    -- Dashboard
     use {'goolord/alpha-nvim'}
+
+    -- Rust tools
+    use 'simrat39/rust-tools.nvim'
+    use {
+        'saecki/crates.nvim',
+        tag = 'v0.3.0',
+        requires = {'nvim-lua/plenary.nvim'}
+    }
+
+    -- Utilities
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "*",
+        requires = 'nvim-tree/nvim-web-devicons'
+    }
 
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
@@ -121,29 +153,13 @@ return packer.startup(function(use)
 
     use {"iamcco/markdown-preview.nvim", run = "cd app && npm install"}
 
-    use "github/copilot.vim"
-
-    -- Rust tools
-    use 'simrat39/rust-tools.nvim'
-    use {
-        'saecki/crates.nvim',
-        tag = 'v0.3.0',
-        requires = {'nvim-lua/plenary.nvim'}
-    }
-
     use 'HiPhish/nvim-ts-rainbow2'
 
-    use 'lervag/vimtex'
-    use 'folke/trouble.nvim'
-    use {
-        "glepnir/lspsaga.nvim",
-        requires = {
-            {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
-        }
-    }
     use 'RRethy/vim-illuminate'
 
     use 'ahmedkhalf/project.nvim'
+
+    use 'johnfrankmorgan/whitespace.nvim'
 
     if PACKER_BOOTSTRAP then require("packer").sync() end
 end)
