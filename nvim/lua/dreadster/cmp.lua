@@ -87,11 +87,7 @@ cmp.setup({
                     buffer = "[Buffer]",
                     path = "[Path]",
                     nvim_lsp_signature_help = "[LSP]"
-                    -- nvim_lsp = 'λ',
-                    -- luasnip = '',
-                    -- buffer = '﬘',
-                    -- path = '',
-                    -- nvim_lsp_signature_help = ''
+                    -- nvim_lua = "[Lua]"
                 }
 
                 item.menu = menu_icon[entry.source.name]
@@ -109,5 +105,6 @@ cmp.setup({
         {name = "luasnip"}, -- For ultisnips user.
         -- { name = 'ultisnips' },
         {name = "buffer"}, {name = "path"}, {name = "nvim_lsp_signature_help"}
+        -- { name = "nvim_lua" }
     }
 })
