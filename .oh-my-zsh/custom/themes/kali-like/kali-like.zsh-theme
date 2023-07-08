@@ -81,7 +81,7 @@ configure_prompt() {
     fi
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'$CYANPROMPT┌───\(%B$FGPROMPT%n@%m%b$CYANPROMPT)-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b$CYANPROMPT]$(git_prompt_info)\n└─%B%(#.%F{red}#.%(?:%{$FGPROMPT%}$ :%{$fg_bold[red]%}$ ))%b%F{reset} '
+            PROMPT=$'$CYANPROMPT┌───\(%B$FGPROMPT%n@%m%b$CYANPROMPT)-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b$CYANPROMPT]$(git_prompt_info)\n$CYANPROMPT└─%B%(#.%F{red}#.%(?:%{$FGPROMPT%}$ :%{$fg_bold[red]%}$ ))%b%F{reset} '
             RPROMPT=
             ;;
         oneline)
