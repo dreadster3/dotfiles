@@ -161,5 +161,7 @@ return packer.startup(function(use)
 
     use 'johnfrankmorgan/whitespace.nvim'
 
+    use 'TaDaa/vimade'
+
     if PACKER_BOOTSTRAP then require("packer").sync() end
 end)
