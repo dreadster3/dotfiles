@@ -162,9 +162,7 @@ return packer.startup(function(use)
 
 	use 'johnfrankmorgan/whitespace.nvim'
 
-	if not utils.is_wsl() then
-		use 'TaDaa/vimade'
-	end
+	use 'levouh/tint.nvim'
 
 	if PACKER_BOOTSTRAP then require("packer").sync() end
 end)
