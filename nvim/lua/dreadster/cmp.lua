@@ -104,7 +104,7 @@ cmp.setup({
         -- For luasnip user.
         {name = "luasnip"}, -- For ultisnips user.
         -- { name = 'ultisnips' },
-        {name = "buffer"}, {name = "path"}, {name = "nvim_lsp_signature_help"}
+        {name = "buffer"}, {name = "path"}
         -- { name = "nvim_lua" }
     }
 })
