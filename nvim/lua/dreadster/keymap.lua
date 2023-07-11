@@ -3,33 +3,49 @@ local nnoremap = remap.nnoremap
 local tnoremap = remap.tnoremap
 local vnoremap = remap.vnoremap
 
+-- NvimTree
 nnoremap("<leader>e", ":NvimTreeFocus<CR>")
+
+-- Bufferline
+nnoremap("<C-l>", ":BufferLineCycleNext<CR>")
+nnoremap("<C-h>", ":BufferLineCyclePrev<CR>")
+
+-- Telescope
 nnoremap("<leader>f", ":Telescope find_files<CR>")
+nnoremap("<C-f>", ":Telescope live_grep<CR>")
+nnoremap('<leader>m', ':Telescope media_files<CR>')
+
+-- LazyGit
 nnoremap('<leader>g', ':LazyGit<CR>')
+
+-- Trouble
 nnoremap('<leader>gl', ":TroubleToggle<CR>")
+
+-- Helper
 nnoremap('<leader>s', ':w<CR>')
 nnoremap('<leader>q', ':q<CR>')
-nnoremap('<leader>sq', ':wq<CR>')
-nnoremap('<leader>m', ':Telescope media_files<CR>')
-nnoremap("<leader>md", ":MarkdownPreviewToggle<CR>")
+nnoremap("<C-a>", "ggvG")
+
+-- LSP
 nnoremap('<leader>lr', ":LspRestart<CR>:lua vim.notify('LSP Restarted')<CR>")
-nnoremap('<leader>cb', ':Task start cmake build<CR>')
-nnoremap('<leader>cg', ':Task start cmake configure<CR>')
-nnoremap('<leader>ci', ':Task start conan install<CR>')
-nnoremap('<leader>tfi', ':Task start terraform init<CR>')
-nnoremap('<leader>tfv', ':Task start terraform validate<CR>')
+
+-- DAP
 nnoremap("<F5>", ":lua require('dap').continue()<CR>")
 nnoremap("<F10>", ":lua require('dap').step_over()<CR>")
 nnoremap("<F11>", ":lua require('dap').step_into()<CR>")
 nnoremap("<F12>", ":lua require('dap').step_out()<CR>")
 nnoremap("<leader>b", ":lua require('dap').toggle_breakpoint()<CR>")
-nnoremap("<C-a>", "ggvG")
 
-nnoremap('<C-f>', ':RnvimrToggle<CR>')
-
+-- Ranger
+nnoremap('<C-e>', ':RnvimrToggle<CR>')
 tnoremap('<C-r>', '<C-\\><C-n>:RnvimrResize<CR>')
-tnoremap('<C-f>', '<C-\\><C-n>:RnvimrToggle<CR>')
+tnoremap('<C-e>', '<C-\\><C-n>:RnvimrToggle<CR>')
 
+-- Comment Toggle
+nnoremap('<C-/>', ":CommentToggle<CR>")
+vnoremap('<C-/>', ":'<,'>CommentToggle<CR>")
+
+-- Terminal Toggle
 function _G.set_terminal_keymaps()
     local opts = {noremap = true, buffer = 0}
     -- vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
@@ -41,8 +57,5 @@ function _G.set_terminal_keymaps()
     vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
     vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
-
-nnoremap('<C-/>', ":CommentToggle<CR>")
-vnoremap('<C-/>', ":'<,'>CommentToggle<CR>")
 
 vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"

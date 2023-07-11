@@ -15,3 +15,5 @@ require("tasks").setup({
     },
     quickfix = {only_on_error = true}
 })
+
+require('dreadster.tasks.keymaps')
