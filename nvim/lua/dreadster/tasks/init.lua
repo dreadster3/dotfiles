@@ -8,10 +8,10 @@ require("tasks").setup({
         cmake = {
             cmd = "cmake",
             build_dir = tostring(path:new('{cwd}', 'build', '{os}-{build_type}')),
-            build_type = "debug",
+            build_type = "Debug",
             args = {configure = {"-G", "Unix Makefiles"}}
         },
-        conan = {cmd = "conan", build_type = "debug"}
+        conan = {cmd = "conan", build_type = "Debug"}
     },
     quickfix = {only_on_error = true}
 })

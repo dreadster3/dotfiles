@@ -45,6 +45,7 @@ addIfExecutable(sources, "rustfmt", formatting.rustfmt)
 addIfExecutable(sources, "latexindent", formatting.latexindent)
 addIfExecutable(sources, "eslint", diagnostics.eslint)
 addIfExecutable(sources, "lua-format", formatting.lua_format)
+addIfExecutable(sources, "clang-format", formatting.clang_format)
 
 null_ls.setup({
     sources = sources,
