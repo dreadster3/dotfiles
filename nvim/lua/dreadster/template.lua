@@ -10,7 +10,8 @@ template.temp_dir = "/home/dreadster/.config/nvim/template"
 local mappings = {
     typescript = {"function.ts"},
     cmake = {"VCMakeLists.txt"},
-    text = {"conanfile.txt"}
+    text = {"conanfile.txt"},
+    yaml = {"clangformat"}
 }
 
 local temp_table = {}
@@ -21,6 +22,3 @@ end
 
 -- Add any template that filetype cannot be detected
 vim.filetype.add({filename = temp_table})
-
-local test = vim.filetype.match({filename = "function.ts"})
-vim.notify(tostring(test), vim.log.levels.INFO, {title = "Filetype"})
