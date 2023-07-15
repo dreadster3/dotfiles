@@ -5,7 +5,7 @@ local opts = {noremap = true, buffer = 0}
 local nnoremap = function(lhs, rhs) vim.keymap.set('n', lhs, rhs, opts) end
 
 local cpp_maps = {
-    pattern = {"*.cpp", "*.hpp", "*.h"},
+    pattern = {"CMakeLists.txt", "conanfile.txt", "*.cpp", "*.hpp", "*.h"},
     keymaps = {
         {"<leader>cb", ":Task start cmake build<CR>"},
         {"<leader>cg", ":Task start cmake configure<CR>"},
