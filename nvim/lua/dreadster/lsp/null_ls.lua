@@ -10,12 +10,6 @@ local function addIfExecutable(list, command, value)
     table.insert(list, value)
 end
 
-local function hasValue(list, value)
-    for _, v in ipairs(list) do if v == value then return true end end
-
-    return false
-end
-
 local null_ls = require('null-ls')
 
 local formatting = null_ls.builtins.formatting
@@ -23,17 +17,8 @@ local diagnostics = null_ls.builtins.diagnostics
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-local disabled = {"tsserver"}
-
 local lsp_formatting = function(bufnr)
-    vim.lsp.buf.format({
-        timeout_ms = 2000,
-        filter = function(client)
-            -- apply whatever logic you want (in this example, we'll only use null-ls)
-            return not hasValue(disabled, client.name)
-        end,
-        bufnr = bufnr
-    })
+    vim.lsp.buf.format({timeout_ms = 2000, bufnr = bufnr})
 end
 
 local sources = {formatting.clang_format}

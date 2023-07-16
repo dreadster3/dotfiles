@@ -40,6 +40,9 @@ return packer.startup(function(use)
     -- Theme
     use {"catppuccin/nvim", as = "catppuccin"}
 
+    -- Syntax Highlight
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', tag = "*"}
+
     -- Lsp
     use 'neovim/nvim-lspconfig'
     use {'onsails/lspkind-nvim'}
@@ -48,7 +51,7 @@ return packer.startup(function(use)
     use {
         "glepnir/lspsaga.nvim",
         requires = {
-            {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
+            -- {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
         }
     }
     use 'ray-x/lsp_signature.nvim'
@@ -81,7 +84,7 @@ return packer.startup(function(use)
     -- Fuzzy finder
     use {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
+        tag = "*",
         requires = {{'nvim-lua/plenary.nvim'}}
     }
     use {
@@ -90,9 +93,6 @@ return packer.startup(function(use)
     }
 
     use 'nvim-telescope/telescope-symbols.nvim'
-
-    -- Syntax Highlight
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- Git
     use 'kdheepak/lazygit.nvim'
