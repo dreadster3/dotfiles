@@ -7,8 +7,14 @@ local vnoremap = remap.vnoremap
 nnoremap("<leader>e", ":NvimTreeFocus<CR>")
 
 -- Bufferline
-nnoremap("<C-l>", ":BufferLineCycleNext<CR>")
-nnoremap("<C-h>", ":BufferLineCyclePrev<CR>")
+nnoremap("<A-l>", ":BufferLineCycleNext<CR>")
+nnoremap("<A-h>", ":BufferLineCyclePrev<CR>")
+
+-- Switch Windows
+nnoremap("<C-h>", "<C-w>h")
+nnoremap("<C-j>", "<C-w>j")
+nnoremap("<C-k>", "<C-w>k")
+nnoremap("<C-l>", "<C-w>l")
 
 -- Telescope
 nnoremap("<leader>f", ":Telescope find_files<CR>")
@@ -48,6 +54,8 @@ vnoremap('<C-/>', ":'<,'>CommentToggle<CR>")
 -- Terminal Toggle
 function _G.set_terminal_keymaps()
     local opts = {noremap = true, buffer = 0}
+
+    if vim.bo.filetype == 'lazygit' then return end
     -- vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
     vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
