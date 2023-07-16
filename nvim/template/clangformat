@@ -4,3 +4,4 @@ ContinuationIndentWidth: 4
 TabWidth: 4
 NamespaceIndentation: "All"
 IndentCaseLabels: true
+AlwaysBreakTemplateDeclarations: "Yes"
