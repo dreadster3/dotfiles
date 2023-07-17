@@ -17,5 +17,6 @@ require('nvim-treesitter.configs').setup {
     },
     highlight = {enable = true, disable = {}},
     indent = {enable = true},
-    rainbow = {enable = true}
+    rainbow = {enable = true},
+    context_commentstring = {enable = true}
 }

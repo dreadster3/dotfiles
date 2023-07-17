@@ -137,6 +137,11 @@ return packer.startup(function(use)
         requires = {'nvim-lua/plenary.nvim'}
     }
 
+    -- Comments
+    use 'terrortylor/nvim-comment'
+    use {'folke/todo-comments.nvim', requires = "nvim-lua/plenary.nvim"}
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
     -- Utilities
     use {
         'akinsho/bufferline.nvim',
@@ -147,9 +152,6 @@ return packer.startup(function(use)
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
 
-    use 'terrortylor/nvim-comment'
-
-    use {'folke/todo-comments.nvim', requires = "nvim-lua/plenary.nvim"}
     use 'petertriho/nvim-scrollbar'
 
     use {"iamcco/markdown-preview.nvim", run = "cd app && npm install"}
