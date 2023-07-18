@@ -14,12 +14,31 @@ local lspconfig = require("lspconfig")
 local handlers = require("dreadster.lsp.handlers")
 local capabilities = handlers.capabilities
 local on_attach = handlers.on_attach
+local on_publish_diagnostics = vim.lsp.handlers["textDocument/publishDiagnostics"]
 
 mason_lsp.setup_handlers({
 	function(server_name) -- default handler (optional)
 		lspconfig[server_name].setup({
 			capabilities = capabilities,
-			on_attach = on_attach
+			on_attach = on_attach,
+			handlers = {
+				["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+					for idx, diag in ipairs(result.diagnostics) do
+						for position, value in pairs(diag.range) do
+							if value.character == -1 or value.line == -1 then
+								if position == "start" then
+									vim.notify(diag.message, vim.log.levels.WARN, {
+										title = "Diagnostic"
+									})
+								end
+								table.remove(result.diagnostics, idx)
+							end
+						end
+					end
+
+					return on_publish_diagnostics(_, result, ctx, config)
+				end
+			}
 		})
 	end,
 	["lua_ls"]        = function()
