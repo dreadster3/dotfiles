@@ -38,6 +38,7 @@ nnoremap('<leader>gl', ":TroubleToggle<CR>")
 nnoremap('<leader>s', ':w<CR>')
 nnoremap('<leader>q', ':q<CR>')
 nnoremap("<C-a>", "ggvG")
+nnoremap("<leader>cd", ":lua vim.cmd.cd(vim.fn.expand('%:p:h'))<CR>")
 
 -- LSP
 nnoremap('<leader>lr', ":LspRestart<CR>:lua vim.notify('LSP Restarted')<CR>")
