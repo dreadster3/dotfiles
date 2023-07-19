@@ -15,6 +15,7 @@ local handlers = require("dreadster.lsp.handlers")
 local capabilities = handlers.capabilities
 local on_attach = handlers.on_attach
 local on_publish_diagnostics = vim.lsp.handlers["textDocument/publishDiagnostics"]
+local cooldown = false
 
 mason_lsp.setup_handlers({
 	function(server_name) -- default handler (optional)
@@ -26,10 +27,16 @@ mason_lsp.setup_handlers({
 					for idx, diag in ipairs(result.diagnostics) do
 						for position, value in pairs(diag.range) do
 							if value.character == -1 or value.line == -1 then
-								if position == "start" then
+								if position == "start" and not cooldown then
 									vim.notify(diag.message, vim.log.levels.WARN, {
 										title = "Diagnostic"
 									})
+									cooldown = true;
+									vim.defer_fn(function()
+										-- Make sure function is only called once a minute
+										-- to avoid notification spam
+										cooldown = false
+									end, 60000)
 								end
 								table.remove(result.diagnostics, idx)
 							end

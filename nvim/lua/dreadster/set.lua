@@ -27,6 +27,12 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.g.completeopt = { "menuone", "noselect", "noinsert" }
 
 -- Copilot settings
+-- Set proxy when using copilot on mac
+local utils = require("dreadster.utils")
+if utils.is_mac() then
+	vim.g.copilot_proxy = os.getenv("http_proxy")
+end
+
 vim.g.copilot_assume_mapped = true
 
 -- Vimtex settings
