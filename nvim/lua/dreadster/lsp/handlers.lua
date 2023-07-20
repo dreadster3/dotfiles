@@ -94,12 +94,11 @@ local function lspsaga_keymaps(bufnr)
     keymap(bufnr, 'n', ']d', ":Lspsaga diagnostic_jump_next<CR>", opts)
 end
 
-M.on_attach = function(client, bufnr)
-    if client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
-    end
+local disabled_formatting = {"tsserver", "sumneko_lua", "omnisharp"}
 
-    if client.name == "sumneko_lua" then
+M.on_attach = function(client, bufnr)
+    if utils.is_in_table(disabled_formatting, client.name) then
+        vim.notify("Disabled formatting for " .. client.name)
         client.server_capabilities.documentFormattingProvider = false
     end
 
