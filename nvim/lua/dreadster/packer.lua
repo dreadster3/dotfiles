@@ -21,11 +21,10 @@ vim.cmd([[
 ]])
 
 -- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then return end
+if not utils.check_module_installed("packer") then return end
 
 -- Have packer use a popup window
-packer.init({
+require('packer').init({
     display = {
         open_fn = function()
             return require("packer.util").float({border = "rounded"})
@@ -33,7 +32,7 @@ packer.init({
     }
 })
 
-return packer.startup(function(use)
+return require('packer').startup(function(use)
     -- Plugin Manager
     use 'wbthomason/packer.nvim'
 
@@ -55,6 +54,9 @@ return packer.startup(function(use)
         }
     }
     use 'ray-x/lsp_signature.nvim'
+
+    -- Fix issue with go to definition omnisharp
+    use 'Hoffs/omnisharp-extended-lsp.nvim'
 
     -- Diagnostic
     use 'folke/trouble.nvim'

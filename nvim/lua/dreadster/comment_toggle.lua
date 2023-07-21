@@ -5,7 +5,7 @@ local prehook = nil
 
 if utils.check_module_installed("ts_context_commentstring") then
     prehook = function()
-        require('ts_context_commentstring.internal').update_commentstring()
+        require('ts_context_commentstring.internal').update_commentstring({})
     end
 end
 
