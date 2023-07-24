@@ -5,6 +5,13 @@ require("nvim-tree").setup({
 	disable_netrw = true,
 	hijack_netrw = true,
 	sync_root_with_cwd = true,
+	actions = {
+		change_dir = {
+			enable = true,
+			global = true,
+		}
+	}
+
 })
 
 -- Start nvim tree
