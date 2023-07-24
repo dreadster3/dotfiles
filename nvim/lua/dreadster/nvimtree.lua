@@ -16,20 +16,13 @@ require("nvim-tree").setup({
 
 -- Start nvim tree
 local function open_nvim_tree(data)
-	-- buffer is a [No Name]
-	local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-
 	-- buffer is a directory
 	local directory = vim.fn.isdirectory(data.file) == 1
 
-	if not no_name and not directory then return end
+	if not directory then return end
 
 	-- change to the directory
-	if directory then
-		vim.cmd.cd(data.file)
-	else
-		vim.cmd.cd(vim.fs.dirname(data.file))
-	end
+	vim.cmd.cd(data.file)
 
 	-- open the tree
 	require("nvim-tree.api").tree.open()
