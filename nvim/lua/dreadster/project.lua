@@ -43,4 +43,4 @@ require("project_nvim").setup({
 
 if not utils.check_module_installed("telescope") then return end
 
-require("telescope").load_extension('projects')
+require("telescope").load_extension("projects")
