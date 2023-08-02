@@ -89,7 +89,8 @@ local function lspsaga_keymaps(bufnr)
     keymap(bufnr, 'x', '<F4>', "<cmd>lua vim.lsp.buf.range_code_action()<CR>",
            opts)
     keymap(bufnr, 'n', 'gl', ":Lspsaga show_cursor_diagnostics<CR>", opts)
-    keymap(bufnr, 'n', 'gL', ":Lspsaga show_line_diagnostics<CR>", opts)
+    keymap(bufnr, 'n', 'gll', ":Lspsaga show_line_diagnostics<CR>", opts)
+    keymap(bufnr, 'n', 'glll', ":Lspsaga show_buf_diagnostics<CR>", opts)
     keymap(bufnr, 'n', '[d', ":Lspsaga diagnostic_jump_prev<CR>", opts)
     keymap(bufnr, 'n', ']d', ":Lspsaga diagnostic_jump_next<CR>", opts)
 end
