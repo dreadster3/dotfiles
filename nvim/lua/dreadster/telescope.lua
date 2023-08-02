@@ -5,7 +5,9 @@ local telescope = require("telescope")
 
 telescope.setup({
     defaults = {
-        file_ignore_patterns = {"obj", "bin", "node_modules", "build", "target"}
+        file_ignore_patterns = {"obj", "bin", "node_modules", "build", "target"},
+
+        mappings = {n = {["q"] = require("telescope.actions").close}}
     },
     extensions = {}
 })
