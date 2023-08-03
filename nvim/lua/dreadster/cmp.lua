@@ -38,10 +38,8 @@ local kind_icons = {
 cmp.setup({
     completion = {completeopt = 'menuone,noselect,noinsert'},
     window = {
-        completion = {
-            winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSel,Search:None',
-            border = "rounded"
-        }
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
     },
     snippet = {
         expand = function(args)

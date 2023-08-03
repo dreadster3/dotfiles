@@ -50,7 +50,7 @@ return require('packer').startup(function(use)
     use {
         "glepnir/lspsaga.nvim",
         requires = {
-            -- {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
+            {"nvim-tree/nvim-web-devicons"}, {"nvim-treesitter/nvim-treesitter"}
         }
     }
     use 'ray-x/lsp_signature.nvim'
