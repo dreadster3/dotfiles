@@ -23,15 +23,10 @@ vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
--- LSP settings
-vim.g.completeopt = { "menuone", "noselect", "noinsert" }
-
 -- Copilot settings
 -- Set proxy when using copilot on mac
 local utils = require("dreadster.utils")
-if utils.is_mac() then
-	vim.g.copilot_proxy = os.getenv("http_proxy")
-end
+if utils.is_mac() then vim.g.copilot_proxy = os.getenv("http_proxy") end
 
 vim.g.copilot_assume_mapped = true
 
@@ -39,10 +34,10 @@ vim.g.copilot_assume_mapped = true
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_compiler_latexmk = {
-	build_dir = "build",
-	aux_dir = "build",
-	out_dir = "build"
+    build_dir = "build",
+    aux_dir = "build",
+    out_dir = "build"
 }
 
 -- Vimade
-vim.g.vimade = { detecttermcolors = 1 }
+vim.g.vimade = {detecttermcolors = 1}

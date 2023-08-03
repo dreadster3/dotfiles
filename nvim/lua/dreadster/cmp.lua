@@ -36,6 +36,13 @@ local kind_icons = {
 }
 
 cmp.setup({
+    completion = {completeopt = 'menuone,noselect,noinsert'},
+    window = {
+        completion = {
+            winhighlight = 'Normal:None,FloatBorder:None,CursorLine:PmenuSel,Search:None',
+            border = "rounded"
+        }
+    },
     snippet = {
         expand = function(args)
             -- For `vsnip` user.
