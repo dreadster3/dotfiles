@@ -4,6 +4,7 @@ require('dreadster.packer')
 require('dreadster.notify')
 require('dreadster.theme')
 require('dreadster.keymap')
+require('dreadster.webicons')
 require('dreadster.nvimtree')
 -- Needs to be initialized before lsp
 require('dreadster.neodev')
