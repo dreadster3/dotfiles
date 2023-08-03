@@ -1,7 +1,7 @@
 local utils = require("dreadster.utils")
 if not utils.check_module_installed("catppuccin") then return end
 
-require('catppuccin').setup({transparent_background = false})
+require('catppuccin').setup({transparent_background = true})
 
 vim.opt.background = 'dark'
 
