@@ -15,7 +15,11 @@ require('nvim-treesitter.configs').setup {
             'php', 'markdown', 'glimmer', 'handlebars', 'hbs'
         }
     },
-    highlight = {enable = true, disable = {}},
+    highlight = {
+        enable = true,
+        disable = {},
+        additional_vim_regex_highlighting = true
+    },
     indent = {enable = true},
     rainbow = {enable = true},
     context_commentstring = {enable = true}
