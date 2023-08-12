@@ -158,7 +158,7 @@ return require('packer').startup(function(use)
 
     use {"iamcco/markdown-preview.nvim", run = "cd app && npm install"}
 
-    use 'HiPhish/nvim-ts-rainbow2'
+    use 'hiphish/rainbow-delimiters.nvim'
 
     use 'RRethy/vim-illuminate'
 
