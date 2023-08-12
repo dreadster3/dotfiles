@@ -40,7 +40,7 @@ return require('packer').startup(function(use)
     use {"catppuccin/nvim", as = "catppuccin"}
 
     -- Syntax Highlight
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', tag = "*"}
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- Lsp
     use 'neovim/nvim-lspconfig'
