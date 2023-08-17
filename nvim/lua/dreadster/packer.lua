@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
         }
     }
     use 'ray-x/lsp_signature.nvim'
+    use 'ray-x/go.nvim'
 
     -- Fix issue with go to definition omnisharp
     use 'Hoffs/omnisharp-extended-lsp.nvim'

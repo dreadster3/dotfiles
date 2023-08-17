@@ -35,6 +35,7 @@ addIfExecutable(sources, "lua-format", formatting.lua_format)
 addIfExecutable(sources, "clang-format", formatting.clang_format)
 addIfExecutable(sources, "tfsec", diagnostics.tfsec)
 addIfExecutable(sources, "autopep8", formatting.autopep8)
+addIfExecutable(sources, "gofmt", formatting.gofmt)
 
 null_ls.setup({
     sources = sources,
