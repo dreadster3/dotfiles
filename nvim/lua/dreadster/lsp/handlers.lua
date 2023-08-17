@@ -65,8 +65,7 @@ local function lspsaga_keymaps(bufnr)
     keymap(bufnr, 'n', 'gO', ":Lspsaga peek_type_definition<CR>", opts)
     keymap(bufnr, 'n', 'gr', "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     keymap(bufnr, 'n', 'gR', ":Lspsaga finder<CR>", opts)
-    keymap(bufnr, 'n', '<C-k>', "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-           opts)
+    keymap(bufnr, 'n', 'gs', "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     keymap(bufnr, 'n', '<F2>', ":Lspsaga rename<CR>", opts)
     keymap(bufnr, 'n', '<F4>', ":Lspsaga code_action<CR>", opts)
     keymap(bufnr, 'x', '<F4>', "<cmd>lua vim.lsp.buf.range_code_action()<CR>",
