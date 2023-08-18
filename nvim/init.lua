@@ -1,1 +1,5 @@
-require('dreadster')
+-- require('dreadster')
+require("dreadster_lazy.config.options")
+require("dreadster_lazy.config.autocmds")
+require("dreadster_lazy.config.keymaps")
+require("dreadster_lazy.config.lazy")({})

@@ -1,0 +1,15 @@
+{
+  "catppuccin": { "branch": "main", "commit": "490078b1593c6609e6a50ad5001e7902ea601824" },
+  "gitsigns": { "branch": "main", "commit": "5a2b1205841bc06ffb15719b14d54987e17b22ae" },
+  "lazy.nvim": { "branch": "main", "commit": "dac844ed617dda4f9ec85eb88e9629ad2add5e05" },
+  "lazygit": { "branch": "main", "commit": "22e51e03268fabe068a77e2bd316ac25ff2084f9" },
+  "notify": { "branch": "master", "commit": "ea9c8ce7a37f2238f934e087c255758659948e0f" },
+  "nvim-ts-context-commentstring": { "branch": "main", "commit": "9bff161dfece6ecf3459e6e46ca42e49f9ed939f" },
+  "nvim-web-devicons": { "branch": "master", "commit": "cfc8824cc1db316a276b36517f093baccb8e799a" },
+  "nvim_comment": { "branch": "main", "commit": "e9ac16ab056695cad6461173693069ec070d2b23" },
+  "nvimtree": { "branch": "master", "commit": "18c7a3119839adc4599d838726deae662859c8b2" },
+  "plenary.nvim": { "branch": "master", "commit": "267282a9ce242bbb0c5dc31445b6d353bed978bb" },
+  "scrollbar": { "branch": "main", "commit": "35f99d559041c7c0eff3a41f9093581ceea534e8" },
+  "telescope": { "branch": "master", "commit": "2d92125620417fbea82ec30303823e3cd69e90e8" },
+  "treesitter": { "branch": "master", "commit": "63260da18bf273c76b8e2ea0db84eb901cab49ce" }
+}
