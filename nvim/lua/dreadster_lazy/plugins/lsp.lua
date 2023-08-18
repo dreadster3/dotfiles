@@ -1,6 +1,7 @@
 return {
-    {"folke/neodev.nvim", opts = {}}, {
+    {
         "neovim/nvim-lspconfig",
+        dependencies = {{"folke/neodev.nvim", opts = {}}},
         name = "lspconfig",
         init = function()
             local signs = {
@@ -122,6 +123,7 @@ return {
                     })
                 end,
                 ["pyright"] = function()
+                    vim.notify("Python")
                     local lspconfig = require("lspconfig")
                     lspconfig.pyright.setup({
                         capabilities = capabilities,
