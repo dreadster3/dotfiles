@@ -2,21 +2,6 @@ return {
     {"folke/neodev.nvim", opts = {}}, {
         "neovim/nvim-lspconfig",
         name = "lspconfig",
-        event = {"BufReadPost", "BufNewFile"},
-        keys = {
-            {
-                "<leader>lr",
-                function()
-                    vim.notify("Lsp Restarted")
-                    vim.cmd([[LspRestart]])
-                end,
-                desc = "Restart Lsp"
-            }
-        }
-    }, {"williamboman/mason.nvim", name = "mason", opts = {}}, {
-        "williamboman/mason-lspconfig.nvim",
-        name = "mason-lspconfig",
-        dependencies = {"mason", "ray-x/lsp_signature.nvim"},
         init = function()
             local signs = {
                 {name = "DiagnosticSignError", text = ""},
@@ -53,6 +38,21 @@ return {
 
             vim.diagnostic.config(config)
         end,
+        event = {"BufReadPost", "BufNewFile"},
+        keys = {
+            {
+                "<leader>lr",
+                function()
+                    vim.notify("Lsp Restarted")
+                    vim.cmd([[LspRestart]])
+                end,
+                desc = "Restart Lsp"
+            }
+        }
+    }, {"williamboman/mason.nvim", name = "mason", opts = {}}, {
+        "williamboman/mason-lspconfig.nvim",
+        name = "mason-lspconfig",
+        dependencies = {"mason", "ray-x/lsp_signature.nvim"},
         config = function(_, opts)
             local mason_lsp = require("mason-lspconfig")
 
