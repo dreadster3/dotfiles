@@ -1,28 +1,32 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        dependencies = {{"folke/neodev.nvim", opts = {}}},
+        dependencies = {
+            {"folke/neodev.nvim", opts = {}}, "mason",
+            "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp"
+        },
         name = "lspconfig",
-        init = function()
-            local signs = {
-                {name = "DiagnosticSignError", text = ""},
-                {name = "DiagnosticSignWarn", text = ""},
-                {name = "DiagnosticSignHint", text = ""},
-                {name = "DiagnosticSignInfo", text = ""}
+        event = {"BufReadPre", "BufNewFile"},
+        keys = {
+            {
+                "<leader>lr",
+                function()
+                    vim.notify("Lsp Restarted")
+                    vim.cmd([[LspRestart]])
+                end,
+                desc = "Restart Lsp"
             }
-
-            for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, {
-                    texthl = sign.name,
-                    text = sign.text,
-                    numhl = ""
-                })
-            end
-
-            local config = {
+        },
+        opts = {
+            diagnostics = {
                 virtual_text = false, -- disable virtual text
                 signs = {
-                    active = signs -- show signs
+                    active = {
+                        {name = "DiagnosticSignError", text = ""},
+                        {name = "DiagnosticSignWarn", text = ""},
+                        {name = "DiagnosticSignHint", text = ""},
+                        {name = "DiagnosticSignInfo", text = ""}
+                    }
                 },
                 update_in_insert = true,
                 underline = true,
@@ -35,151 +39,117 @@ return {
                     header = "",
                     prefix = ""
                 }
-            }
-
-            vim.diagnostic.config(config)
-        end,
-        event = {"BufReadPost", "BufNewFile"},
-        keys = {
-            {
-                "<leader>lr",
-                function()
-                    vim.notify("Lsp Restarted")
-                    vim.cmd([[LspRestart]])
-                end,
-                desc = "Restart Lsp"
-            }
-        }
-    }, {"williamboman/mason.nvim", name = "mason", opts = {}}, {
-        "williamboman/mason-lspconfig.nvim",
-        name = "mason-lspconfig",
-        dependencies = {"mason", "ray-x/lsp_signature.nvim"},
-        config = function(_, opts)
-            local mason_lsp = require("mason-lspconfig")
-
-            mason_lsp.setup(opts)
-
-            local utils = require("dreadster_lazy.utils")
-            local handlers = require("dreadster_lazy.utils.lsp_handlers")
-            local capabilities = handlers.capabilities
-            local on_attach = handlers.on_attach
-            local on_publish_diagnostics =
-                vim.lsp.handlers["textDocument/publishDiagnostics"]
-            local cooldown = false
-
-            mason_lsp.setup_handlers({
-                function(server_name) -- default handler (optional)
-                    vim.notify("Default")
-                    local lspconfig = require("lspconfig")
-                    lspconfig[server_name].setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        handlers = {
-                            ["textDocument/publishDiagnostics"] = function(_,
-                                                                           result,
-                                                                           ctx,
-                                                                           config)
-                                for idx, diag in ipairs(result.diagnostics) do
-                                    for position, value in pairs(diag.range) do
-                                        if value.character == -1 or value.line ==
-                                            -1 then
-                                            if position == "start" and
-                                                not cooldown then
-                                                vim.notify(diag.message,
-                                                           vim.log.levels.WARN,
-                                                           {
-                                                    title = "Diagnostic"
-                                                })
-                                                cooldown = true;
-                                                vim.defer_fn(function()
-                                                    -- Make sure function is only called once a minute
-                                                    -- to avoid notification spam
-                                                    cooldown = false
-                                                end, 60000)
-                                            end
-                                            table.remove(result.diagnostics, idx)
-                                        end
-                                    end
-                                end
-
-                                return on_publish_diagnostics(_, result, ctx,
-                                                              config)
-                            end
+            },
+            servers = {
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            diagnostics = {globals = {'vim'}},
+                            workspace = {checkThirdParty = false}
                         }
-                    })
+                    }
+                },
+                pyright = {single_file_support = true},
+                clangd = {},
+                omnisharp = {
+                    enable_editorconfig_support = true,
+                    enable_ms_build_load_projects_on_demand = false,
+                    enable_roslyn_analyzers = false,
+                    organize_imports_on_format = true,
+                    enable_import_completion = true,
+                    sdk_include_prereleases = true,
+                    analyze_open_documents_only = false
+                }
+            },
+            setup = {
+                clangd = function(_, opts)
+                    opts.capabilities.offsetEncoding = "utf-8"
                 end,
-                ["lua_ls"] = function()
-                    vim.notify("Lua")
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        settings = {
-                            Lua = {
-                                diagnostics = {globals = {'vim'}},
-                                workspace = {checkThirdParty = false}
-                            }
-                        }
-                    })
-                end,
-                ["pyright"] = function()
-                    vim.notify("Python")
-                    local lspconfig = require("lspconfig")
-                    lspconfig.pyright.setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        single_file_support = true
-                    })
-                end,
-                ["rust_analyzer"] = function()
-                    -- require('dreadster.lsp.rust_tools')
-                end,
-                ["grammarly"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.grammarly.setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        filetypes = {"markdown", "text", "tex"}
-                    })
-                end,
-                ["clangd"] = function()
-                    local lspconfig = require("lspconfig")
-                    capabilities.offsetEncoding = "utf-8"
-                    lspconfig.clangd.setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach
-                    })
-                end,
-                ["omnisharp"] = function()
-                    local lspconfig = require("lspconfig")
-                    local handler = vim.lsp.handlers["textDocument/definition"];
-
-                    if utils.check_module_installed('omnisharp_extended') then
-                        handler = require('omnisharp_extended').handler
+                omnisharp = function(_, opts)
+                    local utils = require("dreadster_lazy.utils")
+                    if utils.check_module_installed("omnisharp_extended") then
+                        local handler = require("omnisharp_extended").handler
+                        opts.handlers = {["textDocument/definition"] = handler}
                     end
-
-                    lspconfig.omnisharp.setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        handlers = {["textDocument/definition"] = handler},
-                        enable_editorconfig_support = true,
-                        enable_ms_build_load_projects_on_demand = false,
-                        enable_roslyn_analyzers = false,
-                        organize_imports_on_format = true,
-                        enable_import_completion = true,
-                        sdk_include_prereleases = true,
-                        analyze_open_documents_only = false
-                    })
                 end
-            })
-        end,
-        opts = {
-            ensure_installed = {
-                "lua_ls", "clangd", "cmake", "tsserver", "terraformls",
-                "tflint", "pyright", "bashls"
             }
-        }
-    }, {
+        },
+        config = function(_, opts)
+            -- -- Diagnostics
+            -- for _, sign in ipairs(opts.diagnostics.signs.active) do
+            --     vim.fn.sign_define(sign.name, {
+            --         texthl = sign.name,
+            --         text = sign.text,
+            --         numhl = ""
+            --     })
+            -- end
+            --
+            -- vim.diagnostic.config(opts.diagnostics)
+            --
+            -- local handlers = require("dreadster_lazy.utils.lsp_handlers")
+            --
+            -- handlers.on_attach()
+            --
+            -- -- Servers
+            -- local servers = opts.servers
+            -- local has_cmp_nvim_lsp, cmp_nvim_lsp =
+            --     pcall(require, "cmp_nvim_lsp")
+            --
+            -- local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp
+            --                                              .protocol
+            --                                              .make_client_capabilities(),
+            --                                          has_cmp_nvim_lsp and
+            --                                              cmp_nvim_lsp.default_capabilities() or
+            --                                              {},
+            --                                          opts.capabilities or {})
+            --
+            -- local function setup(server)
+            --     local server_opts = vim.tbl_deep_extend("force", {
+            --         capabilities = vim.deepcopy(capabilities or {})
+            --     }, servers[server] or {})
+            --
+            --     if opts.setup[server] then
+            --         if opts.setup[server](server, server_opts) then
+            --             return
+            --         end
+            --     elseif opts.setup["*"] then
+            --         if opts.setup["*"](server, server_opts) then
+            --             return
+            --         end
+            --     end
+            --     require("lspconfig")[server].setup(server_opts)
+            -- end
+            --
+            -- -- get all the servers that are available thourgh mason-lspconfig
+            -- local have_mason, mlsp = pcall(require, "mason-lspconfig")
+            -- local all_mslp_servers = {}
+            -- if have_mason then
+            --     all_mslp_servers = vim.tbl_keys(require(
+            --                                         "mason-lspconfig.mappings.server").lspconfig_to_package)
+            -- end
+            --
+            -- local ensure_installed = {} ---@type string[]
+            -- for server, server_opts in pairs(servers) do
+            --     if server_opts then
+            --         server_opts = server_opts == true and {} or server_opts
+            --         -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+            --         if server_opts.mason == false or
+            --             not vim.tbl_contains(all_mslp_servers, server) then
+            --             setup(server)
+            --         else
+            --             ensure_installed[#ensure_installed + 1] = server
+            --         end
+            --     end
+            -- end
+            --
+            -- if have_mason then
+            --     mlsp.setup({
+            --         ensure_installed = ensure_installed,
+            --         handlers = {setup}
+            --     })
+            -- end
+        end
+    }, {"williamboman/mason.nvim", name = "mason", opts = {}}, {
         "glepnir/lspsaga.nvim",
         dependencies = {"nvim-tree/nvim-web-devicons", "treesitter"},
         opts = {
@@ -198,5 +168,16 @@ return {
         event = {"BufReadPost *.lua"},
         dependencies = {"lspconfig"},
         opts = {}
-    }, {"ray-x/go.nvim", event = {"BufReadPost *.go"}, opts = {}}
+    }, {"ray-x/go.nvim", event = {"BufReadPost *.go"}, opts = {}}, {
+        "Saecki/crates.nvim",
+        event = {"BufRead Cargo.toml"},
+        config = function(_, opts)
+            local cargo_reload_group = vim.api.nvim_create_augroup(
+                                           "cargo_reload")
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                pattern = "Cargo.toml",
+                callback = function() require("crates").reload() end
+            })
+        end
+    }, {"simrat39/rust-tools.nvim", lazy = true, opts = {}}
 }

@@ -1,7 +1,7 @@
 return {
     {
         'hrsh7th/nvim-cmp',
-        event = {"BufReadPre", "BufNewFile"},
+        event = {"InsertEnter"},
         name = "cmp",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path",
@@ -62,7 +62,13 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-Space>'] = cmp.mapping.complete({}),
+                    ['<C-Space>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.abort()
+                        else
+                            cmp.complete()
+                        end
+                    end, {"i", "s"}),
                     ['<C-e>'] = cmp.mapping.abort(),
                     ['<CR>'] = cmp.mapping.confirm({select = false}),
                     ['<Up>'] = cmp.mapping.select_prev_item(),

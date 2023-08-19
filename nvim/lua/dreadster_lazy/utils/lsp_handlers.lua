@@ -31,19 +31,29 @@ local function lspsaga_keymaps(bufnr)
     keymap(bufnr, 'n', ']d', ":Lspsaga diagnostic_jump_next<CR>", opts)
 end
 
-local disabled_formatting = {"tsserver", "sumneko_lua", "omnisharp"}
+M.on_attach = function(on_attach)
+    vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+            local buffer = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-M.on_attach = function(client, bufnr)
-    if utils.is_in_table(disabled_formatting, client.name) then
-        vim.notify("Disabled formatting for " .. client.name)
-        client.server_capabilities.documentFormattingProvider = false
-    end
+            local disabled_formatting = {"tsserver", "sumneko_lua", "omnisharp"}
 
-    lspsaga_keymaps(bufnr)
+            if client ~= nil and
+                utils.is_in_table(disabled_formatting, client.name) then
+                vim.notify("Disabled formatting for " .. client.name)
+                client.server_capabilities.documentFormattingProvider = false
+            end
 
-    if not utils.check_module_installed("illuminate") then return end
+            lspsaga_keymaps(buffer)
 
-    require("illuminate").on_attach(client)
+            if not utils.check_module_installed("illuminate") then
+                return
+            end
+
+            require("illuminate").on_attach(client)
+        end
+    })
 end
 
 return M

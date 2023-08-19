@@ -20,7 +20,7 @@ return {
     }, {
         'windwp/nvim-autopairs',
         dependencies = {'windwp/nvim-ts-autotag'},
-        event = {"BufReadPost"},
+        event = {"InsertEnter"},
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
