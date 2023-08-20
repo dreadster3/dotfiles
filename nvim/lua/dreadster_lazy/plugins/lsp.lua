@@ -60,9 +60,7 @@ return {
 					sdk_include_prereleases = true,
 					analyze_open_documents_only = false
 				},
-				rust_analyzer = {
-
-				}
+				rust_analyzer = {}
 			},
 			setup = {
 				clangd = function(_, opts)
@@ -152,7 +150,7 @@ return {
 				})
 			end
 		end
-	}, { "williamboman/mason.nvim", name = "mason",          opts = {} }, {
+	}, { "williamboman/mason.nvim", name = "mason",        opts = {} }, {
 	"glepnir/lspsaga.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", "treesitter" },
 	opts = {
