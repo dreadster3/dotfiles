@@ -27,7 +27,7 @@
   "mason": { "branch": "main", "commit": "a51c2d063c5377ee9e58c5f9cda7c7436787be72" },
   "mason-dap": { "branch": "main", "commit": "6148b51db945b55b3b725da39eaea6441e59dff8" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "2997f467881ac4faa6f8c5e7065e3a672297c8ad" },
-  "neodev.nvim": { "branch": "main", "commit": "eb8d781cb261285eb556a15342158c2e5a4c801c" },
+  "neodev.nvim": { "branch": "main", "commit": "e9bc652e22f9cd1892630bf019db363ac403ee39" },
   "neogen": { "branch": "main", "commit": "1dd0319ccf41b2498f45a3c7607f2ee325ffc6a0" },
   "noice": { "branch": "main", "commit": "894db25ec726d32047799d4d0a982b701bec453b" },
   "notify": { "branch": "master", "commit": "ea9c8ce7a37f2238f934e087c255758659948e0f" },
