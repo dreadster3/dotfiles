@@ -23,7 +23,6 @@ return {
 			telescope.setup(opts)
 
 			telescope.load_extension("media_files")
-			-- telescope.load_extension("find_template")
 			telescope.load_extension("projects")
 		end,
 		opts = function()
