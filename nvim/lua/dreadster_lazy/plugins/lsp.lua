@@ -153,6 +153,7 @@ return {
 	}, { "williamboman/mason.nvim", name = "mason",        opts = {} }, {
 	"glepnir/lspsaga.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", "treesitter" },
+	event = { "LspAttach" },
 	opts = {
 		ui = {
 			border = "rounded",
