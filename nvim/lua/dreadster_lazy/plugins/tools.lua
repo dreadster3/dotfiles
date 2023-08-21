@@ -3,10 +3,9 @@ return {
         "nvim-telescope/telescope.nvim",
         name = "telescope",
         dependencies = {
-            "nvim-lua/plenary.nvim", {
-                "nvim-telescope/telescope-media-files.nvim",
-                dependencies = {"nvim-lua/popup.nvim"}
-            }, "nvim-telescope/telescope-symbols.nvim", "project", "template"
+            "nvim-lua/plenary.nvim",
+            {"nvim-telescope/telescope-media-files.nvim"},
+            "nvim-telescope/telescope-symbols.nvim", "project", "template"
         },
         event = {"User AlphaReady"},
         cmd = {"Telescope"},
@@ -52,7 +51,7 @@ return {
                         n = {["q"] = require("telescope.actions").close}
                     }
                 },
-                extensions = {}
+                extensions = {media_files = {find_cmd = "rg"}}
             }
 
             return opts
