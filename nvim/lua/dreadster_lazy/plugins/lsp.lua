@@ -50,7 +50,6 @@ return {
 					}
 				},
 				pyright = { single_file_support = true },
-				clangd = {},
 				omnisharp = {
 					enable_editorconfig_support = true,
 					enable_ms_build_load_projects_on_demand = false,
@@ -61,8 +60,11 @@ return {
 					analyze_open_documents_only = false
 				},
 				rust_analyzer = {},
+				clangd = {},
 				terraformls = {},
-				tflint = {}
+				tflint = {},
+				bashls = {},
+				jsonls = {}
 			},
 			setup = {
 				clangd = function(_, opts)
