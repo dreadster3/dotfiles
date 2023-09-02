@@ -1,0 +1,25 @@
+#window {
+  background-color: #1e1e2e;
+  border-radius: 8px
+}
+
+#input {
+  border-radius: 8px;
+  margin: 6px;
+  border: none;
+  color: white;
+  background-color: #222235
+}
+
+#inner-box {
+  margin: 8px;
+}
+
+#entry:selected {
+  background: rgba(137, 181, 250, .6);
+  color: white
+}
+
+#text {
+  color: white
+}

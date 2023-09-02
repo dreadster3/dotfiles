@@ -1,0 +1,11 @@
+swaylock -f -S \
+	--clock \
+	--effect-blur 10x10 \
+	--indicator \
+	--indicator-radius 100 \
+	--indicator-thickness 10 \
+	--ring-color 89b4fa \
+	--inside-color 1e1e2e \
+	--text-color f9e2af \
+	--key-hl-color a6e3a1 \
+	--fade-in 0.2

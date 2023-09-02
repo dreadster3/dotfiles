@@ -1,0 +1,12 @@
+width=425
+height=250
+show=drun
+prompt=Search...
+allow_markup=true
+no_actions=true
+orientation=vertical
+content_halign=fill
+insensitive=true
+allow_images=true
+image_size=30
+normal_window=true

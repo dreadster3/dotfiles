@@ -1,0 +1,194 @@
+@import "mocha.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(30, 30, 46, 0.5);
+  border-bottom: 1px solid #282828;
+  color: #f4d9e1;
+}
+
+tooltip {
+  background: rgba(30, 30, 46, 0.5);
+  border: 1px solid rgba(205, 214, 244, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#custom-wofi {
+  font-size: 15px;
+  color: @blue;
+  background-color: @base;
+  border-radius: 10px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+  margin: 5px;
+  padding-left: 8px;
+  padding-right: 14px;
+}
+
+#workspaces {
+  border-radius: 10px;
+  margin: 5px;
+  background-color: #1e1e2e;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#workspaces button {
+  border-radius: 10px;
+  padding: 5px;
+  background: transparent;
+}
+
+#workspaces button.active {
+  border-radius: 10px;
+  color: #1e1e2e;
+  background: @blue;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin: 1.5px;
+}
+
+#workspaces button.hover {
+  border-radius: 10px;
+  background: #313244;
+  margin: 1px;
+}
+
+#cpu {
+  color: #eba0ac;
+  background-color: #1e1e2e;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#memory {
+  color: @peach;
+  background-color: #1e1e2e;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#disk {
+  color: @yellow;
+  background-color: #1e1e2e;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#clock {
+  color: #b4befe;
+  background-color: @base;
+  border-radius: 10px;
+  margin: 5px;
+  padding-left: 1px;
+  padding-right: 0px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#battery {
+  background-color: @base;
+  color: @text;
+  border-radius: 10px;
+  margin: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#battery.chargin,
+#battery.plugged {
+  color: @blue;
+}
+
+#backlight {
+  color: @yellow;
+  background-color: @base;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  padding-left: 5px;
+  padding-right: 8px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#pulseaudio {
+  color: #f5c2e7;
+  background-color: @base;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#tray {
+  background-color: @base;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  border-width: 1.3px;
+  border-color: @surface1;
+  border-style: solid;
+}
+
+#custom-playerctl {
+  background: @base;
+  padding-left: 15px;
+  padding-right: 14px;
+  border-radius: 16px;
+  border-width: 1.3px;
+  border-style: solid;
+  border-color: @surface1;
+  /* border-left: solid 1px #ffffff; */
+  /* border-right: solid 1px #ffffff; */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  color: @mauve;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+}
+
+#custom-playerlabel {
+  background: transparent;
+  padding-left: 10px;
+  padding-right: 15px;
+  border-radius: 16px;
+  color: @mauve;
+  /*border-left: solid 1px #282738;*/
+  /*border-right: solid 1px #282738;*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: normal;
+  font-style: normal;
+}
