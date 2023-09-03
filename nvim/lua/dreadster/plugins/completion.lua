@@ -133,7 +133,7 @@ return {
 	name = "copilot",
 	event = { "InsertEnter" },
 	init = function()
-		local utils = require("dreadster_lazy.utils")
+		local utils = require("dreadster.utils")
 		if utils.is_mac() then
 			vim.g.copilot_proxy = os.getenv("http_proxy")
 		end

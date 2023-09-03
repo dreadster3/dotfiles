@@ -12,7 +12,7 @@ return function(opts)
     opts = vim.tbl_deep_extend("force", {
         spec = {
             -- {"LazyVim/LazyVim", import = "lazyvim.plugins", opts = {}},
-            {import = "dreadster_lazy.plugins"}
+            {import = "dreadster.plugins"}
         },
         defaults = {lazy = false},
         -- install = {colorscheme = {"catppuccin-mocha"}},

@@ -71,7 +71,7 @@ return {
                     opts.capabilities.offsetEncoding = "utf-8"
                 end,
                 omnisharp = function(_, opts)
-                    local utils = require("dreadster_lazy.utils")
+                    local utils = require("dreadster.utils")
                     if utils.check_module_installed("omnisharp_extended") then
                         local handler = require("omnisharp_extended").handler
                         opts.handlers = {["textDocument/definition"] = handler}
@@ -91,7 +91,7 @@ return {
 
             vim.diagnostic.config(opts.diagnostics)
 
-            local handlers = require("dreadster_lazy.utils.lsp_handlers")
+            local handlers = require("dreadster.utils.lsp_handlers")
 
             handlers.on_attach()
 

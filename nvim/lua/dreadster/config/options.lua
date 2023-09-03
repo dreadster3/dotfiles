@@ -22,7 +22,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.background = "dark"
 
 -- Copy + Paste WSL
-local utils = require("dreadster_lazy.utils")
+local utils = require("dreadster.utils")
 if utils.is_wsl() then
     vim.g.clipboard = {
         name = "WslClipboard",

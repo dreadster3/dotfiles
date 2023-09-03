@@ -1,4 +1,4 @@
-local utils = require("dreadster_lazy.utils")
+local utils = require("dreadster.utils")
 
 if not utils.check_module_installed("cmp_nvim_lsp") then return end
 
