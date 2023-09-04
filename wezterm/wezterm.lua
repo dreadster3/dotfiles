@@ -3,6 +3,30 @@ local config = {}
 
 config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 18.0
+config.font_rules = {
+    {
+        intensity = 'Bold',
+        italic = true,
+        font = wezterm.font {
+            family = 'VictorMono Nerd Font',
+            weight = 'Bold',
+            style = 'Italic'
+        }
+    }, {
+        italic = true,
+        intensity = 'Half',
+        font = wezterm.font {
+            family = 'VictorMono Nerd Font',
+            weight = 'DemiBold',
+            style = 'Italic'
+        }
+    }, {
+        italic = true,
+        intensity = 'Normal',
+        font = wezterm.font {family = 'VictorMono Nerd Font', style = 'Italic'}
+    }
+}
+
 config.color_scheme = 'Catppuccin Mocha'
 config.tab_bar_at_bottom = true
 config.background = {
@@ -22,11 +46,6 @@ config.background = {
         attachment = "Fixed"
     }
 }
--- The filled in variant of the < symbol
-local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
-
--- The filled in variant of the > symbol
-local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
