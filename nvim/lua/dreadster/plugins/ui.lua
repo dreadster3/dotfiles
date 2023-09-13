@@ -202,10 +202,10 @@ return {
         opts = {}
     }, {
         "folke/twilight.nvim",
-        enabled = false,
+        -- enabled = false,
         name = "twilight",
         cmd = "Twilight",
-        opts = {}
+        opts = {treesitter = true, context = 10}
     }, {
         "lukas-reineke/indent-blankline.nvim",
         event = {"BufReadPost", "BufNewFile"},
