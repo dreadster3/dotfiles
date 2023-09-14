@@ -11,5 +11,5 @@ nnoremap("<C-l>", "<C-w>l")
 -- Helper
 nnoremap('<leader>s', ':w<CR>')
 nnoremap('<leader>q', ':q<CR>')
-nnoremap("<C-a>", "ggvG")
+nnoremap("<C-a>", "ggVG")
 nnoremap("<leader>cd", ":lua vim.cmd.cd(vim.fn.expand('%:p:h'))<CR>")
