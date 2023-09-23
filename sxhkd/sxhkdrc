@@ -11,10 +11,10 @@ super + @space
 	/home/dreadster/.config/rofi/launchers/type-2/launcher.sh
 	# dmenu_run
 
-super + ctrl + l
+super + l
 	betterlockscreen -l blur
 
-super + shift + p
+Print
 	flameshot gui
 
 # make sxhkd reload its configuration files:
