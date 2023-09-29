@@ -208,6 +208,7 @@ return {
 	opts = { treesitter = true, context = 10 }
 }, {
 	"lukas-reineke/indent-blankline.nvim",
+	main = "ibl",
 	event = { "BufReadPost", "BufNewFile" },
 	opts = {}
 }, {
