@@ -61,5 +61,6 @@
   "vim-illuminate": { "branch": "master", "commit": "1b5d70332a51a1de05f281069851865a2bb1e6d7" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
   "whitespace": { "branch": "master", "commit": "fe9ca0ba3c6e6cc1dd14c0d6cbe49d97496700dd" },
+  "yanky.nvim": { "branch": "main", "commit": "636632d70ac00c45bdc1751d7b35c83d47081f36" },
   "zenmode": { "branch": "main", "commit": "68f554702de63f4b7b6b6d4bcb10178f41a0acc7" }
 }
