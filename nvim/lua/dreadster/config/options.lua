@@ -1,13 +1,19 @@
 -- General settings
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.scrolloff = 8
+
+vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.number = true
 vim.opt.ignorecase = true
-vim.opt.tabstop = 4
-
-vim.opt.shiftwidth = 4
-vim.opt.smartindent = true
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.wrap = false
+vim.opt.signcolumn = "yes"
 
 vim.opt.title = true
 vim.opt.termguicolors = true

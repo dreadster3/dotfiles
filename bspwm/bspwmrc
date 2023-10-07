@@ -7,6 +7,7 @@ nitrogen --restore &
 pgrep -x picom > /dev/null || picom -f &
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x flameshot > /dev/null || flameshot &
+xbindkeys
 
 # Launch polybar
 /home/dreadster/.config/polybar/shades/launch.sh &
