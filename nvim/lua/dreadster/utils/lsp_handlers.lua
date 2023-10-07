@@ -31,6 +31,8 @@ local function lspsaga_keymaps(bufnr)
     keymap(bufnr, 'n', ']d', ":Lspsaga diagnostic_jump_next<CR>", opts)
 end
 
+local bounce = false
+
 M.on_attach = function(on_attach)
     vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
@@ -41,7 +43,13 @@ M.on_attach = function(on_attach)
 
             if client ~= nil and
                 utils.is_in_table(disabled_formatting, client.name) then
-                vim.notify("Disabled formatting for " .. client.name)
+                if not bounce then
+                    vim.notify("Disabled formatting for " .. client.name)
+                    bounce = true
+
+                    vim.defer_fn(function() bounce = false end, 5000)
+                end
+
                 client.server_capabilities.documentFormattingProvider = false
             end
 
