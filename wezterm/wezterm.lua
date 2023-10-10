@@ -1,4 +1,5 @@
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
+local utils = require("utils")
 local config = {}
 
 config.font = wezterm.font("FiraCode Nerd Font")
@@ -55,12 +56,22 @@ config.keys = {
 	{
 		key = 'w',
 		mods = 'CTRL|SHIFT',
-		action = wezterm.action.CloseCurrentPane { confirm = true }
+		action = wezterm.action.CloseCurrentPane { confirm = false }
 	}, {
 	key = 'Enter',
 	mods = 'CTRL|SHIFT',
-	action = wezterm.action_callback(require('utils').split_pane)
+	action = wezterm.action_callback(utils.split_pane)
 }
 }
+
+if utils.is_mac() then
+	local macos = require("macos")
+	config = utils.merge({ config, macos })
+end
+
+if utils.is_linux() then
+	local windows = require("linux")
+	config = utils.merge({ config, windows })
+end
 
 return config
