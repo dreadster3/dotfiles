@@ -1,11 +1,11 @@
 {config, lib, pkgs, ...}:
 {
 	imports = [
-		../../services/neovim.nix
-		../../services/zsh-plugins.nix
-		../../services/rofi.nix
-		../../services/polybar.nix
-		../../services/nerdfonts.nix
+		../../services/homemanager/neovim.nix
+		../../services/homemanager/zsh-plugins.nix
+		../../services/homemanager/rofi.nix
+		../../services/homemanager/polybar.nix
+		../../services/homemanager/nerdfonts.nix
 	];
 
 	home.stateVersion = "18.09";
