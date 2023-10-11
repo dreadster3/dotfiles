@@ -2,13 +2,22 @@
 {
 	imports = [
 		../../services/homemanager/neovim.nix
-		../../services/homemanager/zsh-plugins.nix
+		../../services/homemanager/zsh.nix
 		../../services/homemanager/rofi.nix
 		../../services/homemanager/polybar.nix
 		../../services/homemanager/nerdfonts.nix
+		../../services/homemanager/gtk.nix
 	];
 
 	home.stateVersion = "18.09";
+
+	home.pointerCursor = {
+		gtk.enable = true;
+		x11.enable = true;
+		name = "Catppuccin-Mocha-Blue-Cursors";
+		package = pkgs.catppuccin-cursors.mochaBlue;
+		size = 32;
+	};
 
 	xdg = {
 		configFile = {

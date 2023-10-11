@@ -26,6 +26,12 @@ in
 					theme = "robbyrussell";
 					plugins = ["git" "sudo"];
 				};
+				shellAliases = {
+					n = "nvim ./";
+					zshconfig = "nvim ~/Documents/projects/github/dotfiles/services/homemanager/zsh.nix";
+					nvimconfig = "nvim ~/Documents/projects/github/dotfiles/configurations/nvim";
+					nixconfig = "nvim ~/Documents/projects/github/dotfiles";
+				};
 			};
 		};
 	};

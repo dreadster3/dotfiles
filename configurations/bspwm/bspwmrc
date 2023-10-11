@@ -13,7 +13,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 $HOME/.config/polybar/shades/launch.sh &
 
 # Set cursor
-# xsetroot -cursor_name left_ptr 
+xsetroot -cursor_name left_ptr
 
 # Set monitor layout
 # xrandr --output DP-0 --primary --output HDMI-0 --left-of DP-0 --rotate left
