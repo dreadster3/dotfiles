@@ -75,7 +75,7 @@
 		programs = {
 			git = {
 				enable = true;
-				userName = "dreadster";
+				userName = "dreadster3";
 				userEmail = "afonso.antunes@live.com.pt";
 			};
 		};
