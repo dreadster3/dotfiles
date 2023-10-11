@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	wezterm
+	kitty
 
 # program launcher
 super + @space
-	/home/dreadster/.config/rofi/launchers/type-2/launcher.sh
+	~/.config/rofi/launchers/type-2/launcher.sh
 	# dmenu_run
 
 super + l
@@ -26,10 +26,10 @@ super + Escape
 #
 
 super + d
-	/home/dreadster/.config/rofi/launchers/type-2/launcher.sh
+	~/.config/rofi/launchers/type-2/launcher.sh
 
 super + q
-	/home/dreadster/.config/rofi/powermenu/type-2/powermenu.sh
+	~/.config/rofi/powermenu/type-2/powermenu.sh
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
