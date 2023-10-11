@@ -5,14 +5,10 @@ let
 in
 {
 	config = {
-		home-manager.users = {
-			"${username}" = {pkgs, ...}: {
-				services = {
-					polybar = {
-						enable = true;
-						script = "echo 1";
-					};
-				};
+		services = {
+			polybar = {
+				enable = true;
+				script = "echo 1";
 			};
 		};
 	};

@@ -5,14 +5,10 @@ let
 in
 {
 	config = {
-		home-manager.users = {
-			"${username}" = {pkgs, ...}: {
-				fonts.fontconfig.enable = true;
+		fonts.fontconfig.enable = true;
 
-				home.packages = with pkgs; [
-					(nerdfonts.override { fonts = [ "FiraCode" "VictorMono" "Iosevka" ]; })
-				];
-			};
-		};
+		home.packages = with pkgs; [
+			(nerdfonts.override { fonts = [ "FiraCode" "VictorMono" "Iosevka" ]; })
+		];
 	};
 }

@@ -5,12 +5,8 @@ let
 in
 {
 	config = {
-		home-manager.users = {
-			"${username}" = {pkgs, ...}: {
-				home.packages = with pkgs; [
-					rofi
-				];
-			};
-		};
+		home.packages = with pkgs; [
+			rofi
+		];
 	};
 }

@@ -1,33 +1,26 @@
-{config, lib, pkgs, username, ...}:
+{config, lib, pkgs, ...}:
 with lib;
 let
 	cfg = config.customservices.neovim;
 in
 {
 	config = {
-		environment = {
-			variables = {
-				EDITOR = "nvim";
-			};
+		home.sessionVariables = {
+			EDITOR = "nvim";
 		};
-
-		home-manager.users = {
-			"${username}" = {pkgs, ...}: {
-				programs = {
-					neovim = {
-						enable = true;
-						extraPackages = with pkgs; [
-							gcc
-							cmake
-							luarocks
-							nodejs
-							lazygit
-							rustc
-							cargo
-							ripgrep
-						];
-					};
-				};
+		programs = {
+			neovim = {
+				enable = true;
+				extraPackages = with pkgs; [
+					gcc
+					cmake
+					luarocks
+					nodejs
+					lazygit
+					rustc
+					cargo
+					ripgrep
+				];
 			};
 		};
 	};
