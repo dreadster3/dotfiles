@@ -16,7 +16,8 @@ in
 					gcc
 					cmake
 					luarocks
-					nodejs
+					nodejs_20
+					nodePackages.npm
 					lazygit
 					rustc
 					cargo
