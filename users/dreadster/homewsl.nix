@@ -11,6 +11,9 @@
 	home.packages = with pkgs; [
 		ranger
 		btop
+		unzip
+		zip
+		xclip
 	];
 
 	xdg = {
@@ -33,4 +36,6 @@
 			userEmail = "afonso.antunes@live.com.pt";
 		};
 	};
+
+	programs.home-manager.enable = true;
 }
