@@ -12,6 +12,7 @@ in
 			neovim = {
 				enable = true;
 				extraPackages = with pkgs; [
+					unzip
 					gcc
 					cmake
 					luarocks
