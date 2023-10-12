@@ -1,10 +1,10 @@
-{config, lib, pkgs, username, ...}:
-with lib;
-let
-	cfg = config.customservices.zshplugins;
-in
+{config, lib, pkgs, ...}:
 {
 	config = {
+		home.packages = with pkgs; [
+			zsh-powerlevel10k
+		];
+
 		programs = {
 			zsh = {
 				enable = true;
@@ -20,11 +20,22 @@ in
 							sha256 = "uch5w0xznHk2v/dwDSYAi80WqglYydb0zgwgJlIHW3U=";
 						};
 					}
+					{
+						name = "zsh-nix-shell";
+						file = "nix-shell.plugin.zsh";
+						src = pkgs.fetchFromGitHub {
+							owner = "chisui";
+							repo = "zsh-nix-shell";
+							rev = "v0.7.0";
+							sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
+						};
+					}
 				];
 				oh-my-zsh = {
 					enable = true;
-					theme = "robbyrussell";
+					theme = "agnoster-nix";
 					plugins = ["git" "sudo"];
+					custom = "$HOME/Documents/projects/github/dotfiles/configurations/.oh-my-zsh/custom";
 				};
 				shellAliases = {
 					n = "nvim ./";

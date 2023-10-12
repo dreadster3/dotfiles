@@ -5,4 +5,10 @@
       enable = true;
     };
   };
+
+  environment = {
+	  variables = {
+		  NIX_BUILD_SHELL = pkgs.zsh + "/bin/zsh";
+	  };
+  };
 }

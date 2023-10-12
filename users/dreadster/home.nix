@@ -11,6 +11,10 @@
 
 	home.stateVersion = "18.09";
 
+	home.packages = with pkgs; [
+		ranger
+	];
+
 	home.pointerCursor = {
 		gtk.enable = true;
 		x11.enable = true;
@@ -43,6 +47,14 @@
 			};
 			kitty = {
 				source = ../../configurations/kitty;
+				recursive = true;
+			};
+			btop = {
+				source = ../../configurations/btop;
+				recursive = true;
+			};
+			ranger = {
+				source = ../../configurations/ranger;
 				recursive = true;
 			};
 		};
