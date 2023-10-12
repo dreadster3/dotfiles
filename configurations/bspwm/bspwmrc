@@ -6,8 +6,8 @@ nitrogen --restore &
 # Startup applications
 pgrep -x picom > /dev/null || picom -f &
 pgrep -x sxhkd > /dev/null || sxhkd &
-# pgrep -x flameshot > /dev/null || flameshot &
-# xbindkeys
+pgrep -x flameshot > /dev/null || flameshot &
+xbindkeys
 
 # Launch polybar
 $HOME/.config/polybar/shades/launch.sh &
@@ -16,7 +16,7 @@ $HOME/.config/polybar/shades/launch.sh &
 xsetroot -cursor_name left_ptr
 
 # Set monitor layout
-# xrandr --output DP-0 --primary --output HDMI-0 --left-of DP-0 --rotate left
+xrandr --output DP-0 --primary --output HDMI-0 --left-of DP-0 --rotate left
 
 # Startup vm tools
 # vmware-user &

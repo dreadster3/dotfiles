@@ -1,12 +1,6 @@
 { config, pkgs, lib, ...}:
 
 {
-  services = {
-    picom = {
-      enable = true;
-    };
-  };
-
   services.xserver = {
     enable = true;
     layout = "us";

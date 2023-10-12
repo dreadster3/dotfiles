@@ -27,5 +27,6 @@
 		unzip
 		xclip
 		flameshot
+		btop
 	];
 }
