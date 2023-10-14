@@ -30,6 +30,16 @@
 							sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
 						};
 					}
+					{
+						name = "powerlevel10k";
+						src  = pkgs.zsh-powerlevel10k;
+						file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+					}
+					{
+						name = "powerlevel10k-config";
+						src = ../../configurations/powerlevel10k;
+						file = "p10k.zsh";
+					}
 				];
 				oh-my-zsh = {
 					enable = true;
