@@ -198,7 +198,7 @@ prompt_dir() {
 	if [[ -v CURRENT_PROJECT_DIR && -v CURRENT_PROJECT_NAME && $PWD =~ "^$CURRENT_PROJECT_DIR(.*)$" ]]; then
 	  prompt_segment blue black "$CURRENT_PROJECT_NAME$match[1]"
 	else
-    prompt_segment blue black '%~'
+    prompt_segment blue black '%c'
 	fi
 }
 
