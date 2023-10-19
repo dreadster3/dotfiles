@@ -22,6 +22,7 @@ in
 					rustc
 					cargo
 					ripgrep
+					dotnet-sdk_7
 				];
 			};
 		};
