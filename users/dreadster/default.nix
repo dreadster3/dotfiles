@@ -13,6 +13,7 @@
 
 	home.packages = with pkgs; [
 		ranger
+		killall
 	];
 
 	home.pointerCursor = {
