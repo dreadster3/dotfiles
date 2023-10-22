@@ -1,12 +1,12 @@
 {config, lib, pkgs, ...}:
 {
 	imports = [
-		../../services/homemanager/neovim.nix
-		../../services/homemanager/zsh.nix
-		../../services/homemanager/rofi.nix
-		../../services/homemanager/polybar.nix
-		../../services/homemanager/nerdfonts.nix
-		../../services/homemanager/gtk.nix
+		../../../services/homemanager/neovim.nix
+		../../../services/homemanager/zsh.nix
+		../../../services/homemanager/rofi.nix
+		../../../services/homemanager/polybar.nix
+		../../../services/homemanager/nerdfonts.nix
+		../../../services/homemanager/gtk.nix
 	];
 
 	home.stateVersion = "18.09";
@@ -27,35 +27,35 @@
 	xdg = {
 		configFile = {
 			bspwm = {
-				source = ../../configurations/bspwm;
+				source = ../../../configurations/bspwm;
 				recursive = true;
 			};
 			picom = {
-				source = ../../configurations/picom;
+				source = ../../../configurations/picom;
 				recursive = true;
 			};
 			sxhkd = {
-				source = ../../configurations/sxhkd;
+				source = ../../../configurations/sxhkd;
 				recursive = true;
 			};
 			polybar = {
-				source = ../../configurations/polybar;
+				source = ../../../configurations/polybar;
 				recursive = true;
 			};
 			rofi = {
-				source = ../../configurations/rofi;
+				source = ../../../configurations/rofi;
 				recursive = true;
 			};
 			kitty = {
-				source = ../../configurations/kitty;
+				source = ../../../configurations/kitty;
 				recursive = true;
 			};
 			btop = {
-				source = ../../configurations/btop;
+				source = ../../../configurations/btop;
 				recursive = true;
 			};
 			ranger = {
-				source = ../../configurations/ranger;
+				source = ../../../configurations/ranger;
 				recursive = true;
 			};
 		};

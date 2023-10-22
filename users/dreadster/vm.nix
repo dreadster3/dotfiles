@@ -9,5 +9,5 @@
 		packages = with pkgs; [];
 	};
 
-	home-manager.users.dreadster = (import ./home/default.nix);
+	home-manager.users.dreadster = (import ./home/vm.nix);
 }

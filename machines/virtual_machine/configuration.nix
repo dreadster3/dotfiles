@@ -11,7 +11,7 @@ in
     [ # Include the results of the hardware scan.
 	  ../../profiles/common.nix
 	  ../../profiles/bspwm.nix
-	  ../../users/dreadster/base.nix
+	  ../../users/dreadster/vm.nix
       /etc/nixos/hardware-configuration.nix
       (import "${home-manager}/nixos")
     ];
