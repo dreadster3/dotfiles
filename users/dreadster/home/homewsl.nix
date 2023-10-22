@@ -19,11 +19,11 @@
 	xdg = {
 		configFile = {
 			btop = {
-				source = ../../configurations/btop;
+				source = ../../../configurations/btop;
 				recursive = true;
 			};
 			ranger = {
-				source = ../../configurations/ranger;
+				source = ../../../configurations/ranger;
 				recursive = true;
 			};
 		};
