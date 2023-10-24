@@ -8,8 +8,12 @@ in
 		services = {
 			polybar = {
 				enable = true;
-				script = "echo 1";
+				script = builtins.readFile ../../configurations/polybar/shades/launch.sh;
 			};
+		};
+
+		systemd.user.services.polybar = {
+			Install.WantedBy = ["graphical-session.target"];
 		};
 	};
 }
