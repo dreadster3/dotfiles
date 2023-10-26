@@ -2,8 +2,8 @@
 
 {
 	imports = [
-		../services/localization.nix
-		../services/zsh.nix
+		../modules/localization.nix
+		../modules/zsh.nix
 	];
 
 	nixpkgs.config.allowUnfree = true;
@@ -28,5 +28,6 @@
 		xclip
 		flameshot
 		btop
+		procps
 	];
 }

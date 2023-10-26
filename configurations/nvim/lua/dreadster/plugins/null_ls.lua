@@ -22,8 +22,8 @@ return {
 					formatting.csharpier, formatting.terraform_fmt,
 					formatting.rustfmt, formatting.lua_format,
 					formatting.clang_format, formatting.autopep8,
-					formatting.gofmt, formatting.rustywind, diagnostics.eslint,
-					diagnostics.tfsec
+					formatting.gofmt, formatting.rustywind, formatting.nixfmt,
+					diagnostics.eslint, diagnostics.tfsec
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then

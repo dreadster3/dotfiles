@@ -23,6 +23,7 @@ in
 					cargo
 					ripgrep
 					dotnet-sdk_7
+					nixfmt
 				];
 			};
 		};
