@@ -22,8 +22,10 @@ in {
         "super + l" = "betterlockscreen -l blur";
         "Print" = "flameshot gui";
         "super + Escape" = "pkill -USR1 -x sxhkd";
-        "super + d" = "rofi -show run";
-        "super + q" = "rofi -show p -modi 'p:rofi-power-menu'";
+        "super + d" = "${lib.getExe pkgs.rofi} -show run";
+        "super + q" = "${lib.getExe pkgs.rofi} -show p -modi 'p:${
+            lib.getExe pkgs.rofi-power-menu
+          }'";
         "super + alt + {q,r}" = "bspc {quit, wm -r}";
         "super + {_, shift + }w" = "bspc node -{c,k}";
         "super + m" = "bspc desktop -l next";

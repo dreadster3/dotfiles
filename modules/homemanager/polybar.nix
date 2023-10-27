@@ -1,7 +1,8 @@
 { config, lib, pkgs, username, ... }:
 with lib;
 let cfg = config.modules.polybar;
-in {
+in
+{
   options = {
     modules.polybar = {
       enable = mkEnableOption "polybar";
@@ -15,6 +16,24 @@ in {
         default = pkgs.kitty;
         description = "The terminal to use";
       };
+      networkInterface = mkOption {
+        default = { };
+        description = "The network interface to use";
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              type = types.str;
+              default = "ens33";
+              description = "The network interface to use";
+            };
+            type = mkOption {
+              type = types.str;
+              default = "wired";
+              description = "The type of the module";
+            };
+          };
+        };
+      };
       extraConfig = mkOption {
         type = types.str;
         default = "";
@@ -23,7 +42,6 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ rofi-power-menu ];
     services = {
       polybar = {
         enable = true;
@@ -31,11 +49,13 @@ in {
           alsaSupport = true;
           pulseSupport = true;
         };
-        script = "	MONITOR=\"${cfg.monitor}\"\n\n	polybar main &\n";
+        script = ''
+          polybar main &
+        '';
         extraConfig = cfg.extraConfig;
         config = {
           "bar/main" = {
-            monitor = "\${env:MONITOR:}";
+            monitor = "${cfg.monitor}";
 
             # Size
             width = "99%";
@@ -62,10 +82,31 @@ in {
             modules-left = "launcher workspaces firefox";
             modules-center = "date";
             # modules-right = "alsa network cpu filesystem memory sysmenu";
-            modules-right = "alsa";
+            modules-right = "alsa network cpu filesystem memory sysmenu";
 
             # Window Manager
             wm-restack = "bspwm";
+          };
+          "module/cpu" = {
+            type = "internal/cpu";
+            interval = 1;
+            warn-percentage = 90;
+
+            # Label Format
+            format = "<label>";
+            format-prefix = ''"  "'';
+            format-background = "\${colorscheme.base}";
+            format-foreground = "\${colorscheme.yellow}";
+            format-padding = 2;
+            label = "%percentage%%";
+
+            # Warn Label Format
+            format-warn = "<label-warn>";
+            format-warn-prefix = ''"  "'';
+            format-warn-background = "\${colorscheme.base}";
+            format-warn-foreground = "\${colorscheme.red}";
+            format-warn-padding = 2;
+            label-warn = "%percentage%%";
           };
           "module/alsa" = {
             type = "internal/alsa";
@@ -101,6 +142,34 @@ in {
 
             # Click Events
             click-right = "pavucontrol &";
+          };
+          "module/network" = {
+            type = "internal/network";
+            interface = "${cfg.networkInterface.name}";
+            interface-type = "${cfg.networkInterface.type}";
+            interval = 1;
+            accumulate-stats = true;
+            unknown-as-up = true;
+
+            # Format Connected Label
+            format-connected = "<label-connected>";
+            format-connected-background = "\${colorscheme.base}";
+            format-connected-padding = "2";
+
+            # Format Disconnected Label
+            format-disconnected = "<label-disconnected>";
+            format-disconnected-prefix = "󰈂";
+            format-disconnected-background = "\${colorscheme.base}";
+            format-disconnected-padding = "2";
+
+            # Label Connected
+            label-connected =
+              "%{A1:networkmanager_dmenu &:} %upspeed%  %downspeed% %{A}";
+            label-connected-foreground = "\${colorscheme.lavender}";
+
+            # Label Disconnected
+            label-disconnected = "%{A1:networkmanager_dmenu &:} Offline%{A}";
+            label-disconnected-foreground = "\${colorscheme.lavender}";
           };
           "module/date" = {
             type = "internal/date";
@@ -145,6 +214,53 @@ in {
             label-empty-padding = 1;
           };
 
+          "module/filesystem" = {
+            type = "internal/fs";
+
+            mount-0 = "/";
+            interval = 60;
+            fixed-values = true;
+
+            # Format Mounted Label
+            format-mounted = "<label-mounted>";
+            format-mounted-prefix = ''"󰋊 "'';
+            format-mounted-background = "\${colorscheme.base}";
+            format-mounted-foreground = "\${colorscheme.peach}";
+            format-mounted-padding = "2";
+            label-mounted = "%percentage_used%%";
+
+            # Format Unmounted Label
+            format-unmounted = "<label-unmounted>";
+            format-unmounted-prefix = ''"󰋊 "'';
+            format-unmounted-background = "\${colorscheme.shade4}";
+            format-unmounted-padding = "2";
+            label-unmounted = "%mountpoint%: not mounted";
+
+          };
+
+          "module/memory" = {
+            type = "internal/memory";
+            interval = 1;
+
+            warn-percentage = 90;
+
+            # Format Label
+            format = "<label>";
+            format-prefix = ''"  "'';
+            format-background = "\${colorscheme.base}";
+            format-foreground = "\${colorscheme.maroon}";
+            format-padding = 2;
+            label = "%percentage_used%%";
+
+            # Format Warn Label
+            format-warn = "<label-warn>";
+            format-warn-prefix = ''"  "'';
+            format-warn-background = "\${colorscheme.base}";
+            format-warn-foreground = "\${colorscheme.red}";
+            format-warn-padding = 2;
+            label-warn = "%percentage_used%%";
+          };
+
           "module/launcher" = {
             type = "custom/text";
             content = "";
@@ -165,6 +281,22 @@ in {
             content = "";
             click-left = "${lib.getExe pkgs.firefox} &";
             click-right = "${lib.getExe pkgs.firefox} --private-window &";
+          };
+
+          "module/sysmenu" = {
+            type = "custom/text";
+            content = "⏻";
+            content-foreground = "\${colorscheme.base}";
+            content-background = "\${colorscheme.red}";
+            content-padding = 2;
+
+            click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''
+              			  PATH=/run/current-system/sw/bin:$PATH
+
+                            ${lib.getExe pkgs.rofi} -show p -modi "p:${
+                              lib.getExe pkgs.rofi-power-menu
+                            }"
+              			'');
           };
 
           "colorscheme" = {

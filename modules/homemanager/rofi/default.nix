@@ -23,6 +23,7 @@ in {
       enable = true;
       cycle = true;
       font = cfg.font;
+      plugins = [ pkgs.rofi-power-menu ];
       terminal = lib.getExe cfg.terminal;
       location = "center";
       theme = ./theme.rasi;
