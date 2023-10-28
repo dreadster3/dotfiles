@@ -14,5 +14,6 @@
     ./picom.nix
     ./wezterm.nix
     ./ranger.nix
+    ./dunst.nix
   ];
 }

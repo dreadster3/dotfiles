@@ -40,6 +40,7 @@
     neovim = { enable = true; };
     ranger = { enable = true; };
     zsh = { enable = true; };
+    dunst = { enable = true; };
   };
 
   programs = {
