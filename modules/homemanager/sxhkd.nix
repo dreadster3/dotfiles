@@ -6,8 +6,8 @@ in {
     modules.sxhkd = {
       enable = mkEnableOption "sxhkd";
       terminal = mkOption {
-        type = types.str;
-        default = "kitty";
+        type = types.package;
+        default = pkgs.kitty;
         description = "The terminal to use";
       };
     };
@@ -17,10 +17,11 @@ in {
     services.sxhkd = {
       enable = true;
       keybindings = {
-        "super + Return" = cfg.terminal;
-        "super + @space" = "rofi -show drun";
-        "super + l" = "betterlockscreen -l blur";
-        "Print" = "flameshot gui";
+        "super + Return" = lib.getExe cfg.terminal;
+        "super + @space" = "${lib.getExe pkgs.rofi} -show drun";
+        "super + l" = "${lib.getExe pkgs.betterlockscreen} -l blur";
+        "super + shift + l" = "${lib.getExe pkgs.betterlockscreen} -l blur";
+        "Print" = "${lib.getExe pkgs.flameshot} gui";
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "super + d" = "${lib.getExe pkgs.rofi} -show run";
         "super + q" = "${lib.getExe pkgs.rofi} -show p -modi 'p:${

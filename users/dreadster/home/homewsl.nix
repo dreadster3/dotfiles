@@ -1,41 +1,22 @@
-{config, lib, pkgs, ...}:
-{
-	imports = [
-		../../../services/homemanager/neovim.nix
-		../../../services/homemanager/zsh.nix
-		../../../services/homemanager/nerdfonts.nix
-	];
+{ config, lib, pkgs, ... }: {
+  imports = [ ../../../modules/homemanager ];
 
-	home.stateVersion = "18.09";
+  home.stateVersion = "18.09";
 
-	home.packages = with pkgs; [
-		ranger
-		btop
-		unzip
-		zip
-		xclip
-	];
+  home.packages = with pkgs; [ ranger btop unzip zip xclip ];
 
-	xdg = {
-		configFile = {
-			btop = {
-				source = ../../../configurations/btop;
-				recursive = true;
-			};
-			ranger = {
-				source = ../../../configurations/ranger;
-				recursive = true;
-			};
-		};
-	};
+  modules = {
+    nerdfonts = { enable = true; };
+    ranger = { enable = true; };
+  };
 
-	programs = {
-		git = {
-			enable = true;
-			userName = "dreadster3";
-			userEmail = "afonso.antunes@live.com.pt";
-		};
-	};
+  programs = {
+    git = {
+      enable = true;
+      userName = "dreadster3";
+      userEmail = "afonso.antunes@live.com.pt";
+    };
+  };
 
-	programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 }

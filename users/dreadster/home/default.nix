@@ -1,15 +1,9 @@
-{ config, lib, pkgs, ... }:
-{
-  imports = [
-    ../../../modules/homemanager
-  ];
+{ config, lib, pkgs, ... }: {
+  imports = [ ../../../modules/homemanager ];
 
   home.stateVersion = "18.09";
 
-  home.packages = with pkgs; [
-    ranger
-    killall
-  ];
+  home.packages = with pkgs; [ ranger killall ];
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -20,49 +14,32 @@
   };
 
   modules = {
-    nerdfonts = {
-      enable = true;
-    };
+    nerdfonts = { enable = true; };
     polybar = {
       enable = true;
       monitor = "Virtual1";
+      terminal = pkgs.wezterm;
     };
-    rofi = {
+    rofi = { enable = true; };
+    gtk = { enable = true; };
+    kitty = { enable = true; };
+    sxhkd = {
       enable = true;
+      terminal = pkgs.wezterm;
     };
-    gtk = {
+    bspwm = {
       enable = true;
+      monitor = "Virtual1";
     };
-	kitty = {
-		enable = true;
-	};
-	x11eventcallbacks = {
-		enable = true;
-	};
-	sxhkd = {
-		enable = true;
-	};
-  };
-
-  xdg = {
-    configFile = {
-      bspwm = {
-        source = ../../../configurations/bspwm;
-        recursive = true;
-      };
-      picom = {
-        source = ../../../configurations/picom;
-        recursive = true;
-      };
-      btop = {
-        source = ../../../configurations/btop;
-        recursive = true;
-      };
-      ranger = {
-        source = ../../../configurations/ranger;
-        recursive = true;
-      };
+    btop = { enable = true; };
+    picom = {
+      enable = true;
+      backend = "glx";
     };
+    wezterm = { enable = true; };
+    neovim = { enable = true; };
+    ranger = { enable = true; };
+    zsh = { enable = true; };
   };
 
   programs = {

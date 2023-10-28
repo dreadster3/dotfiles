@@ -1,7 +1,5 @@
-{config, lib, pkgs, ...}:
-{
-	imports = [
-		./default.nix
-		../../../modules/homemanager/x11eventcallbacks.nix
-	];
+{ config, lib, pkgs, ... }: {
+  imports = [ ./default.nix ];
+
+  modules = { x11eventcallbacks = { enable = true; }; };
 }
