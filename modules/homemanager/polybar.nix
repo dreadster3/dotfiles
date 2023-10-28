@@ -16,6 +16,11 @@ in
         default = pkgs.kitty;
         description = "The terminal to use";
       };
+      filemanager = mkOption {
+        type = types.package;
+        default = pkgs.xfce.thunar;
+        description = "The filemanager to use";
+      };
       networkInterface = mkOption {
         default = { };
         description = "The network interface to use";
@@ -79,9 +84,9 @@ in
 
             # Modules
             # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
-            modules-left = "launcher workspaces firefox";
+            modules-left =
+              "launcher workspaces ranger github reddit firefox azure monitor";
             modules-center = "date";
-            # modules-right = "alsa network cpu filesystem memory sysmenu";
             modules-right = "alsa network cpu filesystem memory sysmenu";
 
             # Window Manager
@@ -283,6 +288,40 @@ in
             click-right = "${lib.getExe pkgs.firefox} --private-window &";
           };
 
+          "module/ranger" = {
+            "inherit" = "module/links";
+            content = "";
+            click-left = "${lib.getExe cfg.terminal} -e ranger ~ &";
+            click-right = "${lib.getExe cfg.filemanager} &";
+          };
+
+          "module/monitor" = {
+            "inherit" = "module/links";
+            content = "";
+            click-left =
+              "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.btop} &";
+          };
+
+          "module/github" = {
+            "inherit" = "module/links";
+            content = "";
+            click-left =
+              "${lib.getExe pkgs.firefox} https://github.com/dreadster3 &";
+          };
+
+          "module/reddit" = {
+            "inherit" = "module/links";
+            content = "";
+            click-left = "${lib.getExe pkgs.firefox} https://reddit.com &";
+          };
+
+          "module/azure" = {
+            "inherit" = "module/links";
+            content = "󰠅";
+            click-left =
+              "${lib.getExe pkgs.firefox} https://portal.azure.com &";
+          };
+
           "module/sysmenu" = {
             type = "custom/text";
             content = "⏻";
@@ -304,7 +343,7 @@ in
             background = "#222436";
             foreground = "#c8d3f5";
             foreground-alt = "#8f8f8f";
-            base = "#CD1e1e2e";
+            base = "#cd1e1e2e";
             mantle = "#181825";
             crust = "#11111b";
             text = "#cdd6f4";
