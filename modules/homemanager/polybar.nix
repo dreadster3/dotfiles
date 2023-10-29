@@ -126,17 +126,14 @@ in
             format-volume-background = "\${colorscheme.base}";
             format-volume-foreground = "\${colorscheme.sapphire}";
             format-volume-padding = 2;
+            label-volume = "%percentage%%";
+
             # Mute Volume Label Format
             format-muted = "<label-muted>";
-            format-muted-prefix = "󰝟";
+            format-muted-prefix = ''"󰝟 "'';
             format-muted-background = "\${colorscheme.surface0}";
             format-muted-foreground = "\${colorscheme.blue}";
             format-muted-padding = 2;
-
-            # Volume Label
-            label-volume = "%percentage%%";
-
-            # Mute Volume Label
             label-muted = "Muted";
 
             # Ramp Volume Icons
@@ -291,7 +288,8 @@ in
           "module/ranger" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe cfg.terminal} -e ranger ~ &";
+            click-left =
+              "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.ranger} ~ &";
             click-right = "${lib.getExe cfg.filemanager} &";
           };
 
