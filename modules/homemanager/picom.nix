@@ -1,8 +1,7 @@
 { pkgs, lib, config, ... }:
 with lib;
 let cfg = config.modules.picom;
-in
-{
+in {
   options = {
     modules.picom = {
       enable = mkEnableOption "picom";
@@ -28,6 +27,7 @@ in
       fadeSteps = [ 3.0e-2 3.0e-2 ];
 
       inactiveOpacity = 0.95;
+      opacityRules = [ "100:class_g = 'i3lock'" ];
 
       settings = {
         shadow-radius = 10;

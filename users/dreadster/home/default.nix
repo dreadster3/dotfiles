@@ -17,7 +17,6 @@
     nerdfonts = { enable = true; };
     polybar = {
       enable = true;
-      monitor = "Virtual1";
       terminal = pkgs.wezterm;
     };
     rofi = { enable = true; };
@@ -27,10 +26,7 @@
       enable = true;
       terminal = pkgs.wezterm;
     };
-    bspwm = {
-      enable = true;
-      monitor = "Virtual1";
-    };
+    bspwm = { enable = true; };
     btop = { enable = true; };
     picom = {
       enable = true;
