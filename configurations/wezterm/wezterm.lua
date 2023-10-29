@@ -31,7 +31,6 @@ config.font_rules = {
 config.color_scheme = 'Catppuccin Mocha'
 config.tab_bar_at_bottom = true
 config.background = {
-<<<<<<< HEAD
     {
         source = {
             File = "/home/dreadster/Documents/projects/github/dotfiles/wallpapers/cat_bunnies.png"
@@ -47,23 +46,6 @@ config.background = {
         hsb = {brightness = 1.8, saturation = 1.0, hue = 1.0},
         attachment = "Fixed"
     }
-=======
-	{
-		source = {
-			File = "/home/dreadster/Documents/projects/github/dotfiles/configurations/wallpapers/cat_bunnies.png"
-		},
-		opacity = 1.0,
-		hsb = { brightness = 0.0, saturation = 1.0, hue = 1.0 },
-		attachment = "Fixed"
-	}, {
-	source = {
-		File = "/home/dreadster/Documents/projects/github/dotfiles/configurations/wallpapers/cat_bunnies.png"
-	},
-	opacity = 0.2,
-	hsb = { brightness = 1.8, saturation = 1.0, hue = 1.0 },
-	attachment = "Fixed"
-}
->>>>>>> a4047de (Update wezterm configs)
 }
 
 config.enable_tab_bar = true
@@ -97,6 +79,11 @@ end
 
 if utils.is_linux() then
     local windows = require("linux")
+    config = utils.merge({config, windows})
+end
+
+if utils.is_windows() then
+    local windows = require("windows")
     config = utils.merge({config, windows})
 end
 
