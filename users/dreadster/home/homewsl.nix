@@ -8,6 +8,8 @@
   modules = {
     nerdfonts = { enable = true; };
     ranger = { enable = true; };
+    zsh = { enable = true; };
+    neovim = { enable = true; };
   };
 
   programs = {
