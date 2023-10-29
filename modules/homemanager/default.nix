@@ -15,5 +15,6 @@
     ./wezterm.nix
     ./ranger.nix
     ./dunst.nix
+    ./betterlockscreen.nix
   ];
 }

@@ -3,7 +3,8 @@ with lib;
 let
   x11package = pkgs.callPackage ../../derivations/x11eventcallbacks.nix { };
   cfg = config.modules.x11eventcallbacks;
-in {
+in
+{
   options = {
     modules.x11eventcallbacks = {
       enable = mkEnableOption "Enable x11 event callbacks";
@@ -16,10 +17,11 @@ in {
     systemd.user.services.x11eventcallbacks = {
       Unit = {
         Description = "X11 event callbacks";
-        After = [ "graphical.target" ];
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
       };
 
-      Install = { WantedBy = [ "default.target" ]; };
+      Install = { WantedBy = [ "graphical-session.target" ]; };
 
       Service = {
         ExecStart = "${x11package}/bin/x11_event_callbacks "

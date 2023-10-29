@@ -27,8 +27,12 @@ in {
         border_monocle = true;
         gapless_monocle = true;
       };
-      startupPrograms =
-        [ "nitrogen --restore" "vmware-user" "xsetroot -cursor_name left_ptr" ];
+      startupPrograms = [
+        "nitrogen --restore"
+        "vmware-user"
+        "xsetroot -cursor_name left_ptr"
+        "systemctl --user restart polybar.service"
+      ];
 
       monitors = { "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ]; };
     };
