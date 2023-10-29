@@ -1,4 +1,5 @@
 local config = {}
+local wezterm = require('wezterm')
 
 config.background = {
     {
