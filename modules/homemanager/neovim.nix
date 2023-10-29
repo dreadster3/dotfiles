@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.neovim;
-in {
+in
+{
   options = {
     modules.neovim = {
       enable = mkEnableOption "neovim";
@@ -12,7 +13,10 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.sessionVariables = { EDITOR = "nvim"; };
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      DOTNET_ROOT = "${pkgs.dotnet-sdk_7}";
+    };
     programs = {
       neovim = {
         enable = true;
