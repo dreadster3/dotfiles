@@ -9,6 +9,8 @@ end
 
 function M.is_linux() return wezterm.target_triple == "x86_64-unknown-linux-gnu" end
 
+function M.is_windows() return wezterm.target_triple == "x86_64-pc-windows-msvc" end
+
 function M.merge(tables)
 	local res = {}
 	for _, table in pairs(tables) do
@@ -16,6 +18,7 @@ function M.merge(tables)
 	end
 	return res
 end
+
 
 function M.split_pane(window, pane)
 	local tab = pane:tab()
