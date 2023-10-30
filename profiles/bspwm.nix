@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
+  environment.systemPackages = with pkgs; [ fusuma ];
   services.xserver = {
     enable = true;
     layout = "us";

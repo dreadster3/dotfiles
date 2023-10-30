@@ -16,5 +16,6 @@
     ./ranger.nix
     ./dunst.nix
     ./betterlockscreen.nix
+    ./fusuma.nix
   ];
 }
