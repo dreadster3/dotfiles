@@ -8,7 +8,7 @@ in {
 
       monitor = mkOption {
         type = types.str;
-        default = "eDP1";
+        default = "eDP-1";
         description = "The monitor to use for bspwm";
       };
 

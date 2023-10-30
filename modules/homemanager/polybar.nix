@@ -1,8 +1,27 @@
 { config, lib, pkgs, username, ... }:
 with lib;
-let cfg = config.modules.polybar;
-in
-{
+let
+  cfg = config.modules.polybar;
+
+  battery_module = if cfg.useBattery then [ "battery" ] else [ ];
+
+  modules_left = [
+    "launcher"
+    "workspaces"
+    "ranger"
+    "github"
+    "reddit"
+    "firefox"
+    "azure"
+    "monitor"
+  ];
+
+  modules_center = [ "date" ];
+
+  modules_right = [ "alsa" "network" "cpu" "filesystem" "memory" ]
+    ++ battery_module ++ [ "sysmenu" ];
+
+in {
   options = {
     modules.polybar = {
       enable = mkEnableOption "polybar";
@@ -38,6 +57,11 @@ in
             };
           };
         };
+      };
+      useBattery = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to include battery in polybar";
       };
       extraConfig = mkOption {
         type = types.str;
@@ -84,10 +108,9 @@ in
 
             # Modules
             # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
-            modules-left =
-              "launcher workspaces ranger github reddit firefox azure monitor";
-            modules-center = "date";
-            modules-right = "alsa network cpu filesystem memory sysmenu";
+            modules-left = modules_left;
+            modules-center = modules_center;
+            modules-right = modules_right;
 
             # Window Manager
             wm-restack = "bspwm";
@@ -112,6 +135,56 @@ in
             format-warn-foreground = "\${colorscheme.red}";
             format-warn-padding = 2;
             label-warn = "%percentage%%";
+          };
+          "module/battery" = {
+            type = "internal/battery";
+            full-at = 99;
+            low-at = 20;
+            battery = "BAT1";
+            adapter = "ADP1";
+            poll-interval = 5;
+            time-format = "%H:%M";
+
+            format-charging = "<animation-charging> <label-charging>";
+            format-charging-foreground = "\${colorscheme.green}";
+            format-charging-padding = 2;
+            label-charging = "%percentage%%";
+
+            format-discharging = "<ramp-capacity> <label-discharging>";
+            format-discharging-foreground = "\${colorscheme.yellow}";
+            format-discharging-padding = 2;
+            label-discharging = "%percentage%%";
+
+            format-full = "<label-full>";
+            format-full-prefix = ''"󰂅 "'';
+            format-full-foreground = "\${colorscheme.green}";
+            format-full-padding = 2;
+            label-full = "Full";
+
+            ramp-capacity-0 = "󰂎";
+            ramp-capacity-1 = "󰁺";
+            ramp-capacity-2 = "󰁻";
+            ramp-capacity-3 = "󰁼";
+            ramp-capacity-4 = "󰁽";
+            ramp-capacity-5 = "󰁾";
+            ramp-capacity-6 = "󰁿";
+            ramp-capacity-7 = "󰂀";
+            ramp-capacity-8 = "󰂁";
+            ramp-capacity-9 = "󰂂";
+            ramp-capacity-10 = "󰁹";
+
+            animation-charging-0 = "󰢟";
+            animation-charging-1 = "󰢜";
+            animation-charging-2 = "󰂆";
+            animation-charging-3 = "󰂇";
+            animation-charging-4 = "󰂈";
+            animation-charging-5 = "󰢝";
+            animation-charging-6 = "󰂉";
+            animation-charging-7 = "󰢞";
+            animation-charging-8 = "󰂊";
+            animation-charging-9 = "󰂋";
+            animation-charging-10 = "󰂅";
+            animation-charging-framerate = 750;
           };
           "module/alsa" = {
             type = "internal/alsa";
