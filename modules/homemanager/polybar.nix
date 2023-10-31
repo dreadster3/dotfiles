@@ -166,7 +166,7 @@ in {
           "module/battery" = {
             type = "internal/battery";
             full-at = 99;
-            low-at = 20;
+            low-at = 25;
             battery = "BAT1";
             adapter = "ADP1";
             poll-interval = 5;
@@ -182,7 +182,13 @@ in {
             format-discharging-foreground = "\${colorscheme.yellow}";
             format-discharging-background = "\${colorscheme.base}";
             format-discharging-padding = 2;
-            label-discharging = "%percentage%%";
+            label-discharging = "%percentage%% (%time%)";
+
+            format-low = "<animation-low> <label-low>";
+            format-low-foreground = "\${colorscheme.base}";
+            format-low-background = "\${colorscheme.red}";
+            format-low-padding = 2;
+            label-low = "%percentage%% (%time%)";
 
             format-full = "<label-full>";
             format-full-prefix = ''"󰂅 "'';
@@ -215,6 +221,12 @@ in {
             animation-charging-9 = "󰂋";
             animation-charging-10 = "󰂅";
             animation-charging-framerate = 750;
+
+            animation-low-0 = "";
+            animation-low-1 = "󰁺";
+            animation-low-2 = "󰁺";
+            animation-low-3 = "󰁺";
+            animation-low-framerate = 1000;
           };
           "module/alsa" = {
             type = "internal/alsa";
@@ -426,8 +438,8 @@ in {
           "module/sysmenu" = {
             type = "custom/text";
             content = "⏻";
-            content-foreground = "\${colorscheme.base}";
-            content-background = "\${colorscheme.red}";
+            content-foreground = "\${colorscheme.red}";
+            content-background = "\${colorscheme.base}";
             content-padding = 2;
 
             click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''

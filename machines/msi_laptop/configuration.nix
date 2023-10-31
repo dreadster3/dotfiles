@@ -35,5 +35,12 @@ in {
   networking.hostName = "MSILinux";
   networking.networkmanager.enable = true;
 
+  services.udev = {
+    enable = true;
+    extraRules = ''
+      ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp video /sys/class/backlight/intel_backlight/brightness", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
+    '';
+  };
+
   system.stateVersion = "23.05";
 }
