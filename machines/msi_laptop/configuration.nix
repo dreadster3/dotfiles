@@ -13,6 +13,7 @@ in {
     ../../profiles/bspwm.nix
     ../../profiles/nvidia.nix
     ../../profiles/powermanagement.nix
+    ../../profiles/pulseaudio.nix
     ../../users/dreadster/msi.nix
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")

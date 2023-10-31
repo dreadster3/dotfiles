@@ -5,7 +5,7 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Admin";
-    extraGroups = [ "networkmanager" "wheel" "input" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "video" "audio" ];
     packages = with pkgs; [ ];
   };
 
