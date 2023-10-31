@@ -4,6 +4,7 @@ let
   cfg = config.modules.polybar;
 
   battery_module = if cfg.useBattery then [ "battery" ] else [ ];
+  brightness_module = if cfg.useBrightness then [ "backlight" ] else [ ];
 
   modules_left = [
     "launcher"
@@ -19,7 +20,7 @@ let
   modules_center = [ "date" ];
 
   modules_right = [ "alsa" "network" "cpu" "filesystem" "memory" ]
-    ++ battery_module ++ [ "sysmenu" ];
+    ++ battery_module ++ brightness_module ++ [ "sysmenu" ];
 
 in {
   options = {
@@ -62,6 +63,11 @@ in {
         type = types.bool;
         default = false;
         description = "Whether to include battery in polybar";
+      };
+      useBrightness = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to include brightness in polybar";
       };
       extraConfig = mkOption {
         type = types.str;
@@ -136,6 +142,27 @@ in {
             format-warn-padding = 2;
             label-warn = "%percentage%%";
           };
+
+          "module/backlight" = {
+            type = "internal/backlight";
+            card = "intel_backlight";
+            enable-scroll = true;
+
+            # Label
+            format = "<ramp> <label>";
+            format-background = "\${colorscheme.base}";
+            format-foreground = "\${colorscheme.yellow}";
+            format-padding = 2;
+            label = "%percentage%%";
+
+            # Ramp
+            ramp-0 = "󰃜";
+            ramp-1 = "󰃝";
+            ramp-2 = "󰃞";
+            ramp-3 = "󰃟";
+            ramp-4 = "󰃠";
+          };
+
           "module/battery" = {
             type = "internal/battery";
             full-at = 99;
@@ -147,17 +174,20 @@ in {
 
             format-charging = "<animation-charging> <label-charging>";
             format-charging-foreground = "\${colorscheme.green}";
+            format-charging-background = "\${colorscheme.base}";
             format-charging-padding = 2;
             label-charging = "%percentage%%";
 
             format-discharging = "<ramp-capacity> <label-discharging>";
             format-discharging-foreground = "\${colorscheme.yellow}";
+            format-discharging-background = "\${colorscheme.base}";
             format-discharging-padding = 2;
             label-discharging = "%percentage%%";
 
             format-full = "<label-full>";
             format-full-prefix = ''"󰂅 "'';
             format-full-foreground = "\${colorscheme.green}";
+            format-full-background = "\${colorscheme.base}";
             format-full-padding = 2;
             label-full = "Full";
 

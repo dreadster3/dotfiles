@@ -10,6 +10,7 @@
         type = "wireless";
       };
       useBattery = true;
+      useBrightness = true;
     };
     bspwm = { monitor = "eDP-1-1"; };
     fusuma = { enable = true; };

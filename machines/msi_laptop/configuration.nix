@@ -12,6 +12,7 @@ in {
     ../../profiles/common.nix
     ../../profiles/bspwm.nix
     ../../profiles/nvidia.nix
+    ../../profiles/powermanagement.nix
     ../../users/dreadster/msi.nix
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
