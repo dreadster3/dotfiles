@@ -35,8 +35,14 @@ in
           nixfmt
           gnumake
           terraform
+          glow
         ];
       };
+    };
+
+    xdg.configFile.glow = {
+      source = ../../configurations/glow;
+      recursive = true;
     };
   };
 }

@@ -150,7 +150,9 @@ return {
         end,
         opts = {
             highlight = 'DiffDelete',
-            ignored_filetypes = {'TelescopePrompt', 'Trouble', 'help', "noice"},
+            ignored_filetypes = {
+                'TelescopePrompt', 'Trouble', 'help', "noice", "glow"
+            },
             ignore_terminal = true
         }
     }, {
@@ -298,7 +300,10 @@ return {
             "DevdocsOpenFloat", "DevdocsOpenCurrent", "DevdocsOpenCurrentFloat",
             "DevdocsUpdate", "DevdocsUpdateAll"
         },
-        opts = {}
+        opts = {
+            previewer_cmd = "glow",
+            cmd_args = {"-s", "$HOME/.config/glow/mocha.json"}
+        }
     }
 
 }
