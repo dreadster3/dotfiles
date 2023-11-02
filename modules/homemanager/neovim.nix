@@ -34,6 +34,7 @@ in
           dotnet-sdk_7
           nixfmt
           gnumake
+          terraform
         ];
       };
     };
