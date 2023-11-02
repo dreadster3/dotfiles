@@ -12,6 +12,8 @@
     neovim = { enable = true; };
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   programs = {
     git = {
       enable = true;
