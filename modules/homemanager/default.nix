@@ -18,5 +18,6 @@
     ./betterlockscreen.nix
     ./fusuma.nix
     ./xbindkeys.nix
+    ./spicetify.nix
   ];
 }

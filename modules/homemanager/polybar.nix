@@ -120,6 +120,9 @@ in {
 
             # Window Manager
             wm-restack = "bspwm";
+
+            # System Tray
+            tray-position = "right";
           };
           "module/cpu" = {
             type = "internal/cpu";
@@ -145,7 +148,7 @@ in {
 
           "module/backlight" = {
             type = "internal/backlight";
-            card = "intel_backlight";
+            card = "acpi_video0";
             enable-scroll = true;
 
             # Label

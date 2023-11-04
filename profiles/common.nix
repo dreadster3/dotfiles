@@ -6,7 +6,10 @@
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
 
-  programs = { thunar = { enable = true; }; };
+  programs = {
+    thunar = { enable = true; };
+    nm-applet = { enable = true; };
+  };
 
   environment.systemPackages = with pkgs; [
     vim

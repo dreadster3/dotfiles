@@ -14,5 +14,13 @@
     };
     bspwm = { monitor = "eDP-1-1"; };
     fusuma = { enable = true; };
+    spicetify = { enable = true; };
+    xbindkeys = {
+      settings = {
+        "XF86AudioRaiseVolume" = "pactl set-sink-volume @DEFAULT_SINK@ +5%";
+        "XF86AudioLowerVolume" = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        "XF86AudioMute" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+      };
+    };
   };
 }

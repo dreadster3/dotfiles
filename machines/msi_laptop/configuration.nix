@@ -14,6 +14,7 @@ in {
     ../../profiles/nvidia.nix
     ../../profiles/powermanagement.nix
     ../../profiles/pulseaudio.nix
+    ../../profiles/entertainment.nix
     ../../users/dreadster/msi.nix
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
@@ -21,6 +22,7 @@ in {
 
   # Bootloader.
   boot = {
+    kernelParams = [ "acpi_osi=!" ''acpi_osi="Windows 2009"'' ];
     loader = {
       efi = { canTouchEfiVariables = true; };
       grub = {
@@ -38,7 +40,7 @@ in {
   services.udev = {
     enable = true;
     extraRules = ''
-      ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp video /sys/class/backlight/intel_backlight/brightness", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
+      ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp video /sys/class/backlight/acpi_video0/brightness", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/acpi_video0/brightness"
     '';
   };
 

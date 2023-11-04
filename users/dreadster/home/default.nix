@@ -13,6 +13,8 @@
     size = 32;
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   modules = {
     nerdfonts = { enable = true; };
     polybar = {
