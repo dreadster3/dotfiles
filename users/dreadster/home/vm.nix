@@ -5,5 +5,6 @@
     x11eventcallbacks = { enable = true; };
     polybar = { monitor = "Virtual1"; };
     bspwm = { monitor = "Virtual1"; };
+    xbindkeys = { enable = lib.mkForce false; };
   };
 }

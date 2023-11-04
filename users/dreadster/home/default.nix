@@ -38,6 +38,7 @@
     zsh = { enable = true; };
     dunst = { enable = true; };
     betterlockscreen = { enable = true; };
+    xbindkeys = { enable = true; };
   };
 
   programs = {

@@ -17,5 +17,6 @@
     ./dunst.nix
     ./betterlockscreen.nix
     ./fusuma.nix
+    ./xbindkeys.nix
   ];
 }
