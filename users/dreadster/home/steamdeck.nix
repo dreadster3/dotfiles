@@ -8,6 +8,7 @@
   fonts.fontconfig.enable = true;
 
   modules = {
+    dunst = { enable = true; };
     nerdfonts = { enable = true; };
     ranger = { enable = true; };
     zsh = { enable = true; };
