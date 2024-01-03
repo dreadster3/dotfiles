@@ -107,6 +107,14 @@ return {
                                                          cmp_nvim_lsp.default_capabilities() or
                                                          {},
                                                      opts.capabilities or {})
+            capabilities.textDocument.completion.completionItem.snippetSupport =
+                true
+            capabilities.textDocument.completion.completionItem.resolveSupport =
+                {
+                    properties = {
+                        "documentation", "detail", "additionalTextEdits"
+                    }
+                }
 
             local function setup(server)
                 local server_opts = vim.tbl_deep_extend("force", {
