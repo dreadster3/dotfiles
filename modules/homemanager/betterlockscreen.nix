@@ -7,6 +7,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [ feh ];
+
     services.betterlockscreen = {
       enable = true;
       arguments = [ "blur" ];
