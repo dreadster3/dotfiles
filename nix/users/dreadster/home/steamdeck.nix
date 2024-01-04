@@ -13,6 +13,7 @@
     ranger = { enable = true; };
     zsh = { enable = true; };
     neovim = { enable = true; };
+    wezterm = { enable = true; };
   };
 
   nixpkgs.config.allowUnfree = true;

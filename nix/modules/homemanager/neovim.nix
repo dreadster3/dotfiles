@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.neovim;
-in
-{
+in {
   options = {
     modules.neovim = {
       enable = mkEnableOption "neovim";
@@ -41,7 +40,7 @@ in
     };
 
     xdg.configFile.glow = {
-      source = ../../configurations/glow;
+      source = ../../../configurations/glow;
       recursive = true;
     };
   };

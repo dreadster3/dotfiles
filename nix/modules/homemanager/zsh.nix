@@ -10,7 +10,7 @@ in {
       zsh = {
         enable = true;
         enableAutosuggestions = true;
-        enableSyntaxHighlighting = true;
+        syntaxHighlighting.enable = true;
         plugins = [
           {
             name = "zsh-z";
@@ -38,7 +38,7 @@ in {
           }
           {
             name = "powerlevel10k-config";
-            src = ../../configurations/powerlevel10k;
+            src = ../../../configurations/powerlevel10k;
             file = "p10k.zsh";
           }
         ];

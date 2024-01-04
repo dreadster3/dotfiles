@@ -8,7 +8,7 @@ in {
     home.packages = with pkgs; [ wezterm ];
 
     xdg.configFile.wezterm = {
-      source = ../../configurations/wezterm;
+      source = ../../../configurations/wezterm;
       recursive = true;
     };
   };

@@ -34,7 +34,7 @@ config.background = {
 	{
 		source = {
 			File = os.getenv("HOME") ..
-				"/Documents/projects/github/dotfiles/configurations/wallpapers/cat_bunnies.png"
+				"/Documents/projects/github/dotfiles/wallpapers/cat_bunnies.png"
 		},
 		opacity = 1.0,
 		hsb = { brightness = 0.0, saturation = 1.0, hue = 1.0 },
@@ -42,7 +42,7 @@ config.background = {
 	}, {
 	source = {
 		File = os.getenv("HOME") ..
-			"/Documents/projects/github/dotfiles/configurations/wallpapers/cat_bunnies.png"
+			"/Documents/projects/github/dotfiles/wallpapers/cat_bunnies.png"
 	},
 	opacity = 0.2,
 	hsb = { brightness = 1.8, saturation = 1.0, hue = 1.0 },

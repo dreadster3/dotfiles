@@ -1,8 +1,7 @@
 { pkgs, lib, config, ... }:
 with lib;
 let cfg = config.modules.btop;
-in
-{
+in {
   options = {
     modules.btop = {
       enable = mkEnableOption "btop";
@@ -12,7 +11,7 @@ in
 
   config = mkIf cfg.enable {
     xdg.configFile."btop/themes" = {
-      source = ../../configurations/btop/themes;
+      source = ../../../configurations/btop/themes;
       recursive = true;
     };
 

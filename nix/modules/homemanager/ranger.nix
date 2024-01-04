@@ -7,7 +7,7 @@ in {
     xdg = {
       configFile = {
         ranger = {
-          source = ../../configurations/ranger;
+          source = ../../../configurations/ranger;
           recursive = true;
         };
       };
