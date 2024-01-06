@@ -1,9 +1,25 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let
+  catppuccinpkg = pkgs.catppuccin-gtk.override {
+    variant = "mocha";
+    accents = [ "blue" ];
+  };
+in {
   imports = [ ../../../modules/homemanager ];
 
   home.stateVersion = "18.09";
 
-  home.packages = with pkgs; [ ranger btop unzip zip xclip ];
+  home.packages = with pkgs; [
+    openvpn
+    betterdiscordctl
+    catppuccinpkg
+    catppuccin-cursors.mochaBlue
+    ranger
+    btop
+    unzip
+    zip
+    xclip
+  ];
 
   fonts.fontconfig.enable = true;
 
