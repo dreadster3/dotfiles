@@ -19,5 +19,7 @@
     ./fusuma.nix
     ./xbindkeys.nix
     ./spicetify.nix
+    ./guake.nix
+    ./obsmic.nix
   ];
 }

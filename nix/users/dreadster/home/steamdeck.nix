@@ -10,12 +10,12 @@ in {
   home.stateVersion = "18.09";
 
   home.packages = with pkgs; [
+    droidcam
     openvpn
     betterdiscordctl
     catppuccinpkg
     catppuccin-cursors.mochaBlue
     ranger
-    btop
     unzip
     zip
     xclip
@@ -30,6 +30,9 @@ in {
     zsh = { enable = true; };
     neovim = { enable = true; };
     wezterm = { enable = true; };
+    guake = { enable = true; };
+    obsmic = { enable = true; };
+    btop = { enable = true; };
   };
 
   nixpkgs.config.allowUnfree = true;
