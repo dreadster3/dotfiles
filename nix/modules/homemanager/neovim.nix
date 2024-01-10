@@ -35,6 +35,7 @@ in {
           gnumake
           terraform
           glow
+          go
         ];
       };
     };
