@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.zsh;
-in {
+in
+{
   options = { modules.zsh = { enable = mkEnableOption "zsh"; }; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ zsh-powerlevel10k ];
@@ -49,7 +50,7 @@ in {
         shellAliases = {
           n = "nvim ./";
           zshconfig =
-            "nvim ~/Documents/projects/github/dotfiles/services/homemanager/zsh.nix";
+            "nvim ~/Documents/projects/github/dotfiles/nix/modules/homemanager/zsh.nix";
           nvimconfig =
             "nvim ~/Documents/projects/github/dotfiles/configurations/nvim";
           nixconfig = "nvim ~/Documents/projects/github/dotfiles";
