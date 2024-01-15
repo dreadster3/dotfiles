@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ../modules/localization.nix ../modules/zsh.nix ];
+  imports = [ ../modules ];
 
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
@@ -11,6 +11,12 @@
     nm-applet = { enable = true; };
   };
 
+  modules = {
+    localization = { enable = true; };
+    pulseaudio = { enable = true; };
+    zsh = { enable = true; };
+  };
+
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -18,13 +24,10 @@
     firefox
     wezterm
     kitty
-    nitrogen
     zip
     unzip
     xclip
-    flameshot
     btop
     procps
-    betterlockscreen
   ];
 }

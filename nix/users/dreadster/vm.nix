@@ -1,13 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  users.users.dreadster = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    description = "Admin";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
-  };
+  imports = [ ./base.nix ];
 
-  home-manager.users.dreadster = (import ./home/vm.nix);
+  home-manager.users.dreadster = { imports = [ ./home/vm.nix ]; };
 }

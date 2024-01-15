@@ -8,6 +8,4 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ ];
   };
-
-  home-manager.users.dreadster = (import ./home/default.nix);
 }

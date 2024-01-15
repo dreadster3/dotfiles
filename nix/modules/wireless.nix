@@ -1,9 +1,10 @@
-{config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
+with lib;
+let cfg = config.modules.wireless;
+in {
+  options = {
+    modules.wireless = { enable = mkEnableOption "Wireless networking"; };
+  };
 
-{
-	networking = {
-		wireless = {
-			enable = true;
-		};
-	};
+  config = mkIf cfg.enable { networking = { wireless = { enable = true; }; }; };
 }
