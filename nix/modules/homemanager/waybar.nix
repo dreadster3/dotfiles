@@ -4,6 +4,14 @@ let cfg = config.modules.waybar;
 in {
   options = { modules.waybar = { enable = mkEnableOption "waybar"; }; };
   config = mkIf cfg.enable {
+    nixpkgs.overlays = [
+      (self: super: {
+        waybar = super.waybar.overrideAttrs (oldAttrs: {
+          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+        });
+      })
+    ];
+
     programs.waybar = {
       enable = true;
       # systemd.enable = true;
@@ -11,7 +19,7 @@ in {
         mainBar = {
           layer = "top";
           modules-left =
-            [ "custom/wofi" "sway/workspaces" "cpu" "memory" "disk" ];
+            [ "custom/wofi" "hyprland/workspaces" "cpu" "memory" "disk" ];
           modules-center = [ "clock" ];
           modules-right = [ "pulseaudio" "tray" ];
           output = [ "DP-1" "HDMI-A-1" ];
@@ -20,21 +28,17 @@ in {
             on-click = "pkill wofi || wofi";
             tooltip = false;
           };
-          "wlr/workspaces" = {
+          "hyprland/workspaces" = {
             on-click = "activate";
-            on-scroll-down = "hyprctl dispatch workspace e-1";
-            on-scroll-up = "hyprctl dispatch workspace e+1";
+            on-scroll-down = "hyprctl dispatch workspace r-1";
+            on-scroll-up = "hyprctl dispatch workspace r+1";
             format = "{icon}";
-            persistent_workspaces = {
+            persistent-workspaces = {
               "1" = [ ];
               "2" = [ ];
               "3" = [ ];
               "4" = [ ];
             };
-          };
-          "sway/workspaces" = {
-            disable-scroll = false;
-            all-outputs = true;
           };
           "cpu" = {
             interval = 10;

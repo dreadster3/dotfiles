@@ -5,6 +5,8 @@ in {
   options = { modules.hyprland = { enable = mkEnableOption "hyprland"; }; };
 
   config = {
+    home.packages = with pkgs; [ wl-clipboard ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       enableNvidiaPatches = true;
@@ -19,13 +21,14 @@ in {
         ];
 
         exec-once = [
-          "${lib.getExe pkgs.waybar}"
+          "${getExe pkgs.waybar} &"
           ''hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
         ];
 
         input = {
           kb_layout = "us";
           follow_mouse = 1;
+          mouse_refocus = false;
           sensitivity = 0;
         };
 
@@ -37,6 +40,24 @@ in {
           "col.inactive_border" = "rgba(595959aa)";
           layout = "dwindle";
         };
+
+        env = [
+          "NIXOS_OZONE_WL,1"
+          "GUAKE_ENABLE_WAYLAND,1"
+          "XCURSOR_SIZE,24"
+          "WLR_NO_HARDWARE_CURSORS,1"
+          "MOZ_ENABLE_WAYLAND,1"
+          "LIBVA_DRIVER_NAME,nvidia"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          "CLUTTER_BACKEND,wayland"
+          "SDL_VIDEODRIVER,wayland"
+
+          "XDG_CURRENT_DESKTOP,Hyprland"
+          "XDG_SESSION_DESKTOP,Hyprland"
+          "XDG_SESSION_TYPE,wayland"
+          "GTK_USE_PORTAL,1"
+        ];
 
         decoration = {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -81,8 +102,6 @@ in {
 
         "device:epic-mouse-v1" = { sensitivity = -0.5; };
 
-        env = [ "GUAKE_ENABLE_WAYLAND,1" "WLR_NO_HARDWARE_CURSORS,1" ];
-
         windowrulev2 = [
           "animation slide,class:^(wofi)$"
           "float,class:^(pavucontrol)$"
@@ -94,6 +113,20 @@ in {
           "noanim,class:^(xwaylandvideobridge)$"
           "nofocus,class:^(xwaylandvideobridge)$"
           "noinitialfocus,class:^(xwaylandvideobridge)$"
+          "stayfocused, title:^()$,class:^(steam)$"
+          "minsize 1 1, title:^()$,class:^(steam)$"
+        ];
+
+        workspace = [
+          "1,monitor:DP-1"
+          "3,monitor:DP-1"
+          "5,monitor:DP-1"
+          "7,monitor:DP-1"
+          "9,monitor:DP-1"
+          "2,monitor:HDMI-A-1"
+          "4,monitor:HDMI-A-1"
+          "6,monitor:HDMI-A-1"
+          "8,monitor:HDMI-A-1"
         ];
 
         bind = [
@@ -117,6 +150,8 @@ in {
           "$mainMod, right, movefocus, r"
           "$mainMod, up, movefocus, u"
           "$mainMod, down, movefocus, d"
+          "$mainMod_CTRL, left, workspace, r-1"
+          "$mainMod_CTRL, right, workspace, r+1"
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
           "$mainMod, 3, workspace, 3"
@@ -137,8 +172,8 @@ in {
           "$mainMod SHIFT, 8, movetoworkspace, 8"
           "$mainMod SHIFT, 9, movetoworkspace, 9"
           "$mainMod SHIFT, 0, movetoworkspace, 10"
-          "$mainMod, mouse_down, workspace, e+1"
-          "$mainMod, mouse_up, workspace, e-1"
+          "$mainMod, mouse_down, workspace, m+1"
+          "$mainMod, mouse_up, workspace, m-1"
         ];
 
         bindm = [

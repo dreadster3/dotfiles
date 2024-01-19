@@ -3,11 +3,10 @@
 
   modules = {
     x11eventcallbacks = { enable = true; };
-    polybar = { monitor = "Virtual1"; };
-    bspwm = { monitor = "Virtual1"; };
     polybar = {
       enable = true;
       terminal = pkgs.wezterm;
+      monitor = "Virtual1";
     };
     rofi = { enable = true; };
     gtk = {
@@ -18,7 +17,10 @@
       enable = true;
       terminal = pkgs.wezterm;
     };
-    bspwm = { enable = true; };
+    bspwm = {
+      enable = true;
+      monitor = "Virtual1";
+    };
     picom = {
       enable = true;
       backend = "glx";

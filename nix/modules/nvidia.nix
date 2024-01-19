@@ -2,7 +2,12 @@
 with lib;
 let cfg = config.modules.nvidia;
 in {
-  options = { modules.nvidia = { enable = mkEnableOption "nvidia"; enablePrime = mkEnableOption "nvidia.prime"; }; };
+  options = {
+    modules.nvidia = {
+      enable = mkEnableOption "nvidia";
+      enablePrime = mkEnableOption "nvidia.prime";
+    };
+  };
 
   config = mkIf cfg.enable {
     hardware.opengl = {
@@ -17,11 +22,9 @@ in {
 
     hardware.nvidia = {
       modesetting.enable = true;
-      powerManagement = mkIf cfg.enablePrime {
-        enable = false;
-        finegrained = false;
-      };
-      open = true;
+      powerManagement = { enable = true; };
+      # forceFullCompositionPipeline = true;
+      open = false;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = mkIf cfg.enablePrime {

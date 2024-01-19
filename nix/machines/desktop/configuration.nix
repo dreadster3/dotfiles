@@ -6,20 +6,30 @@
 let
   home-manager = builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-in
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ../../profiles/common.nix
-      ../../profiles/nvidia.nix
-      ../../users/dreadster/desktop.nix
-      /etc/nixos/hardware-configuration.nix
-     (import "${home-manager}/nixos")
-    ];
+in {
+  imports = [ # Include the results of the hardware scan.
+    ../../profiles/common.nix
+    ../../profiles/nvidia.nix
+    ../../profiles/entertainment.nix
+    ../../profiles/gaming.nix
+    ../../users/dreadster/desktop.nix
+    /etc/nixos/hardware-configuration.nix
+    (import "${home-manager}/nixos")
+  ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      grub = {
+        enable = true;
+        device = "nodev";
+        useOSProber = true;
+        efiSupport = true;
+      };
+
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -31,39 +41,20 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Lisbon";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "pt_PT.UTF-8";
-    LC_IDENTIFICATION = "pt_PT.UTF-8";
-    LC_MEASUREMENT = "pt_PT.UTF-8";
-    LC_MONETARY = "pt_PT.UTF-8";
-    LC_NAME = "pt_PT.UTF-8";
-    LC_NUMERIC = "pt_PT.UTF-8";
-    LC_PAPER = "pt_PT.UTF-8";
-    LC_TELEPHONE = "pt_PT.UTF-8";
-    LC_TIME = "pt_PT.UTF-8";
-  };
-
   # Configure keymap in X11
   services.xserver = {
     enable = true;
-    displayManager.sddm.enable = true;
+    windowManager = { bspwm = { enable = true; }; };
+    # displayManager.sddm = { enable = true; };
+    displayManager = {
+      lightdm = {
+        enable = true;
+        greeter = { enable = true; };
+      };
+    };
     layout = "us";
     xkbVariant = "";
-    videoDrivers = ["nvidia"];
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.dreadster = {
-    isNormalUser = true;
-    description = "Admin";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    videoDrivers = [ "nvidia" ];
   };
 
   # Allow unfree packages
@@ -72,13 +63,28 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-	vim
-	firefox
-	git
-	curl
-	kitty
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    vim
+    firefox
+    git
+    curl
+    kitty
+
+    # X11 apps
+    nitrogen
+    flameshot
+    betterlockscreen
+
+    # Wayland apps
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+    meson
+    wayland-protocols
+    wayland-utils
+    wl-clipboard
+    wlroots
+    networkmanagerapplet
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -92,6 +98,15 @@ in
     enable = true;
     xwayland.enable = true;
     enableNvidiaPatches = true;
+  };
+
+  environment.sessionVariables = { };
+
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   # List services that you want to enable:

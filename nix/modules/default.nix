@@ -7,5 +7,6 @@
     ./wireless.nix
     ./pulseaudio.nix
     ./localization.nix
+    ./steam.nix
   ];
 }

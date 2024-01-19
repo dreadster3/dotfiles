@@ -28,7 +28,7 @@ in {
       enable = mkEnableOption "polybar";
       monitor = mkOption {
         type = types.str;
-        default = "eDP-1";
+        default = "DP-0";
         description = "The monitor to display the bar on";
       };
       terminal = mkOption {
@@ -48,7 +48,7 @@ in {
           options = {
             name = mkOption {
               type = types.str;
-              default = "ens33";
+              default = "eno01";
               description = "The network interface to use";
             };
             type = mkOption {

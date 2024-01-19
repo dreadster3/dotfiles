@@ -33,11 +33,11 @@ config.tab_bar_at_bottom = true
 config.background = {
 	{
 		source = {
-			File = os.getenv("HOME") ..
-				"/Documents/projects/github/dotfiles/wallpapers/cat_bunnies.png"
+			Color = "#1e1e2e";
 		},
+		width = "100%",
+		height = "100%",
 		opacity = 1.0,
-		hsb = { brightness = 0.0, saturation = 1.0, hue = 1.0 },
 		attachment = "Fixed"
 	}, {
 	source = {
