@@ -2,7 +2,7 @@
 with lib;
 let cfg = config.modules.nvidia;
 in {
-  options = { modules.nvidia = { enable = mkEnableOption "nvidia"; }; };
+  options = { modules.nvidia = { enable = mkEnableOption "nvidia"; enablePrime = mkEnableOption "nvidia.prime"; }; };
 
   config = mkIf cfg.enable {
     hardware.opengl = {
@@ -17,14 +17,14 @@ in {
 
     hardware.nvidia = {
       modesetting.enable = true;
-      powerManagement = {
+      powerManagement = mkIf cfg.enablePrime {
         enable = false;
         finegrained = false;
       };
       open = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-      prime = {
+      prime = mkIf cfg.enablePrime {
         sync.enable = true;
         # offload = {
         #   enable = true;

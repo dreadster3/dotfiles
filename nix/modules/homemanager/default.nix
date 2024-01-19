@@ -21,5 +21,8 @@
     ./spicetify.nix
     ./guake.nix
     ./obsmic.nix
+    ./waybar.nix
+    ./wofi.nix
+    ./hyprland.nix
   ];
 }
