@@ -5,6 +5,7 @@ let
 
   battery_module = if cfg.useBattery then [ "battery" ] else [ ];
   brightness_module = if cfg.useBrightness then [ "backlight" ] else [ ];
+  tray_module = if cfg.useTray then [ "tray" ] else [ ];
 
   modules_left = [
     "launcher"
@@ -19,8 +20,9 @@ let
 
   modules_center = [ "date" ];
 
-  modules_right = [ "alsa" "network" "cpu" "filesystem" "memory" ]
-    ++ battery_module ++ brightness_module ++ [ "sysmenu" "tray" ];
+  modules_right = tray_module
+    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ] ++ battery_module
+    ++ brightness_module ++ [ "sysmenu" ];
 
 in {
   options = {
@@ -74,6 +76,11 @@ in {
         type = types.bool;
         default = false;
         description = "Whether to include brightness in polybar";
+      };
+      useTray = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to use system tray";
       };
       extraConfig = mkOption {
         type = types.str;
@@ -206,7 +213,11 @@ in {
 
           "module/tray" = {
             type = "internal/tray";
-            tray-padding = 2;
+            tray-padding = 7;
+            tray-size = "50%";
+            tray-background = "\${colorscheme.base}";
+            format-background = "\${colorscheme.base}";
+            format-padding = 1;
           };
 
           "module/battery" = {

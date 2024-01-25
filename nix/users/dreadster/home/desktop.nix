@@ -15,6 +15,7 @@
       enable = true;
       terminal = pkgs.wezterm;
       secondMonitor = "HDMI-0";
+      useTray = true;
     };
     rofi = { enable = true; };
     sxhkd = {
