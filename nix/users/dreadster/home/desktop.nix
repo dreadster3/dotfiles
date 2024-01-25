@@ -23,5 +23,6 @@
     };
     bspwm = { enable = true; };
     picom = { enable = true; };
+    spicetify = { enable = true; };
   };
 }
