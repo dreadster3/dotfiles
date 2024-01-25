@@ -20,7 +20,7 @@ let
   modules_center = [ "date" ];
 
   modules_right = [ "alsa" "network" "cpu" "filesystem" "memory" ]
-    ++ battery_module ++ brightness_module ++ [ "sysmenu" ];
+    ++ battery_module ++ brightness_module ++ [ "sysmenu" "tray" ];
 
 in {
   options = {
@@ -30,6 +30,12 @@ in {
         type = types.str;
         default = "DP-0";
         description = "The monitor to display the bar on";
+      };
+      secondMonitor = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description =
+          "The second monitor to display secondary bar. Leave null to disable second bar";
       };
       terminal = mkOption {
         type = types.package;
@@ -48,7 +54,7 @@ in {
           options = {
             name = mkOption {
               type = types.str;
-              default = "eno01";
+              default = "eno1";
               description = "The network interface to use";
             };
             type = mkOption {
@@ -84,8 +90,11 @@ in {
           alsaSupport = true;
           pulseSupport = true;
         };
-        script = ''
+        script = if !builtins.isString cfg.secondMonitor then ''
           polybar main &
+        '' else ''
+          polybar main &
+          polybar secondary &
         '';
         extraConfig = cfg.extraConfig;
         config = {
@@ -100,7 +109,7 @@ in {
             bottom = false;
             fixed-center = true;
             offset-x = "10";
-            offset-y = "2%";
+            offset-y = "1%";
 
             # Appearance
             background = "\${colorscheme.background}";
@@ -120,9 +129,38 @@ in {
 
             # Window Manager
             wm-restack = "bspwm";
+          };
+          "bar/secondary" = mkIf (builtins.isString cfg.secondMonitor) {
+            monitor = "${cfg.secondMonitor}";
 
-            # System Tray
-            tray-position = "right";
+            # Size
+            width = "98%";
+            height = "36";
+
+            # Position
+            bottom = false;
+            fixed-center = true;
+            offset-x = "10";
+            offset-y = "1%";
+
+            # Appearance
+            background = "\${colorscheme.background}";
+            foreground = "\${colorscheme.foreground}";
+            radius = 10;
+            border-size = 0;
+
+            # Fonts
+            font-0 = "Fira Code Nerd Font:pixelsize=12;3";
+            font-1 = "Iosevka Nerd Font:pixelsize=14;4";
+
+            # Modules
+            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
+            modules-left = modules_left;
+            modules-center = modules_center;
+            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
+
+            # Window Manager
+            wm-restack = "bspwm";
           };
           "module/cpu" = {
             type = "internal/cpu";
@@ -164,6 +202,11 @@ in {
             ramp-2 = "󰃞";
             ramp-3 = "󰃟";
             ramp-4 = "󰃠";
+          };
+
+          "module/tray" = {
+            type = "internal/tray";
+            tray-padding = 2;
           };
 
           "module/battery" = {

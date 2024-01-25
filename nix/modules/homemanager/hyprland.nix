@@ -51,12 +51,19 @@ in {
           "GBM_BACKEND,nvidia-drm"
           "__GLX_VENDOR_LIBRARY_NAME,nvidia"
           "CLUTTER_BACKEND,wayland"
+
+          # INFO: Fix issue with gamescope (https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264)
           "SDL_VIDEODRIVER,wayland"
+          "GDK_BACKEND,wayland,x11"
 
           "XDG_CURRENT_DESKTOP,Hyprland"
           "XDG_SESSION_DESKTOP,Hyprland"
           "XDG_SESSION_TYPE,wayland"
           "GTK_USE_PORTAL,1"
+
+          # INFO: https://github.com/ValveSoftware/gamescope/issues/896
+          "ENABLE_VKBASALT,1"
+          "QT_QPA_PLATFORMTHEME, wayland;xcb"
         ];
 
         decoration = {

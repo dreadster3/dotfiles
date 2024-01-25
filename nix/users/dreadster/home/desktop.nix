@@ -14,6 +14,7 @@
     polybar = {
       enable = true;
       terminal = pkgs.wezterm;
+      secondMonitor = "HDMI-0";
     };
     rofi = { enable = true; };
     sxhkd = {

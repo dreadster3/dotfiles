@@ -8,5 +8,6 @@
     ./pulseaudio.nix
     ./localization.nix
     ./steam.nix
+    ./flatpak.nix
   ];
 }
