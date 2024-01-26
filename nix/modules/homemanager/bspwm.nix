@@ -11,6 +11,12 @@ in {
         default = "DP-0";
         description = "The monitor to use for bspwm";
       };
+
+      startupPrograms = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = "The startup programs";
+      };
     };
   };
 
@@ -28,11 +34,9 @@ in {
       };
       startupPrograms = [
         "nitrogen --restore"
-        "vmware-user"
         "xsetroot -cursor_name left_ptr"
         "systemctl --user restart polybar.service"
-        "xrandr --output ${cfg.monitor} --primary --output HDMI-0 --left-of ${cfg.monitor} --rotate left"
-      ];
+      ] ++ cfg.startupPrograms;
 
       monitors = {
         "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ];

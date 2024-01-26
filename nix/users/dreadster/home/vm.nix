@@ -1,4 +1,6 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let primaryMonitor = "Virtual1";
+in {
   imports = [ ./default.nix ];
 
   modules = {
@@ -6,7 +8,7 @@
     polybar = {
       enable = true;
       terminal = pkgs.wezterm;
-      monitor = "Virtual1";
+      monitor = primaryMonitor;
     };
     rofi = { enable = true; };
     gtk = {
@@ -19,14 +21,11 @@
     };
     bspwm = {
       enable = true;
-      monitor = "Virtual1";
+      monitor = primaryMonitor;
+      startupPrograms = [ "vmware-user" ];
     };
-    picom = {
-      enable = true;
-      backend = "glx";
-    };
+    picom = { enable = true; };
     dunst = { enable = true; };
     betterlockscreen = { enable = true; };
-    xbindkeys = { enable = true; };
   };
 }

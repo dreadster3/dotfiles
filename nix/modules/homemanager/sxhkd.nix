@@ -19,7 +19,7 @@ in {
       keybindings = {
         "super + Return" = lib.getExe cfg.terminal;
         "super + @space" = "${lib.getExe pkgs.rofi} -show drun";
-        "super + l" = "${lib.getExe pkgs.betterlockscreen} -l blur";
+        "super + l" = "${lib.getExe pkgs.betterlockscreen} -l blur --display 1";
         "super + shift + l" = "${lib.getExe pkgs.betterlockscreen} -l blur";
         "Print" = "${lib.getExe pkgs.flameshot} gui";
         "super + Escape" = "pkill -USR1 -x sxhkd";

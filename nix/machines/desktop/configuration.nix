@@ -12,6 +12,7 @@ in {
     ../../profiles/nvidia.nix
     ../../profiles/entertainment.nix
     ../../profiles/gaming.nix
+    ../../profiles/bspwm.nix
     ../../users/dreadster/desktop.nix
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
@@ -43,16 +44,6 @@ in {
 
   # Configure keymap in X11
   services.xserver = {
-    enable = true;
-    windowManager = { bspwm = { enable = true; }; };
-    # displayManager.sddm = { enable = true; };
-    displayManager = {
-      lightdm = {
-        enable = true;
-        greeter = { enable = true; };
-      };
-    };
-    layout = "us";
     xkbVariant = "";
     videoDrivers = [ "nvidia" ];
   };
@@ -70,11 +61,6 @@ in {
     git
     curl
     kitty
-
-    # X11 apps
-    nitrogen
-    flameshot
-    betterlockscreen
 
     # Wayland apps
     xdg-desktop-portal-gtk
