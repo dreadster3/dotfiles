@@ -9,5 +9,6 @@
     ./localization.nix
     ./steam.nix
     ./flatpak.nix
+    ./thunar.nix
   ];
 }

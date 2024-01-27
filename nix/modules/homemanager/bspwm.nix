@@ -31,6 +31,9 @@ in {
         split_ratio = 0.5;
         border_monocle = true;
         gapless_monocle = true;
+
+        pointer_follows_focus = false;
+        focus_follows_pointer = true;
       };
       startupPrograms = [
         "nitrogen --restore"
@@ -41,6 +44,13 @@ in {
       monitors = {
         "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ];
         "HDMI-0" = [ "6" "7" "8" "9" "10" ];
+      };
+
+      rules = {
+        "Pavucontrol" = {
+          state = "floating";
+          center = true;
+        };
       };
     };
   };

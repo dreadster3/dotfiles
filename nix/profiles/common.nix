@@ -6,14 +6,14 @@
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
 
-  programs = {
-    thunar = { enable = true; };
-    nm-applet = { enable = true; };
-  };
+  programs = { nm-applet.enable = true; };
+
+  services = { gvfs.enable = true; };
 
   modules = {
     localization = { enable = true; };
     pulseaudio = { enable = true; };
+    thunar = { enable = true; };
     zsh = { enable = true; };
   };
 
@@ -29,5 +29,7 @@
     xclip
     btop
     procps
+
+    vulnix
   ];
 }

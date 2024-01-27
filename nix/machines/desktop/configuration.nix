@@ -43,13 +43,16 @@ in {
   networking.networkmanager.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
-    xkbVariant = "";
-    videoDrivers = [ "nvidia" ];
-  };
+  services.xserver = { xkbVariant = ""; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Suspend on idle
+  services.logind.extraConfig = ''
+    IdleAction=suspend
+    IdleActionSec=15min
+  '';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -104,7 +107,7 @@ in {
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = { enable = true; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
