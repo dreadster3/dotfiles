@@ -46,6 +46,7 @@ in {
           "window_type = 'popup_menu'"
           "window_type = 'popup'"
           "window_type = 'dock'"
+          "window_type = 'tooltip'"
 
           # Classes
           "class_g = 'Polybar'"

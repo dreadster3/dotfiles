@@ -65,6 +65,9 @@ in {
     curl
     kitty
 
+    # Controlling RGB devices
+    openrgb
+
     # Wayland apps
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland

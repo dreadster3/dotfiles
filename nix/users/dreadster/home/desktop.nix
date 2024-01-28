@@ -8,6 +8,7 @@ in {
   home.packages = with pkgs; [ playerctl ];
 
   modules = {
+    aio = { enable = true; };
     waybar = { enable = true; };
     wofi = { enable = true; };
     hyprland = { enable = true; };

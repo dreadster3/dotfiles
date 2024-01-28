@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./aio.nix
     ./rofi
     ./gtk.nix
     ./zsh.nix
