@@ -25,5 +25,6 @@
     ./waybar.nix
     ./wofi.nix
     ./hyprland.nix
+    ./thunderbird.nix
   ];
 }

@@ -10,6 +10,8 @@
 
   services = { gvfs.enable = true; };
 
+  security.polkit.enable = true;
+
   modules = {
     localization = { enable = true; };
     pulseaudio = { enable = true; };
@@ -31,5 +33,10 @@
     procps
 
     vulnix
+
+    polkit_gnome
+
+    # Calculator
+    qalculate-gtk
   ];
 }

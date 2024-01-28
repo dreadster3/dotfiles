@@ -34,6 +34,7 @@ in {
       startupPrograms = [
         "xrandr --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
         "xbindkeys"
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
     };
     picom = { enable = true; };
@@ -52,6 +53,5 @@ in {
       };
     };
     betterlockscreen = { enable = true; };
-
   };
 }

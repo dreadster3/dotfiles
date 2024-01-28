@@ -10,5 +10,8 @@
     ./steam.nix
     ./flatpak.nix
     ./thunar.nix
+    ./vmware.nix
+    ./zerotier.nix
+    ./xrdp.nix
   ];
 }
