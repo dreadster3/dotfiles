@@ -97,6 +97,7 @@ in {
   modules = {
     vmware.enable = true;
     zerotier.enable = true;
+    xrdp.enable = true;
   };
 
   # List services that you want to enable:
@@ -107,7 +108,14 @@ in {
   # Enable openrgb
   services.hardware.openrgb = { enable = true; };
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.sshguard.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no";
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

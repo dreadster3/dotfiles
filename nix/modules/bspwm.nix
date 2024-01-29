@@ -21,6 +21,7 @@ in {
           enable = true;
           greeter = { enable = true; };
         };
+        startx.enable = true;
       };
     };
   };

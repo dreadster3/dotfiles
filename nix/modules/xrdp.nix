@@ -5,12 +5,10 @@ in {
   options = { modules.xrdp = { enable = mkEnableOption "xrdp"; }; };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ xorg.xinit ];
-
     services.xrdp = {
       enable = true;
       openFirewall = true;
-      defaultWindowManager = "exec bspwm";
+      defaultWindowManager = "${pkgs.bspwm}/bin/bspwm";
     };
   };
 }

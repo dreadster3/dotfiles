@@ -33,12 +33,6 @@ in {
         default = "DP-0";
         description = "The monitor to display the bar on";
       };
-      secondMonitor = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description =
-          "The second monitor to display secondary bar. Leave null to disable second bar";
-      };
       terminal = mkOption {
         type = types.package;
         default = pkgs.kitty;
@@ -97,11 +91,10 @@ in {
           alsaSupport = true;
           pulseSupport = true;
         };
-        script = if !builtins.isString cfg.secondMonitor then ''
-          polybar main &
-        '' else ''
-          polybar main &
-          polybar secondary &
+        script = ''
+          ${pkgs.polybar}/bin/polybar main &
+          MONITOR="HDMI-0" ${pkgs.polybar}/bin/polybar --reload secondary &
+          MONITOR="rdp0" ${pkgs.polybar}/bin/polybar --reload secondary &
         '';
         extraConfig = cfg.extraConfig;
         config = {
@@ -137,8 +130,40 @@ in {
             # Window Manager
             wm-restack = "bspwm";
           };
-          "bar/secondary" = mkIf (builtins.isString cfg.secondMonitor) {
-            monitor = "${cfg.secondMonitor}";
+          "bar/secondary" = {
+            monitor = "\${env:MONITOR:}";
+
+            # Size
+            width = "98%";
+            height = "36";
+
+            # Position
+            bottom = false;
+            fixed-center = true;
+            offset-x = "10";
+            offset-y = "1%";
+
+            # Appearance
+            background = "\${colorscheme.background}";
+            foreground = "\${colorscheme.foreground}";
+            radius = 10;
+            border-size = 0;
+
+            # Fonts
+            font-0 = "Fira Code Nerd Font:pixelsize=12;3";
+            font-1 = "Iosevka Nerd Font:pixelsize=14;4";
+
+            # Modules
+            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
+            modules-left = modules_left;
+            modules-center = modules_center;
+            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
+
+            # Window Manager
+            wm-restack = "bspwm";
+          };
+          "bar/remote" = {
+            monitor = "rdp0";
 
             # Size
             width = "98%";
@@ -546,9 +571,8 @@ in {
         };
       };
     };
-
-    systemd.user.services.polybar = {
-      Install.WantedBy = [ "graphical-session.target" ];
-    };
+    # systemd.user.services.polybar = {
+    #   Install.WantedBy = [ "graphical-session.target" ];
+    # };
   };
 }

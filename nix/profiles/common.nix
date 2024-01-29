@@ -8,7 +8,14 @@
 
   programs = { nm-applet.enable = true; };
 
-  services = { gvfs.enable = true; };
+  services = {
+    gvfs.enable = true;
+    locate = {
+      enable = true;
+      package = pkgs.mlocate;
+      localuser = null;
+    };
+  };
 
   security.polkit.enable = true;
 
@@ -34,9 +41,12 @@
 
     vulnix
 
+    # Ask for password when needed
     polkit_gnome
 
     # Calculator
     qalculate-gtk
+
+    remmina
   ];
 }

@@ -7,6 +7,15 @@ in {
 
   home.packages = with pkgs; [ playerctl ];
 
+  home.sessionVariables = {
+    XDG_CACHE_DIR = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_DESKTOP_DIR = "$HOME/Desktop";
+    XDG_DOCUMENTS_DIR = "$HOME/Documents";
+    XDG_DOWNLOAD_DIR = "$HOME/Downloads";
+  };
+
   modules = {
     aio = { enable = true; };
     waybar = { enable = true; };
@@ -21,7 +30,6 @@ in {
     polybar = {
       enable = true;
       terminal = pkgs.wezterm;
-      secondMonitor = secondaryMonitor;
       useTray = true;
     };
     rofi = { enable = true; };
@@ -32,8 +40,12 @@ in {
     bspwm = {
       enable = true;
       startupPrograms = [
-        "xrandr --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
-        "xbindkeys"
+        # "${pkgs.picom}/bin/picom"
+        "${
+          lib.getExe pkgs.xorg.xrandr
+        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
+        "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
+        "${pkgs.xbindkeys}/bin/xbindkeys"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
     };

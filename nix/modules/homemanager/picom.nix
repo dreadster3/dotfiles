@@ -17,7 +17,7 @@ in {
       enable = true;
 
       backend = cfg.backend;
-      vSync = true;
+      vSync = false;
 
       shadow = true;
       shadowOffsets = [ (-7) (-7) ];
