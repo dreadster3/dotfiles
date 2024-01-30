@@ -26,5 +26,7 @@
     ./wofi.nix
     ./hyprland.nix
     ./thunderbird.nix
+    ./helix.nix
+    ./pentest.nix
   ];
 }

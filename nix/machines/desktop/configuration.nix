@@ -13,6 +13,7 @@ in {
     ../../profiles/entertainment.nix
     ../../profiles/gaming.nix
     ../../profiles/bspwm.nix
+    ../../profiles/remotedesktop.nix
     ../../users/dreadster/desktop.nix
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
@@ -65,9 +66,6 @@ in {
     curl
     kitty
 
-    # Controlling RGB devices
-    openrgb
-
     # Wayland apps
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
@@ -85,8 +83,6 @@ in {
     enableNvidiaPatches = true;
   };
 
-  environment.sessionVariables = { };
-
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
@@ -97,7 +93,6 @@ in {
   modules = {
     vmware.enable = true;
     zerotier.enable = true;
-    xrdp.enable = true;
   };
 
   # List services that you want to enable:

@@ -13,5 +13,6 @@
     ./vmware.nix
     ./zerotier.nix
     ./xrdp.nix
+    ./teamviewer.nix
   ];
 }

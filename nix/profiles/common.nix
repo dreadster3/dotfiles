@@ -40,6 +40,7 @@
     procps
 
     vulnix
+    cifs-utils
 
     # Ask for password when needed
     polkit_gnome

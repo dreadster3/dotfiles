@@ -17,16 +17,20 @@ in {
   };
 
   modules = {
-    aio = { enable = true; };
-    waybar = { enable = true; };
-    wofi = { enable = true; };
-    hyprland = { enable = true; };
+    hyprland.enable = true;
+    waybar.enable = true;
+    wofi.enable = true;
+    betterlockscreen.enable = true;
+    dunst.enable = true;
+    picom.enable = true;
+    aio.enable = true;
+    spicetify.enable = true;
+    helix.enable = true;
+
     gtk = {
       enable = true;
-      cursor = { enable = true; };
+      cursor.enable = true;
     };
-    # guake = { enable = true; };
-    dunst = { enable = true; };
     polybar = {
       enable = true;
       terminal = pkgs.wezterm;
@@ -49,8 +53,6 @@ in {
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
     };
-    picom = { enable = true; };
-    spicetify = { enable = true; };
     xbindkeys = {
       enable = true;
       settings = {
@@ -64,6 +66,8 @@ in {
         "XF86AudioNext" = "${lib.getExe pkgs.playerctl} --player spotify next";
       };
     };
-    betterlockscreen = { enable = true; };
+
+    # Extras
+    pentest.enable = true;
   };
 }
