@@ -92,10 +92,7 @@ in {
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  modules = {
-    vmware.enable = true;
-    zerotier.enable = true;
-  };
+  modules = { vmware.enable = true; };
 
   # List services that you want to enable:
 

@@ -40,6 +40,8 @@
     procps
 
     teams-for-linux
+    openvpn
+    remmina
 
     vulnix
     cifs-utils
@@ -49,7 +51,5 @@
 
     # Calculator
     qalculate-gtk
-
-    remmina
   ];
 }

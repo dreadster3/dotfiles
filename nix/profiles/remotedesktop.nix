@@ -5,6 +5,7 @@
 
   modules = {
     teamviewer.enable = true;
+    zerotier.enable = true;
     xrdp.enable = true;
   };
 }
