@@ -3,7 +3,13 @@
 {
   imports = [ ../modules ];
 
-  environment.systemPackages = with pkgs; [ wineWowPackages.stable ];
+  environment.systemPackages = with pkgs; [
+    kazam
+    haruna
+    mpv
+    wineWowPackages.stable
+    winetricks
+  ];
 
   modules = { steam = { enable = true; }; };
 }

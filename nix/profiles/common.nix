@@ -39,6 +39,8 @@
     btop
     procps
 
+    teams-for-linux
+
     vulnix
     cifs-utils
 

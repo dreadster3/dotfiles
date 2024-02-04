@@ -13,5 +13,8 @@ in {
       enable = true;
       arguments = [ "blur" ];
     };
+
+    # Disable xautolock, to use xidlehook instead
+    services.screen-locker.xautolock.enable = false;
   };
 }

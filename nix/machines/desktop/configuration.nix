@@ -66,6 +66,8 @@ in {
     curl
     kitty
 
+    piper
+
     # Wayland apps
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
@@ -102,6 +104,7 @@ in {
 
   # Enable openrgb
   services.hardware.openrgb = { enable = true; };
+  services.ratbagd.enable = true;
   # Enable the OpenSSH daemon.
   services.sshguard.enable = true;
   services.openssh = {
