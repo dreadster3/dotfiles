@@ -23,7 +23,7 @@ in {
       monitor = primaryMonitor;
       startupPrograms = [ "vmware-user" ];
     };
-    picom = { enable = false; };
+    picom = { enable = true; };
     dunst = { enable = true; };
     betterlockscreen = { enable = true; };
   };
