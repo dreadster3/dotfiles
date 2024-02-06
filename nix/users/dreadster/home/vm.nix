@@ -40,5 +40,8 @@ in {
     hyprland.enable = true;
     waybar.enable = true;
     wofi.enable = true;
+
+    # Other
+    pentest.enable = true;
   };
 }
