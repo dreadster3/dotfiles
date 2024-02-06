@@ -29,14 +29,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ lxappearance dconf ];
-
-    dconf = {
-      enable = true;
-      settings = {
-        "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
-      };
-    };
+    home.packages = with pkgs; [ lxappearance ];
 
     home.pointerCursor = mkIf cfg.cursor.enable {
       gtk.enable = true;

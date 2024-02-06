@@ -4,25 +4,28 @@ let cfg = config.modules.hyprland;
 in {
   options = { modules.hyprland = { enable = mkEnableOption "hyprland"; }; };
 
-  config = {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [ wl-clipboard ];
 
     wayland.windowManager.hyprland = {
       enable = true;
-      enableNvidiaPatches = true;
+      # enableNvidiaPatches = true;
       xwayland.enable = true;
       systemd.enable = true;
       settings = {
         "$mainMod" = "SUPER";
         monitor = [
-          "DP-1,preferred,1080x0,auto"
-          "HDMI-A-1,preferred,0x0,auto,transform,1"
+          # "DP-1,preferred,1080x0,auto"
+          # "HDMI-A-1,preferred,0x0,auto,transform,1"
+          "Virtual1,preferred,0x0,auto"
           ",preferred,auto,auto"
         ];
 
         exec-once = [
           "${getExe pkgs.waybar} &"
-          ''hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
+          ''
+            ${pkgs.hyprland}/bin/hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
+          "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper &"
         ];
 
         input = {
@@ -42,28 +45,29 @@ in {
         };
 
         env = [
-          "NIXOS_OZONE_WL,1"
+          # "NIXOS_OZONE_WL,1"
           "GUAKE_ENABLE_WAYLAND,1"
           "XCURSOR_SIZE,24"
           "WLR_NO_HARDWARE_CURSORS,1"
           "MOZ_ENABLE_WAYLAND,1"
-          "LIBVA_DRIVER_NAME,nvidia"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "CLUTTER_BACKEND,wayland"
+          "LIBGL_ALWAYS_SOFTWARE,1"
+          # "LIBVA_DRIVER_NAME,nvidia"
+          # "GBM_BACKEND,nvidia-drm"
+          # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          # "CLUTTER_BACKEND,wayland"
 
           # INFO: Fix issue with gamescope (https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264)
-          "SDL_VIDEODRIVER,wayland"
-          "GDK_BACKEND,wayland,x11"
+          # "SDL_VIDEODRIVER,wayland"
+          # "GDK_BACKEND,wayland,x11"
 
-          "XDG_CURRENT_DESKTOP,Hyprland"
-          "XDG_SESSION_DESKTOP,Hyprland"
-          "XDG_SESSION_TYPE,wayland"
-          "GTK_USE_PORTAL,1"
+          # "XDG_CURRENT_DESKTOP,Hyprland"
+          # "XDG_SESSION_DESKTOP,Hyprland"
+          # "XDG_SESSION_TYPE,wayland"
+          # "GTK_USE_PORTAL,1"
 
           # INFO: https://github.com/ValveSoftware/gamescope/issues/896
-          "ENABLE_VKBASALT,1"
-          "QT_QPA_PLATFORMTHEME, wayland;xcb"
+          # "ENABLE_VKBASALT,1"
+          # "QT_QPA_PLATFORMTHEME, wayland;xcb"
         ];
 
         decoration = {
@@ -124,20 +128,20 @@ in {
           "minsize 1 1, title:^()$,class:^(steam)$"
         ];
 
-        workspace = [
-          "1,monitor:DP-1"
-          "3,monitor:DP-1"
-          "5,monitor:DP-1"
-          "7,monitor:DP-1"
-          "9,monitor:DP-1"
-          "2,monitor:HDMI-A-1"
-          "4,monitor:HDMI-A-1"
-          "6,monitor:HDMI-A-1"
-          "8,monitor:HDMI-A-1"
-        ];
+        # workspace = [
+        #   "1,monitor:DP-1"
+        #   "3,monitor:DP-1"
+        #   "5,monitor:DP-1"
+        #   "7,monitor:DP-1"
+        #   "9,monitor:DP-1"
+        #   "2,monitor:HDMI-A-1"
+        #   "4,monitor:HDMI-A-1"
+        #   "6,monitor:HDMI-A-1"
+        #   "8,monitor:HDMI-A-1"
+        # ];
 
         bind = [
-          "$mainMod, Return, exec, kitty"
+          "$mainMod, Return, exec, ${getExe pkgs.kitty}"
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, thunar"
@@ -147,10 +151,10 @@ in {
           "$mainMod, Space, exec, pkill wofi || wofi --show drun"
           "$mainMod, P, pseudo, # dwindle"
           "$mainMod, J, togglesplit, # dwindle"
-          ", Print, exec, QT_SCALE_FACTOR=0.80 flameshot gui"
+          # ", Print, exec, QT_SCALE_FACTOR=0.80 flameshot gui"
           ", Print, exec, grimblast copysave screen"
           "SHIFT, Print, exec, grimblast copysave area"
-          "$mainMod, L, exec, ~/.config/hypr/scripts/lock_screen.sh"
+          # "$mainMod, L, exec, ~/.config/hypr/scripts/lock_screen.sh"
           "$mainMod_SHIFT, L, exec, systemctl suspend"
           ", F12, exec, guake-toggle"
           "$mainMod, left, movefocus, l"

@@ -3,6 +3,7 @@
 {
   imports = [ ../modules ];
 
+  networking.firewall.enable = true;
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
 

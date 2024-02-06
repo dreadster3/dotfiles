@@ -12,8 +12,9 @@ in {
     };
   };
 
-  config = {
-    services.picom = mkIf cfg.enable {
+  config = mkIf cfg.enable {
+    systemd.user.services.picom = lib.mkForce { };
+    services.picom = {
       enable = true;
 
       backend = cfg.backend;

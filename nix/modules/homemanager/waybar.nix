@@ -22,7 +22,7 @@ in {
             [ "custom/wofi" "hyprland/workspaces" "cpu" "memory" "disk" ];
           modules-center = [ "clock" ];
           modules-right = [ "pulseaudio" "tray" ];
-          output = [ "DP-1" "HDMI-A-1" ];
+          # output = [ "DP-1" "HDMI-A-1" ];
           "custom/wofi" = {
             format = "";
             on-click = "pkill wofi || wofi";

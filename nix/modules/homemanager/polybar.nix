@@ -28,11 +28,6 @@ in {
   options = {
     modules.polybar = {
       enable = mkEnableOption "polybar";
-      monitor = mkOption {
-        type = types.str;
-        default = "DP-0";
-        description = "The monitor to display the bar on";
-      };
       terminal = mkOption {
         type = types.package;
         default = pkgs.kitty;
@@ -84,6 +79,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
+    systemd.user.services.polybar = lib.mkForce { };
     services = {
       polybar = {
         enable = true;
@@ -92,14 +88,14 @@ in {
           pulseSupport = true;
         };
         script = ''
-          ${pkgs.polybar}/bin/polybar main &
+          MONITOR="DP-0" ${pkgs.polybar}/bin/polybar --reload main &
           MONITOR="HDMI-0" ${pkgs.polybar}/bin/polybar --reload secondary &
           MONITOR="rdp0" ${pkgs.polybar}/bin/polybar --reload secondary &
         '';
         extraConfig = cfg.extraConfig;
         config = {
           "bar/main" = {
-            monitor = "${cfg.monitor}";
+            monitor = "\${env:MONITOR:}";
 
             # Size
             width = "99%";

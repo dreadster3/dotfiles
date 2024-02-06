@@ -24,8 +24,44 @@ in {
         device = "/dev/sda";
         useOSProber = true;
       };
+
+      efi.canTouchEfiVariables = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    vim
+    firefox
+    git
+    curl
+    kitty
+    alacritty
+    foot
+
+    piper
+
+    # Wayland apps
+    meson
+    wayland-protocols
+    wayland-utils
+    wl-clipboard
+    wlroots
+    networkmanagerapplet
+  ];
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  # services.dbus.enable = true;
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals =
+  #     [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
+  # };
 
   networking.hostName = "nixosvm";
 
