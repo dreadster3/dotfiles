@@ -34,14 +34,10 @@ in {
     };
     polybar = {
       enable = true;
-      terminal = pkgs.wezterm;
       useTray = true;
     };
-    rofi = { enable = true; };
-    sxhkd = {
-      enable = true;
-      terminal = pkgs.wezterm;
-    };
+    rofi.enable = true;
+    sxhkd.enable = true;
     bspwm = {
       enable = true;
       startupPrograms = [
@@ -52,6 +48,7 @@ in {
         "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
         "${pkgs.xbindkeys}/bin/xbindkeys"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+        "${lib.getExe pkgs.flameshot}"
       ];
     };
     xbindkeys = {
@@ -67,8 +64,5 @@ in {
         "XF86AudioNext" = "${lib.getExe pkgs.playerctl} --player spotify next";
       };
     };
-
-    # Extras
-    pentest.enable = true;
   };
 }

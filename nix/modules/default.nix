@@ -14,5 +14,6 @@
     ./zerotier.nix
     ./xrdp.nix
     ./teamviewer.nix
+    ./docker.nix
   ];
 }

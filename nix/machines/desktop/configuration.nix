@@ -14,6 +14,7 @@ in {
     ../../profiles/gaming.nix
     ../../profiles/bspwm.nix
     ../../profiles/remotedesktop.nix
+    ../../profiles/virtualization.nix
     ../../users/dreadster/desktop.nix
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
@@ -92,10 +93,7 @@ in {
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  modules = { vmware.enable = true; };
-
   # List services that you want to enable:
-
   # Enable onedrive
   services.onedrive.enable = true;
 

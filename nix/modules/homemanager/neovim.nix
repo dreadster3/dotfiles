@@ -7,7 +7,7 @@ in {
       enable = mkEnableOption "neovim";
       terminal = mkOption {
         type = types.package;
-        default = pkgs.wezterm;
+        default = pkgs.kitty;
       };
     };
   };
