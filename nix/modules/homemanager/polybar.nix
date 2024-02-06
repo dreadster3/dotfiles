@@ -1,10 +1,11 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.modules.polybar;
 
   battery_module = if cfg.useBattery then [ "battery" ] else [ ];
   brightness_module = if cfg.useBrightness then [ "backlight" ] else [ ];
+  tray_module = if cfg.useTray then [ "tray" ] else [ ];
 
   modules_left = [
     "launcher"
@@ -19,8 +20,9 @@ let
 
   modules_center = [ "date" ];
 
-  modules_right = [ "alsa" "network" "cpu" "filesystem" "memory" ]
-    ++ battery_module ++ brightness_module ++ [ "sysmenu" ];
+  modules_right = tray_module
+    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ] ++ battery_module
+    ++ brightness_module ++ [ "sysmenu" ];
 
 in {
   options = {
@@ -28,7 +30,7 @@ in {
       enable = mkEnableOption "polybar";
       monitor = mkOption {
         type = types.str;
-        default = "eDP-1";
+        default = "DP-0";
         description = "The monitor to display the bar on";
       };
       terminal = mkOption {
@@ -48,7 +50,7 @@ in {
           options = {
             name = mkOption {
               type = types.str;
-              default = "ens33";
+              default = "eno1";
               description = "The network interface to use";
             };
             type = mkOption {
@@ -69,6 +71,11 @@ in {
         default = false;
         description = "Whether to include brightness in polybar";
       };
+      useTray = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to use system tray";
+      };
       extraConfig = mkOption {
         type = types.str;
         default = "";
@@ -85,7 +92,9 @@ in {
           pulseSupport = true;
         };
         script = ''
-          polybar main &
+          ${pkgs.polybar}/bin/polybar main &
+          MONITOR="HDMI-0" ${pkgs.polybar}/bin/polybar --reload secondary &
+          MONITOR="rdp0" ${pkgs.polybar}/bin/polybar --reload secondary &
         '';
         extraConfig = cfg.extraConfig;
         config = {
@@ -100,7 +109,7 @@ in {
             bottom = false;
             fixed-center = true;
             offset-x = "10";
-            offset-y = "2%";
+            offset-y = "1%";
 
             # Appearance
             background = "\${colorscheme.background}";
@@ -120,9 +129,70 @@ in {
 
             # Window Manager
             wm-restack = "bspwm";
+          };
+          "bar/secondary" = {
+            monitor = "\${env:MONITOR:}";
 
-            # System Tray
-            tray-position = "right";
+            # Size
+            width = "98%";
+            height = "36";
+
+            # Position
+            bottom = false;
+            fixed-center = true;
+            offset-x = "10";
+            offset-y = "1%";
+
+            # Appearance
+            background = "\${colorscheme.background}";
+            foreground = "\${colorscheme.foreground}";
+            radius = 10;
+            border-size = 0;
+
+            # Fonts
+            font-0 = "Fira Code Nerd Font:pixelsize=12;3";
+            font-1 = "Iosevka Nerd Font:pixelsize=14;4";
+
+            # Modules
+            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
+            modules-left = modules_left;
+            modules-center = modules_center;
+            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
+
+            # Window Manager
+            wm-restack = "bspwm";
+          };
+          "bar/remote" = {
+            monitor = "rdp0";
+
+            # Size
+            width = "98%";
+            height = "36";
+
+            # Position
+            bottom = false;
+            fixed-center = true;
+            offset-x = "10";
+            offset-y = "1%";
+
+            # Appearance
+            background = "\${colorscheme.background}";
+            foreground = "\${colorscheme.foreground}";
+            radius = 10;
+            border-size = 0;
+
+            # Fonts
+            font-0 = "Fira Code Nerd Font:pixelsize=12;3";
+            font-1 = "Iosevka Nerd Font:pixelsize=14;4";
+
+            # Modules
+            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
+            modules-left = modules_left;
+            modules-center = modules_center;
+            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
+
+            # Window Manager
+            wm-restack = "bspwm";
           };
           "module/cpu" = {
             type = "internal/cpu";
@@ -164,6 +234,15 @@ in {
             ramp-2 = "󰃞";
             ramp-3 = "󰃟";
             ramp-4 = "󰃠";
+          };
+
+          "module/tray" = {
+            type = "internal/tray";
+            tray-padding = 7;
+            tray-size = "50%";
+            tray-background = "\${colorscheme.base}";
+            format-background = "\${colorscheme.base}";
+            format-padding = 1;
           };
 
           "module/battery" = {
@@ -492,9 +571,8 @@ in {
         };
       };
     };
-
-    systemd.user.services.polybar = {
-      Install.WantedBy = [ "graphical-session.target" ];
-    };
+    # systemd.user.services.polybar = {
+    #   Install.WantedBy = [ "graphical-session.target" ];
+    # };
   };
 }

@@ -64,7 +64,7 @@ return {
                 terraformls = {},
                 tflint = {},
                 bashls = {},
-                jsonls = {}
+                jsonls = {},
             },
             setup = {
                 clangd = function(_, opts)

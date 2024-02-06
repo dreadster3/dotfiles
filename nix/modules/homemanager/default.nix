@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./aio.nix
     ./rofi
     ./gtk.nix
     ./zsh.nix
@@ -21,5 +22,11 @@
     ./spicetify.nix
     ./guake.nix
     ./obsmic.nix
+    ./waybar.nix
+    ./wofi.nix
+    ./hyprland.nix
+    ./thunderbird.nix
+    ./helix.nix
+    ./pentest.nix
   ];
 }

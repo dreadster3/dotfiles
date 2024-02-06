@@ -1,6 +1,14 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.bspwm;
+let
+  cfg = config.modules.bspwm;
+
+  fix_script = pkgs.writers.writeBash "fix_remote.sh" ''
+    bspc wm --restart
+    sleep 1
+    bspc monitor MONITOR --remove
+    bspc monitor rdp0 -d "1" "2" "3" "4" "5"
+    MONITOR='rdp0' polybar --reload secondary &'';
 in {
   options = {
     modules.bspwm = {
@@ -8,15 +16,21 @@ in {
 
       monitor = mkOption {
         type = types.str;
-        default = "eDP-1";
+        default = "DP-0";
         description = "The monitor to use for bspwm";
       };
 
+      startupPrograms = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = "The startup programs";
+      };
     };
   };
 
-  config = {
-    xsession.windowManager.bspwm = mkIf cfg.enable {
+  config = mkIf cfg.enable {
+    programs.zsh.shellAliases.fix_remote = "${fix_script} & disown && exit";
+    xsession.windowManager.bspwm = {
       enable = true;
       settings = {
         focused_border_color = "#89B4FA";
@@ -24,17 +38,34 @@ in {
         window_gap = 10;
 
         split_ratio = 0.5;
-        border_monocle = true;
+        borderless_monocle = true;
         gapless_monocle = true;
+
+        pointer_follows_focus = false;
+        focus_follows_pointer = true;
+
+        right_padding = 0;
+        bottom_padding = 0;
       };
       startupPrograms = [
-        "nitrogen --restore"
-        "vmware-user"
-        "xsetroot -cursor_name left_ptr"
+        "${getExe pkgs.sxhkd}"
+        "${getExe pkgs.nitrogen} --restore"
         "systemctl --user restart polybar.service"
-      ];
+        "xsetroot -cursor_name left_ptr"
+      ] ++ cfg.startupPrograms;
 
-      monitors = { "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ]; };
+      monitors = {
+        "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ];
+        "HDMI-0" = [ "6" "7" "8" "9" "10" ];
+        "rdp0" = [ "1" "2" "3" "4" "5" ];
+      };
+
+      rules = {
+        "Pavucontrol" = {
+          state = "floating";
+          center = true;
+        };
+      };
     };
   };
 

@@ -5,9 +5,9 @@ in {
   options = {
     modules.neovim = {
       enable = mkEnableOption "neovim";
-      setDefaultEditor = mkOption {
-        type = types.bool;
-        default = true;
+      terminal = mkOption {
+        type = types.package;
+        default = pkgs.kitty;
       };
     };
   };
@@ -38,6 +38,17 @@ in {
           go
         ];
       };
+    };
+
+    xdg.desktopEntries.neovim = {
+      name = "Neovim";
+      genericName = "Text Editor";
+      comment = "Edit text files";
+      exec = "${lib.getExe cfg.terminal} -e nvim %F";
+      terminal = false;
+      type = "Application";
+      icon = "nvim";
+      categories = [ "Utility" "TextEditor" ];
     };
 
     xdg.configFile.glow = {
