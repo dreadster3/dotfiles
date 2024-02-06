@@ -7,7 +7,6 @@ in {
     x11eventcallbacks = { enable = true; };
     polybar = {
       enable = true;
-      terminal = pkgs.wezterm;
       monitor = primaryMonitor;
     };
     rofi = { enable = true; };
@@ -24,7 +23,7 @@ in {
       monitor = primaryMonitor;
       startupPrograms = [ "vmware-user" ];
     };
-    picom = { enable = true; };
+    picom = { enable = false; };
     dunst = { enable = true; };
     betterlockscreen = { enable = true; };
   };
