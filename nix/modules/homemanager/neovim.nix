@@ -36,6 +36,7 @@ in {
           terraform
           glow
           go
+          python3
         ];
       };
     };

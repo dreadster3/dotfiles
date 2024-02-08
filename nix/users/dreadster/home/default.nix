@@ -12,18 +12,11 @@
       enable = true;
       not-when-audio = true;
 
-      timers = [
-        {
-          # Lock the session after 10 min idle
-          delay = 10 * 60;
-          command = "loginctl lock-session $XDG_SESSION_ID";
-        }
-        {
-          # Suspend after 15 min idle
-          delay = 5 * 60;
-          command = "systemctl suspend";
-        }
-      ];
+      timers = [{
+        # Lock the session after 10 min idle
+        delay = 10 * 60;
+        command = "loginctl lock-session $XDG_SESSION_ID";
+      }];
     };
   };
 
