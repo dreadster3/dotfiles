@@ -14,7 +14,10 @@ in {
   };
 
   modules = {
-    polybar.enable = true;
+    polybar = {
+      enable = true;
+      useTray = true;
+    };
     gtk = {
       enable = true;
       cursor = { enable = true; };
@@ -24,7 +27,7 @@ in {
       monitor = primaryMonitor;
       startupPrograms = [
         "vmware-user"
-        "${lib.getExe pkgs.picom}"
+        # "${lib.getExe pkgs.picom}"
         "${lib.getExe pkgs.flameshot}"
         "MONITOR='Virtual1' ${pkgs.polybar}/bin/polybar main"
       ];
