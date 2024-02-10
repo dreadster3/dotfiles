@@ -16,6 +16,11 @@ in {
       EDITOR = "nvim";
       DOTNET_ROOT = "${pkgs.dotnet-sdk_7}";
     };
+
+    xdg.configFile."nvim" = {
+    	source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
+    };
+
     programs = {
       neovim = {
         enable = true;
