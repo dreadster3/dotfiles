@@ -27,7 +27,7 @@ in {
       monitor = primaryMonitor;
       startupPrograms = [
         "vmware-user"
-        # "${lib.getExe pkgs.picom}"
+        "${lib.getExe pkgs.picom}"
         "${lib.getExe pkgs.flameshot}"
         "MONITOR='Virtual1' ${pkgs.polybar}/bin/polybar main"
       ];

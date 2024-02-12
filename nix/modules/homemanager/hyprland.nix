@@ -17,7 +17,7 @@ in {
         monitor = [
           # "DP-1,preferred,1080x0,auto"
           # "HDMI-A-1,preferred,0x0,auto,transform,1"
-          "Virtual1,preferred,0x0,auto"
+          "Virtual1,1920x1080,0x0,auto"
           ",preferred,auto,auto"
         ];
 
