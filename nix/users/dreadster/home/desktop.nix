@@ -30,7 +30,7 @@ in {
 
   modules = {
     hyprland.enable = true;
-    waybar.enable = true;
+    # waybar.enable = true;
     wofi.enable = true;
     betterlockscreen.enable = true;
     dunst.enable = true;

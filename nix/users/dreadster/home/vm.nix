@@ -14,19 +14,22 @@ in {
   };
 
   modules = {
-    polybar = {
-      enable = true;
-      useTray = true;
-    };
     gtk = {
       enable = true;
       cursor = { enable = true; };
+    };
+    dunst.enable = true;
+
+    # X11
+    polybar = {
+      enable = true;
+      useTray = true;
     };
     bspwm = {
       enable = true;
       monitor = primaryMonitor;
       startupPrograms = [
-        "vmware-user"
+        "${lib.getExe pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
         "${lib.getExe pkgs.picom}"
         "${lib.getExe pkgs.flameshot}"
         "MONITOR='Virtual1' ${pkgs.polybar}/bin/polybar main"
@@ -36,12 +39,11 @@ in {
     x11eventcallbacks.enable = true;
     rofi.enable = true;
     picom.enable = true;
-    dunst.enable = true;
     betterlockscreen.enable = true;
 
     # Hyprland
     hyprland.enable = true;
-    waybar.enable = true;
+    # waybar.enable = true;
     wofi.enable = true;
 
     # Other
