@@ -79,7 +79,9 @@ in {
     };
   };
   config = mkIf cfg.enable {
+    # Disable the default polybar service
     systemd.user.services.polybar = lib.mkForce { };
+
     services = {
       polybar = {
         enable = true;

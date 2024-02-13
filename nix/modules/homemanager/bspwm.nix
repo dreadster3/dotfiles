@@ -50,7 +50,6 @@ in {
       startupPrograms = [
         "${getExe pkgs.sxhkd}"
         "${getExe pkgs.nitrogen} --restore"
-        "systemctl --user restart polybar.service"
         "xsetroot -cursor_name left_ptr"
       ] ++ cfg.startupPrograms;
 

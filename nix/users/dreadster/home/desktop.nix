@@ -2,6 +2,17 @@
 let
   primaryMonitor = "DP-0";
   secondaryMonitor = "HDMI-0";
+
+  polybar_start = pkgs.writers.writeBash "polybar_multi_monitor" ''
+    MONITOR=${primaryMonitor} polybar main &
+    if type "xrandr"; then
+    	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    		if [ $m = 'Virtual1' ]; then
+    			continue
+    		fi
+    		MONITOR=$m polybar --reload secondary &
+    	done
+    fi'';
 in {
   imports = [ ./default.nix ];
 
@@ -41,7 +52,8 @@ in {
     bspwm = {
       enable = true;
       startupPrograms = [
-        # "${pkgs.picom}/bin/picom"
+        "${pkgs.picom}/bin/picom"
+        "${polybar_start}"
         "${
           lib.getExe pkgs.xorg.xrandr
         } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"

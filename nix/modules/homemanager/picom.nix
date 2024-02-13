@@ -13,7 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Disable the default picom service
     systemd.user.services.picom = lib.mkForce { };
+
     services.picom = {
       enable = true;
 
