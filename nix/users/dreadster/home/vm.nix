@@ -29,7 +29,7 @@ in {
       enable = true;
       monitor = primaryMonitor;
       startupPrograms = [
-        "${lib.getExe pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
+        "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
         "${lib.getExe pkgs.picom}"
         "${lib.getExe pkgs.flameshot}"
         "MONITOR='Virtual1' ${pkgs.polybar}/bin/polybar main"
