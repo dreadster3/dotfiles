@@ -5,7 +5,7 @@ in {
   options = { modules.hyprland = { enable = mkEnableOption "hyprland"; }; };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ wl-clipboard ];
+    home.packages = with pkgs; [ wl-clipboard gbar ];
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -15,17 +15,22 @@ in {
       settings = {
         "$mainMod" = "SUPER";
         monitor = [
-          # "DP-1,preferred,1080x0,auto"
-          # "HDMI-A-1,preferred,0x0,auto,transform,1"
+          # Desktop configs
+          "DP-1,preferred,1080x0,auto"
+          "HDMI-A-1,preferred,0x0,auto,transform,1"
+
+          # VM configs
           "Virtual1,1920x1080,0x0,auto"
+
+          # Default
           ",preferred,auto,auto"
         ];
 
         exec-once = [
-          "${getExe pkgs.waybar} &"
+          "${pkgs.gbar}/bin/gBar bar 0 &"
+          "${pkgs.gbar}/bin/gBar bar 1 &"
           ''
             ${pkgs.hyprland}/bin/hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
-          "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper &"
         ];
 
         input = {
@@ -46,11 +51,11 @@ in {
 
         env = [
           # "NIXOS_OZONE_WL,1"
-          "GUAKE_ENABLE_WAYLAND,1"
+          # "GUAKE_ENABLE_WAYLAND,1"
           "XCURSOR_SIZE,24"
           "WLR_NO_HARDWARE_CURSORS,1"
-          "MOZ_ENABLE_WAYLAND,1"
-          "LIBGL_ALWAYS_SOFTWARE,1"
+          # "MOZ_ENABLE_WAYLAND,1"
+          # "LIBGL_ALWAYS_SOFTWARE,1"
           # "LIBVA_DRIVER_NAME,nvidia"
           # "GBM_BACKEND,nvidia-drm"
           # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
@@ -128,17 +133,18 @@ in {
           "minsize 1 1, title:^()$,class:^(steam)$"
         ];
 
-        # workspace = [
-        #   "1,monitor:DP-1"
-        #   "3,monitor:DP-1"
-        #   "5,monitor:DP-1"
-        #   "7,monitor:DP-1"
-        #   "9,monitor:DP-1"
-        #   "2,monitor:HDMI-A-1"
-        #   "4,monitor:HDMI-A-1"
-        #   "6,monitor:HDMI-A-1"
-        #   "8,monitor:HDMI-A-1"
-        # ];
+        workspace = [
+          "1,monitor:DP-1"
+          "3,monitor:DP-1"
+          "5,monitor:DP-1"
+          "7,monitor:DP-1"
+          "9,monitor:DP-1"
+          "2,monitor:HDMI-A-1"
+          "4,monitor:HDMI-A-1"
+          "6,monitor:HDMI-A-1"
+          "8,monitor:HDMI-A-1"
+          "10,monitor:HDMI-A-1"
+        ];
 
         bind = [
           "$mainMod, Return, exec, ${getExe pkgs.kitty}"

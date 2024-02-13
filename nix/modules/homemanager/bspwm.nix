@@ -47,11 +47,11 @@ in {
         right_padding = 0;
         bottom_padding = 0;
       };
-      startupPrograms = [
+      startupPrograms = cfg.startupPrograms ++ [
         "${getExe pkgs.sxhkd}"
         "${getExe pkgs.nitrogen} --restore"
         "xsetroot -cursor_name left_ptr"
-      ] ++ cfg.startupPrograms;
+      ];
 
       monitors = {
         "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ];

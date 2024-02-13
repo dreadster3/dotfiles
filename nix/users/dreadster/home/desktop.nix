@@ -7,7 +7,7 @@ let
     MONITOR=${primaryMonitor} polybar main &
     if type "xrandr"; then
     	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    		if [ $m = 'Virtual1' ]; then
+    		if [ $m = "${primaryMonitor}" ]; then
     			continue
     		fi
     		MONITOR=$m polybar --reload secondary &
