@@ -3,7 +3,7 @@
 
   home.stateVersion = "18.09";
 
-  home.packages = with pkgs; [ killall ];
+  home.packages = with pkgs; [ killall tldr ];
 
   nixpkgs.config.allowUnfree = true;
 

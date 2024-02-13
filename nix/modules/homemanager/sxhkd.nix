@@ -31,7 +31,7 @@ in {
         "super + {_, shift + }w" = "bspc node -{c,k}";
         "super + m" = "bspc desktop -l next";
         "super + {t,shift + t,s,f}" =
-          "bspc node -t {tiled,pseudo_tiled,floating,fullscreen}";
+          "bspc node -t {tiled,pseudo_tiled,floating,~fullscreen}";
         "super + {_, shift + }{h,j,k,l}" =
           "bspc node -{f,s} {west,south,north,east}";
         "super + {_,shift + }c" = "bspc node -{next,prev}.local.!hidden.window";

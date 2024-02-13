@@ -17,12 +17,11 @@ in {
       windowManager = { bspwm = { enable = true; }; };
       displayManager = {
         defaultSession = "none+bspwm";
-        lightdm = {
-          enable = true;
-          greeter = { enable = true; };
-        };
+        sddm.enable = true;
         startx.enable = true;
       };
     };
+
+    services.logind.killUserProcesses = true;
   };
 }
