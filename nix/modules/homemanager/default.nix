@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./tint2.nix
     ./aio.nix
     ./rofi
     ./gtk.nix

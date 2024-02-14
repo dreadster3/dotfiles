@@ -43,17 +43,18 @@ in {
       enable = true;
       cursor.enable = true;
     };
-    polybar = {
-      enable = true;
-      useTray = true;
-    };
+    # polybar = {
+    #   enable = true;
+    #   useTray = true;
+    # };
+    tint2.enable = true;
     rofi.enable = true;
     sxhkd.enable = true;
     bspwm = {
       enable = true;
       startupPrograms = [
         "${pkgs.picom}/bin/picom"
-        "${polybar_start}"
+        "${pkgs.tint2}/bin/tint2"
         "${
           lib.getExe pkgs.xorg.xrandr
         } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"

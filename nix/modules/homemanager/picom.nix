@@ -20,7 +20,9 @@ in {
       enable = true;
 
       backend = cfg.backend;
-      vSync = false;
+
+      # No screen tearing  on nvidia drivers
+      vSync = true;
 
       shadow = true;
       shadowOffsets = [ (-7) (-7) ];
@@ -30,7 +32,16 @@ in {
       fadeSteps = [ 3.0e-2 3.0e-2 ];
 
       inactiveOpacity = 0.95;
-      opacityRules = [ "100:class_g = 'i3lock'" ];
+      opacityRules = [
+        "100:class_g = 'i3lock'"
+
+        # Disable transparency for fullscreen windows
+        "100:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_FULLSCREEN'"
+        "100:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_FULLSCREEN'"
+        "100:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_FULLSCREEN'"
+        "100:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_FULLSCREEN'"
+        "100:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_FULLSCREEN'"
+      ];
 
       settings = {
         experimental-backends = true;
