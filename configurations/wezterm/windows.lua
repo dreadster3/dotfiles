@@ -3,21 +3,18 @@ local wezterm = require('wezterm')
 
 config.background = {
     {
-        source = {
-            File = "C:\\Users\\afons\\.config\\wallpapers\\cat_bunnies.png"
-        },
+        source = {Color = "#1e1e2e"},
+        width = "100%",
+        height = "100%",
         opacity = 1.0,
-        hsb = {brightness = 0.0, saturation = 1.0, hue = 1.0},
         attachment = "Fixed"
     }, {
         source = {
-            File = "C:\\Users\\afons\\.config\\wallpapers\\cat_bunnies.png"
+            File = os.getenv("HOME") .. "\\.config\\wallpapers\\cat_bunnies.png"
         },
         opacity = 0.2,
         hsb = {brightness = 1.8, saturation = 1.0, hue = 1.0},
-        attachment = "Fixed",
-        width = "100%",
-        height = "100%"
+        attachment = "Fixed"
     }
 }
 

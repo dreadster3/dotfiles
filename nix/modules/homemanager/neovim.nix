@@ -18,7 +18,7 @@ in {
     };
 
     xdg.configFile."nvim" = {
-    	source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
+      source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
     };
 
     programs = {
@@ -41,7 +41,13 @@ in {
           terraform
           glow
           go
+
+          # Dependencies:
+          # Install autopep8
           python3
+
+          # Install mason
+          wget
         ];
       };
     };
