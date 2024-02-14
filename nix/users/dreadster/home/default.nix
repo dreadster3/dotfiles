@@ -3,7 +3,7 @@
 
   home.stateVersion = "18.09";
 
-  home.packages = with pkgs; [ killall tldr openssh ];
+  home.packages = with pkgs; [ killall tldr openssh feh ];
 
   nixpkgs.config.allowUnfree = true;
 
