@@ -25,6 +25,7 @@ in {
       Service = {
         ExecStart = "${x11package}/bin/x11_event_callbacks "
           + pkgs.writers.writeBash "restart_polybar.sh" ''
+            bspc wm --restart
             nitrogen --restore 2> /dev/null
             pkill polybar
             MONITOR=Virtual1 polybar main &
