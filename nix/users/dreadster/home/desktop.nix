@@ -52,6 +52,10 @@ in {
     sxhkd.enable = true;
     bspwm = {
       enable = true;
+	  monitors = {
+		  "${primaryMonitor}" = [ "1" "2" "3" "4" "5" ];
+		  "${secondaryMonitor}" = [ "6" "7" "8" "9" "10"];
+	  }
       startupPrograms = [
         "${pkgs.picom}/bin/picom"
         "${pkgs.tint2}/bin/tint2"

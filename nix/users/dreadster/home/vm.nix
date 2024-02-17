@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-let primaryMonitor = "Virtual1";
+let
+  primaryMonitor = "Virtual1";
+  secondaryMonitor = "Virtual2";
 in {
   imports = [ ./default.nix ];
 
@@ -27,12 +29,15 @@ in {
     };
     bspwm = {
       enable = true;
-      monitor = primaryMonitor;
+      monitors = {
+        "${primaryMonitor}" = [ "1" "2" "3" "4" "5" ];
+        "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
+      };
       startupPrograms = [
         "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
         "${lib.getExe pkgs.picom}"
         "${lib.getExe pkgs.flameshot}"
-        "MONITOR='Virtual1' ${pkgs.polybar}/bin/polybar main"
+        "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
       ];
     };
     sxhkd.enable = true;

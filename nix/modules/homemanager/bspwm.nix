@@ -20,6 +20,12 @@ in {
         description = "The monitor to use for bspwm";
       };
 
+      monitors = mkOption {
+        type = types.attrsOf (types.listOf types.str);
+        default = { DP-0 = [ "1" "2" "3" "4" "5" ]; };
+        description = "The monitors and their desktops";
+      };
+
       startupPrograms = mkOption {
         type = types.listOf types.str;
         default = [ ];
@@ -53,11 +59,8 @@ in {
         "xsetroot -cursor_name left_ptr"
       ];
 
-      monitors = {
-        "${cfg.monitor}" = [ "1" "2" "3" "4" "5" ];
-        "HDMI-0" = [ "6" "7" "8" "9" "10" ];
-        "rdp0" = [ "1" "2" "3" "4" "5" ];
-      };
+      monitors =
+        lib.mkMerge [ ({ rdp0 = [ "1" "2" "3" "4" "5" ]; }) cfg.monitors ];
 
       rules = {
         "Pavucontrol" = {
