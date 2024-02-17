@@ -50,6 +50,8 @@ in {
         background_tint = "0.98";
         enabled_layouts = "tall:bias=66, grid, fat";
 
+        window_margin_width = 10;
+
         map = "ctrl+shift+enter launch --cwd=current";
       };
     };
