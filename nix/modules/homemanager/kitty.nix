@@ -44,8 +44,7 @@ in {
         bold_italic_font = "auto";
         italic_font = "VictorMono Nerd Font";
         disable_ligatures = "never";
-        background_image =
-          "~/Documents/projects/github/dotfiles/wallpapers/gradient-synth-cat.png";
+        background_image = "${../../../wallpapers/gradient-synth-cat.png}";
         background_image_layout = "scaled";
         background_tint = "0.98";
         enabled_layouts = "tall:bias=66, grid, fat";
