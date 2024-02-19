@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools >= 46.4.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "spam-eggs"
@@ -28,11 +28,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-gui = ["PyQt5"]
-cli = [
-  "rich",
-  "click",
-]
+test = ["pytest"]
 
 [project.urls]
 Homepage = "https://example.com"
