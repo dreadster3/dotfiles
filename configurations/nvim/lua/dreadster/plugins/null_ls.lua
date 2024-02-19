@@ -22,9 +22,10 @@ return {
                     formatting.csharpier, formatting.terraform_fmt,
                     formatting.rustfmt, formatting.lua_format,
                     formatting.clang_format, formatting.autopep8,
-                    formatting.isort, formatting.gofmt, formatting.rustywind,
-                    formatting.nixfmt, formatting.beautysh, diagnostics.eslint,
-                    diagnostics.tfsec
+                    formatting.isort, formatting.autoflake, formatting.gofmt,
+                    formatting.rustywind, formatting.nixfmt,
+                    formatting.beautysh, diagnostics.eslint, diagnostics.tfsec,
+                    diagnostics.mypy, diagnostics.flake8
                 },
                 on_attach = function(client, bufnr)
                     if client.supports_method("textDocument/formatting") then
