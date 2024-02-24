@@ -3,7 +3,7 @@
 
   home.stateVersion = "18.09";
 
-  home.packages = with pkgs; [ killall tldr openssh feh ];
+  home.packages = with pkgs; [ killall tldr openssh feh wget curl ];
 
   nixpkgs.config.allowUnfree = true;
 
