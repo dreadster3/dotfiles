@@ -64,6 +64,7 @@ in {
 
           # Classes
           "class_g = 'Polybar'"
+          "class_g = '.guake-wrapped'"
         ];
 
         blur-background-exclude = [ "class_g = 'Dunst'" ];

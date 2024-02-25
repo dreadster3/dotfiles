@@ -67,6 +67,11 @@ in {
           state = "floating";
           center = true;
         };
+        ".guake-wrapped" = {
+          state = "floating";
+          sticky = true;
+          center = true;
+        };
       };
     };
   };

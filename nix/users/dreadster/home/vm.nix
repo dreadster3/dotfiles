@@ -45,6 +45,7 @@ in {
     rofi.enable = true;
     picom.enable = true;
     betterlockscreen.enable = true;
+    guake.enable = true;
 
     # Hyprland
     hyprland.enable = true;
