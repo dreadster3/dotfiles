@@ -12,7 +12,8 @@ return {
 			actions = {
 				change_dir = { enable = true, global = true },
 				open_file = { quit_on_open = true }
-			}
+			},
+			live_filter = { always_show_folders = false }
 		}
 	}, {
 	"rcarriga/nvim-notify",
