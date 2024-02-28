@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.zsh;
-in
-{
+in {
   options = { modules.zsh = { enable = mkEnableOption "zsh"; }; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ zsh-powerlevel10k ];
@@ -12,6 +11,7 @@ in
         enable = true;
         enableAutosuggestions = true;
         syntaxHighlighting.enable = true;
+        sessionVariables = { "PATH" = "$PATH:$HOME/go/bin"; };
         plugins = [
           {
             name = "zsh-z";
