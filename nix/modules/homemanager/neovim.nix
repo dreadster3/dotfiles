@@ -48,6 +48,9 @@ in {
 
           # Install mason
           wget
+
+          # Lua language server not working with mason
+          lua-language-server
         ];
       };
     };

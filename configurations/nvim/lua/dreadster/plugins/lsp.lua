@@ -42,6 +42,7 @@ return {
             },
             servers = {
                 lua_ls = {
+                    mason = false,
                     settings = {
                         Lua = {
                             diagnostics = {globals = {'vim'}},
@@ -65,6 +66,7 @@ return {
                 tflint = {},
                 bashls = {},
                 jsonls = {},
+                gopls = {}
             },
             setup = {
                 clangd = function(_, opts)
@@ -226,5 +228,10 @@ return {
         dependencies = {"lspconfig"},
         event = "BufReadPre *.rs",
         opts = {}
+    }, {
+        "ThePrimeagen/refactoring.nvim",
+        name = "refactoring",
+        dependencies = {"nvim-lua/plenary.nvim", "treesitter"},
+        config = function() require("refactoring").setup() end
     }
 }

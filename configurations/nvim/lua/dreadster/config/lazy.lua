@@ -26,6 +26,7 @@ return function(opts)
                 }
             }
         },
+        dev = {path = "~/Documents/projects/github"},
         debug = false
     }, opts or {})
     require("lazy").setup(opts)

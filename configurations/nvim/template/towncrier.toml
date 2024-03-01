@@ -1,0 +1,43 @@
+[tool.towncrier]
+name = "{{_dir_}}"
+directory = ".changelog.d"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## [[{version}]](https://github.com/{{_owner_}}/{{_dir_}}/tree/{version}) - {project_date}"
+underlines = [""]
+issue_format = "[#{issue}](https://github.com/{{_owner_}}/{{_dir_}}/pull/{issue})"
+
+[[tool.towncrier.type]]
+directory = "feature"
+showcontent = true
+name = "Feature"
+
+[[tool.towncrier.type]]
+directory = "doc"
+showcontent = true
+name = "Documentation Improvement"
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+showcontent = true
+name = "Bug fixes"
+
+[[tool.towncrier.type]]
+directory = "breaking"
+showcontent = true
+name = "Breaking Changes"
+
+[[tool.towncrier.type]]
+directory = "misc"
+showcontent = true
+name = "Miscellaneous"
+
+[[tool.towncrier.type]]
+directory = "security"
+showcontent = true
+name = "Security"
+
+[[tool.towncrier.type]]
+directory = "deprecation"
+showcontent = true
+name = "Deprecation"
