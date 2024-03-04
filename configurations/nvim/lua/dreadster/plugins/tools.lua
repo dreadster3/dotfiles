@@ -29,17 +29,18 @@ return {
                     file_ignore_patterns = {
                         "obj", "bin", "node_modules", "build", "target"
                     },
-                    layout_strategy = "horizontal",
+                    layout_strategy = "vertical",
                     layout_config = {
                         horizontal = {
                             prompt_position = "top",
-                            preview_width = 0.55,
-                            results_width = 0.8
+                            preview_width = 0.5,
+                            results_width = 0.5
                         },
-                        vertical = {mirror = false},
-                        width = 0.87,
-                        height = 0.80,
-                        preview_cutoff = 120
+                        vertical = {
+                            prompt_position = "top",
+                            preview_height = 0.6,
+                            width = 0.6
+                        }
                     },
                     borderchars = {
                         "─", "│", "─", "│", "╭", "╮", "╯", "╰"
