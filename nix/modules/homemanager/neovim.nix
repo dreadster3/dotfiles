@@ -42,6 +42,9 @@ in {
           glow
           go
 
+          # For octo plugin
+          gh
+
           # Dependencies:
           # Install autopep8
           python3
