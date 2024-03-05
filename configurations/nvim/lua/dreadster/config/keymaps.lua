@@ -1,5 +1,5 @@
 local nnoremap = function(lhs, rhs)
-    vim.keymap.set("n", lhs, rhs, {silent = true, noremap = false})
+	vim.keymap.set("n", lhs, rhs, { silent = true, noremap = false })
 end
 
 -- Switch Windows
@@ -11,5 +11,7 @@ nnoremap("<C-l>", "<C-w>l")
 -- Helper
 nnoremap('<leader>s', ':w<CR>')
 nnoremap('<leader>q', ':q<CR>')
+nnoremap('<leader>Q', ':q!<CR>')
+nnoremap('<leader>qb', ':bd<CR>')
 nnoremap("<C-a>", "ggVG")
 nnoremap("<leader>cd", ":lua vim.cmd.cd(vim.fn.expand('%:p:h'))<CR>")
