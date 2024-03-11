@@ -15,22 +15,13 @@ in {
         plugins = [
           {
             name = "zsh-z";
-            src = pkgs.fetchFromGitHub {
-              owner = "agkozak";
-              repo = "zsh-z";
-              rev = "585d1b2c5ad1ca0b21256db401382d751cc7b2a9";
-              sha256 = "uch5w0xznHk2v/dwDSYAi80WqglYydb0zgwgJlIHW3U=";
-            };
+            file = "share/zsh-z/zsh-z.plugin.zsh";
+            src = pkgs.zsh-z;
           }
           {
             name = "zsh-nix-shell";
-            file = "nix-shell.plugin.zsh";
-            src = pkgs.fetchFromGitHub {
-              owner = "chisui";
-              repo = "zsh-nix-shell";
-              rev = "v0.7.0";
-              sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
-            };
+            file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+            src = pkgs.zsh-nix-shell;
           }
           {
             name = "powerlevel10k";
@@ -46,6 +37,7 @@ in {
         oh-my-zsh = {
           enable = true;
           plugins = [ "git" "sudo" ];
+          custom = "$HOME/.oh-my-zsh/custom";
         };
         shellAliases = {
           n = "nvim ./";

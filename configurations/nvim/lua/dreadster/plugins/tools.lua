@@ -94,9 +94,9 @@ return {
 	"iamcco/markdown-preview.nvim",
 	name = "markdown-preview",
 	version = "*",
-	cmd = { "MarkdownPreviewToggle" },
+	cmd = { "MarkdownPreviewToggle", "MarkdownPreview" },
 	build = "cd app && npx --yes yarn install",
-	ft = "markdown",
+	ft = { "markdown" },
 	keys = {
 		{
 			"<leader>md",
@@ -322,5 +322,4 @@ return {
 	dependencies = { "telescope", "nvim-lua/plenary.nvim", "devicons" },
 	opts = {}
 }
-
 }
