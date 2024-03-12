@@ -19,6 +19,7 @@ in {
     grub.enable = true;
     x11.enable = true;
     bspwm.enable = true;
+    zsh.enable = true;
   };
 
   virtualisation.vmware.guest.enable = true;
