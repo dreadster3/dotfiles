@@ -6,7 +6,7 @@ in {
     modules.homemanager.dunst = { enable = mkEnableOption "dunst"; };
   };
 
-  config = mkIf cfg.homemanager.enable {
+  config = mkIf cfg.enable {
     services.dunst = {
       enable = true;
       settings = {
