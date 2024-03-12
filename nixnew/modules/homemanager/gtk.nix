@@ -8,7 +8,7 @@ let
 
 in {
   options = {
-    modules.gtk = {
+    modules.homemanager.gtk = {
       enable = mkEnableOption "gtk";
       variant = mkOption {
         type = types.str;
