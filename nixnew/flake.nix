@@ -20,7 +20,7 @@
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
 
-          modules = [ ./vm.nix ];
+          modules = [ ./hosts/nixosvm/configuration.nix ];
         };
       };
     };
