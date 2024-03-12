@@ -22,6 +22,8 @@ in {
     zsh.enable = true;
   };
 
+  networking.hostName = "nixosvm";
+
   virtualisation.vmware.guest.enable = true;
   services.xserver.videoDrivers = [ "vmware" ];
 
