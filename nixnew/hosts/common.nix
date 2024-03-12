@@ -20,4 +20,6 @@
     wlroots
     networkmanagerapplet
   ];
+
+  nixpkgs.config.allowUnfree = true;
 }
