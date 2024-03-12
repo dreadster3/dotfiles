@@ -3,7 +3,7 @@ with lib;
 let cfg = config.modules.homemanager.rofi;
 in {
   options = {
-    modules.homemanage.rofi = {
+    modules.homemanager.rofi = {
       enable = mkEnableOption "rofi";
       font = mkOption {
         type = types.str;
