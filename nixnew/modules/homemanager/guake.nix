@@ -2,7 +2,9 @@
 with lib;
 let cfg = config.modules.homemanager.guake;
 in {
-  options = { modules.guake = { enable = mkEnableOption "guake"; }; };
+  options = {
+    modules.homemanager.guake = { enable = mkEnableOption "guake"; };
+  };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ guake ];
