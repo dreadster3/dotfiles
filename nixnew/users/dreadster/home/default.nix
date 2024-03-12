@@ -3,8 +3,6 @@
 
   home.packages = with pkgs; [ killall tldr openssh feh wget curl ];
 
-  nixpkgs.config.allowUnfree = true;
-
   services = {
     xidlehook = {
       enable = true;
