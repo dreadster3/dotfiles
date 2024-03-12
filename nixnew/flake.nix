@@ -20,7 +20,20 @@
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
 
-          modules = [ ./hosts/nixosvm/configuration.nix ];
+          modules = [
+            ./hosts/nixosvm/configuration.nix
+
+            ./users/dreadster/dreadster.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.dreadster =
+                import ./users/dreadster/home/vm.nix;
+            }
+          ];
         };
       };
     };
