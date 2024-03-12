@@ -1,4 +1,6 @@
 { config, lib, pkgs, ... }: {
+  imports = [ ../../../modules/homemanager ];
+
   home.packages = with pkgs; [ killall tldr openssh feh wget curl ];
 
   nixpkgs.config.allowUnfree = true;
@@ -14,6 +16,14 @@
         command = "loginctl lock-session $XDG_SESSION_ID";
       }];
     };
+  };
+
+  modules.homemanager = {
+    nerdfonts.enable = true;
+    kitty.enable = true;
+    sxhkd.enable = true;
+    zsh.enable = true;
+    neovim.enable = true;
   };
 
   programs.git = {
