@@ -16,7 +16,6 @@
     ./picom.nix
     ./tint2.nix
     ./fusuma.nix
-    ./obsmic.nix
     ./ranger.nix
     ./waybar.nix
     ./pentest.nix
