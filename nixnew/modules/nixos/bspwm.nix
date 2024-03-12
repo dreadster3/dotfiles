@@ -5,7 +5,10 @@ in {
   options = { modules.nixos.bspwm = { enable = mkEnableOption "Bspwm"; }; };
 
   config = mkIf cfg.enable {
-    assertions = [ config.services.xserver.enable ];
+    assertions = [{
+      assertion = config.services.xserver.enable;
+      message = "xserver must be enabled to use bspwm";
+    }];
 
     services.xserver = {
       windowManager = { bspwm = { enable = true; }; };
