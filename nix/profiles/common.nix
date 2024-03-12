@@ -52,5 +52,8 @@
 
     # Calculator
     qalculate-gtk
+
+    # PDF viewer
+    zathura
   ];
 }

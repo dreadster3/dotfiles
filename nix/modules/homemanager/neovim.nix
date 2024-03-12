@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.neovim;
+let
+  cfg = config.modules.neovim;
+
+  # tex = (pkgs.texlive.combine {
+  #     inherit (pkgs.texlive) scheme-basic
+  #       dvisvgm dvipng # for preview and export as html
+  #   });
 in {
   options = {
     modules.neovim = {
