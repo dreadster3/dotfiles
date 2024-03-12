@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  x11package = pkgs.callPackage ../../derivations/x11eventcallbacks.nix { };
+  x11package = pkgs.callPackage ./derivation.nix { };
   cfg = config.modules.homemanager.x11eventcallbacks;
 in {
   options = {

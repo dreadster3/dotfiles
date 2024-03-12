@@ -23,12 +23,14 @@
     ./polybar.nix
     ./wezterm.nix
     ./hyprland.nix
-    ./spicetify.nix
     ./xbindkeys.nix
     ./thunderbird.nix
     ./betterlockscreen.nix
-    ./x11eventcallbacks.nix
+
+    ./x11eventcallbacks
     ./rofi
+    ./spicetify
+    ./obsmic
   ];
 
   nixpkgs.config.allowUnfree = true;

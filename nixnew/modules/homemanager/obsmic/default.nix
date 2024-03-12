@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  package = pkgs.callPackage ../../derivations/obsmic.nix { };
+  package = pkgs.callPackage ./derivation.nix { };
   cfg = config.modules.homemanager.obsmic;
 in {
   options = {
