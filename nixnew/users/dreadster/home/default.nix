@@ -3,6 +3,11 @@
 
   home.packages = with pkgs; [ killall tldr openssh feh wget curl ];
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+  };
+
   services = {
     xidlehook = {
       enable = true;
@@ -22,6 +27,8 @@
     sxhkd.enable = true;
     zsh.enable = true;
     neovim.enable = true;
+    btop.enable = true;
+    ranger.enable = true;
   };
 
   programs.git = {
