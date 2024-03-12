@@ -62,6 +62,8 @@ in {
 
   networking.hostName = "nixosvm";
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   virtualisation.vmware.guest.enable = true;
 
   services.xserver.videoDrivers = [ "vmware" ];
