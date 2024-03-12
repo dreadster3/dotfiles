@@ -8,7 +8,7 @@ let
     "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in {
   imports = [
-	../common.nix
+    ../common.nix
 
     ../../modules/nixos
 
@@ -16,10 +16,10 @@ in {
   ];
 
   modules.nixos = {
-	  grub.enable = true;
-	  x11.enable = true;
-	  bspwm.enable = true;
-  }
+    grub.enable = true;
+    x11.enable = true;
+    bspwm.enable = true;
+  };
 
   virtualisation.vmware.guest.enable = true;
   services.xserver.videoDrivers = [ "vmware" ];
