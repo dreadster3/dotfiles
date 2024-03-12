@@ -12,7 +12,7 @@ in {
   };
 
   xdg.userDirs = {
-	  enable = true;
-	  createDirectories = true;
-  }
+    enable = true;
+    createDirectories = true;
+  };
 }
