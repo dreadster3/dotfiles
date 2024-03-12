@@ -16,14 +16,12 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-		nixosConfigurations = {
-			vm = nixpkgs.lib.nixosSystem {
-				inherit system;
+      nixosConfigurations = {
+        vm = nixpkgs.lib.nixosSystem {
+          inherit system;
 
-				modules = [
-					./vm.nix
-				];
-			};
-		}
+          modules = [ ./vm.nix ];
+        };
+      };
     };
 }
