@@ -20,7 +20,7 @@
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { pkgs-unstable = pkgs-unstable; };
+          specialArgs = { inherit pkgs-unstable; };
           modules = [
             ./hosts/nixosvm/configuration.nix
 
@@ -30,6 +30,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
 
               home-manager.users.dreadster =
                 import ./users/dreadster/home/vm.nix;
