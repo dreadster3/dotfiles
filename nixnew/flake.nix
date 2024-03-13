@@ -18,7 +18,7 @@
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
       nixosConfigurations = {
-        vm = nixpkgs.lib.nixosSystem {
+        nixosvm = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit pkgs-unstable; };
           modules = [
