@@ -11,7 +11,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -19,11 +19,11 @@
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/nixosvm/configuration.nix
 
-            ./users/dreadster/dreadster.nix
+            ./users/dreadster/base.nix
 
             home-manager.nixosModules.home-manager
             {

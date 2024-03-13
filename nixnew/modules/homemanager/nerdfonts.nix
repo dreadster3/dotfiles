@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, inputs, ... }:
 with lib;
 let cfg = config.modules.homemanager.nerdfonts;
 in {
@@ -15,6 +15,7 @@ in {
   config = mkIf cfg.enable {
     fonts.fontconfig.enable = true;
 
-    home.packages = with pkgs; [ (nerdfonts.override { fonts = cfg.fonts; }) ];
+    home.packages = with pkgs;
+      [ (inputs.nixpkgs-unstable.nerdfonts.override { fonts = cfg.fonts; }) ];
   };
 }
