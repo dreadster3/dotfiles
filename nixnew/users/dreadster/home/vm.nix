@@ -11,11 +11,6 @@ in {
     XDG_DATA_HOME = "$HOME/.local/share";
   };
 
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-  };
-
   modules.homemanager = {
     gtk = {
       enable = true;

@@ -15,12 +15,12 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-	  pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { pkgs-unstable };
+          specialArgs = { inherit pkgs-unstable; };
           modules = [
             ./hosts/nixosvm/configuration.nix
 
