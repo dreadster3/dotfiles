@@ -1,8 +1,8 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.aio;
+let cfg = config.modules.homemanager.aio;
 in {
-  options = { modules.aio = { enable = mkEnableOption "aio"; }; };
+  options = { modules.homemanager.aio = { enable = mkEnableOption "aio"; }; };
 
   config =
     mkIf cfg.enable { home.packages = with pkgs; [ liquidctl gkraken ]; };

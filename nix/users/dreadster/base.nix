@@ -5,7 +5,7 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Admin";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = lib.mkBefore [ "networkmanager" "wheel" ];
     packages = with pkgs; [ ];
   };
 }

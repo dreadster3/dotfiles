@@ -1,8 +1,8 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.wofi;
+let cfg = config.modules.homemanager.wofi;
 in {
-  options = { modules.wofi = { enable = mkEnableOption "wofi"; }; };
+  options = { modules.homemanager.wofi = { enable = mkEnableOption "wofi"; }; };
 
   config = mkIf cfg.enable {
     programs.wofi = {
@@ -21,33 +21,8 @@ in {
         image_size = 30;
         normal_window = true;
       };
-	  style = ''
-		#window {
-			background-color: #1e1e2e;
-			border-radius: 8px;
-		}
-
-		#input {
-			border-radius: 8px;
-			margin: 6px;
-			border: none;
-			color: white;
-			background-color: #222235;
-		}
-
-		#inner-box {
-			margin: 8px;
-		}
-
-		#entry:selected {
-			background: rgba(137, 181, 250, .6);
-			color: white;
-		}
-
-		#text {
-			color: white;
-		}
-	  '';
+      style =
+        "	#window {\n		background-color: #1e1e2e;\n		border-radius: 8px;\n	}\n\n	#input {\n		border-radius: 8px;\n		margin: 6px;\n		border: none;\n		color: white;\n		background-color: #222235;\n	}\n\n	#inner-box {\n		margin: 8px;\n	}\n\n	#entry:selected {\n		background: rgba(137, 181, 250, .6);\n		color: white;\n	}\n\n	#text {\n		color: white;\n	}\n  ";
     };
   };
 }

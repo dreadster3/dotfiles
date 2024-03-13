@@ -1,8 +1,10 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.waybar;
+let cfg = config.modules.homemanager.waybar;
 in {
-  options = { modules.waybar = { enable = mkEnableOption "waybar"; }; };
+  options = {
+    modules.homemanager.waybar = { enable = mkEnableOption "waybar"; };
+  };
   config = mkIf cfg.enable {
     nixpkgs.overlays = [
       (self: super: {

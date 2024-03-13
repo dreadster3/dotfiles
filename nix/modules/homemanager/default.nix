@@ -1,33 +1,36 @@
-{ config, lib, pkgs, ... }: {
+{ ... }: {
   imports = [
-    ./tint2.nix
-    ./aio.nix
-    ./rofi
-    ./gtk.nix
     ./zsh.nix
-    ./neovim.nix
-    ./polybar.nix
-    ./nerdfonts.nix
-    ./x11eventcallbacks.nix
     ./kitty.nix
     ./sxhkd.nix
+    ./nerdfonts.nix
+    ./neovim.nix
     ./bspwm.nix
+    ./aio.nix
+    ./gtk.nix
     ./btop.nix
-    ./picom.nix
-    ./wezterm.nix
-    ./ranger.nix
-    ./dunst.nix
-    ./betterlockscreen.nix
-    ./fusuma.nix
-    ./xbindkeys.nix
-    ./spicetify.nix
-    ./guake.nix
-    ./obsmic.nix
-    ./waybar.nix
     ./wofi.nix
-    ./hyprland.nix
-    ./thunderbird.nix
+    ./dunst.nix
+    ./guake.nix
     ./helix.nix
+    ./picom.nix
+    ./tint2.nix
+    ./fusuma.nix
+    ./ranger.nix
+    ./waybar.nix
     ./pentest.nix
+    ./polybar.nix
+    ./wezterm.nix
+    ./hyprland.nix
+    ./xbindkeys.nix
+    ./thunderbird.nix
+    ./betterlockscreen.nix
+
+    ./x11eventcallbacks
+    ./rofi
+    ./spicetify
+    ./obsmic
   ];
+
+  nixpkgs.config.allowUnfree = true;
 }

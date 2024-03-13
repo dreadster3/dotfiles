@@ -1,14 +1,14 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.modules.gtk;
+  cfg = config.modules.homemanager.gtk;
   capitalize = str:
     concatImapStrings (pos: x: if pos == 1 then (toUpper x) else x)
     (stringToCharacters str);
 
 in {
   options = {
-    modules.gtk = {
+    modules.homemanager.gtk = {
       enable = mkEnableOption "gtk";
       variant = mkOption {
         type = types.str;
@@ -29,7 +29,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ lxappearance ];
+    home.packages = with pkgs; [ dconf lxappearance ];
 
     home.pointerCursor = mkIf cfg.cursor.enable {
       gtk.enable = true;

@@ -9,13 +9,9 @@ in {
     XDG_CACHE_DIR = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_DESKTOP_DIR = "$HOME/Desktop";
-    XDG_DOCUMENTS_DIR = "$HOME/Documents";
-    XDG_DOWNLOAD_DIR = "$HOME/Downloads";
-    XDG_VIDEOS_DIR = "$HOME/Videos";
   };
 
-  modules = {
+  modules.homemanager = {
     gtk = {
       enable = true;
       cursor = { enable = true; };

@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.sxhkd;
+let cfg = config.modules.homemanager.sxhkd;
 in {
   options = {
-    modules.sxhkd = {
+    modules.homemanager.sxhkd = {
       enable = mkEnableOption "sxhkd";
       terminal = mkOption {
         type = types.package;

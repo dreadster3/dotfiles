@@ -1,9 +1,9 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.picom;
+let cfg = config.modules.homemanager.picom;
 in {
   options = {
-    modules.picom = {
+    modules.homemanager.picom = {
       enable = mkEnableOption "picom";
       backend = mkOption {
         type = types.enum [ "glx" "xrender" "xr_glx_hybrid" "egl" ];

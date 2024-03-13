@@ -1,8 +1,10 @@
 { pkgs, config, lib, ... }:
 with lib;
-let cfg = config.modules.fusuma;
+let cfg = config.modules.homemanager.fusuma;
 in {
-  options = { modules.fusuma = { enable = mkEnableOption "fusuma"; }; };
+  options = {
+    modules.homemanager.fusuma = { enable = mkEnableOption "fusuma"; };
+  };
 
   config = mkIf cfg.enable {
     services.fusuma = {

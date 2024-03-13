@@ -1,9 +1,9 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.btop;
+let cfg = config.modules.homemanager.btop;
 in {
   options = {
-    modules.btop = {
+    modules.homemanager.btop = {
       enable = mkEnableOption "btop";
 
     };

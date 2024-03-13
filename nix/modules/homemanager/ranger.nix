@@ -1,9 +1,9 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.ranger;
+let cfg = config.modules.homemanager.ranger;
 in {
   options = {
-    modules.ranger = {
+    modules.homemanager.ranger = {
       enable = mkEnableOption "ranger";
       previewMethod = mkOption {
         type = types.enum [ "iterm2" "ueberzug" ];

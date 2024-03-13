@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.modules.polybar;
+  cfg = config.modules.homemanager.polybar;
 
   battery_module = if cfg.useBattery then [ "battery" ] else [ ];
   brightness_module = if cfg.useBrightness then [ "backlight" ] else [ ];
@@ -26,7 +26,7 @@ let
 
 in {
   options = {
-    modules.polybar = {
+    modules.homemanager.polybar = {
       enable = mkEnableOption "polybar";
       terminal = mkOption {
         type = types.package;

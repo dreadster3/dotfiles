@@ -1,8 +1,10 @@
 { pkgs, config, lib, ... }:
 with lib;
-let cfg = config.modules.dunst;
+let cfg = config.modules.homemanager.dunst;
 in {
-  options = { modules.dunst = { enable = mkEnableOption "dunst"; }; };
+  options = {
+    modules.homemanager.dunst = { enable = mkEnableOption "dunst"; };
+  };
 
   config = mkIf cfg.enable {
     services.dunst = {
