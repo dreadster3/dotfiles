@@ -17,6 +17,7 @@ in {
       flameshot
       # Lockscreen
       betterlockscreen
+      xclip
     ];
   };
 }

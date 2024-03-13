@@ -17,9 +17,10 @@ in {
       DOTNET_ROOT = "${pkgs.dotnet-sdk_7}";
     };
 
-    xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
-    };
+    # With nix flakes, this cannot be used as updates will not work
+    # xdg.configFile."nvim" = {
+    #   source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
+    # };
 
     programs = {
       neovim = {
