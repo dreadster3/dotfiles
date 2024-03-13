@@ -29,7 +29,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ lxappearance ];
+    home.packages = with pkgs; [ dconf lxappearance ];
 
     home.pointerCursor = mkIf cfg.cursor.enable {
       gtk.enable = true;
