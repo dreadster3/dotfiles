@@ -20,7 +20,7 @@
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit pkgs-unstable; };
+          specialArgs = { pkgs-unstable = pkgs-unstable; };
           modules = [
             ./hosts/nixosvm/configuration.nix
 
