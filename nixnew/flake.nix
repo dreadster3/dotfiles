@@ -11,15 +11,16 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+	  pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { pkgs-unstable };
           modules = [
             ./hosts/nixosvm/configuration.nix
 

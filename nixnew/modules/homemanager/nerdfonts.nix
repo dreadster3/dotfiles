@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 with lib;
 let cfg = config.modules.homemanager.nerdfonts;
 in {
@@ -16,6 +16,6 @@ in {
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs;
-      [ (inputs.nixpkgs-unstable.nerdfonts.override { fonts = cfg.fonts; }) ];
+      [ (pkgs-unstable.nerdfonts.override { fonts = cfg.fonts; }) ];
   };
 }
