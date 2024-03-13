@@ -9,16 +9,13 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    buddypkgs.url = "github:dreadster3/buddy";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, buddypkgs, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-      buddy = buddypkgs.defaultPackage.${system};
     in {
       nixosConfigurations = {
         nixosvm = nixpkgs.lib.nixosSystem {
@@ -37,8 +34,6 @@
 
               home-manager.users.dreadster = {
                 imports = [ ./users/dreadster/home/vm.nix ];
-
-                home.packages = [ buddy ];
               };
             }
           ];

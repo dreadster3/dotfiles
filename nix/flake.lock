@@ -1,23 +1,5 @@
 {
   "nodes": {
-    "buddypkgs": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1710297735,
-        "narHash": "sha256-sKJrGpPMhKz0khztiX6oLgpXTSD/+01qYp/zAgVdus0=",
-        "owner": "dreadster3",
-        "repo": "buddy",
-        "rev": "e55f89799b2e74fe6a5d0c8cca38ccc1a92419d6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dreadster3",
-        "repo": "buddy",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -71,27 +53,10 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1710162809,
-        "narHash": "sha256-i2R2bcnQp+85de67yjgZVvJhd6rRnJbSYNpGmB6Leb8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "ddcd7598b2184008c97e6c9c6a21c5f37590b8d2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-23.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "buddypkgs": "buddypkgs",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
