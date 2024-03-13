@@ -1,9 +1,11 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.betterlockscreen;
+let cfg = config.modules.homemanager.betterlockscreen;
 in {
   options = {
-    modules.betterlockscreen = { enable = mkEnableOption "betterlockscreen"; };
+    modules.homemanager.betterlockscreen = {
+      enable = mkEnableOption "betterlockscreen";
+    };
   };
 
   config = mkIf cfg.enable {

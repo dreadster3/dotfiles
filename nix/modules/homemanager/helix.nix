@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.helix;
+let cfg = config.modules.homemanager.helix;
 in {
   options = { modules.helix = { enable = mkEnableOption "helix"; }; };
 

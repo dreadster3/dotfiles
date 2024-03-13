@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 with lib;
 let
-  cfg = config.modules.bspwm;
+  cfg = config.modules.homemanager.bspwm;
 
   fix_script = pkgs.writers.writeBash "fix_remote.sh" ''
     bspc wm --restart
@@ -11,7 +11,7 @@ let
     MONITOR='rdp0' polybar --reload secondary &'';
 in {
   options = {
-    modules.bspwm = {
+    modules.homemanager.bspwm = {
       enable = mkEnableOption "bspwm";
 
       monitor = mkOption {

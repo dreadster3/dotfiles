@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.kitty;
+let cfg = config.modules.homemanager.kitty;
 in {
   options = {
-    modules.kitty = {
+    modules.homemanager.kitty = {
       enable = mkEnableOption "kitty";
       theme = mkOption {
         type = types.str;

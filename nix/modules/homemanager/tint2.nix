@@ -1,8 +1,10 @@
 { pkgs, config, lib, ... }:
 with lib;
-let cfg = config.modules.tint2;
+let cfg = config.modules.homemanager.tint2;
 in {
-  options = { modules.tint2 = { enable = mkEnableOption "tint2"; }; };
+  options = {
+    modules.homemanager.tint2 = { enable = mkEnableOption "tint2"; };
+  };
 
   config = mkIf cfg.enable {
     programs.tint2 = {

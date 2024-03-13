@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.zsh;
+let cfg = config.modules.homemanager.zsh;
 in {
-  options = { modules.zsh = { enable = mkEnableOption "zsh"; }; };
+  options = { modules.homemanager.zsh = { enable = mkEnableOption "zsh"; }; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ zsh-powerlevel10k ];
 

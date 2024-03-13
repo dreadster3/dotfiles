@@ -1,15 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.modules.neovim;
-
-  # tex = (pkgs.texlive.combine {
-  #     inherit (pkgs.texlive) scheme-basic
-  #       dvisvgm dvipng # for preview and export as html
-  #   });
+let cfg = config.modules.homemanager.neovim;
 in {
   options = {
-    modules.neovim = {
+    modules.homemanager.neovim = {
       enable = mkEnableOption "neovim";
       terminal = mkOption {
         type = types.package;
@@ -23,9 +17,10 @@ in {
       DOTNET_ROOT = "${pkgs.dotnet-sdk_7}";
     };
 
-    xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
-    };
+    # With nix flakes, this cannot be used as updates will not work
+    # xdg.configFile."nvim" = {
+    #   source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
+    # };
 
     programs = {
       neovim = {
@@ -73,11 +68,6 @@ in {
       type = "Application";
       icon = "nvim";
       categories = [ "Utility" "TextEditor" ];
-    };
-
-    xdg.configFile.glow = {
-      source = ../../../configurations/glow;
-      recursive = true;
     };
   };
 }

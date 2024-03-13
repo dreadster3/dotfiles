@@ -1,8 +1,10 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.hyprland;
+let cfg = config.modules.homemanager.hyprland;
 in {
-  options = { modules.hyprland = { enable = mkEnableOption "hyprland"; }; };
+  options = {
+    modules.homemanager.hyprland = { enable = mkEnableOption "hyprland"; };
+  };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ wl-clipboard gbar ];

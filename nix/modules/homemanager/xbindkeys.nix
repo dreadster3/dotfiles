@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 with lib;
 let
-  cfg = config.modules.xbindkeys;
+  cfg = config.modules.homemanager.xbindkeys;
 
   mkBinding = evt: command: ''
     "${command}"
@@ -14,7 +14,7 @@ let
 
 in {
   options = {
-    modules.xbindkeys = {
+    modules.homemanager.xbindkeys = {
       enable = mkEnableOption "xbindkeys";
       withGui = mkOption {
         type = types.bool;

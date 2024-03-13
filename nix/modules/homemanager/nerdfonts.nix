@@ -1,16 +1,14 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 with lib;
-let
-  cfg = config.modules.nerdfonts;
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+let cfg = config.modules.homemanager.nerdfonts;
 in {
   options = {
-    modules.nerdfonts = {
+    modules.homemanager.nerdfonts = {
       enable = mkEnableOption "Nerd Fonts";
       fonts = mkOption {
         type = types.listOf types.str;
         default = [ "FiraCode" "VictorMono" "Iosevka" ];
-        description = "	Fonts to install\n";
+        description = "Fonts to install";
       };
     };
   };
@@ -18,6 +16,6 @@ in {
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs;
-      [ (unstable.nerdfonts.override { fonts = cfg.fonts; }) ];
+      [ (pkgs-unstable.nerdfonts.override { fonts = cfg.fonts; }) ];
   };
 }
