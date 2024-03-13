@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }: {
   imports = [ ../../../modules/homemanager ];
 
+  home.username = "dreadster";
+  home.homeDirectory = "/home/dreadster";
+
   home.packages = with pkgs; [ killall tldr openssh feh wget curl ];
 
   xdg.userDirs = {

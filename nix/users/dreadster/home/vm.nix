@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 let
   primaryMonitor = "Virtual1";
   secondaryMonitor = "Virtual2";
@@ -12,6 +12,7 @@ in {
   };
 
   modules.homemanager = {
+    nerdfonts.package = pkgs-unstable.nerd-fonts;
     gtk = {
       enable = true;
       cursor = { enable = true; };
