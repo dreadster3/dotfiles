@@ -39,5 +39,7 @@
     LC_TIME = "pt_PT.UTF-8";
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   nixpkgs.config.allowUnfree = true;
 }
