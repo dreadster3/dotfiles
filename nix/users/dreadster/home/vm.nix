@@ -12,7 +12,7 @@ in {
   };
 
   modules.homemanager = {
-    nerdfonts.package = pkgs-unstable.nerd-fonts;
+    nerdfonts.package = pkgs-unstable.nerdfonts;
     gtk = {
       enable = true;
       cursor = { enable = true; };
