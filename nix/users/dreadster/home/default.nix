@@ -6,6 +6,12 @@
 
   home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
 
+  home.sessionVariables = {
+    XDG_CACHE_DIR = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+  };
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true;

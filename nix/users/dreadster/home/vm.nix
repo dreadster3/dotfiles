@@ -5,12 +5,6 @@ let
 in {
   imports = [ ./default.nix ];
 
-  home.sessionVariables = {
-    XDG_CACHE_DIR = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-  };
-
   modules.homemanager = {
     nerdfonts.package = pkgs-unstable.nerdfonts;
     gtk = {
