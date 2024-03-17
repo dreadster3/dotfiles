@@ -54,6 +54,7 @@ in {
         bottom_padding = 0;
       };
       startupPrograms = cfg.startupPrograms ++ [
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "${getExe pkgs.sxhkd}"
         "${getExe pkgs.nitrogen} --restore"
         "xsetroot -cursor_name left_ptr"

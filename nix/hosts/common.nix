@@ -41,5 +41,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  security.polkit.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 }

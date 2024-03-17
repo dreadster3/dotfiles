@@ -64,7 +64,6 @@ in {
         } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
         "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
         "${pkgs.xbindkeys}/bin/xbindkeys"
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "${lib.getExe pkgs.flameshot}"
       ];
     };
