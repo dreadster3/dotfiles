@@ -42,3 +42,12 @@ if utils.is_wsl() then
         cache_enabled = 0
     }
 end
+
+-- Vimtex settings
+vim.g.vimtex_quickfix_open_on_warning = 0
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_compiler_latexmk = {
+    build_dir = "build",
+    aux_dir = "build",
+    out_dir = "build"
+}

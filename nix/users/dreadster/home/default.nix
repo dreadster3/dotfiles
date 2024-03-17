@@ -4,7 +4,7 @@
   home.username = "dreadster";
   home.homeDirectory = "/home/dreadster";
 
-  home.packages = with pkgs; [ killall tldr openssh feh wget curl ];
+  home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
 
   xdg.userDirs = {
     enable = true;

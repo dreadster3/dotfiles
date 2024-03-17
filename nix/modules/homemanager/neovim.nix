@@ -1,6 +1,16 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.homemanager.neovim;
+let
+  cfg = config.modules.homemanager.neovim;
+
+  tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive)
+      scheme-medium pdfx xmpincl fontawesome5 markdown paralist csvsimple
+      tcolorbox environ tikzfill enumitem dashrule ifmtarg multirow changepage
+      biblatex paracol roboto fontaxes lato;
+    #(setq org-latex-compiler "lualatex")
+    #(setq org-preview-latex-default-process 'dvisvgm)
+  });
 in {
   options = {
     modules.homemanager.neovim = {
@@ -55,6 +65,10 @@ in {
 
           # Lua language server not working with mason
           lua-language-server
+
+          # Latex
+          tex
+          texlab
         ];
       };
     };
