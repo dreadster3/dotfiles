@@ -4,12 +4,6 @@
   home.username = "dreadster";
   home.homeDirectory = "/home/dreadster";
 
-  # Enable experimental nix features
-  nix.package = pkgs.nix;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
   home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
 
   home.sessionVariables = {

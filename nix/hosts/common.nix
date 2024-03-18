@@ -9,15 +9,7 @@
     kitty
     alacritty
     foot
-
-    piper
-
-    # Wayland apps
-    meson
-    wayland-protocols
-    wayland-utils
-    wl-clipboard
-    wlroots
+    openvpn
     networkmanagerapplet
   ];
 
