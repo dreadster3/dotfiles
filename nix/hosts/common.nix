@@ -1,4 +1,6 @@
 { config, lib, pkgs, ... }: {
+  imports = [ ../modules/nixos ];
+
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
@@ -11,6 +13,14 @@
     openvpn
     networkmanagerapplet
   ];
+
+  modules.nixos = {
+    grub.enable = true;
+    thunar.enable = true;
+    network.enable = true;
+    pulseaudio.enable = true;
+    zsh.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";

@@ -12,9 +12,9 @@
     ./thunar.nix
     ./vmware.nix
     ./flatpak.nix
-    ./wireless.nix
     ./zerotier.nix
     ./pulseaudio.nix
     ./teamviewer.nix
+    ./network.nix
   ];
 }
