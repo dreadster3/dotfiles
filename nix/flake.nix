@@ -48,7 +48,8 @@
 
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
+              # Needs to be disabled for spicetify overlay to work
+              # home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
 
