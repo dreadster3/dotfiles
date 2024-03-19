@@ -7,7 +7,13 @@
     experimental-features = nix-command flakes
   '';
 
-  modules.homemanager = { pentest.enable = true; };
+  modules.homemanager = {
+    zsh = {
+      enable = true;
+      sourceNix = true;
+    };
+    pentest.enable = true;
+  };
 
   programs.home-manager.enable = true;
 }
