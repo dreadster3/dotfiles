@@ -2,9 +2,11 @@
 with lib;
 let cfg = config.modules.homemanager.helix;
 in {
-  options = { modules.helix = { enable = mkEnableOption "helix"; }; };
+  options = {
+    modules.homemanager.helix = { enable = mkEnableOption "helix"; };
+  };
 
-  config = {
+  config = mkIf cfg.enable {
     programs.helix = {
       enable = true;
       settings = {

@@ -6,16 +6,12 @@
   imports = [
     ../common.nix
 
-    ../../modules/nixos
-
     /etc/nixos/hardware-configuration.nix
   ];
 
   modules.nixos = {
-    grub.enable = true;
     x11.enable = true;
     bspwm.enable = true;
-    zsh.enable = true;
   };
 
   networking.hostName = "nixosvm";

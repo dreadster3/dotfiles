@@ -2,50 +2,32 @@
 let
   primaryMonitor = "DP-0";
   secondaryMonitor = "HDMI-0";
-
-  polybar_start = pkgs.writers.writeBash "polybar_multi_monitor" ''
-    MONITOR=${primaryMonitor} polybar main &
-    if type "xrandr"; then
-    	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    		if [ $m = "${primaryMonitor}" ]; then
-    			continue
-    		fi
-    		MONITOR=$m polybar --reload secondary &
-    	done
-    fi'';
 in {
   imports = [ ./default.nix ];
 
   home.packages = with pkgs; [ playerctl ];
 
-  modules = {
-    hyprland.enable = true;
-    # waybar.enable = true;
-    wofi.enable = true;
+  modules.homemanager = {
     betterlockscreen.enable = true;
     dunst.enable = true;
     picom.enable = true;
     aio.enable = true;
     spicetify.enable = true;
     helix.enable = true;
+    tint2.enable = true;
+    rofi.enable = true;
+    sxhkd.enable = true;
 
     gtk = {
       enable = true;
       cursor.enable = true;
     };
-    # polybar = {
-    #   enable = true;
-    #   useTray = true;
-    # };
-    tint2.enable = true;
-    rofi.enable = true;
-    sxhkd.enable = true;
     bspwm = {
       enable = true;
-	  monitors = {
-		  "${primaryMonitor}" = [ "1" "2" "3" "4" "5" ];
-		  "${secondaryMonitor}" = [ "6" "7" "8" "9" "10"];
-	  }
+      monitors = {
+        "${primaryMonitor}" = [ "1" "2" "3" "4" "5" ];
+        "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
+      };
       startupPrograms = [
         "${pkgs.picom}/bin/picom"
         "${pkgs.tint2}/bin/tint2"
