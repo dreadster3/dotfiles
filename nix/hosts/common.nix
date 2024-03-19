@@ -8,7 +8,6 @@
     curl
     kitty
     alacritty
-    foot
     openvpn
     networkmanagerapplet
   ];
