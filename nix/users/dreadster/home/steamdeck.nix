@@ -7,6 +7,9 @@ let
 in {
   imports = [ ../../../modules/homemanager ./default.nix ];
 
+  home.username = "deck";
+  home.homeDirectory = "/home/deck";
+
   home.packages = with pkgs; [
     droidcam
     openvpn
@@ -18,10 +21,21 @@ in {
     xclip
   ];
 
-  modules = {
-    dunst = { enable = true; };
-    guake = { enable = true; };
-    obsmic = { enable = true; };
+  # Enable experimental nix features
+  nix.package = pkgs.nix;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  modules.homemanager = {
+    zsh = {
+      enable = true;
+      sourceNix = true;
+    };
+    wezterm.enable = true;
+    dunst.enable = true;
+    guake.enable = true;
+    obsmic.enable = true;
   };
 
   programs.home-manager.enable = true;

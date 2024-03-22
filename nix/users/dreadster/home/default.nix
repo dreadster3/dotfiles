@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }: {
   imports = [ ../../../modules/homemanager ];
 
-  home.username = "dreadster";
-  home.homeDirectory = "/home/dreadster";
+  home.username = lib.mkDefault "dreadster";
+  home.homeDirectory = lib.mkDefault "/home/dreadster";
 
   home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
 
