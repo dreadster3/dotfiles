@@ -44,10 +44,5 @@
 
   security.polkit.enable = true;
 
-  networking.firewall = {
-    enable = true;
-    allowPing = false;
-  };
-
   nixpkgs.config.allowUnfree = true;
 }
