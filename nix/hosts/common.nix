@@ -12,6 +12,10 @@
     alacritty
     openvpn
     networkmanagerapplet
+
+    unzip
+
+    clinfo
   ];
 
   modules.nixos = {

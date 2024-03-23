@@ -9,6 +9,16 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # Necessary for hashcat
+      intel-ocl
+      intel-compute-runtime
+      intel-media-driver
+    ];
+  };
+
   modules.nixos = {
     x11.enable = true;
     bspwm.enable = true;
