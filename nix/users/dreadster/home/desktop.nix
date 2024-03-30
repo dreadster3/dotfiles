@@ -5,7 +5,7 @@ let
 in {
   imports = [ ./default.nix ];
 
-  home.packages = with pkgs; [ playerctl ];
+  home.packages = with pkgs; [ playerctl remmina ];
 
   modules.homemanager = {
     betterlockscreen.enable = true;

@@ -5,6 +5,8 @@ let
 in {
   imports = [ ./default.nix ];
 
+  home.packages = with pkgs; [ remmina ];
+
   modules.homemanager = {
     nerdfonts.package = pkgs-unstable.nerdfonts;
     gtk = {
