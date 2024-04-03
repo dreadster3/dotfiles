@@ -69,6 +69,10 @@ in {
           # Latex
           tex
           texlab
+
+          # Rust
+          rustfmt
+          rust-analyzer
         ];
       };
     };
