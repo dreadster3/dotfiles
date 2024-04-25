@@ -22,6 +22,9 @@
   modules.nixos = {
     x11.enable = true;
     bspwm.enable = true;
+    kubernetes.enable = true;
+    docker.enable = true;
+    ssh.enable = true;
   };
 
   networking.hostName = "nixosvm";

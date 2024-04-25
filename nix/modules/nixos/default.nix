@@ -16,5 +16,7 @@
     ./pulseaudio.nix
     ./teamviewer.nix
     ./network.nix
+    ./kubernetes.nix
+    ./ssh.nix
   ];
 }

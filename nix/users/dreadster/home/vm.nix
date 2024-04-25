@@ -5,7 +5,9 @@ let
 in {
   imports = [ ./default.nix ];
 
-  home.packages = with pkgs; [ remmina ];
+  home.sessionVariables = { KUBECONFIG = "$HOME/.kube/config"; };
+
+  home.packages = with pkgs; [ remmina minecraft ];
 
   modules.homemanager = {
     nerdfonts.package = pkgs-unstable.nerdfonts;
