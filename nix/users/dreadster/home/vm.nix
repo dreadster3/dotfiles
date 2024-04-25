@@ -41,6 +41,10 @@ in {
     picom.enable = true;
     betterlockscreen.enable = true;
     guake.enable = true;
+    neovim = {
+      enable = true;
+      go = pkgs-unstable.go;
+    };
 
     # Hyprland
     hyprland.enable = true;

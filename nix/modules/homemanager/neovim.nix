@@ -19,6 +19,10 @@ in {
         type = types.package;
         default = pkgs.kitty;
       };
+      go = mkOption {
+        type = types.package;
+        default = pkgs.go;
+      };
     };
   };
   config = mkIf cfg.enable {
@@ -51,7 +55,7 @@ in {
           gnumake
           terraform
           glow
-          go
+          cfg.go
 
           # For octo plugin
           gh
