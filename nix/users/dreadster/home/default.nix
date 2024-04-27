@@ -4,7 +4,16 @@
   home.username = lib.mkDefault "dreadster";
   home.homeDirectory = lib.mkDefault "/home/dreadster";
 
-  home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
+  home.packages = with pkgs; [
+    killall
+    tldr
+    openssh
+    feh
+    wget
+    curl
+    zathura
+    tmux
+  ];
 
   home.sessionVariables = {
     XDG_CACHE_DIR = "$HOME/.cache";
