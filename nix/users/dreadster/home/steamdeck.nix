@@ -32,7 +32,8 @@ in {
       enable = true;
       sourceNix = true;
     };
-    wezterm.enable = true;
+    # wezterm.enable = true;
+    kitty.enable = lib.mkForce false;
     dunst.enable = true;
     guake.enable = true;
     obsmic.enable = true;
