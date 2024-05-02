@@ -5,7 +5,15 @@ let
 in {
   imports = [ ./default.nix ];
 
-  home.packages = with pkgs; [ playerctl remmina ];
+  home.packages = with pkgs; [
+    playerctl
+    remmina
+
+    wineWowPackages.stable
+
+    discord
+    betterdiscordctl
+  ];
 
   modules.homemanager = {
     betterlockscreen.enable = true;
