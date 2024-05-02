@@ -1,6 +1,4 @@
-{ config, lib, pkgs, ... }:
-
-{
+{ config, lib, pkgs, ... }: {
   users.users.dreadster = {
     shell = pkgs.zsh;
     isNormalUser = true;

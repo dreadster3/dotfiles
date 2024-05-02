@@ -2,16 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-in {
+{ config, pkgs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ../common.nix
 
     /etc/nixos/hardware-configuration.nix
-    (import "${home-manager}/nixos")
   ];
 
   # Bootloader.
@@ -53,5 +48,4 @@ in {
   };
 
   system.stateVersion = "23.11";
-
 }
