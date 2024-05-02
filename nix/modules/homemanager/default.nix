@@ -25,6 +25,7 @@
     ./xbindkeys.nix
     ./thunderbird.nix
     ./betterlockscreen.nix
+    ./tmux.nix
 
     ./x11eventcallbacks
     ./rofi

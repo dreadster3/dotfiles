@@ -4,16 +4,7 @@
   home.username = lib.mkDefault "dreadster";
   home.homeDirectory = lib.mkDefault "/home/dreadster";
 
-  home.packages = with pkgs; [
-    killall
-    tldr
-    openssh
-    feh
-    wget
-    curl
-    zathura
-    tmux
-  ];
+  home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
 
   home.sessionVariables = {
     XDG_CACHE_DIR = "$HOME/.cache";
@@ -47,6 +38,7 @@
     neovim.enable = true;
     btop.enable = true;
     ranger.enable = true;
+    tmux.enable = true;
   };
 
   programs.git = {
