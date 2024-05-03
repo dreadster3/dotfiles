@@ -22,9 +22,12 @@ in {
     aio.enable = true;
     spicetify.enable = true;
     helix.enable = true;
-    tint2.enable = true;
     rofi.enable = true;
     sxhkd.enable = true;
+    polybar = {
+      enable = true;
+      useTray = true;
+    };
 
     gtk = {
       enable = true;
@@ -38,7 +41,8 @@ in {
       };
       startupPrograms = [
         "${pkgs.picom}/bin/picom"
-        "${pkgs.tint2}/bin/tint2"
+        "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
+        "MONITOR='${secondaryMonitor}' ${pkgs.polybar}/bin/polybar secondary"
         "${
           lib.getExe pkgs.xorg.xrandr
         } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
