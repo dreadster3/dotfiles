@@ -13,6 +13,7 @@
     curl
     zathura
     kubectl
+    neofetch
   ];
 
   home.sessionVariables = {
