@@ -4,12 +4,22 @@
   home.username = lib.mkDefault "dreadster";
   home.homeDirectory = lib.mkDefault "/home/dreadster";
 
-  home.packages = with pkgs; [ killall tldr openssh feh wget curl zathura ];
+  home.packages = with pkgs; [
+    killall
+    tldr
+    openssh
+    feh
+    wget
+    curl
+    zathura
+    kubectl
+  ];
 
   home.sessionVariables = {
     XDG_CACHE_DIR = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
+    KUBECONFIG = "$HOME/.kube/config";
   };
 
   xdg.userDirs = {

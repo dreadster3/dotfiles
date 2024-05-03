@@ -5,8 +5,6 @@ let
 in {
   imports = [ ./default.nix ];
 
-  home.sessionVariables = { KUBECONFIG = "$HOME/.kube/config"; };
-
   home.packages = with pkgs; [ remmina minecraft ];
 
   modules.homemanager = {
