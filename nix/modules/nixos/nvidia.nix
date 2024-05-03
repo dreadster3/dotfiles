@@ -18,21 +18,7 @@ in {
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    environment.systemPackages = with pkgs; [
-      glxinfo
-      pkgs-unstable.cudaPackages.cudatoolkit
-      linuxPackages.nvidia_x11
-    ];
-
-    environment.sessionVariables = {
-      CUDA_PATH = "${pkgs-unstable.cudaPackages.cudatoolkit}";
-    };
-
-    systemd.services.nvidia-control-devices = {
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig.ExecStart =
-        "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
-    };
+    environment.systemPackages = with pkgs; [ glxinfo ];
 
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.stable;
