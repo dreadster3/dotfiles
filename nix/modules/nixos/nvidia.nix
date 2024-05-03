@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, pkgs-unstable, lib, config, ... }:
 with lib;
 let cfg = config.modules.nixos.nvidia;
 in {
@@ -18,15 +18,29 @@ in {
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    environment.systemPackages = with pkgs; [ glxinfo ];
+    environment.systemPackages = with pkgs; [
+      glxinfo
+      pkgs-unstable.cudaPackages.cudatoolkit
+      linuxPackages.nvidia_x11
+    ];
+
+    environment.sessionVariables = {
+      CUDA_PATH = "${pkgs-unstable.cudaPackages.cudatoolkit}";
+    };
+
+    systemd.services.nvidia-control-devices = {
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig.ExecStart =
+        "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
+    };
 
     hardware.nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      open = false;
+      nvidiaSettings = true;
       modesetting.enable = true;
       powerManagement = { enable = true; };
       # forceFullCompositionPipeline = true;
-      open = false;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = mkIf cfg.enablePrime {
         sync.enable = true;
         # offload = {

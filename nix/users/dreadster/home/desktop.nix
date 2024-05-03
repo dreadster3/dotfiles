@@ -24,6 +24,7 @@ in {
     helix.enable = true;
     rofi.enable = true;
     sxhkd.enable = true;
+    thunderbird.enable = true;
     polybar = {
       enable = true;
       useTray = true;
@@ -64,5 +65,7 @@ in {
         "XF86AudioNext" = "${lib.getExe pkgs.playerctl} --player spotify next";
       };
     };
+
+    pentest.enable = true;
   };
 }
