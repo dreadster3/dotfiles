@@ -15,6 +15,7 @@ in {
     betterdiscordctl
 
     qalculate-gtk
+    gucharmap
   ];
 
   modules.homemanager = {
