@@ -52,6 +52,10 @@ in {
             capitalize cfg.accent
           }-Dark";
       };
+      iconTheme = {
+        name = "candy-icons";
+        package = pkgs.candy-icons;
+      };
     };
   };
 }
