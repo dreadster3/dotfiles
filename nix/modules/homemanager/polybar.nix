@@ -10,7 +10,7 @@ let
   modules_left = [
     "launcher"
     "workspaces"
-    "ranger"
+    "explorer"
     "github"
     "reddit"
     "firefox"
@@ -480,12 +480,12 @@ in {
             click-right = "${lib.getExe pkgs.firefox} --private-window &";
           };
 
-          "module/ranger" = {
+          "module/explorer" = {
             "inherit" = "module/links";
             content = "";
-            click-left =
+            click-left = "${lib.getExe cfg.filemanager} &";
+            click-right =
               "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.ranger} ~ &";
-            click-right = "${lib.getExe cfg.filemanager} &";
           };
 
           "module/monitor" = {
