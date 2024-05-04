@@ -41,7 +41,7 @@
     LC_NUMERIC = "pt_PT.UTF-8";
     LC_PAPER = "pt_PT.UTF-8";
     LC_TELEPHONE = "pt_PT.UTF-8";
-    LC_TIME = "pt_PT.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
