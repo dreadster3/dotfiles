@@ -14,6 +14,7 @@
     zathura
     kubectl
     neofetch
+    file
   ];
 
   home.sessionVariables = {
