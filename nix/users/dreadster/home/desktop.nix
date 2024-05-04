@@ -13,6 +13,8 @@ in {
 
     discord
     betterdiscordctl
+
+    qalculate-gtk
   ];
 
   modules.homemanager = {
