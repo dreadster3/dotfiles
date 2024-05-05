@@ -19,5 +19,6 @@
     ./kubernetes.nix
     ./ssh.nix
     ./pipewire.nix
+    ./nightlight.nix
   ];
 }

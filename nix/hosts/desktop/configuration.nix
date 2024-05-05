@@ -12,6 +12,7 @@
   # Bootloader.
   modules.nixos = {
     x11.enable = true;
+    nightlight.enable = true;
     bspwm.enable = true;
     flatpak.enable = true;
     nvidia.enable = true;
