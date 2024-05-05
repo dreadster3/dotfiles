@@ -6,7 +6,16 @@ in {
 
   config = mkIf cfg.enable {
     services.flatpak.enable = true;
-    xdg.portal.enable = true;
-    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    xdg = {
+      mime.enable = true;
+      menus.enable = true;
+      icons.enable = true;
+      sounds.enable = true;
+      portal = {
+        enable = true;
+        extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+        config.common.default = "*";
+      };
+    };
   };
 }

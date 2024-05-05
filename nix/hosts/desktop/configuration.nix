@@ -20,6 +20,7 @@
     teamviewer.enable = true;
     vmware.enable = true;
     xrdp.enable = true;
+    ssh.enable = true;
     zerotier.enable = true;
   };
 
@@ -38,15 +39,6 @@
   # Enable openrgb
   services.hardware.openrgb = { enable = true; };
   services.ratbagd.enable = true;
-  # Enable the OpenSSH daemon.
-  services.sshguard.enable = true;
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no";
-    };
-  };
 
   system.stateVersion = "23.11";
 }
