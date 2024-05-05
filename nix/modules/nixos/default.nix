@@ -18,5 +18,6 @@
     ./network.nix
     ./kubernetes.nix
     ./ssh.nix
+    ./pipewire.nix
   ];
 }

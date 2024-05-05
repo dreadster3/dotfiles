@@ -22,7 +22,7 @@
     grub.enable = true;
     thunar.enable = true;
     network.enable = true;
-    pulseaudio.enable = true;
+    pipewire.enable = true;
     zsh.enable = true;
   };
 

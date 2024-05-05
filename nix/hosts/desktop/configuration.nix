@@ -13,6 +13,7 @@
   modules.nixos = {
     x11.enable = true;
     bspwm.enable = true;
+    flatpak.enable = true;
     nvidia.enable = true;
     docker.enable = true;
     steam.enable = true;
