@@ -1,3 +1,5 @@
 .DS_Store
 
 result
+
+configurations/tmux/plugins

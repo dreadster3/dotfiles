@@ -15,6 +15,7 @@
     kubectl
     neofetch
     file
+    fzf
   ];
 
   home.sessionVariables = {
