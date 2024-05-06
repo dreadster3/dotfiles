@@ -24,6 +24,7 @@
     network.enable = true;
     pipewire.enable = true;
     zsh.enable = true;
+    storage.enable = true;
   };
 
   # Set your time zone.

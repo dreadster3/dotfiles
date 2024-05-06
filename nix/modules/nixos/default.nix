@@ -20,5 +20,6 @@
     ./ssh.nix
     ./pipewire.nix
     ./nightlight.nix
+    ./storage.nix
   ];
 }
