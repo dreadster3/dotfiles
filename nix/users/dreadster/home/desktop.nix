@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 let
   primaryMonitor = "DP-0";
   secondaryMonitor = "HDMI-0";
@@ -10,6 +10,7 @@ in {
     remmina
 
     wineWowPackages.stable
+    pkgs-unstable.winetricks
 
     discord
     betterdiscordctl

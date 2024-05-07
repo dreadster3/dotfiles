@@ -16,6 +16,10 @@
     neofetch
     file
     fzf
+
+    pciutils
+    lshw
+    usbutils
   ];
 
   home.sessionVariables = {
