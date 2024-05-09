@@ -20,6 +20,8 @@ vim.opt.wrap = false
 vim.opt.title = true
 vim.opt.termguicolors = true
 
+vim.opt.clipboard = "unnamedplus"
+
 vim.g.mapleader = " "
 
 -- Fold settings
@@ -32,22 +34,22 @@ vim.opt.background = "dark"
 -- Copy + Paste WSL
 local utils = require("dreadster.utils")
 if utils.is_wsl() then
-    vim.g.clipboard = {
-        name = "WslClipboard",
-        copy = {["+"] = "clip.exe", ["*"] = "clip.exe"},
-        paste = {
-            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
-        },
-        cache_enabled = 0
-    }
+	vim.g.clipboard = {
+		name = "WslClipboard",
+		copy = { ["+"] = "clip.exe", ["*"] = "clip.exe" },
+		paste = {
+			['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
+		},
+		cache_enabled = 0
+	}
 end
 
 -- Vimtex settings
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_compiler_latexmk = {
-    build_dir = "build",
-    aux_dir = "build",
-    out_dir = "build"
+	build_dir = "build",
+	aux_dir = "build",
+	out_dir = "build"
 }
