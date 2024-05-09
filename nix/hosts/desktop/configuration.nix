@@ -26,6 +26,10 @@
   };
 
   networking.hostName = "nixos-desktop";
+  networking.interfaces.eno1.wakeOnLan = {
+    enable = true;
+    policy = [ "magic" ];
+  };
 
   # Suspend on idle
   services.logind.extraConfig = ''

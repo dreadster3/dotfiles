@@ -20,6 +20,7 @@
     pciutils
     lshw
     usbutils
+    ethtool
   ];
 
   home.sessionVariables = {
