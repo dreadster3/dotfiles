@@ -11,6 +11,7 @@ nnoremap("<C-l>", "<C-w>l")
 -- Helper
 nnoremap('<leader>s', ':w<CR>')
 nnoremap('<leader>q', ':q<CR>')
+nnoremap('<leader>qa', ':qa<CR>')
 nnoremap('<leader>Q', ':q!<CR>')
 nnoremap('<leader>qb', ':bd<CR>')
 nnoremap("<C-a>", "ggVG")
