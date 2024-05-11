@@ -16,6 +16,8 @@
     unzip
 
     clinfo
+
+    gnome.eog
   ];
 
   modules.nixos = {
