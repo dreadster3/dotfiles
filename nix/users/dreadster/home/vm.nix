@@ -41,6 +41,7 @@ in {
     guake.enable = true;
     neovim = {
       enable = true;
+      package = pkgs-unstable.neovim-unwrapped;
       go = pkgs-unstable.go;
     };
 

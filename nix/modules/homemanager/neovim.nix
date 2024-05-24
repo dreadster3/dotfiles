@@ -15,6 +15,10 @@ in {
   options = {
     modules.homemanager.neovim = {
       enable = mkEnableOption "neovim";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.neovim-unwrapped;
+      };
       terminal = mkOption {
         type = types.package;
         default = pkgs.kitty;
@@ -39,6 +43,7 @@ in {
     programs = {
       neovim = {
         enable = true;
+        package = cfg.package;
         extraPackages = with pkgs; [
           unzip
           gcc
