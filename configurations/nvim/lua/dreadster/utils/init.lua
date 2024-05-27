@@ -43,4 +43,17 @@ M.is_in_table = function(table, element)
     return false
 end
 
+M.filter_sources = function(sources)
+    local filtered_sources = {}
+    for _, value in pairs(sources) do
+        local command = value._opts.command
+
+        if command and vim.fn.executable(command) == 1 then
+            table.insert(filtered_sources, value)
+        end
+    end
+
+    return filtered_sources
+end
+
 return M
