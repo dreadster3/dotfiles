@@ -6,8 +6,8 @@ return {
         dependencies = {
             "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip",
-            "onsails/lspkind-nvim", "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip", "cmpgit"
+            "onsails/lspkind-nvim", "luasnip", "saadparwaiz1/cmp_luasnip",
+            "cmpgit"
         },
         opts = function(_, opts)
             local kind_icons = {
@@ -160,5 +160,17 @@ return {
             },
             filetypes = {yaml = true, markdown = true}
         }
+    }, {
+        "L3MON4D3/LuaSnip",
+        name = "luasnip",
+        dependencies = {"rafamadriz/friendly-snippets"},
+        lazy = true,
+        version = "*",
+        build = "make install_jsregexp",
+        config = function(_, opts)
+            require("luasnip").setup(opts)
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end
     }
+
 }
