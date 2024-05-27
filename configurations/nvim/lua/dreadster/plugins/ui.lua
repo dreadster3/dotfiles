@@ -288,5 +288,5 @@ return {
         name = "ufo",
         dependencies = {"kevinhwang91/promise-async"},
         opts = {}
-    }
+    }, {"karb94/neoscroll.nvim", name = "neoscroll", opts = {}}
 }
