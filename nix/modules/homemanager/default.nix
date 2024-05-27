@@ -4,7 +4,7 @@
     ./kitty.nix
     ./sxhkd.nix
     ./nerdfonts.nix
-    ./neovim.nix
+    ./neovim
     ./bspwm.nix
     ./aio.nix
     ./gtk.nix

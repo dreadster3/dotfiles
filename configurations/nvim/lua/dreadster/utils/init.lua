@@ -37,10 +37,31 @@ M.is_wsl = function()
     return M.is_linux() and is_microsoft
 end
 
+M.is_nix = function()
+    local uname = vim.loop.os_uname()
+    local version = uname.version
+
+    -- Check if the version string contains "nixos"
+    return version:find("NixOS") ~= nil
+end
+
 M.is_in_table = function(table, element)
     for _, value in ipairs(table) do if value == element then return true end end
 
     return false
+end
+
+M.filter_sources = function(sources)
+    local filtered_sources = {}
+    for _, value in pairs(sources) do
+        local command = value._opts.command
+
+        if command and vim.fn.executable(command) == 1 then
+            table.insert(filtered_sources, value)
+        end
+    end
+
+    return filtered_sources
 end
 
 return M

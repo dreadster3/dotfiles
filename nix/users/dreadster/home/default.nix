@@ -10,7 +10,7 @@
     openssh
     feh
     wget
-    curl
+    curl.dev
     zathura
     kubectl
     neofetch

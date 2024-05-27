@@ -11,21 +11,18 @@ let
     #(setq org-latex-compiler "lualatex")
     #(setq org-preview-latex-default-process 'dvisvgm)
   });
+
 in {
   options = {
     modules.homemanager.neovim = {
       enable = mkEnableOption "neovim";
-      package = mkOption {
-        type = types.package;
-        default = pkgs.neovim-unwrapped;
+      pkgs = mkOption {
+        type = types.pkgs;
+        default = pkgs;
       };
       terminal = mkOption {
         type = types.package;
         default = pkgs.kitty;
-      };
-      go = mkOption {
-        type = types.package;
-        default = pkgs.go;
       };
     };
   };
@@ -43,12 +40,22 @@ in {
     programs = {
       neovim = {
         enable = true;
-        package = cfg.package;
-        extraPackages = with pkgs; [
+        defaultEditor = true;
+        package = cfg.pkgs.neovim-unwrapped;
+        extraLuaPackages = luaPkgs:
+          with luaPkgs; [
+            lua-curl
+            mimetypes
+            nvim-nio
+            xml2lua
+          ];
+        extraPackages = with cfg.pkgs; [
+          luajit
+          luarocks
+
           unzip
           gcc
           cmake
-          luarocks
           nodejs_20
           nodePackages.npm
           lazygit
@@ -60,7 +67,7 @@ in {
           gnumake
           terraform
           glow
-          cfg.go
+          cfg.pkgs.go
 
           # For octo plugin
           gh
