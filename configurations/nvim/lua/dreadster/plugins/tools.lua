@@ -154,7 +154,8 @@ return {
         opts = {
             highlight = 'DiffDelete',
             ignored_filetypes = {
-                'TelescopePrompt', 'Trouble', 'help', "noice", "glow"
+                'TelescopePrompt', 'Trouble', 'help', "noice", "glow",
+                "gitcommit"
             },
             ignore_terminal = true
         }
