@@ -39,7 +39,16 @@ return {
   "lewis6991/gitsigns.nvim",
   name = "gitsigns",
   opts = { current_line_blame = true }
-}, { "folke/trouble.nvim", cmd = "Trouble", opts = {} }, {
+}, {
+  "folke/trouble.nvim",
+  cmd = "Trouble",
+  keys = {
+    "<leader>gl",
+    ":Trouble diagnostics",
+    desc = "Trouble diagnostics"
+  },
+  opts = {}
+}, {
   "j-hui/fidget.nvim",
   cond = false,
   name = "fidget",
@@ -87,7 +96,7 @@ return {
   event = "BufReadPost",
   dependencies = { "devicons" },
   opts = {}
-}, { "levouh/tint.nvim", name = "tint",  opts = {} }, {
+}, { "levouh/tint.nvim",   name = "tint",      opts = {} }, {
   "kevinhwang91/rnvimr",
   name = "rnvimr",
   cmd = "RnvimrToggle",
