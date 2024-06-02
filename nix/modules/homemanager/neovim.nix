@@ -56,7 +56,7 @@ in {
           cargo
           ripgrep
           dotnet-sdk_7
-          nixfmt
+          nixfmt-classic
           gnumake
           terraform
           glow

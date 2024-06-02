@@ -14,8 +14,9 @@ in {
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      enableCompletion = true;
       sessionVariables = { "PATH" = "$PATH:$HOME/go/bin"; };
       initExtra = mkIf cfg.sourceNix ''
         source $HOME/.nix-profile/etc/profile.d/nix.sh
