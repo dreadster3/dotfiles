@@ -1,6 +1,16 @@
 { config, lib, pkgs, ... }: {
   imports = [ ../modules/nixos ];
 
+  # Run appimages directly
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
+    magicOrExtension = "\\x7fELF....AI\\x02";
+  };
+
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
@@ -24,7 +34,7 @@
     grub.enable = true;
     thunar.enable = true;
     network.enable = true;
-    pipewire.enable = true;
+    pipewire.enable = lib.mkDefault true;
     zsh.enable = true;
     storage.enable = true;
   };

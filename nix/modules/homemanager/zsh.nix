@@ -55,6 +55,10 @@ in {
         nvimconfig =
           "nvim ~/Documents/projects/github/dotfiles/configurations/nvim";
         nixconfig = "nvim ~/Documents/projects/github/dotfiles";
+
+        # TODO: Package mechvibes to make alias work out of the box
+        mechvibes =
+          "/opt/Mechvibes-2.3.4.AppImage --disable-seccomp-filter-sandbox";
       };
     };
   };
