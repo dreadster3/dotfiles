@@ -45,6 +45,7 @@ in {
         "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
       };
       startupPrograms = [
+        "${pkgs.mechvibes}/bin/mechvibes"
         "${pkgs.picom}/bin/picom"
         "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
         "MONITOR='${secondaryMonitor}' ${pkgs.polybar}/bin/polybar secondary"

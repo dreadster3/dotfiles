@@ -27,6 +27,7 @@
     ./betterlockscreen.nix
     ./tmux.nix
 
+    ./mechvibes
     ./x11eventcallbacks
     ./rofi
     ./spicetify

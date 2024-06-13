@@ -27,7 +27,7 @@ in {
         "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
       };
       startupPrograms = [
-        "/opt/Mechvibes-2.3.4.AppImage --disable-seccomp-filter-sandbox"
+        "${pkgs.mechvibes}/bin/mechvibes"
         "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
         "${lib.getExe pkgs.picom}"
         "${lib.getExe pkgs.flameshot}"
@@ -45,6 +45,8 @@ in {
       package = pkgs-unstable.neovim-unwrapped;
       go = pkgs-unstable.go;
     };
+
+    mechvibes.enable = true;
 
     # Hyprland
     hyprland.enable = true;
