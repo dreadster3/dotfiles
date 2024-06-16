@@ -57,6 +57,15 @@
     btop.enable = true;
     ranger.enable = true;
     tmux.enable = true;
+
+    # Not enabled defaults
+    gtk.cursor.enable = lib.mkDefault true;
+    polybar.useTray = lib.mkDefault true;
+    bspwm.startupPrograms = [
+      "${pkgs.mechvibes}/bin/mechvibes --disable-seccomp-filter-sandbox"
+      "${lib.getExe pkgs.picom}"
+      "${lib.getExe pkgs.flameshot}"
+    ];
   };
 
   programs.git = {

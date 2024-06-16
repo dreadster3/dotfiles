@@ -29,15 +29,9 @@ in {
     rofi.enable = true;
     sxhkd.enable = true;
     thunderbird.enable = true;
-    polybar = {
-      enable = true;
-      useTray = true;
-    };
+    gtk.enable = true;
+    polybar.enable = true;
 
-    gtk = {
-      enable = true;
-      cursor.enable = true;
-    };
     bspwm = {
       enable = true;
       monitors = {
@@ -45,8 +39,6 @@ in {
         "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
       };
       startupPrograms = [
-        "${pkgs.mechvibes}/bin/mechvibes"
-        "${pkgs.picom}/bin/picom"
         "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
         "MONITOR='${secondaryMonitor}' ${pkgs.polybar}/bin/polybar secondary"
         "${
@@ -54,7 +46,6 @@ in {
         } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
         "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
         "${pkgs.xbindkeys}/bin/xbindkeys"
-        "${lib.getExe pkgs.flameshot}"
       ];
     };
     xbindkeys = {

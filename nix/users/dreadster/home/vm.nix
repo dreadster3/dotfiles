@@ -2,6 +2,7 @@
 let
   primaryMonitor = "Virtual1";
   secondaryMonitor = "Virtual2";
+
 in {
   imports = [ ./default.nix ];
 
@@ -9,17 +10,11 @@ in {
 
   modules.homemanager = {
     nerdfonts.package = pkgs-unstable.nerdfonts;
-    gtk = {
-      enable = true;
-      cursor = { enable = true; };
-    };
+    gtk.enable = true;
     dunst.enable = true;
 
     # X11
-    polybar = {
-      enable = true;
-      useTray = true;
-    };
+    polybar.enable = true;
     bspwm = {
       enable = true;
       monitors = {
@@ -27,13 +22,11 @@ in {
         "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
       };
       startupPrograms = [
-        "${pkgs.mechvibes}/bin/mechvibes"
         "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
-        "${lib.getExe pkgs.picom}"
-        "${lib.getExe pkgs.flameshot}"
         "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
       ];
     };
+    mechvibes.enable = true;
     sxhkd.enable = true;
     x11eventcallbacks.enable = true;
     rofi.enable = true;
@@ -45,8 +38,6 @@ in {
       package = pkgs-unstable.neovim-unwrapped;
       go = pkgs-unstable.go;
     };
-
-    mechvibes.enable = true;
 
     # Hyprland
     hyprland.enable = true;
