@@ -74,6 +74,7 @@ in {
           center = true;
         };
         "Zathura" = { state = "tiled"; };
+        "GeForce NOW" = { state = "fullscreen"; };
       };
     };
   };

@@ -31,6 +31,7 @@ in {
     thunderbird.enable = true;
     gtk.enable = true;
     polybar.enable = true;
+    mechvibes.enable = true;
 
     bspwm = {
       enable = true;
