@@ -57,6 +57,8 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  services.locate.enable = true;
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security.polkit.enable = true;

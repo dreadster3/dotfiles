@@ -17,6 +17,8 @@ in {
 
     qalculate-gtk
     gucharmap
+
+    hypnotix
   ];
 
   modules.homemanager = {
