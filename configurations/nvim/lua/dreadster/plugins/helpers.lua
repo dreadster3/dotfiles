@@ -65,6 +65,8 @@ return {
 		"chrisgrieser/nvim-early-retirement",
 		name = "earlyretirement",
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			retirementAgeMins = 15,
+		},
 	},
 }

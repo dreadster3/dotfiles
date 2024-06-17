@@ -315,7 +315,17 @@ return {
 			"nvim-neotest/neotest-go",
 			"nvim-neotest/neotest-python",
 		},
-		config = function(_, _)
+		opts = function()
+			local opts = {
+				adapters = {
+					require("neotest-go")({ recursive_run = true }),
+					require("neotest-python"),
+				},
+			}
+
+			return opts
+		end,
+		config = function(_, opts)
 			-- get neotest namespace (api call creates or returns namespace)
 			local neotest_ns = vim.api.nvim_create_namespace("neotest")
 			vim.diagnostic.config({
@@ -328,13 +338,7 @@ return {
 				},
 			}, neotest_ns)
 
-			require("neotest").setup({
-				-- your neotest config here
-				adapters = {
-					require("neotest-go")({ recursive_run = true }),
-					require("neotest-python"),
-				},
-			})
+			require("neotest").setup(opts)
 		end,
 	},
 }
