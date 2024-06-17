@@ -34,6 +34,11 @@ in {
     gtk.enable = true;
     polybar.enable = true;
     mechvibes.enable = true;
+    neovim = {
+      enable = true;
+      package = pkgs-unstable.neovim-unwrapped;
+      go = pkgs-unstable.go;
+    };
 
     bspwm = {
       enable = true;

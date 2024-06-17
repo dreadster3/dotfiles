@@ -7,18 +7,20 @@ au("BufEnter", {
 	pattern = "*",
 	callback = function()
 		local buftype = vim.opt.buftype:get()
-		if buftype == "terminal" then vim.cmd("startinsert") end
-	end
+		if buftype == "terminal" then
+			vim.cmd("startinsert")
+		end
+	end,
 })
 
 au("BufEnter", {
 	group = term_group,
 	pattern = "*",
 	callback = function()
-		local filetype = vim.bo.filetype;
+		local filetype = vim.bo.filetype
 
 		if filetype == "NvimTree" then
 			require("nvim-tree.api").tree.reload()
 		end
-	end
+	end,
 })

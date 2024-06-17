@@ -10,9 +10,20 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			ensure_installed = {
-				"c", "lua", "typescript", "tsx", "html", "java", "cpp",
-				"c_sharp", "css", "go", "markdown", "markdown_inline", "python",
-				"regex"
+				"c",
+				"lua",
+				"typescript",
+				"tsx",
+				"html",
+				"java",
+				"cpp",
+				"c_sharp",
+				"css",
+				"go",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"regex",
 			},
 			sync_install = false,
 			auto_install = true,
@@ -25,8 +36,8 @@ return {
 				enable_close = true,
 				-- Issue open to fix this: https://github.com/windwp/nvim-ts-autotag/issues/125
 				-- enable_close_on_slash = true
-				enable_close_on_slash = false
-			}
-		}
-	}
+				enable_close_on_slash = false,
+			},
+		},
+	},
 }

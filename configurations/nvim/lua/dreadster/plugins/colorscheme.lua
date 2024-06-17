@@ -4,7 +4,9 @@ return {
 		name = "catppuccin",
 		lazy = false,
 		version = "*",
-		init = function() vim.cmd.colorscheme("catppuccin-mocha") end,
+		init = function()
+			vim.cmd.colorscheme("catppuccin-mocha")
+		end,
 		opts = {
 			transparent_background = true,
 			integrations = {
@@ -21,8 +23,8 @@ return {
 				which_key = true,
 				nvimtree = true,
 				illuminate = true,
-				lsp_trouble = true
-			}
-		}
-	}
+				lsp_trouble = true,
+			},
+		},
+	},
 }

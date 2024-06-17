@@ -74,6 +74,7 @@ in {
 
           # Lua language server not working with mason
           lua-language-server
+          stylua
 
           # Latex
           tex
