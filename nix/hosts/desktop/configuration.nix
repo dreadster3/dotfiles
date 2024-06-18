@@ -9,6 +9,8 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
+  environment.systemPackages = with pkgs; [ vlc libvlc ];
+
   # Bootloader.
   modules.nixos = {
     x11.enable = true;
