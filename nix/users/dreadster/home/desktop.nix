@@ -18,6 +18,8 @@ in {
     qalculate-gtk
     gucharmap
 
+    postman
+
     hypnotix
   ];
 
