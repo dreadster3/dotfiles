@@ -19,6 +19,7 @@ in {
     gucharmap
 
     postman
+    dbeaver-bin
 
     hypnotix
   ];
