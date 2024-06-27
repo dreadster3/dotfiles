@@ -21,5 +21,6 @@
     ./pipewire.nix
     ./nightlight.nix
     ./storage.nix
+    ./hyprland.nix
   ];
 }

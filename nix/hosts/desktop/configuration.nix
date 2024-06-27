@@ -25,6 +25,8 @@
     xrdp.enable = true;
     ssh.enable = true;
     zerotier.enable = true;
+
+    hyprland.enable = true;
   };
 
   networking.hostName = "nixos-desktop";

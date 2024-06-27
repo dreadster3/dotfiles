@@ -87,5 +87,14 @@ in {
     };
 
     pentest.enable = true;
+
+    # Hyprland
+    hyprland = {
+      enable = true;
+      terminal = terminal;
+      startupPrograms = [ "${pkgs.waybar}/bin/waybar &" ];
+    };
+    wofi.enable = true;
+    waybar.enable = true;
   };
 }

@@ -1,6 +1,9 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.homemanager.waybar;
+let
+  cfg = config.modules.homemanager.waybar;
+  monitor1 = "DP-1";
+  monitor2 = "HDMI-A-1";
 in {
   options = {
     modules.homemanager.waybar = { enable = mkEnableOption "waybar"; };
@@ -35,11 +38,10 @@ in {
             on-scroll-down = "hyprctl dispatch workspace r-1";
             on-scroll-up = "hyprctl dispatch workspace r+1";
             format = "{icon}";
+            active-only = true;
             persistent-workspaces = {
-              "1" = [ ];
-              "2" = [ ];
-              "3" = [ ];
-              "4" = [ ];
+              "${monitor1}" = [ 1 2 3 4 5 ];
+              "${monitor2}" = [ 6 7 8 9 ];
             };
           };
           "cpu" = {

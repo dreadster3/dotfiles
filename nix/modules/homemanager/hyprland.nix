@@ -3,15 +3,26 @@ with lib;
 let cfg = config.modules.homemanager.hyprland;
 in {
   options = {
-    modules.homemanager.hyprland = { enable = mkEnableOption "hyprland"; };
+    modules.homemanager.hyprland = {
+      enable = mkEnableOption "hyprland";
+      terminal = mkOption {
+        type = types.package;
+        default = pkgs.kitty;
+        description = "Terminal to use.";
+      };
+      startupPrograms = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = "List of programs to start on login.";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ wl-clipboard gbar ];
+    home.packages = with pkgs; [ wl-clipboard ];
 
     wayland.windowManager.hyprland = {
       enable = true;
-      # enableNvidiaPatches = true;
       xwayland.enable = true;
       systemd.enable = true;
       settings = {
@@ -29,11 +40,9 @@ in {
         ];
 
         exec-once = [
-          "${pkgs.gbar}/bin/gBar bar 0 &"
-          "${pkgs.gbar}/bin/gBar bar 1 &"
           ''
             ${pkgs.hyprland}/bin/hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
-        ];
+        ] ++ cfg.startupPrograms;
 
         input = {
           kb_layout = "us";
@@ -118,7 +127,10 @@ in {
 
         master = { new_is_master = true; };
 
-        "device:epic-mouse-v1" = { sensitivity = -0.5; };
+        device = {
+          name = "epic-mouse-v1";
+          sensitivity = -0.5;
+        };
 
         windowrulev2 = [
           "animation slide,class:^(wofi)$"
@@ -137,19 +149,18 @@ in {
 
         workspace = [
           "1,monitor:DP-1"
+          "2,monitor:DP-1"
           "3,monitor:DP-1"
+          "4,monitor:DP-1"
           "5,monitor:DP-1"
-          "7,monitor:DP-1"
-          "9,monitor:DP-1"
-          "2,monitor:HDMI-A-1"
-          "4,monitor:HDMI-A-1"
           "6,monitor:HDMI-A-1"
+          "7,monitor:HDMI-A-1"
           "8,monitor:HDMI-A-1"
-          "10,monitor:HDMI-A-1"
+          "9,monitor:HDMI-A-1"
         ];
 
         bind = [
-          "$mainMod, Return, exec, ${getExe pkgs.kitty}"
+          "$mainMod, Return, exec, ${getExe cfg.terminal}"
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, thunar"
@@ -193,6 +204,21 @@ in {
           "$mainMod SHIFT, 0, movetoworkspace, 10"
           "$mainMod, mouse_down, workspace, m+1"
           "$mainMod, mouse_up, workspace, m-1"
+          ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          ", XF86AudioPlay, exec, ${
+            lib.getExe pkgs.playerctl
+          } --player spotify play-pause"
+          ", XF86AudioPrev, exec, ${
+            lib.getExe pkgs.playerctl
+          } --player spotify previous"
+          ", XF86AudioNext, exec,  ${
+            lib.getExe pkgs.playerctl
+          } --player spotify next"
+        ];
+
+        binde = [
+          ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
+          ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
         ];
 
         bindm = [
