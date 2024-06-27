@@ -50,6 +50,7 @@
 
   modules.homemanager = {
     nerdfonts.enable = true;
+    alacritty.enable = true;
     kitty.enable = true;
     sxhkd.enable = true;
     zsh.enable = true;

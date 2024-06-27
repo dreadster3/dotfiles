@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./zsh.nix
+    ./alacritty.nix
     ./kitty.nix
     ./sxhkd.nix
     ./nerdfonts.nix

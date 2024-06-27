@@ -2,6 +2,8 @@
 let
   primaryMonitor = "DP-0";
   secondaryMonitor = "HDMI-0";
+
+  terminal = pkgs.alacritty;
 in {
   imports = [ ./default.nix ];
 
@@ -31,18 +33,29 @@ in {
     aio.enable = true;
     spicetify.enable = true;
     helix.enable = true;
-    rofi.enable = true;
-    sxhkd.enable = true;
     thunderbird.enable = true;
     gtk.enable = true;
-    polybar.enable = true;
     mechvibes.enable = true;
+
     neovim = {
       enable = true;
+      terminal = terminal;
       package = pkgs-unstable.neovim-unwrapped;
       go = pkgs-unstable.go;
     };
 
+    polybar = {
+      enable = true;
+      terminal = terminal;
+    };
+    rofi = {
+      enable = true;
+      terminal = terminal;
+    };
+    sxhkd = {
+      enable = true;
+      terminal = terminal;
+    };
     bspwm = {
       enable = true;
       monitors = {
