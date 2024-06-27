@@ -7,7 +7,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    networking.wireless.enable = true;
+    programs.nm-applet.enable = true;
+    networking.networkmanager.enable = true;
     networking.firewall.enable = true;
     networking.firewall.allowPing = false;
   };
