@@ -1,3 +1,13 @@
+# Windows Configs
+# [shell]
+# program = "wsl"
+# args = ["~"]
+
+# [[keyboard.bindings]]
+# chars = "\u001f"
+# key = "Slash"
+# mods = "Control"
+
 [colors]
 [colors.bright]
 black = "#585b70"
