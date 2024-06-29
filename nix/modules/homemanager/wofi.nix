@@ -2,11 +2,30 @@
 with lib;
 let cfg = config.modules.homemanager.wofi;
 in {
-  options = { modules.homemanager.wofi = { enable = mkEnableOption "wofi"; }; };
+  options = {
+    modules.homemanager.wofi = {
+      enable = mkEnableOption "wofi";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.wofi;
+      };
+    };
+  };
 
   config = mkIf cfg.enable {
+    assertions = [{
+      assertion = config.wayland.windowManager.hyprland.enable;
+      message = "wofi requires the hyprland window manager to be enabled";
+    }];
+
+    wayland.windowManager.hyprland.settings.bind = [
+      "$mainMod, D, exec, pkill ${getExe cfg.package} || wofi --show drun"
+      "$mainMod, Space, exec, pkill ${getExe cfg.package} || wofi --show drun"
+    ];
+
     programs.wofi = {
       enable = true;
+      package = cfg.package;
       settings = {
         width = 425;
         height = 250;

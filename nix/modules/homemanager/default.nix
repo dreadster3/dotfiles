@@ -23,6 +23,9 @@
     ./polybar.nix
     ./wezterm.nix
     ./hyprland.nix
+    ./hyprlock.nix
+    ./hyprpaper.nix
+    ./hypridle.nix
     ./xbindkeys.nix
     ./thunderbird.nix
     ./betterlockscreen.nix

@@ -1,6 +1,35 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.homemanager.hyprland;
+let
+  cfg = config.modules.homemanager.hyprland;
+
+  monitorType = types.submodule {
+    options = {
+      resolution = mkOption {
+        type = types.str;
+        default = "preferred";
+        description = "Resolution to use.";
+      };
+      position = mkOption {
+        type = types.str;
+        default = "auto";
+        description = "Position to use.";
+      };
+      transform = mkOption {
+        type = types.nullOr types.int;
+        default = null;
+        description = "Transform to use.";
+      };
+      workspaces = mkOption {
+        type = types.listOf types.int;
+        default = [ ];
+        description = "List of workspaces to configure.";
+      };
+    };
+  };
+
+  transformToString = transform:
+    if transform == null then "" else ",transform,${toString transform}";
 in {
   options = {
     modules.homemanager.hyprland = {
@@ -9,6 +38,29 @@ in {
         type = types.package;
         default = pkgs.kitty;
         description = "Terminal to use.";
+      };
+      fileManager = mkOption {
+        type = types.package;
+        default = pkgs.xfce.thunar;
+        description = "File manager to use.";
+      };
+      monitors = mkOption {
+        type = types.attrsOf monitorType;
+        default = {
+          DP-1 = {
+            resolution = "preferred";
+            position = "1080x0";
+            transform = null;
+            workspaces = [ 1 2 3 4 5 ];
+          };
+          HDMI-A-1 = {
+            resolution = "preferred";
+            position = "0x0";
+            transform = 1;
+            workspaces = [ 6 7 8 9 10 ];
+          };
+        };
+        description = "List of monitors to configure.";
       };
       startupPrograms = mkOption {
         type = types.listOf types.str;
@@ -19,7 +71,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ wl-clipboard ];
+    home.packages = with pkgs; [ wl-clipboard grimblast ];
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -27,17 +79,10 @@ in {
       systemd.enable = true;
       settings = {
         "$mainMod" = "SUPER";
-        monitor = [
-          # Desktop configs
-          "DP-1,preferred,1080x0,auto"
-          "HDMI-A-1,preferred,0x0,auto,transform,1"
-
-          # VM configs
-          "Virtual1,1920x1080,0x0,auto"
-
-          # Default
-          ",preferred,auto,auto"
-        ];
+        monitor = mapAttrsToList (name: monitor:
+          "${name},${monitor.resolution},${monitor.position},auto${
+            transformToString monitor.transform
+          }") cfg.monitors;
 
         exec-once = [
           ''
@@ -147,32 +192,22 @@ in {
           "minsize 1 1, title:^()$,class:^(steam)$"
         ];
 
-        workspace = [
-          "1,monitor:DP-1"
-          "2,monitor:DP-1"
-          "3,monitor:DP-1"
-          "4,monitor:DP-1"
-          "5,monitor:DP-1"
-          "6,monitor:HDMI-A-1"
-          "7,monitor:HDMI-A-1"
-          "8,monitor:HDMI-A-1"
-          "9,monitor:HDMI-A-1"
-        ];
+        workspace = foldlAttrs (acc: name: monitor:
+          acc ++ (map (workspace: "${toString workspace},monitor:${name}")
+            monitor.workspaces)) [ ] cfg.monitors;
 
         bind = [
           "$mainMod, Return, exec, ${getExe cfg.terminal}"
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
-          "$mainMod, E, exec, thunar"
+          "$mainMod, E, exec, ${getExe cfg.fileManager}"
           "$mainMod, S, togglefloating,"
           "$mainMod, F, fullscreen"
-          "$mainMod, D, exec, pkill wofi || wofi --show drun"
-          "$mainMod, Space, exec, pkill wofi || wofi --show drun"
           "$mainMod, P, pseudo, # dwindle"
           "$mainMod, J, togglesplit, # dwindle"
           # ", Print, exec, QT_SCALE_FACTOR=0.80 flameshot gui"
-          ", Print, exec, grimblast copysave screen"
-          "SHIFT, Print, exec, grimblast copysave area"
+          ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave screen"
+          "SHIFT, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area"
           # "$mainMod, L, exec, ~/.config/hypr/scripts/lock_screen.sh"
           "$mainMod_SHIFT, L, exec, systemctl suspend"
           ", F12, exec, guake-toggle"

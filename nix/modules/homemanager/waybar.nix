@@ -6,9 +6,21 @@ let
   monitor2 = "HDMI-A-1";
 in {
   options = {
-    modules.homemanager.waybar = { enable = mkEnableOption "waybar"; };
+    modules.homemanager.waybar = {
+      enable = mkEnableOption "waybar";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.waybar;
+        description = "The waybar package to use.";
+      };
+    };
   };
   config = mkIf cfg.enable {
+    assertions = [{
+      assertion = config.wayland.windowManager.hyprland.enable;
+      message = "waybar requires the hyprland window manager to be enabled";
+    }];
+
     nixpkgs.overlays = [
       (self: super: {
         waybar = super.waybar.overrideAttrs (oldAttrs: {
@@ -17,9 +29,12 @@ in {
       })
     ];
 
+    wayland.windowManager.hyprland.settings.exec-once =
+      [ "${cfg.package}/bin/waybar &" ];
+
     programs.waybar = {
       enable = true;
-      # systemd.enable = true;
+      package = cfg.package;
       settings = {
         mainBar = {
           layer = "top";
@@ -41,7 +56,7 @@ in {
             active-only = true;
             persistent-workspaces = {
               "${monitor1}" = [ 1 2 3 4 5 ];
-              "${monitor2}" = [ 6 7 8 9 ];
+              "${monitor2}" = [ 6 7 8 9 10 ];
             };
           };
           "cpu" = {

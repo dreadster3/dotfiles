@@ -92,8 +92,16 @@ in {
     hyprland = {
       enable = true;
       terminal = terminal;
-      startupPrograms = [ "${pkgs.waybar}/bin/waybar &" ];
     };
+    hyprpaper = {
+      enable = true;
+      wallpapers = {
+        "DP-1" = ../../../../wallpapers/shinobu.jpg;
+        "HDMI-A-1" = ../../../../wallpapers/anime_vertical.png;
+      };
+    };
+    hypridle.enable = true;
+    hyprlock.enable = true;
     wofi.enable = true;
     waybar.enable = true;
   };
