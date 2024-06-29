@@ -14,10 +14,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    assertions = [{
-      assertion = config.wayland.windowManager.hyprland.enable;
-      message = "hyprlock requires the hyprland window manager to be enabled";
-    }];
+    assertions = [
+      {
+        assertion = config.wayland.windowManager.hyprland.enable;
+        message = "hyprlock requires the hyprland window manager to be enabled";
+      }
+      {
+        assertion = !config.programs.swaylock.enable;
+        message = "hyprlock is incompatible with swaylock";
+      }
+    ];
 
     wayland.windowManager.hyprland.settings.bind =
       [ "$mainMod_CTRL, Q, exec, ${cfg.package}/bin/hyprlock" ];
@@ -29,7 +35,9 @@ in {
         general = {
           disable_loading_bar = false;
           grace = 0;
-          hide_cursor = false;
+          no_fade_in = true;
+          no_fade_out = true;
+          hide_cursor = true;
         };
 
         background = [{
@@ -52,6 +60,19 @@ in {
           shadow_passes = 2;
         }];
       };
+    };
+
+    systemd.user.services.hyprlock-suspend = {
+      Unit = {
+        Description = "Lock screen on suspend";
+        After = [ "sleep.target" ];
+      };
+      Service = {
+        Type = "forking";
+        Environment = "DISPLAY=:0";
+        ExecStart = "${cfg.package}/bin/hyprlock";
+      };
+      Install = { WantedBy = [ "sleep.target" ]; };
     };
   };
 }

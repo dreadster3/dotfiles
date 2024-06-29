@@ -10,7 +10,7 @@
     ./aio.nix
     ./gtk.nix
     ./btop.nix
-    ./wofi.nix
+    ./wofi
     ./dunst.nix
     ./guake.nix
     ./helix.nix
@@ -22,14 +22,18 @@
     ./pentest.nix
     ./polybar.nix
     ./wezterm.nix
-    ./hyprland.nix
-    ./hyprlock.nix
-    ./hyprpaper.nix
-    ./hypridle.nix
     ./xbindkeys.nix
     ./thunderbird.nix
     ./betterlockscreen.nix
     ./tmux.nix
+
+    ./hyprland.nix
+    ./hyprlock.nix
+    ./hyprpaper.nix
+    ./hypridle.nix
+    ./swaylock.nix
+    ./swayidle.nix
+    ./wlogout
 
     ./mechvibes
     ./x11eventcallbacks

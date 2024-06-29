@@ -87,6 +87,7 @@ in {
         exec-once = [
           ''
             ${pkgs.hyprland}/bin/hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         ] ++ cfg.startupPrograms;
 
         input = {
@@ -239,7 +240,7 @@ in {
           "$mainMod SHIFT, 0, movetoworkspace, 10"
           "$mainMod, mouse_down, workspace, m+1"
           "$mainMod, mouse_up, workspace, m-1"
-          ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          ", XF86AudioMute, exec, amixer -D pipewire set Master 1+ toggle"
           ", XF86AudioPlay, exec, ${
             lib.getExe pkgs.playerctl
           } --player spotify play-pause"
@@ -252,8 +253,8 @@ in {
         ];
 
         binde = [
-          ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
-          ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
+          ", XF86AudioRaiseVolume, exec, amixer -D pipewire sset Master 5%+"
+          ", XF86AudioLowerVolume, exec, amixer -D pipewire sset Master 5%-"
         ];
 
         bindm = [

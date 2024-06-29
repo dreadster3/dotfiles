@@ -100,8 +100,9 @@ in {
         "HDMI-A-1" = ../../../../wallpapers/anime_vertical.png;
       };
     };
-    hypridle.enable = true;
-    hyprlock.enable = true;
+    wlogout.enable = true;
+    swaylock.enable = true;
+    swayidle.enable = true;
     wofi.enable = true;
     waybar.enable = true;
   };

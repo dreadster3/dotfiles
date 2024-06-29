@@ -91,10 +91,10 @@ in {
               car = "";
               default = [ "" ];
             };
-            on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            on-click = "amixer -D pipewire set Master 1+ toggle";
             on-click-right = "pavucontrol";
-            on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%";
-            on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
+            on-scroll-up = "amixer -D pipewire sset Master 1%+";
+            on-scroll-down = "amixer -D pipewire sset Master 1%-";
           };
         };
       };

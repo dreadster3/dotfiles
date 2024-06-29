@@ -19,9 +19,9 @@ in {
           padding = 8;
           hide_duplicate_count = true;
 
-          mouse_left_click = "close_current";
-          mouse_middle_click = "do_action";
-          mouse_right_click = "close_all";
+          mouse_left_click = "do_action";
+          mouse_right_click = "close_current";
+          mouse_middle_click = "close_all";
         };
         urgency_low = {
           background = "#1E1E2E";

@@ -9,6 +9,26 @@ in {
         type = types.package;
         default = pkgs.wofi;
       };
+      lockCmd = mkOption {
+        type = types.str;
+        default = "loginctl lock-session";
+      };
+      restartCmd = mkOption {
+        type = types.str;
+        default = "reboot";
+      };
+      sleepCmd = mkOption {
+        type = types.str;
+        default = "systemctl suspend";
+      };
+      shutdownCmd = mkOption {
+        type = types.str;
+        default = "shutdown now";
+      };
+      logoutCmd = mkOption {
+        type = types.str;
+        default = "hyprctl dispatch exit";
+      };
     };
   };
 
@@ -19,8 +39,12 @@ in {
     }];
 
     wayland.windowManager.hyprland.settings.bind = [
-      "$mainMod, D, exec, pkill ${getExe cfg.package} || wofi --show drun"
-      "$mainMod, Space, exec, pkill ${getExe cfg.package} || wofi --show drun"
+      "$mainMod, D, exec, pkill ${getExe cfg.package} || ${
+        getExe cfg.package
+      } wofi --show drun"
+      "$mainMod, Space, exec, pkill ${getExe cfg.package} || ${
+        getExe cfg.package
+      } --show drun"
     ];
 
     programs.wofi = {
