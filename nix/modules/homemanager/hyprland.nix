@@ -76,7 +76,10 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        variables = [ "--all" ];
+      };
       settings = {
         "$mainMod" = "SUPER";
         monitor = mapAttrsToList (name: monitor:

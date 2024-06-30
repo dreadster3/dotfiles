@@ -42,11 +42,11 @@ in {
       ];
       timeouts = [
         {
-          timeout = 60;
+          timeout = 600;
           command = locker_cmd;
         }
         {
-          timeout = 90;
+          timeout = 900;
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
