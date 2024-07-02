@@ -8,6 +8,9 @@
 # key = "Slash"
 # mods = "Control"
 
+[window]
+option_as_alt = "Both"
+
 [colors]
 [colors.bright]
 black = "#585b70"
