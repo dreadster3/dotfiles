@@ -55,6 +55,7 @@ in {
         nvimconfig =
           "nvim ~/Documents/projects/github/dotfiles/configurations/nvim";
         nixconfig = "nvim ~/Documents/projects/github/dotfiles";
+        ssh = "TERM=xterm-256color ${pkgs.openssh}/bin/ssh";
       };
     };
   };

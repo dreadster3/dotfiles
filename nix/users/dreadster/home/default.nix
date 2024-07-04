@@ -17,6 +17,7 @@
     file
     fzf
 
+    dig
     pciutils
     lshw
     usbutils
