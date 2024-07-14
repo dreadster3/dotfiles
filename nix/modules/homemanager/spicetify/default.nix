@@ -2,15 +2,18 @@
 with lib;
 let
   cfg = config.modules.homemanager.spicetify;
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
   catpuccin_theme = import ./spicetify_catppuccin_theme.nix;
-
   spicetify = getExe pkgs.spicetify-cli;
 in {
 
   options = {
     modules.homemanager.spicetify = {
       enable = mkEnableOption "spicetify-cli";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.spicetify-cli;
+        description = "The package to install spicetify-cli";
+      };
     };
   };
 
@@ -53,6 +56,6 @@ in {
       })
     ];
 
-    home.packages = with pkgs; [ spotify unstable.spicetify-cli ];
+    home.packages = with pkgs; [ spotify cfg.package ];
   };
 }

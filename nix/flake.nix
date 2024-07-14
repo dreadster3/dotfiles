@@ -68,6 +68,27 @@
             }
           ];
         };
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit pkgs-unstable; };
+          modules = [
+            ./hosts/desktop/configuration.nix
+
+            ./users/dreadster/base.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              # Needs to be disabled for spicetify overlay to work
+              # home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
+
+              home-manager.users.dreadster = {
+                imports = [ ./users/dreadster/home/laptop.nix ];
+              };
+            }
+          ];
+        };
       };
     };
 }
