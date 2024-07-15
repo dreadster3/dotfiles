@@ -72,7 +72,7 @@
           inherit system;
           specialArgs = { inherit pkgs-unstable; };
           modules = [
-            ./hosts/desktop/configuration.nix
+            ./hosts/laptop/configuration.nix
 
             ./users/dreadster/base.nix
 

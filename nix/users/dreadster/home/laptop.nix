@@ -94,13 +94,19 @@ in {
     hyprland = {
       enable = true;
       terminal = terminal;
+      monitors = {
+        eDP-1 = {
+          resolution = "preferred";
+          position = "0x0";
+          transform = null;
+          workspaces = [ 1 2 3 4 5 ];
+          zoom = 1.0;
+        };
+      };
     };
     hyprpaper = {
       enable = true;
-      wallpapers = {
-        "DP-1" = ../../../../wallpapers/shinobu.jpg;
-        "HDMI-A-1" = ../../../../wallpapers/anime_vertical.png;
-      };
+      wallpapers = { "eDP-1" = ../../../../wallpapers/shinobu.jpg; };
     };
     wlogout.enable = true;
     swaylock.enable = true;

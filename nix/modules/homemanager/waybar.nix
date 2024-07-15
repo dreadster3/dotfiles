@@ -2,8 +2,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.waybar;
-  monitor1 = "DP-1";
-  monitor2 = "HDMI-A-1";
+  hyprland_cfg = config.modules.homemanager.hyprland;
 in {
   options = {
     modules.homemanager.waybar = {
@@ -54,10 +53,8 @@ in {
             on-scroll-up = "hyprctl dispatch workspace r+1";
             format = "{icon}";
             active-only = true;
-            persistent-workspaces = {
-              "${monitor1}" = [ 1 2 3 4 5 ];
-              "${monitor2}" = [ 6 7 8 9 10 ];
-            };
+            persistent-workspaces =
+              mapAttrs (name: value: value.workspaces) hyprland_cfg.monitors;
           };
           "cpu" = {
             interval = 10;

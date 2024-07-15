@@ -25,6 +25,11 @@ let
         default = [ ];
         description = "List of workspaces to configure.";
       };
+      zoom = mkOption {
+        type = types.either types.number types.str;
+        default = "auto";
+        description = "Zoom for monitor";
+      };
     };
   };
 
@@ -52,12 +57,14 @@ in {
             position = "1080x0";
             transform = null;
             workspaces = [ 1 2 3 4 5 ];
+            zoom = "auto";
           };
           HDMI-A-1 = {
             resolution = "preferred";
             position = "0x0";
             transform = 1;
             workspaces = [ 6 7 8 9 10 ];
+            zoom = "auto";
           };
         };
         description = "List of monitors to configure.";
@@ -83,9 +90,9 @@ in {
       settings = {
         "$mainMod" = "SUPER";
         monitor = mapAttrsToList (name: monitor:
-          "${name},${monitor.resolution},${monitor.position},auto${
-            transformToString monitor.transform
-          }") cfg.monitors;
+          "${name},${monitor.resolution},${monitor.position},${
+            toString monitor.zoom
+          }${transformToString monitor.transform}") cfg.monitors;
 
         exec-once = [
           ''
