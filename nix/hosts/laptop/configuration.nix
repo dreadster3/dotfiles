@@ -9,6 +9,8 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
+  boot.kernelParams = [ "acpi_osi=!" ''acpi_osi="Windows 2009"'' ];
+
   environment.systemPackages = with pkgs; [ vlc libvlc ];
 
   # Bootloader.
