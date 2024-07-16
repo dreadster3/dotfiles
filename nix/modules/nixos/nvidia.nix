@@ -10,6 +10,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    nixpkgs.config.cudaSupport = true;
+
     hardware.opengl = {
       enable = true;
       driSupport = true;
