@@ -12,6 +12,26 @@ in {
         default = pkgs.waybar;
         description = "The waybar package to use.";
       };
+      brightness = mkOption {
+        description = "Enable brightness module";
+        default = { };
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "waybar.brightness";
+            step = mkOption {
+              type = types.int;
+              default = 5;
+            };
+          };
+        };
+      };
+      battery = mkOption {
+        description = "Enable battery module";
+        default = { };
+        type = types.submodule {
+          options = { enable = mkEnableOption "waybar.battery"; };
+        };
+      };
     };
   };
   config = mkIf cfg.enable {
@@ -19,6 +39,9 @@ in {
       assertion = config.wayland.windowManager.hyprland.enable;
       message = "waybar requires the hyprland window manager to be enabled";
     }];
+
+    home.packages = with pkgs;
+      [ ] ++ optional (cfg.brightness.enable) (pkgs.brightnessctl);
 
     nixpkgs.overlays = [
       (self: super: {
@@ -40,7 +63,9 @@ in {
           modules-left =
             [ "custom/wofi" "hyprland/workspaces" "cpu" "memory" "disk" ];
           modules-center = [ "clock" ];
-          modules-right = [ "pulseaudio" "tray" ];
+          modules-right = optional (cfg.battery.enable) ("battery")
+            ++ optional (cfg.brightness.enable) ("backlight")
+            ++ [ "pulseaudio" "tray" ];
           # output = [ "DP-1" "HDMI-A-1" ];
           "custom/wofi" = {
             format = "";
@@ -56,24 +81,24 @@ in {
             persistent-workspaces =
               mapAttrs (name: value: value.workspaces) hyprland_cfg.monitors;
           };
-          "cpu" = {
+          cpu = {
             interval = 10;
             format = "   {usage}%";
             max-length = 10;
           };
-          "memory" = {
+          memory = {
             interval = 30;
             format = "   {}%";
             max-length = 10;
           };
-          "disk" = {
+          disk = {
             interval = 30;
             format = "󰋊  {percentage_used}%";
             path = "/";
           };
-          "clock" = { format = "  {:%e %b %Y %H:%M}  "; };
-          "tray" = { spacing = 8; };
-          "pulseaudio" = {
+          clock = { format = "  {:%e %b %Y %H:%M}  "; };
+          tray = { spacing = 8; };
+          pulseaudio = {
             scroll-step = 5;
             format = "{volume}% {icon}";
             format-bluetooth = "{volume}% {icon}  {format_source}";
@@ -92,6 +117,28 @@ in {
             on-click-right = "pavucontrol";
             on-scroll-up = "amixer -D pipewire sset Master 1%+";
             on-scroll-down = "amixer -D pipewire sset Master 1%-";
+          };
+          backlight = {
+            device = "intel_backlight";
+            format = "{percent}% {icon}";
+            format-icons = [ "󰃞" "󰃟" "󰃠" ];
+            on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set ${
+                toString cfg.brightness.step
+              }%+";
+            on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set ${
+                toString cfg.brightness.step
+              }%-";
+            min-length = 4;
+          };
+          battery = {
+            states = {
+              "warning" = 30;
+              "critical" = 15;
+            };
+
+            format = "{capacity}% {icon}";
+            format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+            format-alt = "{time} {icon}";
           };
         };
       };

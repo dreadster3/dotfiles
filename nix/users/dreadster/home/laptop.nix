@@ -112,6 +112,10 @@ in {
     swaylock.enable = true;
     swayidle.enable = true;
     wofi.enable = true;
-    waybar.enable = true;
+    waybar = {
+      enable = true;
+      brightness.enable = true;
+      battery.enable = true;
+    };
   };
 }
