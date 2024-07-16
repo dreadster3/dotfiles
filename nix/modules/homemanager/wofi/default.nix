@@ -39,12 +39,8 @@ in {
     }];
 
     wayland.windowManager.hyprland.settings.bind = [
-      "$mainMod, D, exec, pkill ${getExe cfg.package} || ${
-        getExe cfg.package
-      } wofi --show drun"
-      "$mainMod, Space, exec, pkill ${getExe cfg.package} || ${
-        getExe cfg.package
-      } --show drun"
+      "$mainMod, D, exec, pkill wofi || ${getExe cfg.package} --show drun"
+      "$mainMod, Space, exec, pkill wofi || ${getExe cfg.package} --show drun"
     ];
 
     programs.wofi = {
