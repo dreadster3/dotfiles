@@ -137,8 +137,11 @@ in {
             };
 
             format = "{capacity}% {icon}";
-            format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
             format-alt = "{time} {icon}";
+            format-icons = {
+              default = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+              charging = "󰂄";
+            };
           };
         };
       };
