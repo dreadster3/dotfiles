@@ -141,6 +141,7 @@ in {
             format-icons = {
               default = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
               charging = "󰂄";
+              plugged = "󰂄";
             };
           };
         };
