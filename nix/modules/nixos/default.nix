@@ -4,7 +4,7 @@
     ./grub.nix
     ./bspwm.nix
     ./zsh.nix
-    ./tlp.nix
+    ./powermanagement.nix
     ./xrdp.nix
     ./steam.nix
     ./docker.nix

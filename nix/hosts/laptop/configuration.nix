@@ -31,6 +31,8 @@
     ssh.enable = true;
     zerotier.enable = true;
 
+    powermanagement.enable = true;
+
     hyprland.enable = true;
   };
 
