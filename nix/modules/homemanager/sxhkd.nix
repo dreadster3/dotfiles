@@ -5,28 +5,28 @@ in {
   options = {
     modules.homemanager.sxhkd = {
       enable = mkEnableOption "sxhkd";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.sxhkd;
+        description = "The sxhkd package to use";
+      };
       terminal = mkOption {
         type = types.package;
         default = pkgs.kitty;
-        description = "The terminal to use";
+        description = "The default terminal to use";
       };
     };
   };
 
   config = mkIf cfg.enable {
+    xsession.windowManager.bspwm.startupPrograms = [ "${getExe cfg.package}" ];
+
     services.sxhkd = {
       enable = true;
+      package = cfg.package;
       keybindings = {
-        "super + Return" = lib.getExe cfg.terminal;
-        "super + @space" = "${lib.getExe pkgs.rofi} -show drun";
-        "super + ctrl + q" =
-          "${lib.getExe pkgs.betterlockscreen} -l blur --display 1";
-        "Print" = "${lib.getExe pkgs.flameshot} gui";
+        "super + Return" = getExe cfg.terminal;
         "super + Escape" = "pkill -USR1 -x sxhkd";
-        "super + d" = "${lib.getExe pkgs.rofi} -show run";
-        "super + q" = "${lib.getExe pkgs.rofi} -show p -modi 'p:${
-            lib.getExe pkgs.rofi-power-menu
-          }'";
         "super + alt + {q,r}" = "bspc {quit, wm -r}";
         "super + {_, shift + }w" = "bspc node -{c,k}";
         "super + m" = "bspc desktop -l next";

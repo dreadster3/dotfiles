@@ -5,6 +5,10 @@ in {
   options = {
     modules.homemanager.picom = {
       enable = mkEnableOption "picom";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.picom;
+      };
       backend = mkOption {
         type = types.enum [ "glx" "xrender" "xr_glx_hybrid" "egl" ];
         default = "glx";
@@ -15,6 +19,8 @@ in {
   config = mkIf cfg.enable {
     # Disable the default picom service
     systemd.user.services.picom = lib.mkForce { };
+
+    xsession.windowManager.bspwm.startupPrograms = [ "${getExe cfg.package}" ];
 
     services.picom = {
       enable = true;

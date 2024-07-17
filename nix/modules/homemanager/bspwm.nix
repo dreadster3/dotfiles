@@ -14,12 +14,6 @@ in {
     modules.homemanager.bspwm = {
       enable = mkEnableOption "bspwm";
 
-      monitor = mkOption {
-        type = types.str;
-        default = "DP-0";
-        description = "The monitor to use for bspwm";
-      };
-
       monitors = mkOption {
         type = types.attrsOf (types.listOf types.str);
         default = { DP-0 = [ "1" "2" "3" "4" "5" ]; };
@@ -55,7 +49,6 @@ in {
       };
       startupPrograms = cfg.startupPrograms ++ [
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-        "${getExe pkgs.sxhkd}"
         "${getExe pkgs.nitrogen} --restore"
         "xsetroot -cursor_name left_ptr"
       ];

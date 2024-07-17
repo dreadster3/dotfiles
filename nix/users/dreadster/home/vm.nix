@@ -3,6 +3,7 @@ let
   primaryMonitor = "Virtual1";
   secondaryMonitor = "Virtual2";
 
+  terminal = pkgs.alacritty;
 in {
   imports = [ ./default.nix ];
 
@@ -14,7 +15,19 @@ in {
     dunst.enable = true;
 
     # X11
-    polybar.enable = true;
+    polybar = {
+      enable = true;
+      terminal = terminal;
+    };
+    rofi = {
+      enable = true;
+      terminal = terminal;
+    };
+    sxhkd = {
+      enable = true;
+      terminal = terminal;
+    };
+
     bspwm = {
       enable = true;
       monitors = {
@@ -26,10 +39,9 @@ in {
         "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
       ];
     };
+    flameshot.enable = true;
     mechvibes.enable = true;
-    sxhkd.enable = true;
     x11eventcallbacks.enable = true;
-    rofi.enable = true;
     picom.enable = true;
     betterlockscreen.enable = true;
     guake.enable = true;
@@ -38,11 +50,6 @@ in {
       package = pkgs-unstable.neovim-unwrapped;
       go = pkgs-unstable.go;
     };
-
-    # Hyprland
-    hyprland.enable = true;
-    # waybar.enable = true;
-    wofi.enable = true;
 
     # Other
     pentest.enable = true;

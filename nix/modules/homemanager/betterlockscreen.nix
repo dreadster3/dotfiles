@@ -5,15 +5,32 @@ in {
   options = {
     modules.homemanager.betterlockscreen = {
       enable = mkEnableOption "betterlockscreen";
+      package = mkOption {
+        type = with pkgs; types.package;
+        default = pkgs.betterlockscreen;
+        description = "The package to use for betterlockscreen";
+      };
+      arguments = mkOption {
+        type = types.listOf types.str;
+        default = [ "blur" ];
+        description = "Arguments to pass to betterlockscreen";
+      };
     };
   };
 
   config = mkIf cfg.enable {
+    services.sxhkd.keybindings = {
+      "super + ctrl + q" = "${getExe cfg.package} --display 1 -l ${
+          concatStringsSep " " cfg.arguments
+        }";
+    };
+
     home.packages = with pkgs; [ feh ];
 
     services.betterlockscreen = {
       enable = true;
-      arguments = [ "blur" ];
+      package = cfg.package;
+      arguments = cfg.arguments;
     };
 
     # Disable xautolock, to use xidlehook instead

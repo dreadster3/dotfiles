@@ -26,6 +26,7 @@
     ./thunderbird.nix
     ./betterlockscreen.nix
     ./tmux.nix
+    ./flameshot.nix
 
     ./hyprland.nix
     ./hyprlock.nix
