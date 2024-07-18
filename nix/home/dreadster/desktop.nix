@@ -12,7 +12,7 @@ in {
     remmina
 
     wineWowPackages.stable
-    pkgs-unstable.winetricks
+    pkgs.unstable.winetricks
 
     discord
     betterdiscordctl
@@ -37,12 +37,7 @@ in {
     gtk.enable = true;
     mechvibes.enable = true;
 
-    neovim = {
-      enable = true;
-      terminal = terminal;
-      package = pkgs-unstable.neovim-unwrapped;
-      go = pkgs-unstable.go;
-    };
+    neovim.terminal = terminal;
 
     polybar = {
       enable = true;

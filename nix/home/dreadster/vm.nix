@@ -45,11 +45,7 @@ in {
     picom.enable = true;
     betterlockscreen.enable = true;
     guake.enable = true;
-    neovim = {
-      enable = true;
-      package = pkgs.unstable.neovim-unwrapped;
-      go = pkgs.unstable.go;
-    };
+    neovim.terminal = terminal;
 
     # Other
     pentest.enable = true;

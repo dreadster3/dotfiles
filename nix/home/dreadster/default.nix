@@ -67,7 +67,11 @@
     kitty.enable = true;
     sxhkd.enable = true;
     zsh.enable = true;
-    neovim.enable = true;
+    neovim = {
+      enable = true;
+      package = pkgs.unstable.neovim-unwrapped;
+      go = pkgs.unstable.go;
+    };
     btop.enable = true;
     ranger.enable = true;
     tmux.enable = true;
