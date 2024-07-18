@@ -52,9 +52,9 @@
       };
 
       homeConfigurations = {
-        wsl = home-manager.lib.homeManagerConfiguration {
+        "dreadster@wsl" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          specialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/dreadster/homewsl.nix ];
         };
       };
