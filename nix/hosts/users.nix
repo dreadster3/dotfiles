@@ -10,6 +10,4 @@ with lib; {
         ++ optional config.virtualisation.docker.enable "docker";
     };
   };
-
-  home-manager.users = { dreadster = import ../../home/dreadster/vm.nix; };
 }

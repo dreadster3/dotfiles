@@ -1,5 +1,9 @@
 { inputs, outputs, config, lib, pkgs, ... }: {
-  imports = [ ../modules/nixos inputs.home-manager.nixosModules.home-manager ];
+  imports = [
+    ../modules/nixos
+    ./users.nix
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
   nixpkgs = {
     overlays = [
