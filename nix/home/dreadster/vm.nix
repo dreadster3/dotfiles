@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
 let
   primaryMonitor = "Virtual1";
   secondaryMonitor = "Virtual2";
@@ -10,7 +10,7 @@ in {
   home.packages = with pkgs; [ remmina ];
 
   modules.homemanager = {
-    nerdfonts.package = pkgs-unstable.nerdfonts;
+    nerdfonts.package = pkgs.unstable.nerdfonts;
     gtk.enable = true;
     dunst.enable = true;
 
@@ -47,8 +47,8 @@ in {
     guake.enable = true;
     neovim = {
       enable = true;
-      package = pkgs-unstable.neovim-unwrapped;
-      go = pkgs-unstable.go;
+      package = pkgs.unstable.neovim-unwrapped;
+      go = pkgs.unstable.go;
     };
 
     # Other

@@ -1,8 +1,15 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ../../../modules/homemanager ];
+{ inputs, outputs, config, lib, pkgs, ... }: {
+  imports = [ outputs.homeManagerModules ];
 
-  home.username = lib.mkDefault "dreadster";
-  home.homeDirectory = lib.mkDefault "/home/dreadster";
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+
+    config.allowUnfree = true;
+  };
 
   home.packages = with pkgs; [
     killall
@@ -23,6 +30,11 @@
     usbutils
     ethtool
   ];
+
+  home = {
+    username = lib.mkDefault "dreadster";
+    homeDirectory = lib.mkDefault "/home/dreadster";
+  };
 
   home.sessionVariables = {
     XDG_CACHE_DIR = "$HOME/.cache";
@@ -66,13 +78,14 @@
     rofi.powermenu.enable = true;
   };
 
+  systemd.user.startServices = "sd-switch";
+
   programs.git = {
     enable = true;
     userName = "dreadster3";
     userEmail = "afonso.antunes@live.com.pt";
   };
+  programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";
-
-  programs.home-manager.enable = true;
 }

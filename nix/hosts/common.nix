@@ -1,5 +1,15 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ../modules/nixos ];
+{ inputs, outputs, config, lib, pkgs, ... }: {
+  imports = [ ../modules/nixos inputs.home-manager.nixosModules.home-manager ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+
+    config.allowUnfree = true;
+  };
 
   # Run appimages directly
   boot.binfmt.registrations.appimage = {
@@ -59,9 +69,12 @@
 
   services.locate.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   security.polkit.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  nix = {
+    channel.enable = false;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
+  home-manager.extraSpecialArgs = { inherit inputs outputs; };
 }
