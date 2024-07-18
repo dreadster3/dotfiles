@@ -57,6 +57,11 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/dreadster/homewsl.nix ];
         };
+        "deck@steamdeck" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/dreadster/steamdeck.nix ];
+        };
       };
     };
 }
