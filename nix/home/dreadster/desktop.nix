@@ -98,8 +98,8 @@ in {
     hyprpaper = {
       enable = true;
       wallpapers = {
-        "DP-1" = ../../../../wallpapers/shinobu.jpg;
-        "HDMI-A-1" = ../../../../wallpapers/anime_vertical.png;
+        "DP-1" = ../../../wallpapers/shinobu.jpg;
+        "HDMI-A-1" = ../../../wallpapers/anime_vertical.png;
       };
     };
     wlogout.enable = true;
