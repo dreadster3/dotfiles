@@ -1,4 +1,4 @@
-{ }:
+{ config, ... }:
 let
   lock_image = toString ./lock.png;
   lock_hover_image = toString ./lock-hover.png;
@@ -11,11 +11,12 @@ let
   reboot_image = toString ./restart.png;
   reboot_hover_image = toString ./restart-hover.png;
 
+  colors = config.modules.homemanager.settings.theme.colors;
 in ''
   window {
       font-family: monospace;
       font-size: 14pt;
-      color: #cdd6f4; /* text */
+      color: ${colors.text}; /* text */
       background-color: rgba(30, 30, 46, 0.5);
   }
 
@@ -34,8 +35,8 @@ in ''
   }
 
   button:focus {
-      background-color: #cba6f7;
-      color: #1e1e2e;
+      background-color: ${colors.mauve};
+      color: ${colors.base};
   }
 
   #lock {

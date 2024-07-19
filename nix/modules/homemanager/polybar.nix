@@ -2,6 +2,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.polybar;
+  colors = config.modules.homemanager.settings.theme.colors;
 
   modules_left = [
     "launcher"
@@ -562,12 +563,12 @@ in {
             content-padding = 2;
 
             click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''
-              			  PATH=/run/current-system/sw/bin:$PATH
+                PATH=/run/current-system/sw/bin:$PATH
 
-                            ${lib.getExe pkgs.rofi} -show p -modi "p:${
-                              lib.getExe pkgs.rofi-power-menu
-                            }"
-              			'');
+              	${lib.getExe pkgs.rofi} -show p -modi "p:${
+                 lib.getExe pkgs.rofi-power-menu
+               }"
+            '');
           };
 
           "colorscheme" = {
@@ -575,41 +576,9 @@ in {
             background = "#222436";
             foreground = "#c8d3f5";
             foreground-alt = "#8f8f8f";
-            base = "#cd1e1e2e";
-            mantle = "#181825";
-            crust = "#11111b";
-            text = "#cdd6f4";
-            subtext0 = "#a6adc8";
-            subtext1 = "#bac2de";
-            surface0 = "#313244";
-            surface1 = "#45475a";
-            surface2 = "#585b70";
-            overlay0 = "#6c7086";
-            overlay1 = "#7f849c";
-            overlay2 = "#9399b2";
-
-            # Accent Colors
-            blue = "#89b4fa";
-            lavender = "#b4befe";
-            sapphire = "#74c7ec";
-            sky = "#89dceb";
-            teal = "#94e2d5";
-            green = "#a6e3a1";
-            yellow = "#f9e2af";
-            peach = "#fab387";
-            maroon = "#eba0ac";
-            red = "#f38ba8";
-            mauve = "#cba6f7";
-            pink = "#f5c2e7";
-            flamingo = "#f2cdcd";
-            rosewater = "#f5e0dc";
-            transparent = "#FF00000";
-          };
+          } // colors;
         };
       };
     };
-    # systemd.user.services.polybar = {
-    #   Install.WantedBy = [ "graphical-session.target" ];
-    # };
   };
 }

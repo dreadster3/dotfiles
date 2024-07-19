@@ -1,6 +1,8 @@
 { pkgs, config, lib, ... }:
 with lib;
-let cfg = config.modules.homemanager.dunst;
+let
+  cfg = config.modules.homemanager.dunst;
+  colors = config.modules.homemanager.settings.theme.colors;
 in {
   options = {
     modules.homemanager.dunst = { enable = mkEnableOption "dunst"; };
@@ -13,7 +15,7 @@ in {
         global = {
           title = "Dunst";
           class = "Dunst";
-          frame_color = "#89B4FA";
+          frame_color = colors.blue;
           separator_color = "frame";
           corner_radius = 22;
           padding = 8;
@@ -24,20 +26,20 @@ in {
           mouse_middle_click = "close_all";
         };
         urgency_low = {
-          background = "#1E1E2E";
-          foreground = "#CDD6F4";
+          background = colors.base;
+          foreground = colors.text;
         };
 
         urgency_normal = {
-          background = "#1E1E2E";
-          foreground = "#CDD6F4";
+          background = colors.base;
+          foreground = colors.text;
         };
 
         urgency_critical = {
           timeout = 0;
-          background = "#1E1E2E";
-          foreground = "#CDD6F4";
-          frame_color = "#FAB387";
+          background = colors.base;
+          foreground = colors.text;
+          frame_color = colors.peach;
         };
       };
     };

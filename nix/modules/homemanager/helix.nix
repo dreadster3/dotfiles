@@ -1,6 +1,8 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.homemanager.helix;
+let
+  cfg = config.modules.homemanager.helix;
+  colors = config.modules.homemanager.settings.theme.colors;
 in {
   options = {
     modules.homemanager.helix = { enable = mkEnableOption "helix"; };
@@ -28,32 +30,34 @@ in {
       themes = {
         catppuccin = let
           # catppuccin palette colors
-          rosewater = "#f5e0dc";
-          flamingo = "#f2cdcd";
-          pink = "#f5c2e7";
-          mauve = "#cba6f7";
-          red = "#f38ba8";
-          maroon = "#eba0ac";
-          peach = "#fab387";
-          yellow = "#f9e2af";
-          green = "#a6e3a1";
-          teal = "#94e2d5";
-          sky = "#89dceb";
-          sapphire = "#74c7ec";
-          blue = "#89b4fa";
-          lavender = "#b4befe";
-          text = "#cdd6f4";
-          subtext1 = "#bac2de";
-          subtext0 = "#a6adc8";
-          overlay2 = "#9399b2";
-          overlay1 = "#7f849c";
-          overlay0 = "#6c7086";
-          surface2 = "#585b70";
-          surface1 = "#45475a";
-          surface0 = "#313244";
-          base = "#1e1e2e";
-          mantle = "#181825";
-          crust = "#11111b";
+          rosewater = colors.rosewater;
+          flamingo = colors.flamingo;
+          pink = colors.pink;
+          mauve = colors.mauve;
+          red = colors.red;
+          maroon = colors.maroon;
+          peach = colors.peach;
+          yellow = colors.yellow;
+          green = colors.green;
+          teal = colors.teal;
+          sky = colors.sky;
+          sapphire = colors.sapphire;
+          blue = colors.blue;
+          lavender = colors.lavender;
+
+          subtext1 = colors.subtext_1;
+          subtext0 = colors.subtext_0;
+          overlay2 = colors.overlay_2;
+          overlay1 = colors.overlay_1;
+          overlay0 = colors.overlay_0;
+          surface2 = colors.surface_2;
+          surface1 = colors.surface_1;
+          surface0 = colors.surface_0;
+
+          base = colors.base;
+          mantle = colors.mantle;
+          crust = colors.crust;
+          text = colors.text;
 
           # derived colors by blending existing palette colors
           cursorline = "#2a2b3c";

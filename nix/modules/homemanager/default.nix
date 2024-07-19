@@ -1,5 +1,7 @@
 { ... }: {
   imports = [
+    ./settings.nix
+
     ./zsh.nix
     ./alacritty.nix
     ./kitty.nix
