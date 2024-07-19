@@ -78,7 +78,7 @@
 
     # Not enabled defaults
     gtk.cursor.enable = lib.mkDefault true;
-    polybar.useTray = lib.mkDefault true;
+    polybar.tray.enable = lib.mkDefault true;
     rofi.powermenu.enable = true;
   };
 

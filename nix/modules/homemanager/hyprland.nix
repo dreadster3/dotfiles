@@ -3,36 +3,6 @@ with lib;
 let
   cfg = config.modules.homemanager.hyprland;
 
-  monitorType = types.submodule {
-    options = {
-      resolution = mkOption {
-        type = types.str;
-        default = "preferred";
-        description = "Resolution to use.";
-      };
-      position = mkOption {
-        type = types.str;
-        default = "auto";
-        description = "Position to use.";
-      };
-      transform = mkOption {
-        type = types.nullOr types.int;
-        default = null;
-        description = "Transform to use.";
-      };
-      workspaces = mkOption {
-        type = types.listOf types.int;
-        default = [ ];
-        description = "List of workspaces to configure.";
-      };
-      zoom = mkOption {
-        type = types.either types.number types.str;
-        default = "auto";
-        description = "Zoom for monitor";
-      };
-    };
-  };
-
   transformToString = transform:
     if transform == null then "" else ",transform,${toString transform}";
 in {
@@ -50,7 +20,7 @@ in {
         description = "File manager to use.";
       };
       monitors = mkOption {
-        type = types.attrsOf monitorType;
+        type = types.monitorMap;
         default = {
           DP-1 = {
             resolution = "preferred";

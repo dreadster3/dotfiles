@@ -1,9 +1,14 @@
 { inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
 let
-  primaryMonitor = "Virtual1";
-  secondaryMonitor = "Virtual2";
-
   terminal = pkgs.alacritty;
+
+  monitors = {
+    Virtual1 = {
+      default = true;
+      workspaces = [ 1 2 3 4 5 ];
+    };
+    Virtual2 = { workspaces = [ 6 7 8 9 10 ]; };
+  };
 in {
   imports = [ ./default.nix ];
 
@@ -18,6 +23,7 @@ in {
     polybar = {
       enable = true;
       terminal = terminal;
+      monitors = monitors;
     };
     rofi = {
       enable = true;
@@ -30,14 +36,9 @@ in {
 
     bspwm = {
       enable = true;
-      monitors = {
-        "${primaryMonitor}" = [ "1" "2" "3" "4" "5" ];
-        "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
-      };
-      startupPrograms = [
-        "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
-        "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
-      ];
+      monitors = monitors;
+      startupPrograms =
+        [ "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper" ];
     };
     flameshot.enable = true;
     mechvibes.enable = true;

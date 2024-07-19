@@ -3,6 +3,8 @@ with lib;
 let
   cfg = config.modules.homemanager.bspwm;
 
+  monitors = cfg.monitors // { rdp0 = { workspaces = [ 1 2 3 4 5 ]; }; };
+
   fix_script = pkgs.writers.writeBash "fix_remote.sh" ''
     bspc wm --restart
     sleep 1
@@ -15,9 +17,25 @@ in {
       enable = mkEnableOption "bspwm";
 
       monitors = mkOption {
-        type = types.attrsOf (types.listOf types.str);
-        default = { DP-0 = [ "1" "2" "3" "4" "5" ]; };
+        type = types.monitorMap;
         description = "The monitors and their desktops";
+        default = {
+          DP-0 = {
+            default = true;
+            resolution = "preferred";
+            position = "1080x0";
+            transform = null;
+            workspaces = [ 1 2 3 4 5 ];
+            zoom = "auto";
+          };
+          HDMI-A-0 = {
+            resolution = "preferred";
+            position = "0x0";
+            transform = 1;
+            workspaces = [ 6 7 8 9 10 ];
+            zoom = "auto";
+          };
+        };
       };
 
       startupPrograms = mkOption {
@@ -53,8 +71,9 @@ in {
         "xsetroot -cursor_name left_ptr"
       ];
 
-      monitors =
-        lib.mkMerge [ ({ rdp0 = [ "1" "2" "3" "4" "5" ]; }) cfg.monitors ];
+      monitors = mapAttrs
+        (name: monitor: (map (value: toString value) monitor.workspaces))
+        monitors;
 
       rules = {
         "Pavucontrol" = {

@@ -3,10 +3,6 @@ with lib;
 let
   cfg = config.modules.homemanager.polybar;
 
-  battery_module = if cfg.useBattery then [ "battery" ] else [ ];
-  brightness_module = if cfg.useBrightness then [ "backlight" ] else [ ];
-  tray_module = if cfg.useTray then [ "tray" ] else [ ];
-
   modules_left = [
     "launcher"
     "workspaces"
@@ -20,14 +16,46 @@ let
 
   modules_center = [ "date" ];
 
-  modules_right = tray_module
-    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ] ++ battery_module
-    ++ brightness_module ++ [ "sysmenu" ];
+  modules_right = optional cfg.tray.enable "tray"
+    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ]
+    ++ optional cfg.battery.enable "battery"
+    ++ optional cfg.brightness.enable "backlight" ++ [ "sysmenu" ];
 
 in {
   options = {
     modules.homemanager.polybar = {
       enable = mkEnableOption "polybar";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.polybar;
+        description = "The polybar package to use";
+      };
+      script = mkOption {
+        type = types.str;
+        readOnly = true;
+        description = "The script to run polybar";
+      };
+      monitors = mkOption {
+        type = types.monitorMap;
+        default = {
+          DP-0 = {
+            default = true;
+            resolution = "preferred";
+            position = "1080x0";
+            transform = null;
+            workspaces = [ 1 2 3 4 5 ];
+            zoom = "auto";
+          };
+          HDMI-A-0 = {
+            resolution = "preferred";
+            position = "0x0";
+            transform = 1;
+            workspaces = [ 6 7 8 9 10 ];
+            zoom = "auto";
+          };
+        };
+        description = "The monitors to use";
+      };
       terminal = mkOption {
         type = types.package;
         default = pkgs.kitty;
@@ -56,20 +84,26 @@ in {
           };
         };
       };
-      useBattery = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to include battery in polybar";
+      battery = mkOption {
+        type = types.submodule {
+          options = { enable = mkEnableOption "polybar.battery"; };
+        };
+        default = { };
+        description = "Battery module configuration";
       };
-      useBrightness = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to include brightness in polybar";
+      brightness = mkOption {
+        type = types.submodule {
+          options = { enable = mkEnableOption "polybar.brightness"; };
+        };
+        default = { };
+        description = "Brightness module configuration";
       };
-      useTray = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to use system tray";
+      tray = mkOption {
+        type = types.submodule {
+          options = { enable = mkEnableOption "polybar.tray"; };
+        };
+        default = { };
+        description = "Tray module configuration";
       };
       extraConfig = mkOption {
         type = types.str;
@@ -82,18 +116,23 @@ in {
     # Disable the default polybar service
     systemd.user.services.polybar = lib.mkForce { };
 
+    xsession.windowManager.bspwm.startupPrograms = mapAttrsToList
+      (name: monitor:
+        "MONITOR=${name} ${getExe cfg.package} --reload ${
+          if monitor.default then "main" else "secondary"
+        }") cfg.monitors;
+
+    modules.homemanager.polybar.script = concatStringsSep "\n" (mapAttrsToList
+      (name: monitor:
+        "MONITOR=${name} ${getExe cfg.package} --reload ${
+          if monitor.default then "main" else "secondary"
+        } &") cfg.monitors);
+
     services = {
       polybar = {
         enable = true;
-        package = pkgs.polybar.override {
-          alsaSupport = true;
-          pulseSupport = true;
-        };
-        script = ''
-          MONITOR="DP-0" ${pkgs.polybar}/bin/polybar --reload main &
-          MONITOR="HDMI-0" ${pkgs.polybar}/bin/polybar --reload secondary &
-          MONITOR="rdp0" ${pkgs.polybar}/bin/polybar --reload secondary &
-        '';
+        package = cfg.package;
+        script = cfg.script;
         extraConfig = cfg.extraConfig;
         config = {
           "bar/main" = {

@@ -24,6 +24,9 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      lib = nixpkgs.lib.extend
+        (final: prev: (import ./lib { lib = prev; }) // home-manager.lib);
     in {
       packages =
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
@@ -38,15 +41,15 @@
 
       nixosConfigurations = {
         nixosvm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs lib; };
           modules = [ ./hosts/nixosvm/configuration.nix ];
         };
         nixos-desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs lib; };
           modules = [ ./hosts/desktop/configuration.nix ];
         };
         nixos-laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs lib; };
           modules = [ ./hosts/laptop/configuration.nix ];
         };
       };
@@ -54,7 +57,7 @@
       homeConfigurations = {
         "dreadster@wsl" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = { inherit inputs outputs lib; };
           modules = [ ./home/dreadster/homewsl.nix ];
         };
         "deck@steamdeck" = home-manager.lib.homeManagerConfiguration {
