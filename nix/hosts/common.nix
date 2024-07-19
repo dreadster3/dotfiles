@@ -1,8 +1,8 @@
 { inputs, outputs, config, lib, pkgs, ... }: {
   imports = [
-    ../modules/nixos
-    ./users.nix
     inputs.home-manager.nixosModules.home-manager
+    outputs.nixosModules
+    ./users.nix
   ];
 
   nixpkgs = {
