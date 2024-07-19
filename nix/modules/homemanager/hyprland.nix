@@ -57,7 +57,8 @@ in {
         monitor = mapAttrsToList (name: monitor:
           "${name},${monitor.resolution},${monitor.position},${
             toString monitor.zoom
-          }${transformToString monitor.transform}") monitors;
+          }${transformToString monitor.transform}") monitors
+          ++ [ "Unknown-1,disable" ];
 
         exec-once = [
           ''
