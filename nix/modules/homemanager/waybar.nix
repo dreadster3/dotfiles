@@ -2,7 +2,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.waybar;
-  hyprland_cfg = config.modules.homemanager.hyprland;
+  monitors = config.modules.homemanager.settings.monitors.wayland;
 in {
   options = {
     modules.homemanager.waybar = {
@@ -79,7 +79,7 @@ in {
             format = "{icon}";
             active-only = true;
             persistent-workspaces =
-              mapAttrs (name: value: value.workspaces) hyprland_cfg.monitors;
+              mapAttrs (name: value: value.workspaces) monitors;
           };
           cpu = {
             interval = 10;
