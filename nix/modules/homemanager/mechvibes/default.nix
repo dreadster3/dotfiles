@@ -5,16 +5,21 @@ let
   mechvibes = pkgs.callPackage ./derivation.nix { };
 in {
   options = {
-    modules.homemanager.mechvibes = { enable = mkEnableOption "mechvibes"; };
+    modules.homemanager.mechvibes = {
+      enable = mkEnableOption "mechvibes";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.mechvibes;
+        description = "The mechvibes package to use.";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [ (final: prev: { mechvibes = mechvibes; }) ];
-
     xsession.windowManager.bspwm.startupPrograms =
-      [ "${pkgs.mechvibes}/bin/mechvibes --disable-seccomp-filter-sandbox" ];
+      [ "${cfg.package}/bin/mechvibes --disable-seccomp-filter-sandbox" ];
 
-    home.packages = with pkgs; [ mechvibes ];
+    home.packages = [ cfg.package ];
     programs.zsh.shellAliases.mechvibes =
       "mechvibes --disable-seccomp-filter-sandbox";
   };
