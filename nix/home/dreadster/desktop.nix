@@ -32,7 +32,7 @@ in {
             primary = true;
             workspaces = [ 1 2 3 4 5 ];
           };
-          HDMI-A-0 = { workspaces = [ 6 7 8 9 10 ]; };
+          HDMI-0 = { workspaces = [ 6 7 8 9 10 ]; };
         };
 
         wayland = {
