@@ -3,4 +3,5 @@
 pkgs: {
   x11eventcallbacks = pkgs.callPackage ./x11eventcallbacks.nix { };
   mechvibes = pkgs.callPackage ./mechvibes.nix { };
+  spicetify_theme = pkgs.callPackage ./spicetify_theme.nix { };
 }

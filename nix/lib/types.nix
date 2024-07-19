@@ -2,7 +2,7 @@
 with lib; rec {
   monitor = types.submodule {
     options = {
-      default = mkOption {
+      primary = mkOption {
         type = types.bool;
         default = false;
         description = "Whether this monitor is the default.";

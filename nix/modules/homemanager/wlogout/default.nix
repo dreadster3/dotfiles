@@ -56,7 +56,7 @@ in {
           keybind = "o";
         }
       ];
-      style = import ./style.nix { };
+      style = import ./style.nix { inherit config; };
     };
 
   };

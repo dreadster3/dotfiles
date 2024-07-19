@@ -6,7 +6,8 @@
   imports = [ # Include the results of the hardware scan.
     ../common.nix
 
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
+    ./home.nix
   ];
 
   environment.systemPackages = with pkgs; [ vlc libvlc ];

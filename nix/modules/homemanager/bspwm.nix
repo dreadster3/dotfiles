@@ -3,7 +3,10 @@ with lib;
 let
   cfg = config.modules.homemanager.bspwm;
 
-  monitors = cfg.monitors // { rdp0 = { workspaces = [ 1 2 3 4 5 ]; }; };
+  monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors
+    // {
+      rdp0 = { workspaces = [ 1 2 3 4 5 ]; };
+    };
 
   fix_script = pkgs.writers.writeBash "fix_remote.sh" ''
     bspc wm --restart
@@ -19,23 +22,7 @@ in {
       monitors = mkOption {
         type = types.monitorMap;
         description = "The monitors and their desktops";
-        default = {
-          DP-0 = {
-            default = true;
-            resolution = "preferred";
-            position = "1080x0";
-            transform = null;
-            workspaces = [ 1 2 3 4 5 ];
-            zoom = "auto";
-          };
-          HDMI-A-0 = {
-            resolution = "preferred";
-            position = "0x0";
-            transform = 1;
-            workspaces = [ 6 7 8 9 10 ];
-            zoom = "auto";
-          };
-        };
+        default = { };
       };
 
       startupPrograms = mkOption {
@@ -47,6 +34,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [{
+      assertion = monitors != { };
+      message = "No monitors configured";
+    }];
+
     programs.zsh.shellAliases.fix_remote = "${fix_script} & disown && exit";
     xsession.windowManager.bspwm = {
       enable = true;

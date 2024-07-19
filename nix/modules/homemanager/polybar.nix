@@ -3,6 +3,8 @@ with lib;
 let
   cfg = config.modules.homemanager.polybar;
   colors = config.modules.homemanager.settings.theme.colors;
+  monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 
   modules_left = [
     "launcher"
@@ -38,28 +40,12 @@ in {
       };
       monitors = mkOption {
         type = types.monitorMap;
-        default = {
-          DP-0 = {
-            default = true;
-            resolution = "preferred";
-            position = "1080x0";
-            transform = null;
-            workspaces = [ 1 2 3 4 5 ];
-            zoom = "auto";
-          };
-          HDMI-A-0 = {
-            resolution = "preferred";
-            position = "0x0";
-            transform = 1;
-            workspaces = [ 6 7 8 9 10 ];
-            zoom = "auto";
-          };
-        };
+        default = { };
         description = "The monitors to use";
       };
       terminal = mkOption {
-        type = types.package;
-        default = pkgs.kitty;
+        type = types.nullOr types.package;
+        default = null;
         description = "The terminal to use";
       };
       filemanager = mkOption {
@@ -120,14 +106,14 @@ in {
     xsession.windowManager.bspwm.startupPrograms = mapAttrsToList
       (name: monitor:
         "MONITOR=${name} ${getExe cfg.package} --reload ${
-          if monitor.default then "main" else "secondary"
-        }") cfg.monitors;
+          if monitor.primary then "main" else "secondary"
+        }") monitors;
 
     modules.homemanager.polybar.script = concatStringsSep "\n" (mapAttrsToList
       (name: monitor:
         "MONITOR=${name} ${getExe cfg.package} --reload ${
-          if monitor.default then "main" else "secondary"
-        } &") cfg.monitors);
+          if monitor.primary then "main" else "secondary"
+        } &") monitors);
 
     services = {
       polybar = {
@@ -525,14 +511,13 @@ in {
             content = "";
             click-left = "${lib.getExe cfg.filemanager} &";
             click-right =
-              "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.ranger} ~ &";
+              "${lib.getExe terminal} -e ${lib.getExe pkgs.ranger} ~ &";
           };
 
           "module/monitor" = {
             "inherit" = "module/links";
             content = "";
-            click-left =
-              "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.btop} &";
+            click-left = "${lib.getExe terminal} -e ${lib.getExe pkgs.btop} &";
           };
 
           "module/github" = {

@@ -42,6 +42,34 @@ let
 in {
   options = {
     modules.homemanager.settings = {
+      terminal = mkOption {
+        type = types.package;
+        default = pkgs.alacritty;
+        description = "The terminal emulator to use.";
+      };
+      monitors = mkOption {
+        type = types.attrsOf types.monitorMap;
+        default = { };
+        description = "The configuration of the monitors.";
+        example = {
+          x11 = {
+            DP-0 = {
+              primary = true;
+              workspaces = [ 1 2 3 4 5 ];
+            };
+
+            HDMI-A-0 = { workspaces = [ 6 7 8 9 10 ]; };
+          };
+          wayland = {
+            DP-0 = {
+              primary = true;
+              workspaces = [ 1 2 3 4 5 ];
+            };
+
+            HDMI-A-0 = { workspaces = [ 6 7 8 9 10 ]; };
+          };
+        };
+      };
       theme = mkOption {
         type = types.submodule {
           options = {

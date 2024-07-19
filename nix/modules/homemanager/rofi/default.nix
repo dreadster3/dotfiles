@@ -3,6 +3,7 @@ with lib;
 let
   cfg = config.modules.homemanager.rofi;
   packagePath = getExe config.programs.rofi.finalPackage;
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
     modules.homemanager.rofi = {
@@ -18,8 +19,8 @@ in {
         description = "Font to use for rofi";
       };
       terminal = mkOption {
-        type = types.package;
-        default = pkgs.kitty;
+        type = types.nullOr types.package;
+        default = null;
         description = "Terminal to use for rofi";
       };
       powermenu = mkOption {
@@ -53,7 +54,7 @@ in {
       cycle = true;
       font = cfg.font;
       plugins = [ ] ++ optional cfg.powermenu.enable cfg.powermenu.package;
-      terminal = getExe cfg.terminal;
+      terminal = getExe terminal;
       location = "center";
       theme = ./theme.rasi;
       extraConfig = {

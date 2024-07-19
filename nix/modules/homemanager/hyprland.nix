@@ -5,13 +5,18 @@ let
 
   transformToString = transform:
     if transform == null then "" else ",transform,${toString transform}";
+
+  monitors = config.modules.homemanager.settings.monitors.wayland
+    // cfg.monitors;
+
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
     modules.homemanager.hyprland = {
       enable = mkEnableOption "hyprland";
       terminal = mkOption {
-        type = types.package;
-        default = pkgs.kitty;
+        type = types.nullOr types.package;
+        default = null;
         description = "Terminal to use.";
       };
       fileManager = mkOption {
@@ -21,22 +26,7 @@ in {
       };
       monitors = mkOption {
         type = types.monitorMap;
-        default = {
-          DP-1 = {
-            resolution = "preferred";
-            position = "1080x0";
-            transform = null;
-            workspaces = [ 1 2 3 4 5 ];
-            zoom = "auto";
-          };
-          HDMI-A-1 = {
-            resolution = "preferred";
-            position = "0x0";
-            transform = 1;
-            workspaces = [ 6 7 8 9 10 ];
-            zoom = "auto";
-          };
-        };
+        default = { };
         description = "List of monitors to configure.";
       };
       startupPrograms = mkOption {
@@ -48,6 +38,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [{
+      assertion = monitors != { };
+      message = "No monitors configured.";
+    }];
+
     home.packages = with pkgs; [ wl-clipboard grimblast ];
 
     wayland.windowManager.hyprland = {
@@ -62,7 +57,7 @@ in {
         monitor = mapAttrsToList (name: monitor:
           "${name},${monitor.resolution},${monitor.position},${
             toString monitor.zoom
-          }${transformToString monitor.transform}") cfg.monitors;
+          }${transformToString monitor.transform}") monitors;
 
         exec-once = [
           ''
@@ -175,10 +170,10 @@ in {
 
         workspace = foldlAttrs (acc: name: monitor:
           acc ++ (map (workspace: "${toString workspace},monitor:${name}")
-            monitor.workspaces)) [ ] cfg.monitors;
+            monitor.workspaces)) [ ] monitors;
 
         bind = [
-          "$mainMod, Return, exec, ${getExe cfg.terminal}"
+          "$mainMod, Return, exec, ${getExe terminal}"
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, ${getExe cfg.fileManager}"
