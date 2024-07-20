@@ -6,7 +6,8 @@
   imports = [
     ../common.nix
 
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
+    ./home.nix
   ];
 
   hardware.opengl = {

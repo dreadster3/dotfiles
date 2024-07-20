@@ -2,7 +2,6 @@
 with lib;
 let
   cfg = config.modules.homemanager.spicetify;
-  catpuccin_theme = import ./spicetify_catppuccin_theme.nix;
   spicetify = getExe pkgs.spicetify-cli;
 in {
 
@@ -31,7 +30,7 @@ in {
                         mkdir $SPICETIFY_CONFIG/Extensions
                         mkdir $SPICETIFY_CONFIG/CustomApps
 
-            			cp -r "${catpuccin_theme}/catppuccin" "$SPICETIFY_CONFIG/Themes/"
+            			cp -r "${pkgs.spicetify_theme}/catppuccin" "$SPICETIFY_CONFIG/Themes/"
             			# Initialize config file
             			${spicetify} config > /dev/null || true
 

@@ -2,24 +2,25 @@
 with lib;
 let
   cfg = config.modules.homemanager.alacritty;
+  colors = config.modules.homemanager.settings.theme.colors;
 
-  base = "#1e1e2e";
-  text = "#cdd6f4";
-  overlay_1 = "#7f849c";
-  subtext_0 = "#a6adc8";
-  subtext_1 = "#bac2de";
-  surface_1 = "#45475a";
-  surface_2 = "#585b70";
+  base = colors.base;
+  text = colors.text;
+  overlay_1 = colors.overlay_1;
+  subtext_0 = colors.subtext_0;
+  subtext_1 = colors.subtext_1;
+  surface_1 = colors.surface_1;
+  surface_2 = colors.surface_2;
 
-  red = "#f38ba8";
-  green = "#a6e3a1";
-  yellow = "#f9e2af";
-  blue = "#89b4fa";
-  pink = "#f5c2e7";
-  teal = "#94e2d5";
-  rosewater = "#f5e0dc";
-  lavender = "#b4befe";
-  peach = "#fab387";
+  red = colors.red;
+  green = colors.green;
+  yellow = colors.yellow;
+  blue = colors.blue;
+  pink = colors.pink;
+  teal = colors.teal;
+  rosewater = colors.rosewater;
+  lavender = colors.lavender;
+  peach = colors.peach;
 
 in {
   options = {

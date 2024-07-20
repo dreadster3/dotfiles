@@ -3,45 +3,20 @@ with lib;
 let
   cfg = config.modules.homemanager.hyprland;
 
-  monitorType = types.submodule {
-    options = {
-      resolution = mkOption {
-        type = types.str;
-        default = "preferred";
-        description = "Resolution to use.";
-      };
-      position = mkOption {
-        type = types.str;
-        default = "auto";
-        description = "Position to use.";
-      };
-      transform = mkOption {
-        type = types.nullOr types.int;
-        default = null;
-        description = "Transform to use.";
-      };
-      workspaces = mkOption {
-        type = types.listOf types.int;
-        default = [ ];
-        description = "List of workspaces to configure.";
-      };
-      zoom = mkOption {
-        type = types.either types.number types.str;
-        default = "auto";
-        description = "Zoom for monitor";
-      };
-    };
-  };
-
   transformToString = transform:
     if transform == null then "" else ",transform,${toString transform}";
+
+  monitors = config.modules.homemanager.settings.monitors.wayland
+    // cfg.monitors;
+
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
     modules.homemanager.hyprland = {
       enable = mkEnableOption "hyprland";
       terminal = mkOption {
-        type = types.package;
-        default = pkgs.kitty;
+        type = types.nullOr types.package;
+        default = null;
         description = "Terminal to use.";
       };
       fileManager = mkOption {
@@ -50,23 +25,8 @@ in {
         description = "File manager to use.";
       };
       monitors = mkOption {
-        type = types.attrsOf monitorType;
-        default = {
-          DP-1 = {
-            resolution = "preferred";
-            position = "1080x0";
-            transform = null;
-            workspaces = [ 1 2 3 4 5 ];
-            zoom = "auto";
-          };
-          HDMI-A-1 = {
-            resolution = "preferred";
-            position = "0x0";
-            transform = 1;
-            workspaces = [ 6 7 8 9 10 ];
-            zoom = "auto";
-          };
-        };
+        type = types.monitorMap;
+        default = { };
         description = "List of monitors to configure.";
       };
       startupPrograms = mkOption {
@@ -78,6 +38,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [{
+      assertion = monitors != { };
+      message = "No monitors configured.";
+    }];
+
     home.packages = with pkgs; [ wl-clipboard grimblast ];
 
     wayland.windowManager.hyprland = {
@@ -92,7 +57,8 @@ in {
         monitor = mapAttrsToList (name: monitor:
           "${name},${monitor.resolution},${monitor.position},${
             toString monitor.zoom
-          }${transformToString monitor.transform}") cfg.monitors;
+          }${transformToString monitor.transform}") monitors
+          ++ [ "Unknown-1,disable" ];
 
         exec-once = [
           ''
@@ -205,10 +171,10 @@ in {
 
         workspace = foldlAttrs (acc: name: monitor:
           acc ++ (map (workspace: "${toString workspace},monitor:${name}")
-            monitor.workspaces)) [ ] cfg.monitors;
+            monitor.workspaces)) [ ] monitors;
 
         bind = [
-          "$mainMod, Return, exec, ${getExe cfg.terminal}"
+          "$mainMod, Return, exec, ${getExe terminal}"
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, ${getExe cfg.fileManager}"

@@ -1,17 +1,20 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  x11package = pkgs.callPackage ./derivation.nix { };
-  cfg = config.modules.homemanager.x11eventcallbacks;
+let cfg = config.modules.homemanager.x11eventcallbacks;
 in {
   options = {
     modules.homemanager.x11eventcallbacks = {
       enable = mkEnableOption "Enable x11 event callbacks";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.x11eventcallbacks;
+        description = "The package to use for x11 event callbacks";
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ (x11package) ];
+    home.packages = with pkgs; [ cfg.package ];
 
     systemd.user.services.x11eventcallbacks = {
       Unit = {
@@ -23,20 +26,13 @@ in {
       Install = { WantedBy = [ "graphical-session.target" ]; };
 
       Service = {
-        ExecStart = "${x11package}/bin/x11_event_callbacks "
+        ExecStart = "${cfg.package}/bin/x11_event_callbacks "
           + pkgs.writers.writeBash "restart_polybar.sh" ''
             bspc wm --restart
             nitrogen --restore 2> /dev/null
             pkill polybar
-            MONITOR=Virtual1 polybar main &
-            if type "xrandr"; then
-            	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-            		if [ $m = 'Virtual1' ]; then
-            			continue
-            		fi
-            		MONITOR=$m polybar --reload secondary &
-            	done
-            fi'';
+            ${config.modules.homemanager.polybar.script}
+          '';
         Environment = [
           "DISPLAY=:0"
           "PATH=/run/current-system/sw/bin:${pkgs.nitrogen}/bin:${pkgs.polybar}/bin"

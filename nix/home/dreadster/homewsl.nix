@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [ ../../../modules/homemanager ./default.nix ];
+  imports = [ ./default.nix ];
 
   # Enable experimental nix features
   nix.package = pkgs.nix;

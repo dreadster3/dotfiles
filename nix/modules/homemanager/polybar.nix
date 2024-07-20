@@ -2,10 +2,9 @@
 with lib;
 let
   cfg = config.modules.homemanager.polybar;
-
-  battery_module = if cfg.useBattery then [ "battery" ] else [ ];
-  brightness_module = if cfg.useBrightness then [ "backlight" ] else [ ];
-  tray_module = if cfg.useTray then [ "tray" ] else [ ];
+  colors = config.modules.homemanager.settings.theme.colors;
+  monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 
   modules_left = [
     "launcher"
@@ -20,17 +19,33 @@ let
 
   modules_center = [ "date" ];
 
-  modules_right = tray_module
-    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ] ++ battery_module
-    ++ brightness_module ++ [ "sysmenu" ];
+  modules_right = optional cfg.tray.enable "tray"
+    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ]
+    ++ optional cfg.battery.enable "battery"
+    ++ optional cfg.brightness.enable "backlight" ++ [ "sysmenu" ];
 
 in {
   options = {
     modules.homemanager.polybar = {
       enable = mkEnableOption "polybar";
-      terminal = mkOption {
+      package = mkOption {
         type = types.package;
-        default = pkgs.kitty;
+        default = pkgs.polybar;
+        description = "The polybar package to use";
+      };
+      script = mkOption {
+        type = types.str;
+        readOnly = true;
+        description = "The script to run polybar";
+      };
+      monitors = mkOption {
+        type = types.monitorMap;
+        default = { };
+        description = "The monitors to use";
+      };
+      terminal = mkOption {
+        type = types.nullOr types.package;
+        default = null;
         description = "The terminal to use";
       };
       filemanager = mkOption {
@@ -56,20 +71,26 @@ in {
           };
         };
       };
-      useBattery = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to include battery in polybar";
+      battery = mkOption {
+        type = types.submodule {
+          options = { enable = mkEnableOption "polybar.battery"; };
+        };
+        default = { };
+        description = "Battery module configuration";
       };
-      useBrightness = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to include brightness in polybar";
+      brightness = mkOption {
+        type = types.submodule {
+          options = { enable = mkEnableOption "polybar.brightness"; };
+        };
+        default = { };
+        description = "Brightness module configuration";
       };
-      useTray = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to use system tray";
+      tray = mkOption {
+        type = types.submodule {
+          options = { enable = mkEnableOption "polybar.tray"; };
+        };
+        default = { };
+        description = "Tray module configuration";
       };
       extraConfig = mkOption {
         type = types.str;
@@ -82,18 +103,23 @@ in {
     # Disable the default polybar service
     systemd.user.services.polybar = lib.mkForce { };
 
+    xsession.windowManager.bspwm.startupPrograms = mapAttrsToList
+      (name: monitor:
+        "MONITOR=${name} ${getExe cfg.package} --reload ${
+          if monitor.primary then "main" else "secondary"
+        }") monitors;
+
+    modules.homemanager.polybar.script = concatStringsSep "\n" (mapAttrsToList
+      (name: monitor:
+        "MONITOR=${name} ${getExe cfg.package} --reload ${
+          if monitor.primary then "main" else "secondary"
+        } &") monitors);
+
     services = {
       polybar = {
         enable = true;
-        package = pkgs.polybar.override {
-          alsaSupport = true;
-          pulseSupport = true;
-        };
-        script = ''
-          MONITOR="DP-0" ${pkgs.polybar}/bin/polybar --reload main &
-          MONITOR="HDMI-0" ${pkgs.polybar}/bin/polybar --reload secondary &
-          MONITOR="rdp0" ${pkgs.polybar}/bin/polybar --reload secondary &
-        '';
+        package = cfg.package;
+        script = cfg.script;
         extraConfig = cfg.extraConfig;
         config = {
           "bar/main" = {
@@ -485,14 +511,13 @@ in {
             content = "";
             click-left = "${lib.getExe cfg.filemanager} &";
             click-right =
-              "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.ranger} ~ &";
+              "${lib.getExe terminal} -e ${lib.getExe pkgs.ranger} ~ &";
           };
 
           "module/monitor" = {
             "inherit" = "module/links";
             content = "";
-            click-left =
-              "${lib.getExe cfg.terminal} -e ${lib.getExe pkgs.btop} &";
+            click-left = "${lib.getExe terminal} -e ${lib.getExe pkgs.btop} &";
           };
 
           "module/github" = {
@@ -523,12 +548,12 @@ in {
             content-padding = 2;
 
             click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''
-              			  PATH=/run/current-system/sw/bin:$PATH
+                PATH=/run/current-system/sw/bin:$PATH
 
-                            ${lib.getExe pkgs.rofi} -show p -modi "p:${
-                              lib.getExe pkgs.rofi-power-menu
-                            }"
-              			'');
+              	${lib.getExe pkgs.rofi} -show p -modi "p:${
+                 lib.getExe pkgs.rofi-power-menu
+               }"
+            '');
           };
 
           "colorscheme" = {
@@ -536,41 +561,9 @@ in {
             background = "#222436";
             foreground = "#c8d3f5";
             foreground-alt = "#8f8f8f";
-            base = "#cd1e1e2e";
-            mantle = "#181825";
-            crust = "#11111b";
-            text = "#cdd6f4";
-            subtext0 = "#a6adc8";
-            subtext1 = "#bac2de";
-            surface0 = "#313244";
-            surface1 = "#45475a";
-            surface2 = "#585b70";
-            overlay0 = "#6c7086";
-            overlay1 = "#7f849c";
-            overlay2 = "#9399b2";
-
-            # Accent Colors
-            blue = "#89b4fa";
-            lavender = "#b4befe";
-            sapphire = "#74c7ec";
-            sky = "#89dceb";
-            teal = "#94e2d5";
-            green = "#a6e3a1";
-            yellow = "#f9e2af";
-            peach = "#fab387";
-            maroon = "#eba0ac";
-            red = "#f38ba8";
-            mauve = "#cba6f7";
-            pink = "#f5c2e7";
-            flamingo = "#f2cdcd";
-            rosewater = "#f5e0dc";
-            transparent = "#FF00000";
-          };
+          } // colors;
         };
       };
     };
-    # systemd.user.services.polybar = {
-    #   Install.WantedBy = [ "graphical-session.target" ];
-    # };
   };
 }

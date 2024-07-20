@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.homemanager.sxhkd;
+let
+  cfg = config.modules.homemanager.sxhkd;
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
     modules.homemanager.sxhkd = {
@@ -11,8 +13,8 @@ in {
         description = "The sxhkd package to use";
       };
       terminal = mkOption {
-        type = types.package;
-        default = pkgs.kitty;
+        type = types.nullOr types.package;
+        default = null;
         description = "The default terminal to use";
       };
     };
@@ -25,7 +27,7 @@ in {
       enable = true;
       package = cfg.package;
       keybindings = {
-        "super + Return" = getExe cfg.terminal;
+        "super + Return" = getExe terminal;
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "super + alt + {q,r}" = "bspc {quit, wm -r}";
         "super + {_, shift + }w" = "bspc node -{c,k}";

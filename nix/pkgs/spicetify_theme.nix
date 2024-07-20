@@ -1,6 +1,5 @@
-let
-	pkgs = import <nixpkgs> {};
-in pkgs.fetchFromGitHub {
+{ pkgs, ... }:
+pkgs.fetchFromGitHub {
   owner = "catppuccin";
   repo = "spicetify";
   rev = "ba3986981c717856d9ec68412c95ae282b505538";

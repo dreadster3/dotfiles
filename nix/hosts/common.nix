@@ -1,14 +1,24 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ../modules/nixos ];
+{ inputs, outputs, config, lib, pkgs, ... }: {
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    outputs.nixosModules
+    ./users.nix
+  ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+
+    config.allowUnfree = true;
+  };
 
   # Run appimages directly
-  boot.binfmt.registrations.appimage = {
-    wrapInterpreterInShell = false;
-    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-    recognitionType = "magic";
-    offset = 0;
-    mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
-    magicOrExtension = "\\x7fELF....AI\\x02";
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -59,9 +69,12 @@
 
   services.locate.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   security.polkit.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  nix = {
+    channel.enable = false;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
+  home-manager.extraSpecialArgs = { inherit inputs outputs; };
 }

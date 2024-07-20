@@ -12,7 +12,7 @@ in {
     remmina
 
     wineWowPackages.stable
-    pkgs-unstable.winetricks
+    pkgs.unstable.winetricks
 
     discord
     betterdiscordctl
@@ -30,21 +30,13 @@ in {
     betterlockscreen.enable = true;
     dunst.enable = true;
     picom.enable = true;
-    spicetify = {
-      enable = true;
-      package = pkgs-unstable.spicetify-cli;
-    };
+    spicetify.enable = true;
     helix.enable = true;
     thunderbird.enable = true;
     gtk.enable = true;
     mechvibes.enable = true;
 
-    neovim = {
-      enable = true;
-      terminal = terminal;
-      package = pkgs-unstable.neovim-unwrapped;
-      go = pkgs-unstable.go;
-    };
+    neovim.terminal = terminal;
 
     polybar = {
       enable = true;

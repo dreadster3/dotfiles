@@ -1,6 +1,8 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.homemanager.wofi;
+let
+  cfg = config.modules.homemanager.wofi;
+  colors = config.modules.homemanager.settings.theme.colors;
 in {
   options = {
     modules.homemanager.wofi = {
@@ -61,7 +63,7 @@ in {
         normal_window = true;
       };
       style =
-        "	#window {\n		background-color: #1e1e2e;\n		border-radius: 8px;\n	}\n\n	#input {\n		border-radius: 8px;\n		margin: 6px;\n		border: none;\n		color: white;\n		background-color: #222235;\n	}\n\n	#inner-box {\n		margin: 8px;\n	}\n\n	#entry:selected {\n		background: rgba(137, 181, 250, .6);\n		color: white;\n	}\n\n	#text {\n		color: white;\n	}\n  ";
+        "	#window {\n		background-color: ${colors.base};\n		border-radius: 8px;\n	}\n\n	#input {\n		border-radius: 8px;\n		margin: 6px;\n		border: none;\n		color: white;\n		background-color: #222235;\n	}\n\n	#inner-box {\n		margin: 8px;\n	}\n\n	#entry:selected {\n		background: rgba(137, 181, 250, .6);\n		color: white;\n	}\n\n	#text {\n		color: white;\n	}\n  ";
     };
   };
 }

@@ -11,6 +11,8 @@ let
     #(setq org-latex-compiler "lualatex")
     #(setq org-preview-latex-default-process 'dvisvgm)
   });
+
+  terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
     modules.homemanager.neovim = {
@@ -20,8 +22,8 @@ in {
         default = pkgs.neovim-unwrapped;
       };
       terminal = mkOption {
-        type = types.package;
-        default = pkgs.kitty;
+        type = types.nullOr types.package;
+        default = null;
       };
       go = mkOption {
         type = types.package;
@@ -91,7 +93,7 @@ in {
       name = "Neovim";
       genericName = "Text Editor";
       comment = "Edit text files";
-      exec = "${lib.getExe cfg.terminal} -e nvim %F";
+      exec = "${getExe terminal} -e nvim %F";
       terminal = false;
       type = "Application";
       icon = "nvim";
