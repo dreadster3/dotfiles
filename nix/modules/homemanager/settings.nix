@@ -49,7 +49,10 @@ in {
       };
       monitors = mkOption {
         type = types.attrsOf types.monitorMap;
-        default = { };
+        default = {
+          x11 = { };
+          wayland = { };
+        };
         description = "The configuration of the monitors.";
         example = {
           x11 = {
