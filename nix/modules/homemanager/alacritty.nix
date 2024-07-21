@@ -51,11 +51,7 @@ in {
     programs.alacritty = {
       enable = true;
       settings = {
-        font = {
-          size = cfg.font.size;
-          normal = { family = cfg.font.name; };
-          italic = { family = "VictorMono Nerd Font"; };
-        };
+        font = { italic = { family = "VictorMono Nerd Font"; }; };
 
         window = {
           padding = {
@@ -69,91 +65,6 @@ in {
           mods = "Control|Shift";
           action = "SpawnNewInstance";
         }];
-
-        colors = {
-          primary = {
-            background = base;
-            foreground = text;
-            dim_foreground = overlay_1;
-            bright_foreground = text;
-          };
-          cursor = {
-            text = base;
-            cursor = rosewater;
-          };
-          vi_mode_cursor = {
-            text = base;
-            cursor = lavender;
-          };
-          search = {
-            matches = {
-              foreground = base;
-              background = subtext_0;
-            };
-            focused_match = {
-              foreground = base;
-              background = green;
-            };
-          };
-          footer_bar = {
-            foreground = base;
-            background = subtext_0;
-          };
-          hints = {
-            start = {
-              foreground = base;
-              background = yellow;
-            };
-            end = {
-              foreground = base;
-              background = subtext_0;
-            };
-          };
-          selection = {
-            foreground = base;
-            background = rosewater;
-          };
-          normal = {
-            black = surface_1;
-            red = red;
-            green = green;
-            yellow = yellow;
-            blue = blue;
-            magenta = pink;
-            cyan = teal;
-            white = subtext_1;
-          };
-          bright = {
-            black = surface_2;
-            red = red;
-            green = green;
-            yellow = yellow;
-            blue = blue;
-            magenta = pink;
-            cyan = teal;
-            white = subtext_0;
-          };
-          dim = {
-            black = surface_1;
-            red = red;
-            green = green;
-            yellow = yellow;
-            blue = blue;
-            magenta = pink;
-            cyan = teal;
-            white = subtext_1;
-          };
-          indexed_colors = [
-            {
-              index = 16;
-              color = peach;
-            }
-            {
-              index = 17;
-              color = rosewater;
-            }
-          ];
-        };
       };
     };
   };

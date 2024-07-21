@@ -52,11 +52,10 @@ in {
       enable = true;
       package = cfg.package;
       cycle = true;
-      font = cfg.font;
       plugins = [ ] ++ optional cfg.powermenu.enable cfg.powermenu.package;
       terminal = getExe terminal;
       location = "center";
-      theme = ./theme.rasi;
+      theme = import ./theme.nix { inherit config lib; };
       extraConfig = {
         modi = "drun";
         show-icons = true;

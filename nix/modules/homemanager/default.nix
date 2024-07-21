@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./settings.nix
+    ./stylix
 
     ./zsh.nix
     ./alacritty.nix

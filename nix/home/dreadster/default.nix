@@ -29,6 +29,8 @@
     lshw
     usbutils
     ethtool
+
+    tree
   ];
 
   home = {
@@ -62,7 +64,8 @@
   };
 
   modules.homemanager = {
-    nerdfonts.enable = true;
+    # nerdfonts.enable = true;
+    stylix.enable = true;
     alacritty.enable = true;
     kitty.enable = true;
     sxhkd.enable = true;

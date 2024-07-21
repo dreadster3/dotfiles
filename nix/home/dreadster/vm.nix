@@ -18,12 +18,14 @@ in {
       };
     };
 
-    nerdfonts.package = pkgs.unstable.nerdfonts;
-    gtk.enable = true;
+    gtk.enable = false;
     dunst.enable = true;
 
     # X11
-    polybar.enable = true;
+    polybar = {
+      enable = true;
+      networkInterface = { name = "ens33"; };
+    };
     rofi.enable = true;
     sxhkd.enable = true;
     bspwm = {
