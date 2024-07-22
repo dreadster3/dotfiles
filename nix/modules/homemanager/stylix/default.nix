@@ -18,7 +18,10 @@ in {
         bspwm.enable = true;
         dunst.enable = true;
         feh.enable = true;
-        firefox.enable = true;
+        firefox = {
+          enable = true;
+          profileNames = [ "dreadster" ];
+        };
         gtk.enable = true;
         hyprland.enable = true;
         hyprpaper.enable = true;

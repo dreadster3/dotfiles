@@ -18,8 +18,10 @@ in {
       };
     };
 
-    gtk.enable = false;
+    bat.enable = true;
+    gtk.enable = true;
     dunst.enable = true;
+    firefox.enable = true;
 
     # X11
     polybar = {

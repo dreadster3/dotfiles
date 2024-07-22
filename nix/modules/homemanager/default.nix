@@ -1,10 +1,11 @@
-{ ... }: {
+{ name, ... }: {
   imports = [
     ./settings.nix
     ./stylix
 
     ./zsh.nix
     ./alacritty.nix
+    ./firefox.nix
     ./kitty.nix
     ./sxhkd.nix
     ./nerdfonts.nix
@@ -30,6 +31,7 @@
     ./betterlockscreen.nix
     ./tmux.nix
     ./flameshot.nix
+    ./bat.nix
 
     ./hyprland.nix
     ./hyprlock.nix
