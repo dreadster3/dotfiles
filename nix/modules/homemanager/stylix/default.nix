@@ -2,7 +2,7 @@
 with lib;
 let cfg = config.modules.homemanager.stylix;
 in {
-  imports = [ ./polybar.nix ];
+  imports = [ ./polybar.nix ./waybar ];
 
   options = {
     modules.homemanager.stylix = { enable = mkEnableOption "stylix"; };
@@ -10,6 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     stylix = {
+      opacity = { desktop = 0.5; };
       autoEnable = false;
       targets = {
         alacritty.enable = true;
@@ -33,8 +34,9 @@ in {
 
         # Plugin takes care of styling
         tmux.enable = false;
+        waybar.enable = false;
+        waybar-custom.enable = true;
 
-        waybar.enable = true;
         zathura.enable = true;
       };
     };

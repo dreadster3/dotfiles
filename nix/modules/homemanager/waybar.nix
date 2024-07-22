@@ -83,17 +83,17 @@ in {
           };
           cpu = {
             interval = 10;
-            format = "   {usage}%";
+            format = " {usage}%";
             max-length = 10;
           };
           memory = {
             interval = 30;
-            format = "   {}%";
+            format = " {}%";
             max-length = 10;
           };
           disk = {
             interval = 30;
-            format = "󰋊  {percentage_used}%";
+            format = "󰋊 {percentage_used}%";
             path = "/";
           };
           clock = { format = "  {:%e %b %Y %H:%M}  "; };
@@ -146,14 +146,6 @@ in {
           };
         };
       };
-      style = ../../../configurations/waybar/style.css;
-    };
-
-    xdg.configFile."waybar/mocha.css" = {
-      source = ../../../configurations/waybar/mocha.css;
-      onChange = ''
-        ${pkgs.procps}/bin/pkill -u $USER -USR2 waybar || true
-      '';
     };
   };
 }

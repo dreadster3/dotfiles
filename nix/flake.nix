@@ -49,11 +49,13 @@
         };
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules = [ ./hosts/desktop/configuration.nix ];
+          modules =
+            [ ./hosts/desktop/configuration.nix stylix.nixosModules.stylix ];
         };
         nixos-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules = [ ./hosts/laptop/configuration.nix ];
+          modules =
+            [ ./hosts/laptop/configuration.nix stylix.nixosModules.stylix ];
         };
       };
 
