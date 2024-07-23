@@ -2,7 +2,6 @@
 with lib;
 let
   cfg = config.modules.homemanager.polybar;
-  colors = config.modules.homemanager.settings.theme.colors;
   monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 
@@ -412,7 +411,7 @@ in {
             # Label Format
             format = "<label>";
             format-background = "\${colorscheme.mantle}";
-            format-foreground = "\${colorscheme.text}";
+            format-foreground = "\${colorscheme.foreground}";
             format-padding = "2";
 
             # Label
