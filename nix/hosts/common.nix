@@ -21,7 +21,7 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor = {
-      name = "Catppuccin-Mocha-Blue-Cursors";
+      name = "catppuccin-mocha-blue-cursors";
       package = pkgs.catppuccin-cursors.mochaBlue;
       size = 32;
     };
@@ -112,4 +112,5 @@
   };
 
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
+  home-manager.backupFileExtension = "bkp";
 }

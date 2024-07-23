@@ -90,11 +90,11 @@ in {
       };
     };
 
-    home.file = {
-      "${profilePath name}/containers.json" = {
-        text = mkContainersJson containers;
-        force = true;
-      };
-    };
+    # home.file = {
+    #   "${profilePath name}/containers.json" = {
+    #     text = mkContainersJson containers;
+    #     force = true;
+    #   };
+    # };
   };
 }
