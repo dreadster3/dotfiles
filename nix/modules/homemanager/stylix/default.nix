@@ -10,7 +10,6 @@ in {
 
   config = mkIf cfg.enable {
     stylix = {
-      opacity = { desktop = 0.5; };
       autoEnable = false;
       targets = {
         alacritty.enable = true;
@@ -40,5 +39,7 @@ in {
         zathura.enable = true;
       };
     };
+
+    programs.mangohud.settings.background_alpha = mkForce 0.5;
   };
 }

@@ -64,6 +64,7 @@ in {
     thunderbird.enable = true;
     gtk.enable = true;
     mechvibes.enable = true;
+    mangohud.enable = true;
 
     polybar.enable = true;
     rofi.enable = true;

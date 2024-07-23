@@ -3,6 +3,7 @@
     ./settings.nix
     ./stylix
 
+    ./mangohud.nix
     ./zsh.nix
     ./alacritty.nix
     ./firefox.nix
