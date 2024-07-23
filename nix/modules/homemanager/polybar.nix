@@ -115,6 +115,12 @@ in {
           if monitor.primary then "main" else "secondary"
         } &") monitors);
 
+    programs.zsh.shellAliases = {
+      polybar_all = "(pkill polybar || true) && ${
+          pkgs.writers.writeBash "polybar_all" cfg.script
+        }";
+    };
+
     services = {
       polybar = {
         enable = true;

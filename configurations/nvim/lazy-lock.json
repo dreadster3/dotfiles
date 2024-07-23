@@ -59,7 +59,7 @@
   "project": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "28c1d5a295eb5310afa2523d4ae9aa41ec5a9de2" },
   "rainbow": { "branch": "master", "commit": "b29da4a6061a88270e875b38367d82c04c856128" },
-  "refactoring": { "branch": "master", "commit": "1c2b889fd494d7f0f4fcc1b0dacd7e8d4b3d9fbe" },
+  "refactoring": { "branch": "master", "commit": "23af7cf5d39a48c24db146bd567e5cbac14def3e" },
   "rnvimr": { "branch": "main", "commit": "3c41af742a61caf74a9f83fb82b9ed03ef13b880" },
   "rust-tools.nvim": { "branch": "master", "commit": "676187908a1ce35ffcd727c654ed68d851299d3e" },
   "scrollbar": { "branch": "main", "commit": "d09f14aa16c9f2748e77008f9da7b1f76e4e7b85" },
