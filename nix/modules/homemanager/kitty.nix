@@ -35,10 +35,6 @@ in {
     programs.kitty = {
       enable = true;
       theme = cfg.theme;
-      font = {
-        name = cfg.font.name;
-        size = cfg.font.size;
-      };
       settings = {
         bold_font = "auto";
         bold_italic_font = "auto";

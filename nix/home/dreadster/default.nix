@@ -29,6 +29,8 @@
     lshw
     usbutils
     ethtool
+
+    tree
   ];
 
   home = {
@@ -62,8 +64,12 @@
   };
 
   modules.homemanager = {
-    nerdfonts.enable = true;
+    # nerdfonts.enable = true;
+    stylix.enable = true;
+
+    bat.enable = true;
     alacritty.enable = true;
+    firefox.enable = true;
     kitty.enable = true;
     sxhkd.enable = true;
     zsh.enable = true;
@@ -75,9 +81,9 @@
     btop.enable = true;
     ranger.enable = true;
     tmux.enable = true;
+    lazygit.enable = true;
 
     # Not enabled defaults
-    gtk.cursor.enable = lib.mkDefault true;
     polybar.tray.enable = lib.mkDefault true;
     rofi.powermenu.enable = true;
   };

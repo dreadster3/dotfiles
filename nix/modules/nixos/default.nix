@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./openrgb.nix
     ./x11.nix
     ./grub.nix
     ./bspwm.nix

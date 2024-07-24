@@ -55,15 +55,21 @@ in {
       };
     };
 
+    openrgb = {
+      enable = true;
+      startup.enable = true;
+    };
     betterlockscreen.enable = true;
     dunst.enable = true;
     picom.enable = true;
+    flameshot.enable = true;
     aio.enable = true;
     spicetify.enable = true;
     helix.enable = true;
     thunderbird.enable = true;
     gtk.enable = true;
     mechvibes.enable = true;
+    mangohud.enable = true;
 
     polybar.enable = true;
     rofi.enable = true;

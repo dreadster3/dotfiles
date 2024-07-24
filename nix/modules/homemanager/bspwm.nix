@@ -43,7 +43,6 @@ in {
     xsession.windowManager.bspwm = {
       enable = true;
       settings = {
-        focused_border_color = "#89B4FA";
         border_width = 3;
         window_gap = 10;
 
