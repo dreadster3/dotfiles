@@ -107,7 +107,7 @@
   security.polkit.enable = true;
 
   nix = {
-    channel.enable = false;
+    # channel.enable = false;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
