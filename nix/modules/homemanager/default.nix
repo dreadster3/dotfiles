@@ -3,6 +3,7 @@
     ./settings.nix
     ./stylix
 
+    ./lazygit.nix
     ./openrgb.nix
     ./mangohud.nix
     ./zsh.nix

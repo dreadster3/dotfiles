@@ -65,8 +65,9 @@
 
   modules.homemanager = {
     # nerdfonts.enable = true;
-    bat.enable = true;
     stylix.enable = true;
+
+    bat.enable = true;
     alacritty.enable = true;
     firefox.enable = true;
     kitty.enable = true;
@@ -80,6 +81,7 @@
     btop.enable = true;
     ranger.enable = true;
     tmux.enable = true;
+    lazygit.enable = true;
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;
