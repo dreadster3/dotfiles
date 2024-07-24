@@ -27,7 +27,7 @@ in {
       open = false;
       nvidiaSettings = true;
       modesetting.enable = true;
-      powerManagement = { enable = true; };
+      powerManagement = { enable = cfg.enablePrime; };
       # forceFullCompositionPipeline = true;
       prime = mkIf cfg.enablePrime {
         sync.enable = true;

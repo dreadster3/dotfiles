@@ -18,7 +18,6 @@ in {
       };
     };
 
-    bat.enable = true;
     gtk.enable = true;
     dunst.enable = true;
 

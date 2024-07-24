@@ -26,8 +26,6 @@
       size = 32;
     };
 
-    opacity = { popups = 0.5; };
-
     fonts = {
       monospace = {
         name = "FiraCode Nerd Font";

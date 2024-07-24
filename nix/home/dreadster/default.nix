@@ -65,6 +65,7 @@
 
   modules.homemanager = {
     # nerdfonts.enable = true;
+    bat.enable = true;
     stylix.enable = true;
     alacritty.enable = true;
     firefox.enable = true;

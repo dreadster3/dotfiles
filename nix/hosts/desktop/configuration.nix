@@ -14,6 +14,7 @@
 
   # Bootloader.
   modules.nixos = {
+    openrgb.enable = true;
     x11.enable = true;
     nightlight.enable = true;
     bspwm.enable = true;
@@ -45,10 +46,6 @@
   # List services that you want to enable:
   # Enable onedrive
   services.onedrive.enable = true;
-
-  # Enable openrgb
-  services.hardware.openrgb = { enable = true; };
-  services.ratbagd.enable = true;
 
   system.stateVersion = "23.11";
 }
