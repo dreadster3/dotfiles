@@ -50,10 +50,13 @@ in {
       xwayland.enable = true;
       systemd = {
         enable = true;
+        enableXdgAutostart = true;
         variables = [ "--all" ];
       };
       settings = {
         "$mainMod" = "SUPER";
+        debug.disable_logs = false;
+
         monitor = mapAttrsToList (name: monitor:
           "${name},${monitor.resolution},${monitor.position},${
             toString monitor.zoom
@@ -80,30 +83,14 @@ in {
           layout = "dwindle";
         };
 
+        cursor = { no_hardware_cursors = true; };
+
         env = [
-          # "NIXOS_OZONE_WL,1"
-          # "GUAKE_ENABLE_WAYLAND,1"
-          "XCURSOR_SIZE,24"
-          "WLR_NO_HARDWARE_CURSORS,1"
-          # "MOZ_ENABLE_WAYLAND,1"
-          # "LIBGL_ALWAYS_SOFTWARE,1"
-          # "LIBVA_DRIVER_NAME,nvidia"
-          # "GBM_BACKEND,nvidia-drm"
-          # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          # "CLUTTER_BACKEND,wayland"
-
-          # INFO: Fix issue with gamescope (https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264)
-          # "SDL_VIDEODRIVER,wayland"
-          # "GDK_BACKEND,wayland,x11"
-
-          # "XDG_CURRENT_DESKTOP,Hyprland"
-          # "XDG_SESSION_DESKTOP,Hyprland"
-          # "XDG_SESSION_TYPE,wayland"
-          # "GTK_USE_PORTAL,1"
-
-          # INFO: https://github.com/ValveSoftware/gamescope/issues/896
-          # "ENABLE_VKBASALT,1"
-          # "QT_QPA_PLATFORMTHEME, wayland;xcb"
+          "LIBVA_DRIVER_NAME,nvidia"
+          "XDG_SESSION_TYPE,wayland"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          "NVD_BACKEND,direct"
         ];
 
         decoration = {

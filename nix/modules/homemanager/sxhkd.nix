@@ -28,6 +28,7 @@ in {
       package = cfg.package;
       keybindings = {
         "super + Return" = getExe terminal;
+        "super + ctrl + q" = "${pkgs.systemd}/bin/loginctl lock-session";
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "super + alt + {q,r}" = "bspc {quit, wm -r}";
         "super + {_, shift + }w" = "bspc node -{c,k}";

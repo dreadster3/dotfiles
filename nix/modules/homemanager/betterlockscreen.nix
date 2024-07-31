@@ -19,12 +19,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.sxhkd.keybindings = {
-      "super + ctrl + q" = "${getExe cfg.package} --display 1 -l ${
-          concatStringsSep " " cfg.arguments
-        }";
-    };
-
     home.packages = with pkgs; [ feh ];
 
     services.betterlockscreen = {

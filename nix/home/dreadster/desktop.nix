@@ -111,6 +111,8 @@ in {
     wlogout.enable = true;
     swaylock.enable = true;
     swayidle.enable = true;
+    # hypridle.enable = true;
+    # hyprlock.enable = true;
     wofi.enable = true;
     waybar.enable = true;
   };

@@ -1,6 +1,9 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.modules.homemanager.hypridle;
+let
+  cfg = config.modules.homemanager.hypridle;
+
+  hyprlock = config.programs.hyprlock.package;
 in {
   options = {
     modules.homemanager.hypridle = {
@@ -31,8 +34,9 @@ in {
       settings = {
         general = {
           after_sleep_cmd = "hyprctl dispatch dpms on";
+          before_sleep_cmd = "${hyprlock}/bin/hyprlock";
+          lock_cmd = "${hyprlock}/bin/hyprlock";
           ignore_dbus_inhibit = false;
-          lock_cmd = "${config.programs.hyprlock.package}/bin/hyprlock";
         };
 
         listener = [
