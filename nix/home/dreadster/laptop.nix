@@ -1,7 +1,6 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 let
-  primaryMonitor = "DP-0";
-  secondaryMonitor = "HDMI-0";
+  primaryMonitor = "eDP-0";
 
   terminal = pkgs.alacritty;
 in {
@@ -27,41 +26,56 @@ in {
   ];
 
   modules.homemanager = {
+    settings = {
+      monitors = {
+        x11 = {
+          eDP-0 = {
+            primary = true;
+            workspaces = [ 1 2 3 4 5 ];
+          };
+        };
+        wayland = {
+          eDP-1 = {
+            resolution = "1920x1080";
+            position = "0x0";
+            zoom = "1.25";
+            workspaces = [ 6 7 8 9 10 ];
+          };
+          DP-3 = {
+            primary = true;
+            resolution = "1920x1080";
+            zoom = "1.25";
+            position = "auto";
+            workspaces = [ 1 2 3 4 5 ];
+          };
+          DP-4 = {
+            primary = true;
+            resolution = "1920x1080";
+            zoom = "1.0";
+            position = "auto";
+            workspaces = [ 1 2 3 4 5 ];
+          };
+        };
+      };
+    };
     betterlockscreen.enable = true;
     dunst.enable = true;
     picom.enable = true;
+    flameshot.enable = true;
     spicetify.enable = true;
     helix.enable = true;
     thunderbird.enable = true;
     gtk.enable = true;
     mechvibes.enable = true;
+    mangohud.enable = true;
 
-    neovim.terminal = terminal;
-
-    polybar = {
-      enable = true;
-      terminal = terminal;
-    };
-    rofi = {
-      enable = true;
-      terminal = terminal;
-    };
-    sxhkd = {
-      enable = true;
-      terminal = terminal;
-    };
+    polybar.enable = true;
+    rofi.enable = true;
+    sxhkd.enable = true;
     bspwm = {
       enable = true;
-      monitors = {
-        "${primaryMonitor}" = [ "1" "2" "3" "4" "5" ];
-        "${secondaryMonitor}" = [ "6" "7" "8" "9" "10" ];
-      };
       startupPrograms = [
-        "MONITOR='${primaryMonitor}' ${pkgs.polybar}/bin/polybar main"
-        "MONITOR='${secondaryMonitor}' ${pkgs.polybar}/bin/polybar secondary"
-        "${
-          lib.getExe pkgs.xorg.xrandr
-        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
+        "${lib.getExe pkgs.xorg.xrandr} --output ${primaryMonitor} --primary"
         "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
         "${pkgs.xbindkeys}/bin/xbindkeys"
       ];
@@ -69,9 +83,9 @@ in {
     xbindkeys = {
       enable = true;
       settings = {
-        "XF86AudioRaiseVolume" = "pactl set-sink-volume @DEFAULT_SINK@ +5%";
-        "XF86AudioLowerVolume" = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
-        "XF86AudioMute" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        "XF86AudioRaiseVolume" = "amixer -D pipewire sset Master 5%+";
+        "XF86AudioLowerVolume" = "amixer -D pipewire sset Master 5%-";
+        "XF86AudioMute" = "amixer -D pipewire set Master 1+ toggle";
         "XF86AudioPlay" =
           "${lib.getExe pkgs.playerctl} --player spotify play-pause";
         "XF86AudioPrev" =
@@ -83,19 +97,7 @@ in {
     pentest.enable = true;
 
     # Hyprland
-    hyprland = {
-      enable = true;
-      terminal = terminal;
-      monitors = {
-        eDP-1 = {
-          resolution = "preferred";
-          position = "0x0";
-          transform = null;
-          workspaces = [ 1 2 3 4 5 ];
-          zoom = 1.0;
-        };
-      };
-    };
+    hyprland.enable = true;
     hyprpaper = {
       enable = true;
       wallpapers = { "eDP-1" = ../../../../wallpapers/shinobu.jpg; };

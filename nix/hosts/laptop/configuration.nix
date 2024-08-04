@@ -6,7 +6,8 @@
   imports = [ # Include the results of the hardware scan.
     ../common.nix
 
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
+    ./home.nix
   ];
 
   boot.kernelParams = [ "acpi_osi=!" ''acpi_osi="Windows 2009"'' ];
@@ -37,10 +38,6 @@
   };
 
   networking.hostName = "nixos-laptop";
-  networking.interfaces.eno1.wakeOnLan = {
-    enable = true;
-    policy = [ "magic" ];
-  };
 
   # Suspend on idle
   services.logind.extraConfig = ''
@@ -51,10 +48,6 @@
   # List services that you want to enable:
   # Enable onedrive
   services.onedrive.enable = true;
-
-  # Enable openrgb
-  services.hardware.openrgb = { enable = true; };
-  services.ratbagd.enable = true;
 
   system.stateVersion = "23.11";
 }

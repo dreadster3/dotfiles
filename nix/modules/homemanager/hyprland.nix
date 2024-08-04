@@ -61,7 +61,7 @@ in {
           "${name},${monitor.resolution},${monitor.position},${
             toString monitor.zoom
           }${transformToString monitor.transform}") monitors
-          ++ [ "Unknown-1,disable" ",preferred,auto,auto" ];
+          ++ [ "Unknown-1,disable" ",preferred,auto,1.0" ];
 
         exec-once = [
           ''
