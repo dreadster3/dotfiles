@@ -1,4 +1,4 @@
-{ name, ... }: {
+{ ... }: {
   imports = [
     ./settings.nix
     ./stylix

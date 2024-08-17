@@ -70,6 +70,7 @@ in {
     gtk.enable = true;
     mechvibes.enable = true;
     mangohud.enable = true;
+    firefox.enable = true;
 
     polybar.enable = true;
     rofi.enable = true;

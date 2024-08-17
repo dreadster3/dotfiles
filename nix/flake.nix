@@ -63,12 +63,14 @@
         "dreadster@wsl" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs lib; };
-          modules = [ ./home/dreadster/homewsl.nix ];
+          modules =
+            [ ./home/dreadster/homewsl.nix stylix.homeManagerModules.stylix ];
         };
         "deck@steamdeck" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/dreadster/steamdeck.nix ];
+          modules =
+            [ ./home/dreadster/steamdeck.nix stylix.homeManagerModules.stylix ];
         };
       };
     };

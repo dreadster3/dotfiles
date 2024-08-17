@@ -84,7 +84,6 @@
 
     bat.enable = true;
     alacritty.enable = true;
-    firefox.enable = true;
     kitty.enable = true;
     sxhkd.enable = true;
     zsh.enable = true;

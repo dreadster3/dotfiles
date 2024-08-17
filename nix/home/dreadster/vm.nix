@@ -20,6 +20,7 @@ in {
 
     gtk.enable = true;
     dunst.enable = true;
+    firefox.enable = true;
 
     # X11
     polybar = {
