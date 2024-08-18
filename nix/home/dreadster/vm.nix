@@ -1,5 +1,7 @@
 { inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
 let
+  primaryMonitor = "Virtual1";
+  secondaryMonitor = "Virtual2";
 in {
   imports = [ ./default.nix ];
 
@@ -31,8 +33,12 @@ in {
     sxhkd.enable = true;
     bspwm = {
       enable = true;
-      startupPrograms =
-        [ "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper" ];
+      startupPrograms = [
+        "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
+        "${
+          lib.getExe pkgs.xorg.xrandr
+        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor}"
+      ];
     };
     flameshot.enable = true;
     mechvibes.enable = true;
