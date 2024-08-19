@@ -30,7 +30,20 @@ return {
 		"windwp/nvim-autopairs",
 		name = "autopairs",
 		dependencies = {
-			{ "windwp/nvim-ts-autotag", name = "autopairs-ts", opts = {} },
+			{
+				"windwp/nvim-ts-autotag",
+				name = "autopairs-ts",
+				opts = {
+					opts = {
+						enable = true,
+						enable_rename = true,
+						enable_close = true,
+						-- Issue open to fix this: https://github.com/windwp/nvim-ts-autotag/issues/125
+						-- enable_close_on_slash = true
+						enable_close_on_slash = true,
+					},
+				},
+			},
 		},
 		event = { "InsertEnter" },
 		init = function()
@@ -49,16 +62,16 @@ return {
 			end,
 		},
 	},
-	{ "folke/todo-comments.nvim", event = "BufReadPre", opts = {} },
-	{ "RRethy/vim-illuminate", event = { "BufReadPost" } },
+	{ "folke/todo-comments.nvim", event = "BufReadPre",     opts = {} },
+	{ "RRethy/vim-illuminate",    event = { "BufReadPost" } },
 	{
 		"gbprod/yanky.nvim",
 		lazy = false,
 		keys = {
-			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
-			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
-			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
-			{ "<c-n>", "<Plug>(YankyCycleForward)", mode = { "n", "x" } },
+			{ "y",     "<Plug>(YankyYank)",          mode = { "n", "x" } },
+			{ "p",     "<Plug>(YankyPutAfter)",      mode = { "n", "x" } },
+			{ "P",     "<Plug>(YankyPutBefore)",     mode = { "n", "x" } },
+			{ "<c-n>", "<Plug>(YankyCycleForward)",  mode = { "n", "x" } },
 			{ "<c-p>", "<Plug>(YankyCycleBackward)", mode = { "n", "x" } },
 		},
 		opts = {},

@@ -122,7 +122,7 @@ return {
 			},
 		},
 	},
-	{ "hiphish/rainbow-delimiters.nvim", name = "rainbow",  event = "BufReadPre" },
+	{ "hiphish/rainbow-delimiters.nvim", version = "*",     name = "rainbow", event = "BufReadPre" },
 	{
 		"dreadster3/template.nvim",
 		-- dev = false,

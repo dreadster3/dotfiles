@@ -30,14 +30,6 @@ return {
 			highlight = { enable = true, disable = {} },
 			indent = { enable = true },
 			context_commentstring = { enable = true },
-			autotag = {
-				enable = true,
-				enable_rename = true,
-				enable_close = true,
-				-- Issue open to fix this: https://github.com/windwp/nvim-ts-autotag/issues/125
-				-- enable_close_on_slash = true
-				enable_close_on_slash = false,
-			},
 		},
 	},
 }
