@@ -43,6 +43,7 @@
       sourceNix = true;
     };
     pentest.enable = true;
+    neovim.go = pkgs.unstable.go_1_23;
   };
 
   programs.home-manager.enable = true;

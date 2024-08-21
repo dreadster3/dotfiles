@@ -89,8 +89,8 @@
     zsh.enable = true;
     neovim = {
       enable = true;
-      package = pkgs.unstable.neovim-unwrapped;
-      go = pkgs.unstable.go;
+      package = lib.mkDefault pkgs.unstable.neovim-unwrapped;
+      go = lib.mkDefault pkgs.unstable.go;
     };
     btop.enable = true;
     ranger.enable = true;

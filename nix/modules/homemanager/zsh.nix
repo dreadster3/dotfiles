@@ -49,7 +49,7 @@ in {
         custom = "$HOME/.oh-my-zsh/custom";
       };
       shellAliases = {
-        n = "nvim ./";
+        n = "nvim";
         zshconfig =
           "nvim ~/Documents/projects/github/dotfiles/nix/modules/homemanager/zsh.nix";
         nvimconfig =
