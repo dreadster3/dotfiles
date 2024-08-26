@@ -71,6 +71,7 @@
     unzip
 
     clinfo
+    postman
 
     gnome.eog
   ];
