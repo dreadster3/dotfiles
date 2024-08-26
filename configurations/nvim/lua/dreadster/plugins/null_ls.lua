@@ -30,7 +30,7 @@ return {
 				formatting.taplo,
 				formatting.isort,
 				formatting.autoflake,
-				formatting.gofmt,
+				formatting.goimports,
 				formatting.rustywind,
 				formatting.nixfmt,
 				formatting.beautysh,
