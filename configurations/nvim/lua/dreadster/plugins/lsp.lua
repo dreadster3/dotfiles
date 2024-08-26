@@ -69,7 +69,7 @@ return {
 				tflint = {},
 				bashls = {},
 				jsonls = {},
-				gopls = {},
+				gopls = { mason = false },
 			},
 			setup = {
 				clangd = function(_, opts)

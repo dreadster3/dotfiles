@@ -47,6 +47,7 @@ in {
         enable = true;
         package = cfg.package;
         extraPackages = with pkgs; [
+          # Depependencies
           unzip
           gcc
           cmake
@@ -62,7 +63,10 @@ in {
           gnumake
           terraform
           glow
+
+          # Golang
           cfg.go
+          gopls
 
           # For octo plugin
           gh
