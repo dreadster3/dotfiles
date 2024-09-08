@@ -8,6 +8,11 @@
 # key = "Slash"
 # mods = "Control"
 
+# [[keyboard.bindings]]
+# action = "ReceiveChar"
+# key = "Return"
+# mods = "Alt"
+
 [window]
 option_as_alt = "Both"
 
