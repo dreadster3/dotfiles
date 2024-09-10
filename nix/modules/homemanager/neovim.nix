@@ -89,6 +89,9 @@ in {
           # Rust
           rustfmt
           rust-analyzer
+
+          # Bash
+          beautysh
         ];
       };
     };
