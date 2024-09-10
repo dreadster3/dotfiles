@@ -18,6 +18,9 @@ in {
         tmuxPlugins.catppuccin
       ];
       extraConfig = ''
+        bind-key v split-window -v
+        bind-key h split-window -h
+
         set -g @catppuccin_flavour 'mocha'
       '';
     };
