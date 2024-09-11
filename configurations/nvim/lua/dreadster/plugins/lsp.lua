@@ -20,6 +20,13 @@ return {
 			},
 		},
 		opts = {
+			capabilities = {
+				textDocument = {
+					foldingRange = {
+						lineFoldingOnly = true,
+					},
+				},
+			},
 			diagnostics = {
 				virtual_text = false, -- disable virtual text
 				signs = {
@@ -70,6 +77,7 @@ return {
 				bashls = {},
 				jsonls = {},
 				gopls = { mason = false },
+				yamlls = {},
 			},
 			setup = {
 				clangd = function(_, opts)
@@ -80,6 +88,13 @@ return {
 					if utils.check_module_installed("omnisharp_extended") then
 						local handler = require("omnisharp_extended").handler
 						opts.handlers = { ["textDocument/definition"] = handler }
+					end
+				end,
+				yamlls = function(_, opts)
+					local cfg = require("yaml-companion").setup(opts)
+
+					for key, value in pairs(cfg) do
+						opts[key] = value
 					end
 				end,
 			},
@@ -237,5 +252,17 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "treesitter" },
 		main = "refactoring",
 		opts = {},
+	},
+	{
+		"someone-stole-my-name/yaml-companion.nvim",
+		name = "yaml-companion",
+		dependencies = {
+			{ "lspconfig" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "telescope" },
+		},
+		config = function()
+			require("telescope").load_extension("yaml_schema")
+		end,
 	},
 }
