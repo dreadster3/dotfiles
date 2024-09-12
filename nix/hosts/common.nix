@@ -15,6 +15,8 @@
     config.allowUnfree = true;
   };
 
+  security.pki.certificateFiles = [ ../../certificates/issuer.crt ];
+
   stylix = {
     enable = true;
     image = ../../wallpapers/furina.jpg;
