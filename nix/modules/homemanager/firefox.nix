@@ -70,38 +70,40 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.firefox = {
-      enable = true;
-      package = cfg.package;
-      policies = {
-        PromptForDownloadLocation = true;
-        DefaultDownloadDirectory = config.home.homeDirectory + "/Downloads";
-        Extensions = {
-          Install = [
-            "https://addons.mozilla.org/firefox/downloads/file/4317971/darkreader-4.9.88.xpi"
-            "https://addons.mozilla.org/firefox/downloads/file/4316758/adguard_adblocker-4.3.64.xpi"
-            "https://addons.mozilla.org/firefox/downloads/file/4307738/bitwarden_password_manager-2024.6.3.xpi"
-            "https://addons.mozilla.org/firefox/downloads/file/4186050/multi_account_containers-8.1.3.xpi"
-          ];
-        };
-      };
-      # profiles."${name}" = {
-      #   id = 0;
-      #   isDefault = true;
-      #   settings = { "browser.search.region" = "PT"; };
-      #   search = {
-      #     default = "DuckDuckGo";
-      #     force = true;
-      #     privateDefault = "DuckDuckGo";
-      #   };
-      # };
-    };
+    home.packages = [ cfg.package ];
 
-    # home.file = {
-    #   "${profilePath name}/containers.json" = {
-    #     text = mkContainersJson containers;
-    #     force = true;
+    # programs.firefox = {
+    #   enable = true;
+    #   package = cfg.package;
+    #   policies = {
+    #     PromptForDownloadLocation = true;
+    #     DefaultDownloadDirectory = config.home.homeDirectory + "/Downloads";
+    #     Extensions = {
+    #       Install = [
+    #         "https://addons.mozilla.org/firefox/downloads/file/4317971/darkreader-4.9.88.xpi"
+    #         "https://addons.mozilla.org/firefox/downloads/file/4316758/adguard_adblocker-4.3.64.xpi"
+    #         "https://addons.mozilla.org/firefox/downloads/file/4307738/bitwarden_password_manager-2024.6.3.xpi"
+    #         "https://addons.mozilla.org/firefox/downloads/file/4186050/multi_account_containers-8.1.3.xpi"
+    #       ];
+    #     };
     #   };
+    #   # profiles."${name}" = {
+    #   #   id = 0;
+    #   #   isDefault = true;
+    #   #   settings = { "browser.search.region" = "PT"; };
+    #   #   search = {
+    #   #     default = "DuckDuckGo";
+    #   #     force = true;
+    #   #     privateDefault = "DuckDuckGo";
+    #   #   };
+    #   # };
     # };
+    #
+    # # home.file = {
+    # #   "${profilePath name}/containers.json" = {
+    # #     text = mkContainersJson containers;
+    # #     force = true;
+    # #   };
+    # # };
   };
 }
