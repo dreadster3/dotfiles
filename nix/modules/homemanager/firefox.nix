@@ -85,16 +85,16 @@ in {
           ];
         };
       };
-      profiles."${name}" = {
-        id = 0;
-        isDefault = true;
-        settings = { "browser.search.region" = "PT"; };
-        search = {
-          default = "DuckDuckGo";
-          force = true;
-          privateDefault = "DuckDuckGo";
-        };
-      };
+      # profiles."${name}" = {
+      #   id = 0;
+      #   isDefault = true;
+      #   settings = { "browser.search.region" = "PT"; };
+      #   search = {
+      #     default = "DuckDuckGo";
+      #     force = true;
+      #     privateDefault = "DuckDuckGo";
+      #   };
+      # };
     };
 
     # home.file = {
