@@ -60,12 +60,19 @@ let
     '';
 in {
   options = {
-    modules.homemanager.firefox = { enable = mkEnableOption "firefox"; };
+    modules.homemanager.firefox = {
+      enable = mkEnableOption "firefox";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.firefox-devedition;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
+      package = cfg.package;
       policies = {
         PromptForDownloadLocation = true;
         DefaultDownloadDirectory = config.home.homeDirectory + "/Downloads";
