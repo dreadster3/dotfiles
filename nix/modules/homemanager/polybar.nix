@@ -2,6 +2,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.polybar;
+  firefox = config.modules.homemanager.firefox.package;
   monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 
@@ -507,8 +508,8 @@ in {
           "module/firefox" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe pkgs.firefox} &";
-            click-right = "${lib.getExe pkgs.firefox} --private-window &";
+            click-left = "${lib.getExe firefox} &";
+            click-right = "${lib.getExe firefox} --private-window &";
           };
 
           "module/explorer" = {
@@ -529,20 +530,19 @@ in {
             "inherit" = "module/links";
             content = "";
             click-left =
-              "${lib.getExe pkgs.firefox} https://github.com/dreadster3 &";
+              "${lib.getExe firefox} https://github.com/dreadster3 &";
           };
 
           "module/reddit" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe pkgs.firefox} https://reddit.com &";
+            click-left = "${lib.getExe firefox} https://reddit.com &";
           };
 
           "module/azure" = {
             "inherit" = "module/links";
             content = "󰠅";
-            click-left =
-              "${lib.getExe pkgs.firefox} https://portal.azure.com &";
+            click-left = "${lib.getExe firefox} https://portal.azure.com &";
           };
 
           "module/sysmenu" = {
