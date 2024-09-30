@@ -11,7 +11,7 @@ return {
 		cmd = { "Telescope" },
 		keys = {
 			{ "<leader>ff", ":Telescope find_files<CR>", desc = "Find files" },
-			{ "<C-f>",      ":Telescope live_grep<CR>",  desc = "Live grep" },
+			{ "<C-f>", ":Telescope live_grep<CR>", desc = "Live grep" },
 			{
 				"<leader>fm",
 				":Telescope media_files<CR>",
@@ -122,7 +122,7 @@ return {
 			},
 		},
 	},
-	{ "hiphish/rainbow-delimiters.nvim", version = "*",     name = "rainbow", event = "BufReadPre" },
+	{ "hiphish/rainbow-delimiters.nvim", version = "0.6.1", name = "rainbow", event = "BufReadPre" },
 	{
 		"dreadster3/template.nvim",
 		-- dev = false,
@@ -225,7 +225,7 @@ return {
 			datapath = vim.fn.stdpath("data"),
 		},
 	},
-	{ "stevearc/overseer.nvim",          name = "overseer", opts = {} },
+	{ "stevearc/overseer.nvim", name = "overseer", opts = {} },
 	{
 		"danymat/neogen",
 		name = "neogen",
@@ -250,7 +250,7 @@ return {
 				desc = "Replace in files (Spectre)"
 			}
 		}
-		,
+,
 	},
 	{
 		"cshuaimin/ssr.nvim",
