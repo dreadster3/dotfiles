@@ -22,7 +22,7 @@ return {
 		dependencies = { "devicons" },
 		keys = {
 			{
-				"<leader>fM",
+				"<C-e>",
 				function()
 					require("mini.files").open()
 				end,
