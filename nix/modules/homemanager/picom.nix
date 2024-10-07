@@ -5,6 +5,10 @@ in {
   options = {
     modules.homemanager.picom = {
       enable = mkEnableOption "picom";
+      onStartup = mkOption {
+        type = types.bool;
+        default = true;
+      };
       package = mkOption {
         type = types.package;
         default = pkgs.picom;
@@ -20,7 +24,8 @@ in {
     # Disable the default picom service
     systemd.user.services.picom = lib.mkForce { };
 
-    xsession.windowManager.bspwm.startupPrograms = [ "${getExe cfg.package}" ];
+    xsession.windowManager.bspwm.startupPrograms =
+      mkIf cfg.onStartup [ "${getExe cfg.package}" ];
 
     services.picom = {
       enable = true;

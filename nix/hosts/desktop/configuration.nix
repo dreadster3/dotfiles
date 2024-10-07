@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [ # Include the results of the hardware scan.
     ../common.nix
 
@@ -30,6 +30,13 @@
 
     hyprland.enable = true;
   };
+
+  # Needed when virtualizing the desktop with no GPU passthrough
+  services.spice-vdagentd.enable = true;
+  services.qemuGuest.enable = true;
+  services.xserver.videoDrivers = [ "qxl" ];
+  home-manager.users.dreadster.modules.homemanager.picom.onStartup =
+    lib.mkForce false;
 
   networking.hostName = "nixos-desktop";
   networking.interfaces.eno1.wakeOnLan = {

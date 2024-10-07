@@ -33,6 +33,11 @@ in {
             workspaces = [ 1 2 3 4 5 ];
           };
           HDMI-0 = { workspaces = [ 6 7 8 9 10 ]; };
+          Virtual-1 = {
+            primary = true;
+            workspaces = [ 1 2 3 4 5 ];
+          };
+          Virtual-2 = { workspaces = [ 6 7 8 9 10 ]; };
         };
 
         wayland = {
@@ -81,6 +86,9 @@ in {
         "${
           lib.getExe pkgs.xorg.xrandr
         } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
+        "${
+          lib.getExe pkgs.xorg.xrandr
+        } --output Virtual-1 --preferred --primary"
         "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
       ];
     };

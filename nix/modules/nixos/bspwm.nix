@@ -10,11 +10,20 @@ in {
       message = "xserver must be enabled to use bspwm";
     }];
 
-    services.xserver = { windowManager = { bspwm = { enable = true; }; }; };
+    services.xserver = {
+      # displayManager = {
+      #   lightdm = {
+      #     enable = true;
+      #     greeter.enable = true;
+      #   };
+      # };
+      windowManager.bspwm.enable = true;
+    };
 
     services.displayManager = {
       defaultSession = "none+bspwm";
       sddm.enable = true;
     };
+
   };
 }
