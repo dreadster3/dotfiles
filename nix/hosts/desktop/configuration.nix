@@ -29,17 +29,12 @@
     zerotier.enable = true;
 
     hyprland.enable = true;
+
+    virtualisation.guest.qemu.enable = true;
   };
 
-  # Needed when virtualizing the desktop with no GPU passthrough
-  services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
-  services.xserver.videoDrivers = [ "qxl" ];
-  home-manager.users.dreadster.modules.homemanager.picom.onStartup =
-    lib.mkForce false;
-
   networking.hostName = "nixos-desktop";
-  networking.interfaces.eno1.wakeOnLan = {
+  networking.interfaces.enp6s18.wakeOnLan = {
     enable = true;
     policy = [ "magic" ];
   };

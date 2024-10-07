@@ -80,6 +80,7 @@ in {
     polybar.enable = true;
     rofi.enable = true;
     sxhkd.enable = true;
+    x11eventcallbacks.enable = true;
     bspwm = {
       enable = true;
       startupPrograms = [

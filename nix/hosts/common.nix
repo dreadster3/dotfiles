@@ -45,6 +45,8 @@
         desktop = 12;
       };
     };
+
+    targets = { regreet.enable = false; };
   };
 
   # Run appimages directly

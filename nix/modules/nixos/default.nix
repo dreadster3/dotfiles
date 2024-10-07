@@ -23,5 +23,9 @@
     ./nightlight.nix
     ./storage.nix
     ./hyprland.nix
+    ./virtualisation
+
+    # TODO: Remove when this gets fixed upstream
+    ./regreet.nix
   ];
 }

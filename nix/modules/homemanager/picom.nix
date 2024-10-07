@@ -33,7 +33,7 @@ in {
       backend = cfg.backend;
 
       # No screen tearing  on nvidia drivers
-      vSync = true;
+      vSync = false;
 
       shadow = true;
       shadowOffsets = [ (-7) (-7) ];
