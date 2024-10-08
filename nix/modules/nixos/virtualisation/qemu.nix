@@ -17,8 +17,21 @@ in {
     services.spice-autorandr.enable = true;
     services.qemuGuest.enable = true;
 
-    services.xserver.videoDrivers = optional (cfg.opengl) "modesetting"
-      ++ [ "qxl" ];
-    hardware.opengl.enable = mkIf cfg.opengl true;
+    environment.systemPackages = with pkgs; [ glxinfo ];
+
+    services.xserver.videoDrivers = [ "qxl" ];
+
+    specialisation.virgl.configuration = mkIf cfg.opengl {
+      nixpkgs.config.cudaSupport = true;
+
+      hardware.opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+      };
+
+      services.xserver.videoDrivers = lib.mkForce [ "virgl" ];
+    };
+
   };
 }
