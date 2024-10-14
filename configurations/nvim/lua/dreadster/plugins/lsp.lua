@@ -6,6 +6,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"neodev",
+			"b0o/schemastore.nvim",
 		},
 		name = "lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
@@ -19,86 +20,95 @@ return {
 				desc = "Restart Lsp",
 			},
 		},
-		opts = {
-			capabilities = {
-				textDocument = {
-					foldingRange = {
-						lineFoldingOnly = true,
-					},
-				},
-			},
-			diagnostics = {
-				virtual_text = false, -- disable virtual text
-				signs = {
-					active = {
-						{ name = "DiagnosticSignError", text = "" },
-						{ name = "DiagnosticSignWarn", text = "" },
-						{ name = "DiagnosticSignHint", text = "" },
-						{ name = "DiagnosticSignInfo", text = "" },
-					},
-				},
-				update_in_insert = true,
-				underline = true,
-				severity_sort = true,
-				float = {
-					focusable = true,
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-				},
-			},
-			servers = {
-				lua_ls = {
-					mason = false,
-					settings = {
-						Lua = {
-							diagnostics = { globals = { "vim" } },
-							workspace = { checkThirdParty = false },
+		opts = function()
+			return {
+				capabilities = {
+					textDocument = {
+						foldingRange = {
+							lineFoldingOnly = true,
 						},
 					},
 				},
-				texlab = { mason = false },
-				pyright = { single_file_support = true },
-				omnisharp = {
-					enable_editorconfig_support = true,
-					enable_ms_build_load_projects_on_demand = false,
-					enable_roslyn_analyzers = false,
-					organize_imports_on_format = true,
-					enable_import_completion = true,
-					sdk_include_prereleases = true,
-					analyze_open_documents_only = false,
+				diagnostics = {
+					virtual_text = false, -- disable virtual text
+					signs = {
+						active = {
+							{ name = "DiagnosticSignError", text = "" },
+							{ name = "DiagnosticSignWarn", text = "" },
+							{ name = "DiagnosticSignHint", text = "" },
+							{ name = "DiagnosticSignInfo", text = "" },
+						},
+					},
+					update_in_insert = true,
+					underline = true,
+					severity_sort = true,
+					float = {
+						focusable = true,
+						style = "minimal",
+						border = "rounded",
+						source = "always",
+						header = "",
+						prefix = "",
+					},
 				},
-				rust_analyzer = { mason = false },
-				clangd = {},
-				terraformls = {},
-				tflint = {},
-				bashls = {},
-				jsonls = {},
-				gopls = { mason = false },
-				yamlls = {},
-			},
-			setup = {
-				clangd = function(_, opts)
-					opts.capabilities.offsetEncoding = "utf-8"
-				end,
-				omnisharp = function(_, opts)
-					local utils = require("dreadster.utils")
-					if utils.check_module_installed("omnisharp_extended") then
-						local handler = require("omnisharp_extended").handler
-						opts.handlers = { ["textDocument/definition"] = handler }
-					end
-				end,
-				yamlls = function(_, opts)
-					local cfg = require("yaml-companion").setup(opts)
+				servers = {
+					lua_ls = {
+						mason = false,
+						settings = {
+							Lua = {
+								diagnostics = { globals = { "vim" } },
+								workspace = { checkThirdParty = false },
+							},
+						},
+					},
+					texlab = { mason = false },
+					pyright = { single_file_support = true },
+					omnisharp = {
+						enable_editorconfig_support = true,
+						enable_ms_build_load_projects_on_demand = false,
+						enable_roslyn_analyzers = false,
+						organize_imports_on_format = true,
+						enable_import_completion = true,
+						sdk_include_prereleases = true,
+						analyze_open_documents_only = false,
+					},
+					rust_analyzer = { mason = false },
+					clangd = {},
+					terraformls = {},
+					tflint = {},
+					bashls = {},
+					jsonls = {
+						settings = {
+							json = {
+								schemas = require("schemastore").json.schemas(),
+								validate = { enable = true },
+							},
+						},
+					},
+					gopls = { mason = false },
+					yamlls = {},
+				},
+				setup = {
+					clangd = function(_, opts)
+						opts.capabilities.offsetEncoding = "utf-8"
+					end,
+					omnisharp = function(_, opts)
+						local utils = require("dreadster.utils")
+						if utils.check_module_installed("omnisharp_extended") then
+							local handler = require("omnisharp_extended").handler
+							opts.handlers = { ["textDocument/definition"] = handler }
+						end
+					end,
+					yamlls = function(_, opts)
+						local cfg = require("yaml-companion").setup(opts)
 
-					for key, value in pairs(cfg) do
-						opts[key] = value
-					end
-				end,
-			},
-		},
+						for key, value in pairs(cfg) do
+							opts[key] = value
+						end
+					end,
+				},
+			}
+		end,
 		config = function(_, opts)
 			-- Diagnostics
 			for _, sign in ipairs(opts.diagnostics.signs.active) do

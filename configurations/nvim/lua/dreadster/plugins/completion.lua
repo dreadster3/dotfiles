@@ -139,40 +139,6 @@ return {
 		opts = {},
 	},
 	{
-		"github/copilot.vim",
-		enable = false,
-		cond = false,
-		name = "copilot",
-		cmd = { "Copilot" },
-		event = { "InsertEnter" },
-		init = function()
-			local utils = require("dreadster.utils")
-			if utils.is_mac() then
-				vim.g.copilot_proxy = os.getenv("http_proxy")
-			end
-
-			vim.g.copilot_assume_mapped = true
-		end,
-	},
-	{
-		"zbirenbaum/copilot.lua",
-		name = "copilot.lua",
-		cmd = { "Copilot" },
-		event = { "InsertEnter" },
-		opts = {
-			panel = { keymap = { enable = false } },
-			suggestion = {
-				auto_trigger = true,
-				keymap = {
-					accept = "<M-CR>",
-					accept_word = "<M-Right>",
-					accept_line = "<M-Up>",
-				},
-			},
-			filetypes = { yaml = true, markdown = true },
-		},
-	},
-	{
 		"L3MON4D3/LuaSnip",
 		name = "luasnip",
 		dependencies = { "rafamadriz/friendly-snippets" },
