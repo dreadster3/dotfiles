@@ -30,9 +30,9 @@
 
     fonts = {
       monospace = {
-        name = "FiraCode Nerd Font";
+        name = "Mononoki Nerd Font";
         package = pkgs.nerdfonts.override {
-          fonts = [ "FiraCode" "VictorMono" "Iosevka" ];
+          fonts = [ "Mononoki" "VictorMono" "Iosevka" ];
         };
       };
 

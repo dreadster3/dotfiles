@@ -164,7 +164,6 @@ return {
 	},
 	{
 		"folke/twilight.nvim",
-		-- enabled = false,
 		name = "twilight",
 		cmd = "Twilight",
 		opts = { treesitter = true, context = 10 },
@@ -198,6 +197,8 @@ return {
 	},
 	{
 		"echasnovski/mini.icons",
+		name = "miniicons",
+		main = "mini.icons",
 		lazy = true,
 		opts = {
 			file = {
@@ -215,36 +216,6 @@ return {
 			end
 		end,
 	},
-	-- {
-	-- 	"nvim-tree/nvim-web-devicons",
-	-- 	name = "devicons",
-	-- 	lazy = true,
-	-- 	config = function(_, opts)
-	-- 		require("nvim-web-devicons").setup(opts)
-	-- 	end,
-	-- 	opts = {
-	-- 		color_icons = true,
-	-- 		default = true,
-	-- 		override = {
-	-- 			js = { icon = "󰌞", color = "#F7DF1E", name = "Javascript" },
-	-- 			cjs = { icon = "󰌞", color = "#F7DF1E", name = "Javascript" },
-	-- 			ts = { icon = "󰛦", color = "#007ACC", name = "Typescript" },
-	-- 			astro = { icon = "", color = "#FA7A0A", name = "Astro" },
-	-- 		},
-	-- 		override_by_filename = {
-	-- 			["tailwind.config.cjs"] = {
-	-- 				icon = "󱏿",
-	-- 				color = "#06B6D4",
-	-- 				name = "Tailwind",
-	-- 			},
-	-- 			[".prettierrc"] = {
-	-- 				icon = "󰬗",
-	-- 				color = "#7242ED",
-	-- 				name = "Prettier",
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
 	{
 		"sindrets/diffview.nvim",
 		name = "diffview",

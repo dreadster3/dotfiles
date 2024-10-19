@@ -18,6 +18,7 @@ return {
 	-- },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		name = "neotree",
 		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -29,12 +30,30 @@ return {
 			{
 				"<leader>e",
 				function()
-					require("neo-tree.command").execute({ toggle = true, dir = vim.fn.getcwd() })
+					require("neo-tree.command").execute({ action = "focus", toggle = false, dir = vim.fn.getcwd() })
 				end,
 				desc = "Focus neotree",
 			},
 		},
-		lazy = false,
+		init = function()
+			-- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
+			-- because `cwd` is not set up properly.
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
+				desc = "Start Neo-tree with directory",
+				once = true,
+				callback = function()
+					if package.loaded["neo-tree"] then
+						return
+					else
+						local stats = vim.uv.fs_stat(vim.fn.argv(0))
+						if stats and stats.type == "directory" then
+							require("neo-tree")
+						end
+					end
+				end,
+			})
+		end,
 		opts = {
 			open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
 			auto_clean_after_session_restore = true,
@@ -58,10 +77,12 @@ return {
 				},
 			},
 			window = {
-				width = 0.2,
+				width = 30,
+				mappings = {
+					["<C-f>"] = "noop",
+				},
 			},
 			event_handlers = {
-
 				{
 					event = "file_open_requested",
 					handler = function()
@@ -73,6 +94,9 @@ return {
 	},
 	{
 		"echasnovski/mini.files",
+		name = "minifiles",
+		main = "mini.files",
+		lazy = false,
 		version = "*",
 		dependencies = { "devicons" },
 		keys = {
