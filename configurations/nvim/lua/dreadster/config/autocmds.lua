@@ -20,7 +20,7 @@ au("BufEnter", {
 		local filetype = vim.bo.filetype
 
 		if filetype == "NvimTree" then
-			require("nvim-tree.api").tree.reload()
+			-- require("nvim-tree.api").tree.reload()
 		end
 	end,
 })

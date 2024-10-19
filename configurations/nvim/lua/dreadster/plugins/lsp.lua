@@ -5,7 +5,6 @@ return {
 			"mason",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
-			"neodev",
 			"b0o/schemastore.nvim",
 		},
 		name = "lspconfig",
@@ -190,7 +189,7 @@ return {
 			end
 		end,
 	},
-	{ "williamboman/mason.nvim", name = "mason",                 opts = {} },
+	{ "williamboman/mason.nvim", name = "mason", opts = {} },
 	{
 		"glepnir/lspsaga.nvim",
 		dependencies = { "devicons", "treesitter" },
@@ -208,13 +207,7 @@ return {
 		dependencies = { "lspconfig" },
 		event = { "BufReadPost *.cs" },
 	},
-	{
-		"folke/neodev.nvim",
-		name = "neodev",
-		lazy = true,
-		opts = { library = { plugins = { "neotest" }, types = true } },
-	},
-	{ "ray-x/go.nvim",           event = { "BufReadPost *.go" }, opts = {} },
+	{ "ray-x/go.nvim", event = { "BufReadPost *.go" }, opts = {} },
 	{
 		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },

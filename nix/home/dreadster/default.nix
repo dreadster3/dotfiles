@@ -90,7 +90,15 @@
     neovim = {
       enable = true;
       package = lib.mkDefault pkgs.unstable.neovim-unwrapped;
-      go = lib.mkDefault pkgs.unstable.go;
+      go = lib.mkDefault {
+        enable = true;
+        package = pkgs.unstable.go;
+        languageServer = {
+          enable = true;
+          package = pkgs.unstable.gopls;
+        };
+      };
+      rust = lib.mkDefault { enable = true; };
     };
     btop.enable = true;
     ranger.enable = true;

@@ -125,6 +125,7 @@ return {
 					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
+					{ name = "lazydev", group_index = 0 },
 				},
 			})
 
@@ -149,5 +150,17 @@ return {
 			require("luasnip").setup(opts)
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		cmd = "LazyDev",
+		opts = {
+			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				{ path = "LazyVim", words = { "LazyVim" } },
+				{ path = "lazy.nvim", words = { "LazyVim" } },
+			},
+		},
 	},
 }

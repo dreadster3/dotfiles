@@ -12,6 +12,16 @@ let
     #(setq org-preview-latex-default-process 'dvisvgm)
   });
 
+  goPackages = optionals cfg.go.enable ([ cfg.go.package ]
+    ++ optional cfg.go.languageServer.enable cfg.go.languageServer.package);
+
+  rustPackages = optionals cfg.rust.enable [
+    cfg.rust.package
+    pkgs.cargo
+    pkgs.rustfmt
+    pkgs.rust-analyzer
+  ];
+
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
@@ -25,9 +35,38 @@ in {
         type = types.nullOr types.package;
         default = null;
       };
+      rust = mkOption {
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "neovim.rust";
+            package = mkOption {
+              type = types.package;
+              default = pkgs.rustc;
+            };
+          };
+        };
+      };
       go = mkOption {
-        type = types.package;
-        default = pkgs.go;
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "neovim.go";
+            package = mkOption {
+              type = types.package;
+              default = pkgs.go;
+            };
+            languageServer = mkOption {
+              type = types.submodule {
+                options = {
+                  enable = mkEnableOption "neovim.go.languageServer";
+                  package = mkOption {
+                    type = types.package;
+                    default = pkgs.gopls;
+                  };
+                };
+              };
+            };
+          };
+        };
       };
     };
   };
@@ -46,53 +85,44 @@ in {
       neovim = {
         enable = true;
         package = cfg.package;
-        extraPackages = with pkgs; [
-          # Depependencies
-          unzip
-          gcc
-          cmake
-          luarocks
-          nodejs_20
-          nodePackages.npm
-          lazygit
-          rustc
-          cargo
-          ripgrep
-          dotnet-sdk_7
-          nixfmt-classic
-          gnumake
-          terraform
-          glow
+        extraPackages = with pkgs;
+          [
+            # Depependencies
+            unzip
+            gcc
+            cmake
+            luarocks
+            nodejs_20
+            nodePackages.npm
+            lazygit
+            ripgrep
+            dotnet-sdk_7
+            nixfmt-classic
+            gnumake
+            terraform
+            glow
 
-          # Golang
-          cfg.go
-          gopls
+            # For octo plugin
+            gh
 
-          # For octo plugin
-          gh
+            # Dependencies:
+            # Install autopep8
+            python3
 
-          # Dependencies:
-          # Install autopep8
-          python3
+            # Install mason
+            wget
 
-          # Install mason
-          wget
+            # Lua language server not working with mason
+            lua-language-server
+            stylua
 
-          # Lua language server not working with mason
-          lua-language-server
-          stylua
+            # Latex
+            tex
+            texlab
 
-          # Latex
-          tex
-          texlab
-
-          # Rust
-          rustfmt
-          rust-analyzer
-
-          # Bash
-          beautysh
-        ];
+            # Bash
+            beautysh
+          ] ++ goPackages ++ rustPackages;
       };
     };
 

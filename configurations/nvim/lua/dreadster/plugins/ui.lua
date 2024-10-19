@@ -101,6 +101,15 @@ return {
 		event = "VeryLazy",
 		version = "*",
 		dependencies = { "notify", "MunifTanjim/nui.nvim" },
+		config = function(_, opts)
+			-- HACK: noice shows messages from before it was enabled,
+			-- but this is not ideal when Lazy is installing plugins,
+			-- so clear the messages in this case.
+			if vim.o.filetype == "lazy" then
+				vim.cmd([[messages clear]])
+			end
+			require("noice").setup(opts)
+		end,
 		opts = {
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -164,51 +173,78 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		event = { "BufReadPost", "BufNewFile" },
-		opts = {},
-	},
-	{
-		"nvim-tree/nvim-web-devicons",
-		name = "devicons",
-		lazy = true,
-		config = function(_, opts)
-			require("nvim-web-devicons").setup(opts)
-		end,
 		opts = {
-			color_icons = true,
-			default = true,
-			override = {
-				js = { icon = "󰌞", color = "#F7DF1E", name = "Javascript" },
-				cjs = { icon = "󰌞", color = "#F7DF1E", name = "Javascript" },
-				ts = { icon = "󰛦", color = "#007ACC", name = "Typescript" },
-				astro = { icon = "", color = "#FA7A0A", name = "Astro" },
+			indent = {
+				char = "│",
+				tab_char = "│",
 			},
-			override_by_filename = {
-				["tailwind.config.cjs"] = {
-					icon = "󱏿",
-					color = "#06B6D4",
-					name = "Tailwind",
-				},
-				[".prettierrc"] = {
-					icon = "󰬗",
-					color = "#7242ED",
-					name = "Prettier",
+			scope = { show_start = false, show_end = false },
+			exclude = {
+				filetypes = {
+					"help",
+					"alpha",
+					"dashboard",
+					"neo-tree",
+					"Trouble",
+					"trouble",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"lazyterm",
 				},
 			},
 		},
 	},
 	{
-		"nvim-treesitter/nvim-treesitter-context",
-		name = "treesitter-context",
-		event = { "BufReadPost", "BufNewFile" },
-		keys = {
-			{
-				"gc",
-				":lua require('treesitter-context').go_to_context(vim.v.count1)<CR>",
-				desc = "Go to treesitter context",
+		"echasnovski/mini.icons",
+		lazy = true,
+		opts = {
+			file = {
+				[".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+				["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+			},
+			filetype = {
+				dotenv = { glyph = "", hl = "MiniIconsYellow" },
 			},
 		},
-		opts = {},
+		init = function()
+			package.preload["nvim-web-devicons"] = function()
+				require("mini.icons").mock_nvim_web_devicons()
+				return package.loaded["nvim-web-devicons"]
+			end
+		end,
 	},
+	-- {
+	-- 	"nvim-tree/nvim-web-devicons",
+	-- 	name = "devicons",
+	-- 	lazy = true,
+	-- 	config = function(_, opts)
+	-- 		require("nvim-web-devicons").setup(opts)
+	-- 	end,
+	-- 	opts = {
+	-- 		color_icons = true,
+	-- 		default = true,
+	-- 		override = {
+	-- 			js = { icon = "󰌞", color = "#F7DF1E", name = "Javascript" },
+	-- 			cjs = { icon = "󰌞", color = "#F7DF1E", name = "Javascript" },
+	-- 			ts = { icon = "󰛦", color = "#007ACC", name = "Typescript" },
+	-- 			astro = { icon = "", color = "#FA7A0A", name = "Astro" },
+	-- 		},
+	-- 		override_by_filename = {
+	-- 			["tailwind.config.cjs"] = {
+	-- 				icon = "󱏿",
+	-- 				color = "#06B6D4",
+	-- 				name = "Tailwind",
+	-- 			},
+	-- 			[".prettierrc"] = {
+	-- 				icon = "󰬗",
+	-- 				color = "#7242ED",
+	-- 				name = "Prettier",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"sindrets/diffview.nvim",
 		name = "diffview",
