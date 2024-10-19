@@ -32,7 +32,7 @@
       monospace = {
         name = "Mononoki Nerd Font";
         package = pkgs.nerdfonts.override {
-          fonts = [ "Mononoki" "VictorMono" "Iosevka" ];
+          fonts = [ "Mononoki" "FiraCode" "VictorMono" "Iosevka" ];
         };
       };
 
