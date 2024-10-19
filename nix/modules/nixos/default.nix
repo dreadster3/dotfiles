@@ -23,5 +23,6 @@
     ./nightlight.nix
     ./storage.nix
     ./hyprland.nix
+    ./regreet.nix
   ];
 }
