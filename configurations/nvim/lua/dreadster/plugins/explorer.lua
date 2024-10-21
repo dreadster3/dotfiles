@@ -55,6 +55,7 @@ return {
 			})
 		end,
 		opts = {
+			close_if_last_window = true,
 			open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
 			auto_clean_after_session_restore = true,
 			filesystem = {
@@ -77,6 +78,7 @@ return {
 				},
 			},
 			window = {
+				position = "left",
 				width = 30,
 				mappings = {
 					["<C-f>"] = "noop",
