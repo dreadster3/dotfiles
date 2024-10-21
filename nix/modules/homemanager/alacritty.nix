@@ -51,7 +51,10 @@ in {
     programs.alacritty = {
       enable = true;
       settings = {
-        font = { italic = { family = "VictorMono Nerd Font"; }; };
+        font = {
+          normal = { style = lib.mkForce "Bold"; };
+          italic = { family = "VictorMono Nerd Font"; };
+        };
 
         window = {
           padding = {
