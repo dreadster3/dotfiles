@@ -25,4 +25,10 @@ function M.on_load(name, fn)
 	end
 end
 
+function M.lazy_load_telescope_extension(name)
+	M.on_load("telescope", function()
+		require("telescope").load_extension(name)
+	end)
+end
+
 return M

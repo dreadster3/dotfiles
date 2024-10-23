@@ -134,9 +134,7 @@ return {
 		config = function(_, opts)
 			require("yanky").setup(opts)
 
-			require("dreadster.utils.lazy").on_load("telescope", function()
-				require("telescope").load_extension("yank_history")
-			end)
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
 		end,
 	},
 	{ "rhysd/git-messenger.vim", cmd = { "GitMessenger" }, opts = {} },

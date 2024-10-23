@@ -71,9 +71,7 @@ return {
 			},
 		},
 		config = function()
-			require("dreadster.utils.lazy").on_load("telescope", function()
-				require("telescope").load_extension("media_files")
-			end)
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("media_files")
 		end,
 	},
 }

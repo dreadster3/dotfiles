@@ -137,9 +137,7 @@ return {
 		config = function(_, opts)
 			require("project_nvim").setup(opts)
 
-			require("dreadster.utils.lazy").on_load("telescope", function()
-				require("telescope").load_extension("projects")
-			end)
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("projects")
 		end,
 		opts = {
 			on_config_done = nil,

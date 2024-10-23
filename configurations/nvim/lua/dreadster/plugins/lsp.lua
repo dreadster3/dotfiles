@@ -345,9 +345,7 @@ return {
 		config = function(_, opts)
 			require("refactoring").setup(opts)
 
-			require("dreadster.utils.lazy").on_load("telescope", function()
-				require("telescope").load_extension("refactoring")
-			end)
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("refactoring")
 		end,
 		opts = {},
 	},
@@ -360,9 +358,7 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 		},
 		config = function()
-			require("dreadster.utils.lazy").on_load("telescope", function()
-				require("telescope").load_extension("yaml_schema")
-			end)
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("yaml_schema")
 		end,
 	},
 }

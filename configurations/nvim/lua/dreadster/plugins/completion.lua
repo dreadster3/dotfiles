@@ -16,6 +16,7 @@ return {
 			"copilotcmp",
 		},
 		opts = function(_, opts)
+			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 			local kind_icons = {
 				Text = "󰉿",
 				Method = "󰆧",
@@ -133,6 +134,11 @@ return {
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "git", group_index = 3 },
 					{ name = "buffer", group_index = 3 },
+				},
+				experimental = {
+					ghost_text = {
+						hl_group = "CmpGhostText",
+					},
 				},
 			})
 

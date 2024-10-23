@@ -13,6 +13,9 @@ return {
 			top_down = false,
 			max_height = 3,
 		},
+		config = function(_)
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("notify")
+		end,
 	},
 	{
 		"petertriho/nvim-scrollbar",
