@@ -81,7 +81,7 @@ return {
 		"RRethy/vim-illuminate",
 		name = "illuminate",
 		main = "illuminate",
-		event = { "BufReadPre", "BufReadPost" },
+		event = { "BufReadPre", "BufNewFile" },
 		keys = {
 			{
 				"[[",
