@@ -13,7 +13,8 @@ return {
 			top_down = false,
 			max_height = 3,
 		},
-		config = function(_)
+		config = function(_, opts)
+			require("notify").setup(opts)
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("notify")
 		end,
 	},
