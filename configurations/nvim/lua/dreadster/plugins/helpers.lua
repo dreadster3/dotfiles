@@ -54,16 +54,68 @@ return {
 		"folke/which-key.nvim",
 		version = "*",
 		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Keymaps (which-key)",
+			},
+		},
 		opts = {
+			spec = {
+				{
+					mode = { "n", "v" },
+					{ "[", group = "Previous" },
+					{ "]", group = "Next" },
+				},
+			},
 			delay = function(ctx)
 				return 500
 			end,
 		},
 	},
 	{ "folke/todo-comments.nvim", event = "BufReadPre", opts = {} },
-	{ "RRethy/vim-illuminate", event = { "BufReadPost" } },
+	{
+		"RRethy/vim-illuminate",
+		name = "illuminate",
+		main = "illuminate",
+		event = { "BufReadPre", "BufReadPost" },
+		keys = {
+			{
+				"[[",
+				function()
+					require("illuminate").goto_prev_reference(false)
+				end,
+				mode = "n",
+				desc = "Goto next Reference",
+			},
+			{
+				"]]",
+				function()
+					require("illuminate").goto_next_reference(false)
+				end,
+				mode = "n",
+				desc = "Goto previous Reference",
+			},
+		},
+		opts = {
+			delay = 200,
+			large_file_cutoff = 5000,
+			large_file_overrides = {
+				providers = {
+					"lsp",
+				},
+			},
+		},
+		config = function(_, opts)
+			require("illuminate").configure(opts)
+		end,
+	},
 	{
 		"gbprod/yanky.nvim",
+		name = "yanky",
 		lazy = false,
 		keys = {
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
@@ -72,7 +124,20 @@ return {
 			{ "<c-n>", "<Plug>(YankyCycleForward)", mode = { "n", "x" } },
 			{ "<c-p>", "<Plug>(YankyCycleBackward)", mode = { "n", "x" } },
 		},
-		opts = {},
+		opts = {
+			picker = {
+				telescope = {
+					use_default_mappings = true,
+				},
+			},
+		},
+		config = function(_, opts)
+			require("yanky").setup(opts)
+
+			require("dreadster.utils.lazy").on_load("telescope", function()
+				require("telescope").load_extension("yank_history")
+			end)
+		end,
 	},
 	{ "rhysd/git-messenger.vim", cmd = { "GitMessenger" }, opts = {} },
 	{
@@ -91,6 +156,9 @@ return {
 		main = "auto-session",
 		opts = {
 			bypass_save_filetypes = { "neo-tree" },
+			session_lens = {
+				load_on_setup = false,
+			},
 		},
 	},
 }

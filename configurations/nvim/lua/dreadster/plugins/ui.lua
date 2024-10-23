@@ -51,14 +51,9 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		name = "bufferline",
-		dependencies = { "devicons" },
+		dependencies = { "icons" },
 		event = "BufReadPost",
 		keys = {
-			{
-				"˙",
-				":BufferLineCyclePrev<CR>",
-				desc = "Cycle to previous buffer in buffer line",
-			},
 			{
 				"¬",
 				":BufferLineCycleNext<CR>",
@@ -70,7 +65,22 @@ return {
 				desc = "Cycle to next buffer in buffer line",
 			},
 			{
+				"]b",
+				":BufferLineCycleNext<CR>",
+				desc = "Cycle to next buffer in buffer line",
+			},
+			{
 				"<A-h>",
+				":BufferLineCyclePrev<CR>",
+				desc = "Cycle to previous buffer in buffer line",
+			},
+			{
+				"˙",
+				":BufferLineCyclePrev<CR>",
+				desc = "Cycle to previous buffer in buffer line",
+			},
+			{
+				"[b",
 				":BufferLineCyclePrev<CR>",
 				desc = "Cycle to previous buffer in buffer line",
 			},
@@ -91,7 +101,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		name = "lualine",
 		event = "BufReadPost",
-		dependencies = { "devicons" },
+		dependencies = { "icons" },
 		opts = {},
 	},
 	{ "levouh/tint.nvim", name = "tint", opts = {} },
@@ -197,7 +207,7 @@ return {
 	},
 	{
 		"echasnovski/mini.icons",
-		name = "miniicons",
+		name = "icons",
 		main = "mini.icons",
 		lazy = true,
 		opts = {

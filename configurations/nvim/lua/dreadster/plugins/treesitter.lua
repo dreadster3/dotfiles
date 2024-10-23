@@ -47,6 +47,8 @@ return {
 	},
 	{
 		"echasnovski/mini.ai",
+		name = "miniai",
+		main = "mini.ai",
 		event = "VeryLazy",
 		opts = function()
 			local ai = require("mini.ai")

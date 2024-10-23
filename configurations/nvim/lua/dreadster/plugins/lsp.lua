@@ -21,6 +21,7 @@ return {
 		},
 		opts = function()
 			return {
+				document_highlight = { enabled = false },
 				capabilities = {
 					textDocument = {
 						foldingRange = {
@@ -192,7 +193,7 @@ return {
 	{ "williamboman/mason.nvim", name = "mason", opts = {} },
 	{
 		"glepnir/lspsaga.nvim",
-		dependencies = { "devicons", "treesitter" },
+		dependencies = { "icons", "treesitter" },
 		event = { "LspAttach" },
 		opts = {
 			ui = {
@@ -259,13 +260,15 @@ return {
 	{
 		"someone-stole-my-name/yaml-companion.nvim",
 		name = "yaml-companion",
+		lazy = false,
 		dependencies = {
 			{ "lspconfig" },
 			{ "nvim-lua/plenary.nvim" },
-			{ "telescope" },
 		},
 		config = function()
-			require("telescope").load_extension("yaml_schema")
+			require("dreadster.utils.lazy").on_load("telescope", function()
+				require("telescope").load_extension("yaml_schema")
+			end)
 		end,
 	},
 }

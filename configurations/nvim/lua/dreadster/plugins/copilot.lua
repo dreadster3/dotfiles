@@ -26,16 +26,34 @@ return {
 		cmd = { "Copilot" },
 		event = { "InsertEnter" },
 		opts = {
-			panel = { keymap = { enable = false } },
-			suggestion = {
-				auto_trigger = true,
-				keymap = {
-					accept = "<M-CR>",
-					accept_word = "<M-Right>",
-					accept_line = "<M-Up>",
-				},
+			panel = {
+				enabled = false,
+				keymap = { enable = false },
 			},
-			filetypes = { yaml = true, markdown = true },
+			suggestion = {
+				enabled = false,
+			},
+			filetypes = {
+				yaml = true,
+				markdown = true,
+				help = true,
+			},
 		},
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		name = "copilotcmp",
+		main = "copilot_cmp",
+		lazy = true,
+		dependencies = { "copilot" },
+		opts = {},
+		config = function(_, opts)
+			local copilot_cmp = require("copilot_cmp")
+			copilot_cmp.setup(opts)
+
+			require("dreadster.utils.lsp").on_attach(function(_)
+				copilot_cmp._on_insert_enter({})
+			end, "copilot")
+		end,
 	},
 }

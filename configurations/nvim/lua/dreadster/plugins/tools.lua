@@ -1,73 +1,5 @@
 return {
 	{
-		"nvim-telescope/telescope.nvim",
-		name = "telescope",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-media-files.nvim",
-			"nvim-telescope/telescope-symbols.nvim",
-			"project",
-		},
-		cmd = { "Telescope" },
-		keys = {
-			{ "<leader>ff", ":Telescope find_files<CR>", desc = "Find files" },
-			{ "<C-f>", ":Telescope live_grep<CR>", desc = "Live grep" },
-			{
-				"<leader>fm",
-				":Telescope media_files<CR>",
-				desc = "Find media files",
-			},
-		},
-		config = function(_, opts)
-			local telescope = require("telescope")
-			telescope.setup(opts)
-
-			telescope.load_extension("media_files")
-		end,
-		opts = function()
-			local opts = {
-				defaults = {
-					file_ignore_patterns = {
-						"obj",
-						"bin",
-						"node_modules",
-						"build",
-						"target",
-					},
-					layout_strategy = "vertical",
-					layout_config = {
-						horizontal = {
-							prompt_position = "top",
-							preview_width = 0.5,
-							results_width = 0.5,
-						},
-						vertical = {
-							prompt_position = "top",
-							preview_height = 0.6,
-							width = 0.6,
-						},
-					},
-					borderchars = {
-						"─",
-						"│",
-						"─",
-						"│",
-						"╭",
-						"╮",
-						"╯",
-						"╰",
-					},
-					mappings = {
-						n = { ["q"] = require("telescope.actions").close },
-					},
-				},
-				extensions = { media_files = { find_cmd = "rg" } },
-			}
-
-			return opts
-		end,
-	},
-	{
 		"kdheepak/lazygit.nvim",
 		name = "lazygit",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -194,25 +126,20 @@ return {
 		"ahmedkhalf/project.nvim",
 		name = "project",
 		cmd = { "ProjectRoot", "Telescope" },
-		event = { "User AlphaReady" },
-		dependencies = { "telescope" },
+		event = { "VeryLazy" },
 		keys = {
 			{
 				"<leader>fp",
-				function()
-					vim.schedule(function()
-						vim.cmd("Telescope projects")
-					end)
-				end,
+				":Telescope projects<CR>",
 				desc = "Find projects",
 			},
 		},
 		config = function(_, opts)
-			local telescope = require("telescope")
-
 			require("project_nvim").setup(opts)
 
-			telescope.load_extension("projects")
+			require("dreadster.utils.lazy").on_load("telescope", function()
+				require("telescope").load_extension("projects")
+			end)
 		end,
 		opts = {
 			on_config_done = nil,
@@ -286,31 +213,17 @@ return {
 		},
 	},
 	{
-		"luckasRanarison/nvim-devdocs",
-		name = "devdocs",
-		dependencies = { "telescope", "nvim-lua/plenary.nvim", "treesitter" },
-		cmd = {
-			"DevdocsFetch",
-			"DevdocsInstall",
-			"DevdocsUninstall",
-			"DevdocsOpen",
-			"DevdocsOpenFloat",
-			"DevdocsOpenCurrent",
-			"DevdocsOpenCurrentFloat",
-			"DevdocsUpdate",
-			"DevdocsUpdateAll",
-		},
-		opts = {
-			previewer_cmd = "glow",
-			cmd_args = { "-s", "$HOME/.config/glow/mocha.json" },
-		},
-	},
-	{
 		"pwntester/octo.nvim",
 		name = "octo",
 		cmd = "Octo",
-		dependencies = { "telescope", "nvim-lua/plenary.nvim", "devicons" },
-		opts = {},
+		event = { { event = "BufReadCmd", pattern = "octo://*" } },
+		dependencies = { "telescope", "nvim-lua/plenary.nvim", "icons" },
+		opts = {
+			enable_builtin = true,
+			default_to_projects_v2 = true,
+			default_merge_method = "squash",
+			picker = "telescope",
+		},
 	},
 	{ "lervag/vimtex", name = "vimtex", init = function() end },
 	{

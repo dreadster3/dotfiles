@@ -1,28 +1,11 @@
 return {
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua",
-	-- 	name = "nvimtree",
-	-- 	lazy = false,
-	-- 	dependencies = { "devicons" },
-	-- 	keys = { { "<leader>e", ":NvimTreeFocus<CR>", desc = "Focus nvim tree" } },
-	-- 	opts = {
-	-- 		disable_netrw = true,
-	-- 		hijack_netrw = true,
-	-- 		sync_root_with_cwd = true,
-	-- 		actions = {
-	-- 			change_dir = { enable = true, global = true },
-	-- 			open_file = { quit_on_open = true },
-	-- 		},
-	-- 		live_filter = { always_show_folders = false },
-	-- 	},
-	-- },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		name = "neotree",
 		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"devicons", -- not strictly required, but recommended
+			"icons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
@@ -100,7 +83,7 @@ return {
 		main = "mini.files",
 		lazy = false,
 		version = "*",
-		dependencies = { "devicons" },
+		dependencies = { "icons" },
 		keys = {
 			{
 				"<C-m>",

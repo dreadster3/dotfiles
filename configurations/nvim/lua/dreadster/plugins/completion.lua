@@ -13,6 +13,7 @@ return {
 			"luasnip",
 			"saadparwaiz1/cmp_luasnip",
 			"cmpgit",
+			"copilotcmp",
 		},
 		opts = function(_, opts)
 			local kind_icons = {
@@ -42,7 +43,10 @@ return {
 				Operator = "",
 				TypeParameter = " ",
 				Misc = " ",
+				Copilot = "",
 			}
+
+			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -67,7 +71,7 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping(function(fallback)
+					["<C-Space>"] = cmp.mapping(function(_)
 						if cmp.visible() then
 							cmp.abort()
 						else
@@ -110,6 +114,8 @@ return {
 								buffer = "[Buffer]",
 								path = "[Path]",
 								nvim_lsp_signature_help = "[LSP]",
+								lazydev = "[LazyDev]",
+								copilot = "[AI]",
 								-- nvim_lua = "[Lua]"
 							}
 
@@ -120,12 +126,13 @@ return {
 					}),
 				},
 				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "git" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
 					{ name = "lazydev", group_index = 0 },
+					{ name = "path", group_index = 1 },
+					{ name = "luasnip", group_index = 1 },
+					{ name = "copilot", group_index = 2 },
+					{ name = "nvim_lsp", group_index = 2 },
+					{ name = "git", group_index = 3 },
+					{ name = "buffer", group_index = 3 },
 				},
 			})
 
