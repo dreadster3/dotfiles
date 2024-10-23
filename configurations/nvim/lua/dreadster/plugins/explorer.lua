@@ -62,7 +62,8 @@ return {
 			},
 			window = {
 				position = "left",
-				width = 30,
+				width = "15%",
+				auto_expand = false,
 				mappings = {
 					["<C-f>"] = "noop",
 				},

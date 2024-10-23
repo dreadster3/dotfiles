@@ -96,12 +96,14 @@ cursor = "#b4befe"
 text = "#1e1e2e"
 
 [font]
-size = 18
+size = 20
+
 [font.italic]
 family = "VictorMono Nerd Font"
 
 [font.normal]
-family = "FiraCode Nerd Font"
+family = "Mononoki Nerd Font"
+style = "Bold"
 
 [window.padding]
 x = 20

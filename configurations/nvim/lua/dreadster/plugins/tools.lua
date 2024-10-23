@@ -31,11 +31,24 @@ return {
 			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 		end,
 		cmd = "ToggleTerm",
-		keys = { { "<C-\\>", "<CMD>ToggleTerm<CR>", desc = "Toggle terminal" } },
+		keys = {
+			{
+				"<C-\\>",
+				'<CMD>execute v:count . "ToggleTerm direction=horizontal"<CR>',
+				mode = { "n", "t", "x" },
+				desc = "Toggle terminal horizontal",
+			},
+			{
+				"<M-\\>",
+				'<CMD>execute v:count . "ToggleTerm direction=float"<CR>',
+				mode = { "n", "t", "x" },
+				desc = "Toggle terminal float",
+			},
+		},
 		opts = {
-			open_mapping = [[<c-\>]],
-			persist_size = false,
+			open_mapping = "<Nop>",
 			start_in_insert = true,
+			persist_size = false,
 			persist_mode = false,
 		},
 	},
