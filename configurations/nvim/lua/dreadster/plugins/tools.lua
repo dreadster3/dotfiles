@@ -77,11 +77,10 @@ return {
 		},
 	},
 	{
-		"dreadster3/template.nvim",
-		-- dev = false,
+		"nvimdev/template.nvim",
+		version = false,
 		name = "template",
 		cmd = { "Template" },
-		branch = "directory-variable",
 		init = function()
 			local mappings = {
 				typescript = { "function.ts" },
@@ -104,7 +103,11 @@ return {
 		config = function(_, opts)
 			require("template").setup(opts)
 
-			require("telescope").load_extension("find_template")
+			require("template").register("{{_dir_}}", function()
+				vim.fn.expand("%:p:h")
+			end)
+
+			require("dreadster.utils.lazy").lazy_load_telescope_extension("find_template")
 		end,
 		opts = {
 			author = "dreadster3",

@@ -7,7 +7,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-emoji",
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind-nvim",
 			"luasnip",
@@ -134,6 +134,7 @@ return {
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "git", group_index = 3 },
 					{ name = "buffer", group_index = 3 },
+					{ name = "emoji", group_index = 4 },
 				},
 				experimental = {
 					ghost_text = {

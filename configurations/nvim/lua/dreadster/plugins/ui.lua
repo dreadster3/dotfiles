@@ -45,14 +45,6 @@ return {
 		opts = {},
 	},
 	{
-		"j-hui/fidget.nvim",
-		cond = false,
-		name = "fidget",
-		event = "LspAttach",
-		tag = "legacy",
-		opts = { text = { spinner = "arc" } },
-	},
-	{
 		"akinsho/bufferline.nvim",
 		name = "bufferline",
 		dependencies = { "icons" },
@@ -111,7 +103,6 @@ return {
 	{ "levouh/tint.nvim", name = "tint", opts = {} },
 	{
 		"folke/noice.nvim",
-		name = "noice",
 		event = "VeryLazy",
 		version = "*",
 		dependencies = { "notify", "MunifTanjim/nui.nvim" },
@@ -150,31 +141,6 @@ return {
 		cmd = "ZenMode",
 		keys = { { "<leader>zz", ":ZenMode<CR>", desc = "Toggle zen mode" } },
 		opts = { plugins = { twilight = { enabled = false } } },
-	},
-	{
-		"pocco81/truezen.nvim",
-		name = "truezen",
-		cond = false,
-		init = function()
-			vim.wo.foldmethod = "manual"
-		end,
-		keys = {
-			{ "<leader>zz", ":TZAtaraxis<CR>", desc = "Toggle zen mode ataraxis" },
-			{
-				"<leader>zm",
-				":TZMinimalist<CR>",
-				desc = "Toggle zen mode minimalist",
-			},
-			{ "<leader>zf", ":TZFocus<CR>", desc = "Toggle zen mode focus" },
-			{ "<leader>zn", ":TZNarrow<CR>", desc = "Toggle zen mode narrow" },
-			{
-				"<leader>zn",
-				":'<,'>TZNarrow<CR>",
-				desc = "Toggle zen mode narrow",
-				mode = "v",
-			},
-		},
-		opts = { modes = { ataraxis = { padding = { left = 20, right = 20 } } } },
 	},
 	{
 		"folke/twilight.nvim",
