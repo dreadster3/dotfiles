@@ -21,6 +21,7 @@ return {
 
 			local sources = {
 				formatting.prettier.with({ extra_filetypes = { "astro" } }),
+				formatting.djhtml,
 				formatting.csharpier,
 				formatting.terraform_fmt,
 				formatting.rustfmt,

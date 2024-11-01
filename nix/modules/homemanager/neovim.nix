@@ -108,6 +108,7 @@ in {
             # Dependencies:
             # Install autopep8
             python3
+            djhtml
 
             # Install mason
             wget
