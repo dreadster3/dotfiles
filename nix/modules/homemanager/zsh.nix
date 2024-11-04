@@ -17,7 +17,7 @@ in {
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
-      sessionVariables = { "PATH" = "$PATH:$HOME/go/bin"; };
+      sessionVariables = { "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin"; };
       initExtra = mkIf cfg.sourceNix ''
         source $HOME/.nix-profile/etc/profile.d/nix.sh
       '';

@@ -43,7 +43,10 @@
     zsh.sourceNix = true;
     pentest.enable = true;
     kitty.package = pkgs.emptyDirectory;
-    alacritty.package = pkgs.emptyDirectory;
+    alacritty = {
+      package = pkgs.emptyDirectory;
+      yaml = true;
+    };
   };
 
   programs.home-manager.enable = true;

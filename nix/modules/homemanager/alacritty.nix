@@ -30,6 +30,7 @@ in {
         type = types.package;
         default = pkgs.alacritty;
       };
+      yaml = mkEnableOption "alacritty.yaml";
       font = mkOption {
         description = "Font to use for kitty";
         default = { };
@@ -75,5 +76,11 @@ in {
         }];
       };
     };
+
+    xdg.configFile."alacritty/alacritty.yml" =
+      mkIf (config.programs.alacritty.settings != { } && cfg.yaml) {
+        text = replaceStrings [ "\\\\" ] [ "\\" ]
+          (builtins.toJSON config.programs.alacritty.settings);
+      };
   };
 }

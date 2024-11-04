@@ -100,7 +100,14 @@
         };
       };
       rust = lib.mkDefault { enable = true; };
-      python = lib.mkDefault { enable = true; };
+      python = lib.mkDefault {
+        enable = true;
+        package = pkgs.unstable.python3;
+        poetry = {
+          enable = true;
+          package = pkgs.unstable.poetry;
+        };
+      };
     };
     btop.enable = true;
     ranger.enable = true;

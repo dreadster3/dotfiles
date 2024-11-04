@@ -22,12 +22,14 @@ let
     pkgs.rust-analyzer
   ];
 
-  pythonPackages = optionals cfg.python.enable [
+  pythonPackages = optionals cfg.python.enable ([
     (cfg.python.package.withPackages
       (ps: with ps; [ autopep8 autoflake flake8 ]))
     pkgs.djhtml
-    (pkgs.poetry.override { python3 = cfg.python.package; })
-  ];
+  ]);
+
+  poetryPackage =
+    cfg.python.poetry.package.override { python3 = cfg.python.package; };
 
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
@@ -83,6 +85,17 @@ in {
               type = types.package;
               default = pkgs.python3;
             };
+            poetry = mkOption {
+              type = types.submodule {
+                options = {
+                  enable = mkEnableOption "neovim.python.poetry";
+                  package = mkOption {
+                    type = types.package;
+                    default = pkgs.poetry;
+                  };
+                };
+              };
+            };
           };
         };
       };
@@ -98,6 +111,11 @@ in {
     # xdg.configFile."nvim" = {
     #   source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
     # };
+
+    modules.homemanager.poetry = mkIf cfg.python.poetry.enable {
+      enable = true;
+      package = poetryPackage;
+    };
 
     programs = {
       neovim = {

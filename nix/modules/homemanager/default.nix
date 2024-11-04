@@ -50,6 +50,7 @@
     ./spicetify
     ./obsmic
     ./direnv.nix
+    ./poetry.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
