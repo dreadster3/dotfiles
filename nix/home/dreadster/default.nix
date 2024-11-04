@@ -82,6 +82,7 @@
     # nerdfonts.enable = true;
     stylix.enable = true;
 
+    direnv.enable = true;
     bat.enable = true;
     alacritty.enable = true;
     kitty.enable = true;
@@ -99,6 +100,7 @@
         };
       };
       rust = lib.mkDefault { enable = true; };
+      python = lib.mkDefault { enable = true; };
     };
     btop.enable = true;
     ranger.enable = true;

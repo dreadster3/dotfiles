@@ -22,6 +22,13 @@ let
     pkgs.rust-analyzer
   ];
 
+  pythonPackages = optionals cfg.python.enable [
+    (cfg.python.package.withPackages
+      (ps: with ps; [ autopep8 autoflake flake8 ]))
+    pkgs.djhtml
+    (pkgs.poetry.override { python3 = cfg.python.package; })
+  ];
+
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in {
   options = {
@@ -68,6 +75,17 @@ in {
           };
         };
       };
+      python = mkOption {
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "neovim.python";
+            package = mkOption {
+              type = types.package;
+              default = pkgs.python3;
+            };
+          };
+        };
+      };
     };
   };
   config = mkIf cfg.enable {
@@ -105,11 +123,6 @@ in {
             # For octo plugin
             gh
 
-            # Dependencies:
-            # Install autopep8
-            python3
-            djhtml
-
             # Install mason
             wget
 
@@ -123,7 +136,7 @@ in {
 
             # Bash
             beautysh
-          ] ++ goPackages ++ rustPackages;
+          ] ++ goPackages ++ rustPackages ++ pythonPackages;
       };
     };
 

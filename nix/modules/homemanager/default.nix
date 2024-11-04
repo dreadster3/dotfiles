@@ -49,6 +49,7 @@
     ./rofi
     ./spicetify
     ./obsmic
+    ./direnv.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

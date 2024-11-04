@@ -37,7 +37,7 @@ in {
         "${pkgs.open-vm-tools}/bin/vmware-user-suid-wrapper"
         "${
           lib.getExe pkgs.xorg.xrandr
-        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor}"
+        } --output ${primaryMonitor} --primary --pos 1080x240 --output ${secondaryMonitor} --pos 0x0"
       ];
     };
     flameshot.enable = true;
