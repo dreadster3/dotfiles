@@ -5,6 +5,10 @@ in {
   options = {
     modules.homemanager.kitty = {
       enable = mkEnableOption "kitty";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.kitty;
+      };
       theme = mkOption {
         type = types.str;
         default = "Catppuccin-Mocha";
@@ -34,6 +38,7 @@ in {
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
+      package = cfg.package;
       theme = cfg.theme;
       settings = {
         bold_font = "auto";

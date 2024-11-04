@@ -37,12 +37,13 @@
     };
   };
 
+  fonts.fontconfig.enable = true;
+
   modules.homemanager = {
-    zsh = {
-      enable = true;
-      sourceNix = true;
-    };
+    zsh.sourceNix = true;
     pentest.enable = true;
+    kitty.package = pkgs.emptyDirectory;
+    alacritty.package = pkgs.emptyDirectory;
   };
 
   programs.home-manager.enable = true;

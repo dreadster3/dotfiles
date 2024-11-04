@@ -26,6 +26,10 @@ in {
   options = {
     modules.homemanager.alacritty = {
       enable = mkEnableOption "alacritty";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.alacritty;
+      };
       font = mkOption {
         description = "Font to use for kitty";
         default = { };
@@ -50,6 +54,7 @@ in {
   config = mkIf cfg.enable {
     programs.alacritty = {
       enable = true;
+      package = cfg.package;
       settings = {
         font = {
           normal = { style = lib.mkForce "Bold"; };

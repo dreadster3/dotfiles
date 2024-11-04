@@ -80,6 +80,7 @@ return {
 	},
 	{
 		"echasnovski/mini.files",
+		cond = false,
 		name = "minifiles",
 		main = "mini.files",
 		lazy = false,
