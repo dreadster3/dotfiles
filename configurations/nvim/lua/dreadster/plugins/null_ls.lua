@@ -18,7 +18,6 @@ return {
 
 				vim.lsp.buf.format({ timeout_ms = 2000, bufnr = bufnr })
 			end
-
 			local sources = {
 				formatting.prettier.with({ extra_filetypes = { "astro" } }),
 				formatting.djhtml,
@@ -27,10 +26,7 @@ return {
 				formatting.rustfmt,
 				formatting.stylua,
 				formatting.clang_format,
-				formatting.autopep8,
 				formatting.taplo,
-				formatting.isort,
-				formatting.autoflake,
 				formatting.goimports,
 				formatting.rustywind,
 				formatting.nixfmt,
@@ -38,8 +34,24 @@ return {
 				formatting.latexindent,
 				diagnostics.eslint,
 				diagnostics.tfsec,
+
+				-- Python
+				formatting.ruff.with({
+					generator_opts = {
+						command = "ruff",
+						args = { "format", "-n", "--stdin-filename", "$FILENAME", "-" },
+						to_stdin = true,
+					},
+				}),
+				formatting.ruff.with({
+					generator_opts = {
+						command = "ruff",
+						args = { "check", "--fix", "-n", "--stdin-filename", "$FILENAME", "-" },
+						to_stdin = true,
+					},
+				}),
+				diagnostics.ruff,
 				diagnostics.mypy,
-				diagnostics.flake8,
 			}
 
 			return {

@@ -62,7 +62,8 @@ return {
 						},
 					},
 					texlab = { mason = false },
-					pyright = { single_file_support = true },
+					basedpyright = { single_file_support = true },
+					ruff = {},
 					omnisharp = {
 						enable_editorconfig_support = true,
 						enable_ms_build_load_projects_on_demand = false,
