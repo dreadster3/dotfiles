@@ -53,6 +53,7 @@ return {
 			local lspkind = require("lspkind")
 			local local_opts = vim.tbl_deep_extend("force", opts or {}, {
 				completion = { completeopt = "menuone,noselect,noinsert" },
+				preselect = cmp.PreselectMode.Item,
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
@@ -99,9 +100,23 @@ return {
 				}),
 				formatting = {
 					format = lspkind.cmp_format({
-						mode = "symbol", -- show only symbol annotations
-						maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+						mode = "symbol_text", -- show only symbol annotations
+						maxwidth = {
+							abbr = function()
+								max_width = math.ceil((1 / 3) * vim.fn.winwidth(0))
+								kind = math.ceil((1 / 3) * 0.25 * vim.fn.winwidth(0))
+								menu = math.min(math.ceil((1 / 3) * 0.2 * vim.fn.winwidth(0)), 6)
+								return max_width - kind - menu
+							end,
+							kind = function()
+								return math.ceil((1 / 3) * 0.25 * vim.fn.winwidth(0))
+							end,
+							menu = function()
+								return math.min(math.ceil((1 / 3) * 0.2 * vim.fn.winwidth(0)), 6)
+							end,
+						},
+						ellipsis_char = "...",
+						show_labelDetails = true,
 
 						symbol_map = kind_icons,
 
@@ -111,11 +126,11 @@ return {
 							local menu_icon = {
 								nvim_lsp = "[LSP]",
 								git = "[Git]",
-								luasnip = "[Snippet]",
-								buffer = "[Buffer]",
-								path = "[Path]",
-								nvim_lsp_signature_help = "[LSP]",
-								lazydev = "[LazyDev]",
+								luasnip = "[SNIP]",
+								buffer = "[BUF]",
+								path = "[PATH]",
+								nvim_lsp_signature_help = "[SIG]",
+								lazydev = "[LDEV]",
 								copilot = "[AI]",
 								-- nvim_lua = "[Lua]"
 							}
@@ -128,13 +143,13 @@ return {
 				},
 				sources = {
 					{ name = "lazydev", group_index = 0 },
-					{ name = "path", group_index = 1 },
-					{ name = "luasnip", group_index = 2 },
-					{ name = "copilot", group_index = 2 },
-					{ name = "nvim_lsp", group_index = 2 },
-					{ name = "git", group_index = 3 },
-					{ name = "buffer", group_index = 3 },
-					{ name = "emoji", group_index = 4 },
+					{ name = "path", group_index = 0 },
+					{ name = "copilot", group_index = 0, max_item_count = 3 },
+					{ name = "nvim_lsp", group_index = 0 },
+					{ name = "luasnip", group_index = 0, max_item_count = 3 },
+					{ name = "emoji", group_index = 0, trigger_characters = { ":" } },
+					{ name = "git", group_index = 1 },
+					{ name = "buffer", group_index = 2, max_item_count = 5 },
 				},
 				experimental = {
 					ghost_text = {
