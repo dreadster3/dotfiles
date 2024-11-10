@@ -51,6 +51,7 @@
     ./obsmic
     ./direnv.nix
     ./poetry.nix
+    ./xdg.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

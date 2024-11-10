@@ -88,6 +88,7 @@
     kitty.enable = true;
     sxhkd.enable = true;
     zsh.enable = true;
+    xdg.enable = true;
     neovim = {
       enable = true;
       package = lib.mkDefault pkgs.unstable.neovim-unwrapped;

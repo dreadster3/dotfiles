@@ -23,8 +23,8 @@ let
   ];
 
   pythonPackages = optionals cfg.python.enable ([
-    (cfg.python.package.withPackages
-      (ps: with ps; [ autopep8 autoflake flake8 ]))
+    (cfg.python.package.withPackages (ps: with ps; [ ruff mypy ]))
+    pkgs.unstable.basedpyright
     pkgs.djhtml
   ]);
 

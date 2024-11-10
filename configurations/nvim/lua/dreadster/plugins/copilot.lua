@@ -16,6 +16,10 @@ return {
 		name = "copilot-chat",
 		cmd = { "CopilotChat" },
 		branch = "canary",
+		enabled = function()
+			utils = require("dreadster.utils")
+			return utils.is_mac()
+		end,
 		dependencies = {
 			{ "copilot" }, -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -89,6 +93,10 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		name = "copilot",
+		enabled = function()
+			utils = require("dreadster.utils")
+			return utils.is_mac()
+		end,
 		cmd = { "Copilot" },
 		event = { "InsertEnter" },
 		opts = {
@@ -109,6 +117,10 @@ return {
 	{
 		"zbirenbaum/copilot-cmp",
 		name = "copilotcmp",
+		enabled = function()
+			utils = require("dreadster.utils")
+			return utils.is_mac()
+		end,
 		main = "copilot_cmp",
 		lazy = true,
 		dependencies = { "copilot" },

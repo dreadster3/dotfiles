@@ -45,9 +45,11 @@ return {
 				TypeParameter = " ",
 				Misc = " ",
 				Copilot = "",
+				Codeium = "",
 			}
 
 			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+			vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#6CC644" })
 
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -132,6 +134,7 @@ return {
 								nvim_lsp_signature_help = "[SIG]",
 								lazydev = "[LDEV]",
 								copilot = "[AI]",
+								codeium = "[AI]",
 								-- nvim_lua = "[Lua]"
 							}
 
@@ -145,6 +148,7 @@ return {
 					{ name = "lazydev", group_index = 0 },
 					{ name = "path", group_index = 0 },
 					{ name = "copilot", group_index = 0, max_item_count = 3 },
+					{ name = "codeium", group_index = 0, max_item_count = 3 },
 					{ name = "nvim_lsp", group_index = 0 },
 					{ name = "luasnip", group_index = 0, max_item_count = 3 },
 					{ name = "emoji", group_index = 0, trigger_characters = { ":" } },
