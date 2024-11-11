@@ -7,6 +7,8 @@
     experimental-features = nix-command flakes
   '';
 
+  home.packages = with pkgs; [ systemd ];
+
   stylix = {
     enable = true;
     image = ../../../wallpapers/furina.jpg;

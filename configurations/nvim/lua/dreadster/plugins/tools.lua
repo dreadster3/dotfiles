@@ -283,6 +283,9 @@ return {
 		ft = { "markdown" },
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
-		opts = {},
+		opts = {
+			filetypes = { "markdown" },
+		},
 	},
+	{ "laytan/cloak.nvim", opts = {} },
 }

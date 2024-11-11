@@ -18,9 +18,11 @@ in {
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       sessionVariables = { "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin"; };
-      initExtra = mkIf cfg.sourceNix ''
-        source $HOME/.nix-profile/etc/profile.d/nix.sh
-      '';
+      initExtra = concatStringsSep "\n" ([
+        ''
+          export OPENAI_API_KEY="$(cat ${config.sops.secrets.openai_api_key.path})"''
+      ] ++ optional cfg.sourceNix
+        "source $HOME/.nix-profile/etc/profile.d/nix.sh");
       plugins = [
         {
           name = "zsh-z";

@@ -31,7 +31,17 @@
     ethtool
 
     tree
+
+    sops
   ];
+
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+
+    secrets.openai_api_key = { };
+  };
 
   home = {
     username = lib.mkDefault "dreadster";
@@ -114,6 +124,7 @@
     ranger.enable = true;
     tmux.enable = true;
     lazygit.enable = true;
+    bitwarden.enable = true;
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;

@@ -52,6 +52,7 @@
     ./direnv.nix
     ./poetry.nix
     ./xdg.nix
+    ./bitwarden.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
