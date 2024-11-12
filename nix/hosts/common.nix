@@ -109,6 +109,11 @@
 
   security.polkit.enable = true;
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = [ ];
+  };
+
   nix = {
     # channel.enable = false;
     settings.experimental-features = [ "nix-command" "flakes" ];
@@ -116,4 +121,5 @@
 
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
   home-manager.backupFileExtension = "bkp";
+  home-manager.sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
 }

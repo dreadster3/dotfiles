@@ -46,27 +46,18 @@
       nixosConfigurations = {
         nixosvm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules = [
-            ./hosts/nixosvm/configuration.nix
-            stylix.nixosModules.stylix
-            sops-nix.nixosModules.sops
-          ];
+          modules =
+            [ ./hosts/nixosvm/configuration.nix stylix.nixosModules.stylix ];
         };
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules = [
-            ./hosts/desktop/configuration.nix
-            stylix.nixosModules.stylix
-            sops-nix.nixosModules.sops
-          ];
+          modules =
+            [ ./hosts/desktop/configuration.nix stylix.nixosModules.stylix ];
         };
         nixos-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules = [
-            ./hosts/laptop/configuration.nix
-            stylix.nixosModules.stylix
-            sops-nix.nixosModules.sops
-          ];
+          modules =
+            [ ./hosts/laptop/configuration.nix stylix.nixosModules.stylix ];
         };
       };
 
