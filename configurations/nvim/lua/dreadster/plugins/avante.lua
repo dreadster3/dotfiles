@@ -2,7 +2,7 @@ return {
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
-		enable = function()
+		enabled = function()
 			return not require("dreadster.utils").is_mac()
 		end,
 		lazy = false,
