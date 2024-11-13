@@ -40,7 +40,6 @@ return {
 				},
 			},
 			{
-				-- Make sure to set this up properly if you have lazy=true
 				"render-markdown",
 				opts = {
 					file_types = { "Avante" },

@@ -13,15 +13,20 @@ in {
       newSession = true;
       mouse = true;
       terminal = "tmux-256color";
-      plugins = with pkgs; [
-        tmuxPlugins.better-mouse-mode
-        tmuxPlugins.catppuccin
+      plugins = with pkgs.tmuxPlugins; [
+        better-mouse-mode
+        catppuccin
+        resurrect
+        continuum
       ];
       extraConfig = ''
         bind-key v split-window -v
         bind-key h split-window -h
 
+        set-option status on
+
         set -g @catppuccin_flavour 'mocha'
+        set -g @continuum-restore 'on'
       '';
     };
   };
