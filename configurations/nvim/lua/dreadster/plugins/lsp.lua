@@ -88,6 +88,7 @@ return {
 					},
 					gopls = { mason = false },
 					yamlls = {},
+					eslint = { mason = false, settings = { format = false } },
 				},
 				setup = {
 					clangd = function(_, opts)

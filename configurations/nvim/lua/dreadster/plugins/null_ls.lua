@@ -32,7 +32,6 @@ return {
 				formatting.nixfmt,
 				formatting.beautysh,
 				formatting.latexindent,
-				diagnostics.eslint,
 				diagnostics.tfsec,
 
 				-- Python
