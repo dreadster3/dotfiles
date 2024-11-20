@@ -183,7 +183,7 @@ return {
 			enabled = true,
 			languages = {
 				cs = { template = { annotation_convention = "xmldoc" } },
-				python = { template = { annotation_convention = "reST" } },
+				python = { template = { annotation_convention = "google_docstrings" } },
 			},
 		},
 	},
@@ -199,7 +199,7 @@ return {
 				desc = "Replace in files (Spectre)"
 			}
 		}
-		,
+,
 	},
 	{
 		"cshuaimin/ssr.nvim",
@@ -239,7 +239,7 @@ return {
 			picker = "telescope",
 		},
 	},
-	{ "lervag/vimtex",          name = "vimtex",   init = function() end },
+	{ "lervag/vimtex", name = "vimtex", init = function() end },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
