@@ -24,5 +24,6 @@
     ./storage.nix
     ./hyprland.nix
     ./regreet.nix
+    ./virtmanager.nix
   ];
 }

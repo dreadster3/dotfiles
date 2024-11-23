@@ -23,10 +23,10 @@
     docker.enable = true;
     steam.enable = true;
     teamviewer.enable = true;
-    vmware.enable = true;
     xrdp.enable = true;
     ssh.enable = true;
     zerotier.enable = true;
+    virtmanager.enable = true;
 
     hyprland.enable = true;
   };
