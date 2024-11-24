@@ -120,6 +120,7 @@ in {
 
     programs.neovim = {
       enable = true;
+      catppuccin.enable = false;
       package = cfg.package;
       defaultEditor = true;
       extraPackages = with pkgs;
