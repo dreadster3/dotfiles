@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.homemanager.zsh;
-in {
+in
+{
   options = {
     modules.homemanager.zsh = {
       enable = mkEnableOption "zsh";

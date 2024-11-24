@@ -1,12 +1,14 @@
 { pkgs, config, lib, ... }:
 with lib;
 let cfg = config.modules.homemanager.tmux;
-in {
+in
+{
   options = { modules.homemanager.tmux = { enable = mkEnableOption "tmux"; }; };
 
   config = mkIf cfg.enable {
     programs.tmux = {
       enable = true;
+      catppuccin.enable = false;
       shell = "${pkgs.zsh}/bin/zsh";
       keyMode = "vi";
       prefix = "C-b";

@@ -45,6 +45,9 @@
         desktop = 12;
       };
     };
+
+    # Disable modules supported by catppuccin
+    targets = { grub.enable = false; };
   };
 
   # Run appimages directly
@@ -79,6 +82,7 @@
   ];
 
   modules.nixos = {
+    catppuccin.enable = true;
     grub.enable = true;
     thunar.enable = true;
     network.enable = true;
@@ -121,5 +125,8 @@
 
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
   home-manager.backupFileExtension = "bkp";
-  home-manager.sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+  home-manager.sharedModules = [
+    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.sops-nix.homeManagerModules.sops
+  ];
 }

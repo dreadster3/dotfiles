@@ -89,7 +89,16 @@
   };
 
   modules.homemanager = {
-    # nerdfonts.enable = true;
+    settings = {
+      font = {
+        package = pkgs.nerdfonts.override {
+          fonts = [ "Mononoki" "FiraCode" "VictorMono" "Iosevka" ];
+        };
+        normal.style = "Bold";
+        italic.family = "VictorMono Nerd Font";
+      };
+    };
+
     stylix.enable = true;
 
     direnv.enable = true;

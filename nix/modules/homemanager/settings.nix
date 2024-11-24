@@ -3,6 +3,22 @@ with lib;
 let
   cfg = config.modules.homemanager.settings;
 
+  mkFontOption = mkOption {
+    type = types.submodule {
+      options = {
+        family = mkOption {
+          type = types.str;
+          default = "Mononoki Nerd Font";
+        };
+        style = mkOption {
+          type = types.str;
+          default = "Regular";
+        };
+      };
+    };
+    default = { };
+  };
+
   themes = {
     catppuccin = {
       mocha = {
@@ -39,7 +55,8 @@ let
     };
   };
 
-in {
+in
+{
   options = {
     modules.homemanager.settings = {
       terminal = mkOption {
@@ -94,11 +111,28 @@ in {
           };
         };
       };
+      font = mkOption {
+        type = types.submodule {
+          options = {
+            package = mkOption {
+              type = types.package;
+              default = pkgs.nerdfonts;
+            };
+            size = mkOption {
+              type = types.int;
+              default = 18;
+            };
+            normal = mkFontOption;
+            italic = mkFontOption;
+          };
+        };
+        default = { };
+      };
     };
   };
-
   config = {
     modules.homemanager.settings.theme.colors =
       themes.${cfg.theme.name}.${cfg.theme.variant};
+    modules.homemanager.settings.font = { };
   };
 }

@@ -5,6 +5,8 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    catppuccin.url = "github:catppuccin/nix";
     stylix.url = "github:danth/stylix";
 
     home-manager = {
@@ -15,8 +17,8 @@
     sops-nix.url = "github:Mic92/sops-nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, sops-nix
-    , ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, catppuccin, stylix
+    , sops-nix, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -51,8 +53,11 @@
         };
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules =
-            [ ./hosts/desktop/configuration.nix stylix.nixosModules.stylix ];
+          modules = [
+            ./hosts/desktop/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            stylix.nixosModules.stylix
+          ];
         };
         nixos-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
