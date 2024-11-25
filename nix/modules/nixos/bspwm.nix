@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 with lib;
 let cfg = config.modules.nixos.bspwm;
-in {
+in
+{
   options = { modules.nixos.bspwm = { enable = mkEnableOption "Bspwm"; }; };
 
   config = mkIf cfg.enable {
@@ -14,7 +15,10 @@ in {
 
     services.displayManager = {
       defaultSession = "none+bspwm";
-      sddm.enable = true;
+      sddm = {
+        enable = true;
+        package = pkgs.kdePackages.sddm;
+      };
     };
   };
 }

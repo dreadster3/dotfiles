@@ -74,7 +74,9 @@ return {
 						analyze_open_documents_only = false,
 					},
 					rust_analyzer = { mason = false },
-					clangd = {},
+					clangd = {
+						filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+					},
 					terraformls = {},
 					tflint = {},
 					bashls = {},

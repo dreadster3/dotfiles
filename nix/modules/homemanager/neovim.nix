@@ -36,6 +36,7 @@ in {
   options = {
     modules.homemanager.neovim = {
       enable = mkEnableOption "neovim";
+      catppuccin.enable = false;
       package = mkOption {
         type = types.package;
         default = pkgs.neovim-unwrapped;
@@ -117,45 +118,45 @@ in {
       package = poetryPackage;
     };
 
-    programs = {
-      neovim = {
-        enable = true;
-        package = cfg.package;
-        extraPackages = with pkgs;
-          [
-            # Depependencies
-            unzip
-            gcc
-            cmake
-            luarocks
-            nodejs_20
-            nodePackages.npm
-            lazygit
-            ripgrep
-            dotnet-sdk_7
-            nixfmt-classic
-            gnumake
-            terraform
-            glow
+    programs.neovim = {
+      enable = true;
+      catppuccin.enable = false;
+      package = cfg.package;
+      defaultEditor = true;
+      extraPackages = with pkgs;
+        [
+          # Depependencies
+          unzip
+          gcc
+          cmake
+          luarocks
+          nodejs_20
+          nodePackages.npm
+          lazygit
+          ripgrep
+          dotnet-sdk_7
+          nixfmt-classic
+          gnumake
+          terraform
+          glow
 
-            # For octo plugin
-            gh
+          # For octo plugin
+          gh
 
-            # Install mason
-            wget
+          # Install mason
+          wget
 
-            # Lua language server not working with mason
-            lua-language-server
-            stylua
+          # Lua language server not working with mason
+          lua-language-server
+          stylua
 
-            # Latex
-            tex
-            texlab
+          # Latex
+          tex
+          texlab
 
-            # Bash
-            beautysh
-          ] ++ goPackages ++ rustPackages ++ pythonPackages;
-      };
+          # Bash
+          beautysh
+        ] ++ goPackages ++ rustPackages ++ pythonPackages;
     };
 
     xdg.desktopEntries.neovim = {

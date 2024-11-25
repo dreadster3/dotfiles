@@ -106,7 +106,6 @@ in {
     wlogout.enable = true;
     swaylock.enable = true;
     swayidle.enable = true;
-    wofi.enable = true;
     waybar = {
       enable = true;
       brightness.enable = true;

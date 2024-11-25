@@ -142,8 +142,8 @@ in {
             offset-y = "1%";
 
             # Appearance
-            background = "\${colorscheme.background}";
-            foreground = "\${colorscheme.foreground}";
+            background = "\${colors.base}";
+            foreground = "\${colors.text}";
             radius = 10;
             border-size = 0;
 
@@ -174,8 +174,8 @@ in {
             offset-y = "1%";
 
             # Appearance
-            background = "\${colorscheme.background}";
-            foreground = "\${colorscheme.foreground}";
+            background = "\${colors.base}";
+            foreground = "\${colors.text}";
             radius = 10;
             border-size = 0;
 
@@ -206,8 +206,8 @@ in {
             offset-y = "1%";
 
             # Appearance
-            background = "\${colorscheme.background}";
-            foreground = "\${colorscheme.foreground}";
+            background = "\${colors.base}";
+            foreground = "\${colors.text}";
             radius = 10;
             border-size = 0;
 
@@ -232,16 +232,16 @@ in {
             # Label Format
             format = "<label>";
             format-prefix = ''"  "'';
-            format-background = "\${colorscheme.mantle}";
-            format-foreground = "\${colorscheme.yellow}";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.yellow}";
             format-padding = 2;
             label = "%percentage%%";
 
             # Warn Label Format
             format-warn = "<label-warn>";
             format-warn-prefix = ''"  "'';
-            format-warn-background = "\${colorscheme.mantle}";
-            format-warn-foreground = "\${colorscheme.red}";
+            format-warn-background = "\${colors.mantle}";
+            format-warn-foreground = "\${colors.red}";
             format-warn-padding = 2;
             label-warn = "%percentage%%";
           };
@@ -253,8 +253,8 @@ in {
 
             # Label
             format = "<ramp> <label>";
-            format-background = "\${colorscheme.mantle}";
-            format-foreground = "\${colorscheme.yellow}";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.yellow}";
             format-padding = 2;
             label = "%percentage%%";
 
@@ -270,8 +270,8 @@ in {
             type = "internal/tray";
             tray-padding = 7;
             tray-size = "50%";
-            tray-background = "\${colorscheme.mantle}";
-            format-background = "\${colorscheme.mantle}";
+            tray-background = "\${colors.mantle}";
+            format-background = "\${colors.mantle}";
             format-padding = 1;
           };
 
@@ -285,27 +285,27 @@ in {
             time-format = "%H:%M";
 
             format-charging = "<animation-charging> <label-charging>";
-            format-charging-foreground = "\${colorscheme.green}";
-            format-charging-background = "\${colorscheme.mantle}";
+            format-charging-foreground = "\${colors.green}";
+            format-charging-background = "\${colors.mantle}";
             format-charging-padding = 2;
             label-charging = "%percentage%%";
 
             format-discharging = "<ramp-capacity> <label-discharging>";
-            format-discharging-foreground = "\${colorscheme.yellow}";
-            format-discharging-background = "\${colorscheme.mantle}";
+            format-discharging-foreground = "\${colors.yellow}";
+            format-discharging-background = "\${colors.mantle}";
             format-discharging-padding = 2;
             label-discharging = "%percentage%% (%time%)";
 
             format-low = "<animation-low> <label-low>";
-            format-low-foreground = "\${colorscheme.mantle}";
-            format-low-background = "\${colorscheme.red}";
+            format-low-foreground = "\${colors.mantle}";
+            format-low-background = "\${colors.red}";
             format-low-padding = 2;
             label-low = "%percentage%% (%time%)";
 
             format-full = "<label-full>";
             format-full-prefix = ''"󰂅 "'';
-            format-full-foreground = "\${colorscheme.green}";
-            format-full-background = "\${colorscheme.mantle}";
+            format-full-foreground = "\${colors.green}";
+            format-full-background = "\${colors.mantle}";
             format-full-padding = 2;
             label-full = "Full";
 
@@ -350,16 +350,16 @@ in {
 
             # Volume Label Format
             format-volume = "<ramp-volume> <label-volume>";
-            format-volume-background = "\${colorscheme.mantle}";
-            format-volume-foreground = "\${colorscheme.teal}";
+            format-volume-background = "\${colors.mantle}";
+            format-volume-foreground = "\${colors.teal}";
             format-volume-padding = 2;
             label-volume = "%percentage%%";
 
             # Mute Volume Label Format
             format-muted = "<label-muted>";
             format-muted-prefix = ''"󰝟 "'';
-            format-muted-background = "\${colorscheme.surface0}";
-            format-muted-foreground = "\${colorscheme.blue}";
+            format-muted-background = "\${colors.surface0}";
+            format-muted-foreground = "\${colors.blue}";
             format-muted-padding = 2;
             label-muted = "Muted";
 
@@ -382,23 +382,23 @@ in {
 
             # Format Connected Label
             format-connected = "<label-connected>";
-            format-connected-background = "\${colorscheme.mantle}";
+            format-connected-background = "\${colors.mantle}";
             format-connected-padding = "2";
 
             # Format Disconnected Label
             format-disconnected = "<label-disconnected>";
             format-disconnected-prefix = "󰈂";
-            format-disconnected-background = "\${colorscheme.mantle}";
+            format-disconnected-background = "\${colors.mantle}";
             format-disconnected-padding = "2";
 
             # Label Connected
             label-connected =
               "%{A1:networkmanager_dmenu &:} %upspeed%  %downspeed% %{A}";
-            label-connected-foreground = "\${colorscheme.lavender}";
+            label-connected-foreground = "\${colors.lavender}";
 
             # Label Disconnected
             label-disconnected = "%{A1:networkmanager_dmenu &:} Offline%{A}";
-            label-disconnected-foreground = "\${colorscheme.lavender}";
+            label-disconnected-foreground = "\${colors.lavender}";
           };
           "module/date" = {
             type = "internal/date";
@@ -411,8 +411,8 @@ in {
 
             # Label Format
             format = "<label>";
-            format-background = "\${colorscheme.mantle}";
-            format-foreground = "\${colorscheme.foreground}";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.text}";
             format-padding = "2";
 
             # Label
@@ -428,8 +428,8 @@ in {
             # Label Format
             format = "<label-state>";
             format-padding = "1";
-            format-background = "\${colorscheme.mantle}";
-            format-foreground = "\${colorscheme.teal}";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.teal}";
 
             # Label
             label-monitor = "%name%";
@@ -453,15 +453,15 @@ in {
             # Format Mounted Label
             format-mounted = "<label-mounted>";
             format-mounted-prefix = ''"󰋊 "'';
-            format-mounted-background = "\${colorscheme.mantle}";
-            format-mounted-foreground = "\${colorscheme.flamingo}";
+            format-mounted-background = "\${colors.mantle}";
+            format-mounted-foreground = "\${colors.flamingo}";
             format-mounted-padding = "2";
             label-mounted = "%percentage_used%%";
 
             # Format Unmounted Label
             format-unmounted = "<label-unmounted>";
             format-unmounted-prefix = ''"󰋊 "'';
-            format-unmounted-background = "\${colorscheme.blue}";
+            format-unmounted-background = "\${colors.blue}";
             format-unmounted-padding = "2";
             label-unmounted = "%mountpoint%: not mounted";
 
@@ -476,16 +476,16 @@ in {
             # Format Label
             format = "<label>";
             format-prefix = ''"  "'';
-            format-background = "\${colorscheme.mantle}";
-            format-foreground = "\${colorscheme.peach}";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.peach}";
             format-padding = 2;
             label = "%percentage_used%%";
 
             # Format Warn Label
             format-warn = "<label-warn>";
             format-warn-prefix = ''"  "'';
-            format-warn-background = "\${colorscheme.mantle}";
-            format-warn-foreground = "\${colorscheme.red}";
+            format-warn-background = "\${colors.mantle}";
+            format-warn-foreground = "\${colors.red}";
             format-warn-padding = 2;
             label-warn = "%percentage_used%%";
           };
@@ -493,15 +493,15 @@ in {
           "module/launcher" = {
             type = "custom/text";
             content = "";
-            content-background = "\${colorscheme.mantle}";
-            content-foreground = "\${colorscheme.green}";
+            content-background = "\${colors.mantle}";
+            content-foreground = "\${colors.green}";
             content-padding = 2;
             click-left = "${lib.getExe pkgs.rofi} -show drun";
           };
 
           "module/links" = {
             type = "custom/text";
-            content-foreground = "\${colorscheme.foreground}";
+            content-foreground = "\${colors.text}";
             content-padding = 2;
           };
 
@@ -548,8 +548,8 @@ in {
           "module/sysmenu" = {
             type = "custom/text";
             content = "⏻";
-            content-foreground = "\${colorscheme.red}";
-            content-background = "\${colorscheme.mantle}";
+            content-foreground = "\${colors.red}";
+            content-background = "\${colors.mantle}";
             content-padding = 2;
 
             click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''

@@ -1,6 +1,7 @@
 { config, lib, pkgs, username, ... }:
 with lib;
 let
+  inherit (config.lib.formats.rasi) mkLiteral;
   cfg = config.modules.homemanager.rofi;
   packagePath = getExe config.programs.rofi.finalPackage;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
@@ -10,13 +11,8 @@ in {
       enable = mkEnableOption "rofi";
       package = mkOption {
         type = types.package;
-        default = pkgs.rofi;
+        default = pkgs.rofi-wayland;
         description = "Package to use for rofi";
-      };
-      font = mkOption {
-        type = types.str;
-        default = "Fira Code Nerd Font 12";
-        description = "Font to use for rofi";
       };
       terminal = mkOption {
         type = types.nullOr types.package;
@@ -48,6 +44,11 @@ in {
         "${packagePath} -show p -modi 'p:${getExe cfg.powermenu.package}'";
     };
 
+    wayland.windowManager.hyprland.settings.bind = [
+      "$mainMod, D, exec, pkill rofi || ${packagePath} -show drun"
+      "$mainMod, Space, exec, pkill rofi || ${packagePath} -show drun"
+    ];
+
     programs.rofi = {
       enable = true;
       package = cfg.package;
@@ -55,11 +56,14 @@ in {
       plugins = [ ] ++ optional cfg.powermenu.enable cfg.powermenu.package;
       terminal = getExe terminal;
       location = "center";
-      theme = import ./theme.nix { inherit config lib; };
+      theme = {
+        window.border = mkLiteral "3px solid";
+        window.border-radius = mkLiteral "12px";
+      };
       extraConfig = {
         modi = "drun";
         show-icons = true;
-        display-drun = "";
+        display-drun = " ";
         drun-display-format = "{name}";
       };
     };

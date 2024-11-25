@@ -9,9 +9,10 @@ in {
 
     gtk = {
       enable = true;
-      iconTheme = {
-        name = "candy-icons";
-        package = pkgs.candy-icons;
+      catppuccin.icon = {
+        enable = config.gtk.catppuccin.enable;
+        flavor = config.catppuccin.flavor;
+        accent = config.catppuccin.accent;
       };
     };
   };

@@ -61,15 +61,16 @@ in {
         mainBar = {
           layer = "top";
           modules-left =
-            [ "custom/wofi" "hyprland/workspaces" "cpu" "memory" "disk" ];
+            [ "custom/launcher" "hyprland/workspaces" "cpu" "memory" "disk" ];
           modules-center = [ "clock" ];
           modules-right = optional (cfg.battery.enable) ("battery")
             ++ optional (cfg.brightness.enable) ("backlight")
             ++ [ "pulseaudio" "tray" ];
-          # output = [ "DP-1" "HDMI-A-1" ];
-          "custom/wofi" = {
+          "custom/launcher" = {
             format = "";
-            on-click = "pkill wofi || wofi";
+            on-click = "pkill rofi || ${
+                getExe config.programs.rofi.finalPackage
+              } -show drun";
             tooltip = false;
           };
           "hyprland/workspaces" = {

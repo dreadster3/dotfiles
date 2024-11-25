@@ -114,7 +114,6 @@ in {
     swayidle.enable = true;
     # hypridle.enable = true;
     # hyprlock.enable = true;
-    wofi.enable = true;
     waybar.enable = true;
   };
 }

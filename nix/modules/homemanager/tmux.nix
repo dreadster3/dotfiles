@@ -7,6 +7,7 @@ in {
   config = mkIf cfg.enable {
     programs.tmux = {
       enable = true;
+      catppuccin.enable = false;
       shell = "${pkgs.zsh}/bin/zsh";
       keyMode = "vi";
       prefix = "C-b";
@@ -14,13 +15,15 @@ in {
       mouse = true;
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
-        better-mouse-mode
         {
           plugin = catppuccin;
           extraConfig = ''
             set -g @catppuccin_flavour 'mocha'
             set -g @catppuccin_window_tabs_enabled 'on'
             set -g @catppuccin_date_time "%H:%M"
+            set -g @catppuccin_window_left_separator ""
+            set -g @catppuccin_window_right_separator " "
+            set -g @catppuccin_status_modules_right "application cpu session host date_time"
           '';
         }
         {
@@ -36,16 +39,15 @@ in {
           extraConfig = ''
             set -g @continuum-restore 'on'
             set -g @continuum-boot 'on'
-            set -g @continuum-save-interval '30'
+            set -g @continuum-save-interval '10'
           '';
         }
+        cpu
+        better-mouse-mode
       ];
       extraConfig = ''
         bind-key v split-window -v
         bind-key h split-window -h
-
-        set-option status on
-        set -g status-right 'Continuum status: #{continuum_status}'
       '';
     };
   };

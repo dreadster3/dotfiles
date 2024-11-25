@@ -25,5 +25,6 @@
     ./hyprland.nix
     ./regreet.nix
     ./virtmanager.nix
+    ./catppuccin.nix
   ];
 }
