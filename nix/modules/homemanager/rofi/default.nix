@@ -15,11 +15,6 @@ in {
         default = pkgs.rofi-wayland;
         description = "Package to use for rofi";
       };
-      font = mkOption {
-        type = types.str;
-        default = "Fira Code Nerd Font 12";
-        description = "Font to use for rofi";
-      };
       terminal = mkOption {
         type = types.nullOr types.package;
         default = null;
@@ -65,7 +60,6 @@ in {
       theme = {
         window.border = mkLiteral "3px solid";
         window.border-radius = mkLiteral "12px";
-        window.border-color = mkLiteral "@${accent}";
       };
       extraConfig = {
         modi = "drun";
