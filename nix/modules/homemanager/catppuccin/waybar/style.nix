@@ -1,4 +1,6 @@
-accent: ''
+{ config, ... }:
+let accent = config.accent;
+in ''
   * {
     border: none;
     border-radius: 0;
@@ -7,26 +9,26 @@ accent: ''
   }
 
   window#waybar {
-    background: alpha(@background, 0.5);
+    background: alpha(@base, 0.5);
     border-bottom: 1px solid;
     border-color: @mantle;
-    color: @foreground;
+    color: @text;
   }
 
   tooltip {
-    background: alpha(@background, 1);
+    background: alpha(@base, 1);
     border: 1px solid;
     border-color: @surface1;
     border-radius: 10px;
   }
   tooltip label {
-    color: @foreground;
+    color: @text;
   }
 
   #custom-launcher {
     font-size: 15px;
     color: @${accent};
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     border-width: 1.3px;
     border-color: @surface1;
@@ -39,7 +41,7 @@ accent: ''
   #workspaces {
     border-radius: 10px;
     margin: 5px;
-    background-color: @background;
+    background-color: @base;
     border-width: 1.3px;
     border-color: @surface1;
     border-style: solid;
@@ -49,12 +51,12 @@ accent: ''
     border-radius: 10px;
     padding: 5px;
     background: transparent;
-    color: @foreground;
+    color: @text;
   }
 
   #workspaces button.active {
     border-radius: 10px;
-    color: @background;
+    color: @base;
     background: @${accent};
     padding-left: 8px;
     padding-right: 8px;
@@ -69,7 +71,7 @@ accent: ''
 
   #cpu {
     color: @flamingo;
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
@@ -80,7 +82,7 @@ accent: ''
 
   #memory {
     color: @peach;
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
@@ -91,7 +93,7 @@ accent: ''
 
   #disk {
     color: @yellow;
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
@@ -101,8 +103,8 @@ accent: ''
   }
 
   #clock {
-    color: @foreground;
-    background-color: @background;
+    color: @text;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding-left: 0px;
@@ -113,7 +115,7 @@ accent: ''
   }
 
   #battery {
-    background-color: @background;
+    background-color: @base;
     color: @green;
     border-radius: 10px;
     margin: 5px;
@@ -134,12 +136,12 @@ accent: ''
 
   #battery.charging,
   #battery.plugged {
-    color: @${accent};
+    color: @blue;
   }
 
   #backlight {
     color: @yellow;
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
@@ -152,7 +154,7 @@ accent: ''
 
   #pulseaudio {
     color: #f5c2e7;
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding-left: 5px;
@@ -163,7 +165,7 @@ accent: ''
   }
 
   #tray {
-    background-color: @background;
+    background-color: @base;
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
@@ -173,7 +175,7 @@ accent: ''
   }
 
   #custom-playerctl {
-    background: @background;
+    background: @base;
     padding-left: 15px;
     padding-right: 14px;
     border-radius: 16px;

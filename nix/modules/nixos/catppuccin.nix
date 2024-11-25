@@ -10,7 +10,7 @@ in {
     catppuccinConfig = {
       enable = true;
       flavor = "mocha";
-      accent = "blue";
+      accent = "mauve";
     };
 
   in mkIf cfg.enable {
