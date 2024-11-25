@@ -1,4 +1,10 @@
-{ inputs, outputs, config, lib, pkgs, ... }: {
+{ inputs, outputs, config, lib, pkgs, ... }:
+let
+  catppuccinConfig = config.catppuccin;
+  mkUpper = str:
+    (lib.toUpper (builtins.substring 0 1 str))
+    + (builtins.substring 1 (builtins.stringLength str) str);
+in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules
@@ -23,8 +29,11 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor = {
-      name = "catppuccin-mocha-blue-cursors";
-      package = pkgs.catppuccin-cursors.mochaBlue;
+      name =
+        "catppuccin-${catppuccinConfig.flavor}-${catppuccinConfig.accent}-cursors";
+      package = pkgs.catppuccin-cursors."${catppuccinConfig.flavor}${
+          mkUpper catppuccinConfig.accent
+        }";
       size = 32;
     };
 

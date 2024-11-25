@@ -53,6 +53,7 @@
     ./poetry.nix
     ./xdg.nix
     ./bitwarden.nix
+    ./catppuccin
   ];
 
   nixpkgs.config.allowUnfree = true;

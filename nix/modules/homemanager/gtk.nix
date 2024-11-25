@@ -2,8 +2,7 @@
 with lib;
 let cfg = config.modules.homemanager.gtk;
 
-in
-{
+in {
   options = { modules.homemanager.gtk = { enable = mkEnableOption "gtk"; }; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ dconf lxappearance ];
@@ -11,14 +10,10 @@ in
     gtk = {
       enable = true;
       catppuccin.icon = {
-        enable = true;
+        enable = config.gtk.catppuccin.enable;
         flavor = config.catppuccin.flavor;
         accent = config.catppuccin.accent;
       };
-      # iconTheme = {
-      #   name = "candy-icons";
-      #   package = pkgs.candy-icons;
-      # };
     };
   };
 }
