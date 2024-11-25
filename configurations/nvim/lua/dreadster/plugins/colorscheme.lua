@@ -22,7 +22,8 @@ return {
 				markdown = true,
 				which_key = true,
 				nvimtree = true,
-				neotree = false,
+				neotree = true,
+				notify = true,
 				illuminate = true,
 				lsp_trouble = true,
 			},
@@ -37,6 +38,10 @@ return {
 					NeoTreeDirectoryIcon = { fg = colors[accent_name] },
 					NeoTreeRootName = { fg = colors[accent_name], bold = true },
 					NeoTreeTitleBar = { fg = colors.mantle, bg = colors[accent_name] },
+
+					-- Noice
+					NoiceCmdlinePopupBorder = { fg = colors[accent_name] },
+					NoiceCmdlineIcon = { fg = colors[accent_name] },
 				}
 			end,
 		},
