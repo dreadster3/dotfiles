@@ -23,7 +23,6 @@ return {
 				which_key = true,
 				nvimtree = true,
 				neotree = true,
-				notify = true,
 				illuminate = true,
 				lsp_trouble = true,
 			},
