@@ -5,11 +5,6 @@ return {
 		lazy = false,
 		version = "*",
 		init = function()
-			local accent_color = require("dreadster.utils.ui").get_accent_color()
-			vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { fg = accent_color })
-			vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = accent_color })
-			vim.api.nvim_set_hl(0, "NeoTreeRootName", { fg = accent_color, bold = true })
-
 			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 		opts = {
@@ -31,6 +26,19 @@ return {
 				illuminate = true,
 				lsp_trouble = true,
 			},
+			custom_highlights = function(colors)
+				local accent_name = require("dreadster.utils.ui").get_accent_name()
+				return {
+					FloatBorder = { fg = colors[accent_name] },
+					FloatTitle = { fg = colors.text },
+
+					-- Neotree
+					NeoTreeDirectoryName = { fg = colors[accent_name] },
+					NeoTreeDirectoryIcon = { fg = colors[accent_name] },
+					NeoTreeRootName = { fg = colors[accent_name], bold = true },
+					NeoTreeTitleBar = { fg = colors.mantle, bg = colors[accent_name] },
+				}
+			end,
 		},
 	},
 }
