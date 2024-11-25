@@ -48,8 +48,11 @@
       nixosConfigurations = {
         nixosvm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules =
-            [ ./hosts/nixosvm/configuration.nix stylix.nixosModules.stylix ];
+          modules = [
+            ./hosts/nixosvm/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            stylix.nixosModules.stylix
+          ];
         };
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };

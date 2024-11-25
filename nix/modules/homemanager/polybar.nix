@@ -429,7 +429,7 @@ in {
             format = "<label-state>";
             format-padding = "1";
             format-background = "\${colors.mantle}";
-            format-foreground = "\${colors.teal}";
+            format-foreground = "\${colors.${config.catppuccin.accent}}";
 
             # Label
             label-monitor = "%name%";
@@ -494,9 +494,10 @@ in {
             type = "custom/text";
             content = "";
             content-background = "\${colors.mantle}";
-            content-foreground = "\${colors.green}";
+            content-foreground = "\${colors.${config.catppuccin.accent}}";
             content-padding = 2;
-            click-left = "${lib.getExe pkgs.rofi} -show drun";
+            click-left =
+              "${getExe config.programs.rofi.finalPackage} -show drun";
           };
 
           "module/links" = {
@@ -508,41 +509,40 @@ in {
           "module/firefox" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe firefox} &";
-            click-right = "${lib.getExe firefox} --private-window &";
+            click-left = "${getExe firefox} &";
+            click-right = "${getExe firefox} --private-window &";
           };
 
           "module/explorer" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe cfg.filemanager} &";
-            click-right =
-              "${lib.getExe terminal} -e ${lib.getExe pkgs.ranger} ~ &";
+            click-left = "${getExe cfg.filemanager} &";
+            click-right = "${getExe terminal} -e ${getExe pkgs.ranger} ~ &";
           };
 
           "module/monitor" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe terminal} -e ${lib.getExe pkgs.btop} &";
+            click-left =
+              "${getExe terminal} -e ${getExe config.programs.btop.package} &";
           };
 
           "module/github" = {
             "inherit" = "module/links";
             content = "";
-            click-left =
-              "${lib.getExe firefox} https://github.com/dreadster3 &";
+            click-left = "${getExe firefox} https://github.com/dreadster3 &";
           };
 
           "module/reddit" = {
             "inherit" = "module/links";
             content = "";
-            click-left = "${lib.getExe firefox} https://reddit.com &";
+            click-left = "${getExe firefox} https://reddit.com &";
           };
 
           "module/azure" = {
             "inherit" = "module/links";
             content = "󰠅";
-            click-left = "${lib.getExe firefox} https://portal.azure.com &";
+            click-left = "${getExe firefox} https://portal.azure.com &";
           };
 
           "module/sysmenu" = {
@@ -553,11 +553,10 @@ in {
             content-padding = 2;
 
             click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''
-                PATH=/run/current-system/sw/bin:$PATH
-
-              	${lib.getExe pkgs.rofi} -show p -modi "p:${
-                 lib.getExe pkgs.rofi-power-menu
-               }"
+              PATH=/run/current-system/sw/bin:$PATH
+              ${getExe config.programs.rofi.finalPackage} -show p -modi "p:${
+                getExe config.modules.homemanager.rofi.powermenu.package
+              }"
             '');
           };
         };

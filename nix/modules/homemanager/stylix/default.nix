@@ -10,7 +10,6 @@ in {
     stylix = {
       autoEnable = false;
       targets = {
-        bspwm.enable = true;
         feh.enable = true;
         gtk.enable = true;
         hyprpaper.enable = true;
