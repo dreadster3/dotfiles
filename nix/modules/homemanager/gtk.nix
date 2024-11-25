@@ -10,7 +10,7 @@ in {
     gtk = {
       enable = true;
       catppuccin.icon = {
-        enable = config.gtk.catppuccin.enable;
+        enable = config.catppuccin.enable;
         flavor = config.catppuccin.flavor;
         accent = config.catppuccin.accent;
       };
