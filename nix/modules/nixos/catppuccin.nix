@@ -14,6 +14,11 @@ in {
     };
 
   in mkIf cfg.enable {
+    environment.sessionVariables = {
+      CATPPUCCIN_FLAVOR = catppuccinConfig.flavor;
+      CATPPUCCIN_ACCENT = catppuccinConfig.accent;
+    };
+
     catppuccin = catppuccinConfig;
 
     home-manager.sharedModules = [{ catppuccin = catppuccinConfig; }];

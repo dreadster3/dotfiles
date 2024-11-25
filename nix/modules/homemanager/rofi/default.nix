@@ -5,7 +5,6 @@ let
   cfg = config.modules.homemanager.rofi;
   packagePath = getExe config.programs.rofi.finalPackage;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
-  accent = config.catppuccin.accent;
 in {
   options = {
     modules.homemanager.rofi = {

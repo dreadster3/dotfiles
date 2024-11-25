@@ -64,6 +64,7 @@
   "octo": { "branch": "master", "commit": "51f18085561805732e0306cf7300f773ec86872c" },
   "omnisharp-extended-lsp.nvim": { "branch": "main", "commit": "aad7bf06b4ca0de816b919d475a75b30f5f62b61" },
   "overseer": { "branch": "master", "commit": "10ee48ff96c8d1049efb278ea4c8cf9f3b0e4326" },
+  "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "project": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },

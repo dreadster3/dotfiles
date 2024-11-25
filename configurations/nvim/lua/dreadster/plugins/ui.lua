@@ -98,7 +98,27 @@ return {
 		name = "lualine",
 		event = "BufReadPost",
 		dependencies = { "icons" },
-		opts = {},
+		config = function(_, opts)
+			local theme = require("lualine.themes.catppuccin-mocha")
+			local accent_color = require("dreadster.utils.ui").get_accent_color()
+
+			theme.normal.a.bg = accent_color
+			theme.normal.b.fg = accent_color
+			theme.normal.c.fg = accent_color
+
+			local final = vim.tbl_deep_extend("force", opts, {
+				options = {
+					theme = theme,
+				},
+			})
+
+			require("lualine").setup(final)
+		end,
+		opts = {
+			options = {
+				theme = "catppuccin",
+			},
+		},
 	},
 	{ "levouh/tint.nvim", name = "tint", opts = {} },
 	{
@@ -180,15 +200,23 @@ return {
 		name = "icons",
 		main = "mini.icons",
 		lazy = true,
-		opts = {
-			file = {
-				[".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
-				["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
-			},
-			filetype = {
-				dotenv = { glyph = "", hl = "MiniIconsYellow" },
-			},
-		},
+		opts = function()
+			return {
+				file = {
+					[".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+					["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+				},
+				filetype = {
+					dotenv = { glyph = "", hl = "MiniIconsYellow" },
+				},
+				lsp_icons = {
+					folder = { glyph = "", hl = "MiniIconsAccent" },
+				},
+				default = {
+					directory = { glyph = "󰉋", hl = "MiniIconsAccent" },
+				},
+			}
+		end,
 		init = function()
 			package.preload["nvim-web-devicons"] = function()
 				require("mini.icons").mock_nvim_web_devicons()

@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		name = "treesitter",
+		dependencies = { "nvim-treesitter/playground" },
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
 		end,
@@ -30,6 +31,9 @@ return {
 			highlight = { enable = true, disable = {} },
 			indent = { enable = true },
 			context_commentstring = { enable = true },
+			playground = {
+				enable = true,
+			},
 		},
 	},
 	{

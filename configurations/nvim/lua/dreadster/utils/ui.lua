@@ -47,4 +47,26 @@ function M.bufremove(buf)
 	end
 end
 
+--- Gets the catppuccin accent name
+---@return string accent_name
+function M.get_accent_name()
+	local accent = vim.fn.getenv("CATPPUCCIN_ACCENT")
+
+	if accent == "" or accent == vim.NIL then
+		accent = "blue"
+	end
+
+	return accent
+end
+
+--- Gets the catppuccin accent color
+---@return string accent_color
+function M.get_accent_color()
+	local accent_name = M.get_accent_name()
+
+	local pallet = require("catppuccin.palettes").get_palette()
+
+	return pallet[accent_name]
+end
+
 return M
