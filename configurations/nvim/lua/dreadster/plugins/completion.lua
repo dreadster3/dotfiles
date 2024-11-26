@@ -15,6 +15,16 @@ return {
 			"cmpgit",
 			"copilotcmp",
 		},
+		config = function(_, opts)
+			local cmp = require("cmp")
+			cmp.setup(opts)
+
+			for _, filetype in ipairs(opts.disabled_filetypes) do
+				cmp.setup.filetype(filetype, {
+					enabled = false,
+				})
+			end
+		end,
 		opts = function(_, opts)
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 			local kind_icons = {
@@ -105,9 +115,9 @@ return {
 						mode = "symbol_text", -- show only symbol annotations
 						maxwidth = {
 							abbr = function()
-								max_width = math.ceil((1 / 3) * vim.fn.winwidth(0))
-								kind = math.ceil((1 / 3) * 0.25 * vim.fn.winwidth(0))
-								menu = math.min(math.ceil((1 / 3) * 0.2 * vim.fn.winwidth(0)), 6)
+								local max_width = math.ceil((1 / 3) * vim.fn.winwidth(0))
+								local kind = math.ceil((1 / 3) * 0.25 * vim.fn.winwidth(0))
+								local menu = math.min(math.ceil((1 / 3) * 0.2 * vim.fn.winwidth(0)), 6)
 								return max_width - kind - menu
 							end,
 							kind = function()
@@ -159,6 +169,9 @@ return {
 					ghost_text = {
 						hl_group = "CmpGhostText",
 					},
+				},
+				disabled_filetypes = {
+					"sagarename",
 				},
 			})
 
