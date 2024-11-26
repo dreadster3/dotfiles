@@ -42,7 +42,7 @@ in {
         listener = [
           {
             timeout = 900;
-            on-timeout = "${config.programs.hyprlock.package}/bin/hyprlock";
+            on-timeout = "${hyprlock}/bin/hyprlock";
           }
           {
             timeout = 1200;

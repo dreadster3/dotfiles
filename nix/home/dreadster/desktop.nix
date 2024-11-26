@@ -110,10 +110,8 @@ in {
       };
     };
     wlogout.enable = true;
-    swaylock.enable = true;
-    swayidle.enable = true;
-    # hypridle.enable = true;
-    # hyprlock.enable = true;
+    hypridle.enable = true;
+    hyprlock.enable = true;
     waybar.enable = true;
   };
 }
