@@ -42,6 +42,10 @@
   fonts.fontconfig.enable = true;
 
   modules.homemanager = {
+    catppuccin = {
+      enable = true;
+      accent = "mauve";
+    };
     firefox.enable = true;
     zsh.sourceNix = true;
     pentest.enable = true;

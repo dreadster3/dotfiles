@@ -3,8 +3,7 @@ with lib;
 let
   cfg = config.modules.homemanager.alacritty;
   settings = config.modules.homemanager.settings;
-in
-{
+in {
   options = {
     modules.homemanager.alacritty = {
       enable = mkEnableOption "alacritty";

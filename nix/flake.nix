@@ -77,6 +77,7 @@
             ./home/dreadster/homewsl.nix
             stylix.homeManagerModules.stylix
             sops-nix.homeManagerModules.sops
+            catppuccin.homeManagerModules.catppuccin
           ];
         };
         "deck@steamdeck" = home-manager.lib.homeManagerConfiguration {
