@@ -54,6 +54,7 @@
     ./xdg.nix
     ./bitwarden.nix
     ./catppuccin
+    ./ssh.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

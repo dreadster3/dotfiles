@@ -98,6 +98,7 @@
         italic.family = "VictorMono Nerd Font";
       };
     };
+    ssh.enable = true;
 
     stylix.enable = true;
 
