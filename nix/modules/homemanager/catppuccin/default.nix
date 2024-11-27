@@ -2,7 +2,8 @@
 with lib;
 let cfg = config.modules.homemanager.catppuccin;
 in {
-  imports = [ ./hyprland.nix ./waybar ./rofi.nix ./colors.nix ./bspwm.nix ];
+  imports =
+    [ ./hyprland.nix ./waybar ./rofi.nix ./colors.nix ./bspwm.nix ./dunst.nix ];
 
   options = {
     modules.homemanager.catppuccin = {
