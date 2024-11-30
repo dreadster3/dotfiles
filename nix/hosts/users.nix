@@ -2,6 +2,7 @@
 with lib; {
 
   users.users = {
+    root.hashedPassword = "!";
     dreadster = {
       shell = pkgs.zsh;
       isNormalUser = true;

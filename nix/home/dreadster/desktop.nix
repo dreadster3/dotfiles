@@ -3,7 +3,7 @@ let
   primaryMonitor = "DP-0";
   secondaryMonitor = "HDMI-0";
 in {
-  imports = [ ./default.nix ];
+  imports = [ ./base/personal.nix ];
 
   home.packages = with pkgs; [
     playerctl

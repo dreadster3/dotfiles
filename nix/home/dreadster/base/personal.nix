@@ -1,27 +1,11 @@
 { inputs, outputs, config, lib, pkgs, ... }: {
-  imports = [ outputs.homeManagerModules ];
-
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
-
-    config.allowUnfree = true;
-  };
+  imports = [ ./common.nix ];
 
   home.packages = with pkgs; [
-    killall
-    tldr
-    openssh
     feh
-    wget
-    curl
     zathura
     kubectl
     neofetch
-    file
     fzf
 
     dig
@@ -30,34 +14,15 @@
     usbutils
     ethtool
 
-    tree
-
     sops
   ];
 
   sops = {
-    defaultSopsFile = lib.mkDefault ../../secrets/secrets.yaml;
+    defaultSopsFile = lib.mkDefault ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     secrets.openai_api_key = { };
-  };
-
-  home = {
-    username = lib.mkDefault "dreadster";
-    homeDirectory = lib.mkDefault "/home/dreadster";
-  };
-
-  home.sessionVariables = {
-    XDG_CACHE_DIR = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    KUBECONFIG = "$HOME/.kube/config";
-  };
-
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
   };
 
   services = {
@@ -109,7 +74,7 @@
     sxhkd.enable = true;
     zsh = {
       enable = true;
-      dynamicEnvVariables = {
+      dynamicEnvVariables = lib.mkDefault {
         open_api_key = config.sops.secrets.openai_api_key.path;
       };
     };
@@ -135,9 +100,7 @@
         };
       };
     };
-    btop.enable = true;
     ranger.enable = true;
-    tmux.enable = true;
     lazygit.enable = true;
     bitwarden.enable = true;
 
@@ -153,7 +116,6 @@
     userName = "dreadster3";
     userEmail = "afonso.antunes@live.com.pt";
   };
-  programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";
 }

@@ -5,23 +5,9 @@ let
     (lib.toUpper (builtins.substring 0 1 str))
     + (builtins.substring 1 (builtins.stringLength str) str);
 in {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    outputs.nixosModules
-    ./users.nix
-  ];
+  imports = [ ./common.nix ];
 
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
-
-    config.allowUnfree = true;
-  };
-
-  security.pki.certificateFiles = [ ../../certificates/issuer.crt ];
+  security.pki.certificateFiles = [ ../../../certificates/issuer.crt ];
 
   stylix = {
     enable = true;
@@ -71,40 +57,19 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    vim
-    # firefox
-    git
-    curl
-    kitty
-    alacritty
-    openvpn
+    gnome.eog
     networkmanagerapplet
-
-    unzip
-
+    openvpn
     clinfo
     postman
-
-    gnome.eog
   ];
 
   modules.nixos = {
     catppuccin.enable = true;
-    grub.enable = true;
     thunar.enable = true;
     network.enable = true;
     pipewire.enable = lib.mkDefault true;
-    zsh.enable = true;
-    storage.enable = true;
   };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Lisbon";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_PT.UTF-8";
@@ -118,24 +83,8 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.locate.enable = true;
-
   security.polkit.enable = true;
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = [ ];
-  };
-
-  nix = {
-    # channel.enable = false;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  home-manager.extraSpecialArgs = { inherit inputs outputs; };
-  home-manager.backupFileExtension = "bkp";
-  home-manager.sharedModules = [
-    inputs.catppuccin.homeManagerModules.catppuccin
-    inputs.sops-nix.homeManagerModules.sops
-  ];
+  home-manager.sharedModules =
+    [ inputs.catppuccin.homeManagerModules.catppuccin ];
 }

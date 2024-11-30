@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }: {
   imports = [
-    ../profiles/personal.nix
+    ../profiles/server.nix
 
     ./hardware-configuration.nix
     ./home.nix
@@ -21,13 +21,10 @@
   };
 
   modules.nixos = {
-    x11.enable = true;
-    bspwm.enable = true;
-    # kubernetes.enable = true;
-    docker.enable = true;
-    ssh.enable = true;
-    pipewire.enable = false;
-    pulseaudio.enable = true;
+    grub = {
+      device = "/dev/sda";
+      useOSProber = false;
+    };
   };
 
   networking.hostName = "nixosvm";

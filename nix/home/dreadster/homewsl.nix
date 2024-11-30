@@ -5,7 +5,7 @@ let
     (lib.toUpper (builtins.substring 0 1 str))
     + (builtins.substring 1 (builtins.stringLength str) str);
 in {
-  imports = [ ./default.nix ];
+  imports = [ ./base/personal.nix ];
 
   # Enable experimental nix features
   nix.package = pkgs.nix;

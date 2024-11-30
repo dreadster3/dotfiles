@@ -67,6 +67,10 @@
           modules =
             [ ./hosts/laptop/configuration.nix stylix.nixosModules.stylix ];
         };
+        nixvps = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs lib; };
+          modules = [ ./hosts/vps/configuration.nix ];
+        };
       };
 
       homeConfigurations = {

@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }: {
   imports = [ # Include the results of the hardware scan.
-    ../common.nix
+    ../profiles/personal.nix
 
     ./hardware-configuration.nix
     ./home.nix
