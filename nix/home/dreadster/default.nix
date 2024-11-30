@@ -107,7 +107,12 @@
     alacritty.enable = true;
     kitty.enable = true;
     sxhkd.enable = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      dynamicEnvVariables = {
+        open_api_key = config.sops.secrets.openai_api_key.path;
+      };
+    };
     xdg.enable = true;
     neovim = {
       enable = true;

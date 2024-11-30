@@ -1,14 +1,19 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.homemanager.zsh;
-in
-{
+let
+  cfg = config.modules.homemanager.zsh;
+
+  dynamicEnvVariables =
+    foldlAttrs (acc: name: value: "export ${toUpper name}=$(cat ${value})") ""
+    cfg.dynamicEnvVariables;
+in {
   options = {
     modules.homemanager.zsh = {
       enable = mkEnableOption "zsh";
-      sourceNix = mkOption {
-        default = false;
-        type = types.bool;
+      sourceNix = mkEnableOption "zsh.sourceNix";
+      dynamicEnvVariables = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
       };
     };
   };
@@ -19,10 +24,8 @@ in
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       sessionVariables = { "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin"; };
-      initExtra = concatStringsSep "\n" ([
-        ''
-          export OPENAI_API_KEY="$(cat ${config.sops.secrets.openai_api_key.path})"''
-      ] ++ optional cfg.sourceNix
+      initExtra = concatStringsSep "\n" ([ dynamicEnvVariables ]
+        ++ optional cfg.sourceNix
         "source $HOME/.nix-profile/etc/profile.d/nix.sh");
       plugins = [
         {
