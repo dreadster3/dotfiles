@@ -1,3 +1,3 @@
 { ... }: {
-  home-manager.users = { dreadster = import ../../home/dreadster/vm.nix; };
+  home-manager.users = { dreadster = import ../../home/dreadster/vps.nix; };
 }
