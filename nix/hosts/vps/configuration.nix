@@ -29,6 +29,7 @@
 
   users.groups.coolify = { gid = 9999; };
   users.users.coolify = {
+    shell = pkgs.bash;
     isSystemUser = true;
     hashedPassword = "!";
     group = "coolify";
