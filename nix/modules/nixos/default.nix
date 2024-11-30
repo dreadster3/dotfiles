@@ -26,5 +26,6 @@
     ./regreet.nix
     ./virtmanager.nix
     ./catppuccin.nix
+    ./coolify.nix
   ];
 }

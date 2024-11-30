@@ -11,7 +11,7 @@ in {
       settings = {
         PasswordAuthentication = true;
         X11Forwarding = true;
-        PermitRootLogin = "no";
+        PermitRootLogin = "prohibit-password";
       };
     };
   };
