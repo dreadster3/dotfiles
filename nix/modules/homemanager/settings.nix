@@ -59,6 +59,7 @@ let
 in {
   options = {
     modules.homemanager.settings = {
+      enable = mkEnableOption "settings";
       terminal = mkOption {
         type = types.package;
         default = pkgs.alacritty;
@@ -130,7 +131,7 @@ in {
       };
     };
   };
-  config = {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [ cfg.font.package ];
 
     modules.homemanager.settings.theme.colors =

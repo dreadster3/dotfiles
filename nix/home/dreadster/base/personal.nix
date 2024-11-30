@@ -55,6 +55,7 @@
 
   modules.homemanager = {
     settings = {
+      enable = true;
       font = {
         package = pkgs.nerdfonts.override {
           fonts = [ "Mononoki" "FiraCode" "VictorMono" "Iosevka" ];
