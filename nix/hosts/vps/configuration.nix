@@ -33,6 +33,10 @@
     hashedPassword = "!";
     group = "coolify";
     uid = 9999;
+    extraGroups = [ "docker" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIlwnL7LOKNAGPCQvoaHcIwWi600lwQmeiY8fu56JQ6 coolify@nixvps"
+    ];
   };
 
   networking.hostName = "nixvps";
