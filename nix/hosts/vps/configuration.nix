@@ -27,7 +27,7 @@
     };
   };
 
-  networking.hostName = "nixosvm";
+  networking.hostName = "nixvps";
 
   virtualisation.vmware.guest.enable = true;
   services.xserver.videoDrivers = [ "vmware" ];
