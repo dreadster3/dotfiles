@@ -84,7 +84,4 @@ in {
   };
 
   security.polkit.enable = true;
-
-  home-manager.sharedModules =
-    [ inputs.catppuccin.homeManagerModules.catppuccin ];
 }
