@@ -69,7 +69,11 @@
         };
         nixvps = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
-          modules = [ ./hosts/vps/configuration.nix ];
+          modules = [
+            ./hosts/vps/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            stylix.nixosModules.stylix
+          ];
         };
       };
 
