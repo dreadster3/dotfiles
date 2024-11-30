@@ -1,5 +1,5 @@
 { inputs, outputs, config, lib, pkgs, ... }: {
-  imports = [ ./common.nix ];
+  imports = [ ./common.nix inputs.sops-nix.homeManagerModules.sops ];
 
   home.packages = with pkgs; [
     feh
