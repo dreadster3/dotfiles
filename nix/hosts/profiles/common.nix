@@ -25,7 +25,10 @@ in {
 
   modules.nixos = {
     grub.enable = true;
-    docker.enable = true;
+    docker = {
+      enable = true;
+      package = pkgs.unstable.docker;
+    };
     ssh.enable = true;
     zsh.enable = true;
     storage.enable = true;
