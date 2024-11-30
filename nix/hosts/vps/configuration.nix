@@ -41,7 +41,10 @@
   };
   security.sudo.extraRules = [{
     users = [ "coolify" ];
-    options = [ "NOPASSWD" ];
+    commands = [{
+      command = "ALL";
+      options = [ "NOPASSWD" ];
+    }];
   }];
 
   networking.hostName = "nixvps";
