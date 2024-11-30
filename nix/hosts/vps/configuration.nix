@@ -27,6 +27,14 @@
     };
   };
 
+  users.groups.coolify = { gid = 9999; };
+  users.users.coolify = {
+    isSystemUser = true;
+    hashedPassword = "!";
+    group = "coolify";
+    uid = 9999;
+  };
+
   networking.hostName = "nixvps";
 
   virtualisation.vmware.guest.enable = true;
