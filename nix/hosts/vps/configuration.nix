@@ -39,6 +39,10 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIlwnL7LOKNAGPCQvoaHcIwWi600lwQmeiY8fu56JQ6 coolify@nixvps"
     ];
   };
+  security.sudo.extraRules = [{
+    users = [ "coolify" ];
+    options = [ "NOPASSWD" ];
+  }];
 
   networking.hostName = "nixvps";
 
