@@ -110,6 +110,7 @@
   };
 
   systemd.user.startServices = "sd-switch";
+  stylix.enable = true;
 
   programs.git = {
     enable = true;
