@@ -3,7 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ../profiles/personal.nix
 
     ./hardware-configuration.nix
@@ -20,7 +21,6 @@
     bspwm.enable = true;
     flatpak.enable = true;
     nvidia.enable = true;
-    docker.enable = true;
     steam.enable = true;
     teamviewer.enable = true;
     xrdp.enable = true;

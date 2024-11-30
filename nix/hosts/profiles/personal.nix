@@ -66,6 +66,7 @@ in {
 
   modules.nixos = {
     catppuccin.enable = true;
+    docker.enable = true;
     thunar.enable = true;
     network.enable = true;
     pipewire.enable = lib.mkDefault true;
