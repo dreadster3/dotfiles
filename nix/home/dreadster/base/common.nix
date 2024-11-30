@@ -36,6 +36,9 @@
     tmux.enable = true;
   };
 
+  stylix.enable = lib.mkDefault false;
+  catppuccin.enable = lib.mkDefault false;
+
   programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";

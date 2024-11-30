@@ -48,10 +48,11 @@ in {
     };
   };
 
+  stylix.enable = lib.mkDefault false;
+  catppuccin.enable = lib.mkDefault false;
+
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
   home-manager.backupFileExtension = "bkp";
-  home-manager.sharedModules = [
-    inputs.sops-nix.homeManagerModules.sops
-    inputs.catppuccin.homeManagerModules.catppuccin
-  ];
+  home-manager.sharedModules =
+    [ inputs.catppuccin.homeManagerModules.catppuccin ];
 }

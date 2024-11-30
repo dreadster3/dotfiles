@@ -27,5 +27,6 @@
     ./virtmanager.nix
     ./catppuccin.nix
     ./coolify.nix
+    ./fail2ban.nix
   ];
 }

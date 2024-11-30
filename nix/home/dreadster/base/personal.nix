@@ -1,5 +1,5 @@
 { inputs, outputs, config, lib, pkgs, ... }: {
-  imports = [ ./common.nix ];
+  imports = [ ./common.nix inputs.sops-nix.homeManagerModules.sops ];
 
   home.packages = with pkgs; [
     feh
@@ -55,6 +55,7 @@
 
   modules.homemanager = {
     settings = {
+      enable = true;
       font = {
         package = pkgs.nerdfonts.override {
           fonts = [ "Mononoki" "FiraCode" "VictorMono" "Iosevka" ];
@@ -110,6 +111,7 @@
   };
 
   systemd.user.startServices = "sd-switch";
+  stylix.enable = true;
 
   programs.git = {
     enable = true;
