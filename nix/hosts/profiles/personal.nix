@@ -57,7 +57,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    gnome.eog
+    eog
     networkmanagerapplet
     openvpn
     clinfo

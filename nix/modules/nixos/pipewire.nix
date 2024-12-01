@@ -20,12 +20,5 @@ in {
       #jack.enable = true;
     };
 
-    sound = {
-      enable = true;
-      mediaKeys = {
-        enable = true;
-        volumeStep = "5%";
-      };
-    };
   };
 }

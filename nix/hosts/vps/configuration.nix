@@ -10,16 +10,6 @@
     ./home.nix
   ];
 
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      # Necessary for hashcat
-      intel-ocl
-      intel-compute-runtime
-      intel-media-driver
-    ];
-  };
-
   modules.nixos = {
     grub = {
       device = "/dev/sda";

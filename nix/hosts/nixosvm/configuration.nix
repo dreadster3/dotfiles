@@ -10,10 +10,10 @@
     ./home.nix
   ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
-      # Necessary for hashcat
       intel-ocl
       intel-compute-runtime
       intel-media-driver
@@ -25,8 +25,7 @@
     bspwm.enable = true;
     # kubernetes.enable = true;
     ssh.enable = true;
-    pipewire.enable = false;
-    pulseaudio.enable = true;
+    pulseaudio.enable = false;
   };
 
   networking.hostName = "nixosvm";

@@ -12,12 +12,12 @@ in {
       enable = true;
       support32Bit = true;
     };
-    sound = {
-      enable = true;
-      mediaKeys = {
-        enable = true;
-        volumeStep = "5%";
-      };
-    };
+    # sound = {
+    #   enable = true;
+    #   mediaKeys = {
+    #     enable = true;
+    #     volumeStep = "5%";
+    #   };
+    # };
   };
 }

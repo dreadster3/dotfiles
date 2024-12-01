@@ -105,7 +105,7 @@ in {
   config = mkIf cfg.enable {
     home.sessionVariables = {
       EDITOR = "nvim";
-      DOTNET_ROOT = "${pkgs.dotnet-sdk_7}";
+      DOTNET_ROOT = "${pkgs.dotnet-sdk}";
     };
 
     # With nix flakes, this cannot be used as updates will not work
@@ -134,7 +134,7 @@ in {
           nodePackages.npm
           lazygit
           ripgrep
-          dotnet-sdk_7
+          dotnet-sdk
           nixfmt-classic
           gnumake
           terraform

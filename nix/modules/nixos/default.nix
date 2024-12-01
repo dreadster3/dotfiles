@@ -23,7 +23,6 @@
     ./nightlight.nix
     ./storage.nix
     ./hyprland.nix
-    ./regreet.nix
     ./virtmanager.nix
     ./catppuccin.nix
     ./coolify.nix

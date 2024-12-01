@@ -39,7 +39,7 @@ in {
     programs.kitty = {
       enable = true;
       package = cfg.package;
-      theme = cfg.theme;
+      themeFile = cfg.theme;
       settings = {
         bold_font = "auto";
         bold_italic_font = "auto";
