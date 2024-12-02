@@ -15,7 +15,10 @@
       device = "/dev/sda";
       useOSProber = false;
     };
-    rustdesk.enable = true;
+    rustdesk = {
+      enable = true;
+      relayHosts = [ "localhost" ];
+    };
   };
 
   users.groups.coolify = { gid = 9999; };
