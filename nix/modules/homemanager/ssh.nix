@@ -9,7 +9,7 @@ in {
     programs.ssh = {
       enable = true;
       extraConfig = ''
-        Host vps-safe.dreadster3.com
+        Host vps.dreadster3.com
         ProxyCommand ${getExe pkgs.cloudflared} access ssh --hostname %h
       '';
     };
