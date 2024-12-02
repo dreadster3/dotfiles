@@ -27,5 +27,6 @@
     ./catppuccin.nix
     ./coolify.nix
     ./fail2ban.nix
+    ./rustdesk.nix
   ];
 }

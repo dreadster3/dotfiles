@@ -15,6 +15,7 @@
       device = "/dev/sda";
       useOSProber = false;
     };
+    rustdesk.enable = true;
   };
 
   users.groups.coolify = { gid = 9999; };
