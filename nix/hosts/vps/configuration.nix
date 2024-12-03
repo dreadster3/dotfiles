@@ -39,8 +39,5 @@
 
   networking.hostName = "nixvps";
 
-  virtualisation.vmware.guest.enable = true;
-  services.xserver.videoDrivers = [ "vmware" ];
-
   system.stateVersion = "23.11";
 }
