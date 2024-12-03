@@ -17,7 +17,7 @@
     };
     rustdesk = {
       enable = true;
-      relayHosts = [ "localhost" ];
+      relayHosts = [ "rustdesk.dreadster3.com" ];
     };
   };
 
