@@ -22,6 +22,7 @@ in {
     dbeaver-bin
 
     hypnotix
+    rustdesk-flutter
   ];
 
   modules.homemanager = {
