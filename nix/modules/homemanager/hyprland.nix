@@ -85,14 +85,6 @@ in {
 
         cursor = { no_hardware_cursors = true; };
 
-        env = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "NVD_BACKEND,direct"
-        ];
-
         decoration = {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
@@ -104,9 +96,11 @@ in {
             passes = 1;
           };
 
-          drop_shadow = true;
-          shadow_range = 4;
-          shadow_render_power = 3;
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 3;
+          };
         };
 
         animations = {

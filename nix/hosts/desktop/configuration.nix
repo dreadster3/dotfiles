@@ -20,7 +20,7 @@
     nightlight.enable = true;
     bspwm.enable = true;
     flatpak.enable = true;
-    nvidia.enable = true;
+    # nvidia.enable = true;
     steam.enable = true;
     teamviewer.enable = true;
     xrdp.enable = true;
@@ -30,6 +30,25 @@
 
     hyprland.enable = true;
   };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-ocl
+      intel-vaapi-driver
+      vpl-gpu-rt
+    ];
+  };
+  services.xserver.videoDrivers = [ "modesetting" ];
+
+  boot.kernelParams =
+    [ "intel_iommu=on" "iommu=pt" "vfio-pci.ids=10de:2216,10de:1aef" ];
+  boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
+  boot.blacklistedKernelModules =
+    [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
+
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
   networking.hostName = "nixos-desktop";
   networking.interfaces.eno1.wakeOnLan = {

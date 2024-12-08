@@ -1,7 +1,7 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 let
-  primaryMonitor = "DP-0";
-  secondaryMonitor = "HDMI-0";
+  primaryMonitor = "HDMI-2";
+  # secondaryMonitor = "HDMI-0";
 in {
   imports = [ ./base/personal.nix ];
 
@@ -28,27 +28,38 @@ in {
     settings = {
       monitors = {
         x11 = {
-          DP-0 = {
+          # DP-0 = {
+          #   primary = true;
+          #   workspaces = [ 1 2 3 4 5 ];
+          # };
+          HDMI-2 = {
             primary = true;
             workspaces = [ 1 2 3 4 5 ];
           };
-          HDMI-0 = { workspaces = [ 6 7 8 9 10 ]; };
         };
 
         wayland = {
-          DP-1 = {
+          # DP-1 = {
+          #   primary = true;
+          #   resolution = "preferred";
+          #   position = "1080x0";
+          #   transform = null;
+          #   workspaces = [ 1 2 3 4 5 ];
+          #   zoom = "auto";
+          # };
+          # HDMI-A-1 = {
+          #   resolution = "preferred";
+          #   position = "0x0";
+          #   transform = 1;
+          #   workspaces = [ 6 7 8 9 10 ];
+          #   zoom = "auto";
+          # };
+          HDMI-A-2 = {
             primary = true;
-            resolution = "preferred";
-            position = "1080x0";
+            resolution = "2540x1440";
+            position = "0x0";
             transform = null;
             workspaces = [ 1 2 3 4 5 ];
-            zoom = "auto";
-          };
-          HDMI-A-1 = {
-            resolution = "preferred";
-            position = "0x0";
-            transform = 1;
-            workspaces = [ 6 7 8 9 10 ];
             zoom = "auto";
           };
         };
@@ -80,7 +91,7 @@ in {
       startupPrograms = [
         "${
           lib.getExe pkgs.xorg.xrandr
-        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
+        } --output ${primaryMonitor} --primary --mode 2560x1440"
         "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
       ];
     };
