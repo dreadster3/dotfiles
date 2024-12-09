@@ -31,7 +31,7 @@
   networking.hostName = "nixosvm";
 
   virtualisation.vmware.guest.enable = true;
-  services.xserver.videoDrivers = [ "vmware" ];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   system.stateVersion = "23.11";
 }
