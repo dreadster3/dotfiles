@@ -17,11 +17,11 @@ in {
     services.rustdesk-server = {
       enable = true;
       openFirewall = true;
-      signal = {
-        enable = true;
-        relayHosts = cfg.relayHosts;
-      };
+      signal = { enable = true; };
       relay = { enable = true; };
     };
+
+    systemd.services.rustdesk-signal.serviceConfig.ExecStart =
+      lib.mkForce "${config.services.rustdesk-server.package}/bin/hbbs";
   };
 }
