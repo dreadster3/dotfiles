@@ -1,7 +1,7 @@
 { inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
 let
-  primaryMonitor = "Virtual1";
-  secondaryMonitor = "Virtual2";
+  primaryMonitor = "Virtual-1";
+  secondaryMonitor = "Virtual-2";
 in {
   imports = [ ./base/personal.nix ];
 
@@ -11,11 +11,11 @@ in {
     settings = {
       monitors = {
         x11 = {
-          Virtual1 = {
+          "${primaryMonitor}" = {
             primary = true;
             workspaces = [ 1 2 3 4 5 ];
           };
-          Virtual2 = { workspaces = [ 6 7 8 9 10 ]; };
+          "${secondaryMonitor}" = { workspaces = [ 6 7 8 9 10 ]; };
         };
       };
     };
