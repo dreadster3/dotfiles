@@ -6,8 +6,7 @@ in {
 
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      # decoration.shadow.color = "$base";
-      decoration."col.shadow" = "$base";
+      decoration.shadow.color = "$base";
       general = {
         "col.active_border" = "$accent";
         "col.inactive_border" = "$surface1";
