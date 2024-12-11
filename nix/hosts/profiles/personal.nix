@@ -4,7 +4,8 @@ let
   mkUpper = str:
     (lib.toUpper (builtins.substring 0 1 str))
     + (builtins.substring 1 (builtins.stringLength str) str);
-in {
+in
+{
   imports = [ ./common.nix ];
 
   security.pki.certificateFiles = [ ../../../certificates/issuer.crt ];
@@ -20,7 +21,7 @@ in {
       package = pkgs.catppuccin-cursors."${catppuccinConfig.flavor}${
           mkUpper catppuccinConfig.accent
         }";
-      size = 32;
+      size = 24;
     };
 
     fonts = {
@@ -68,7 +69,7 @@ in {
     catppuccin.enable = true;
     thunar.enable = true;
     network.enable = true;
-    pipewire.enable = lib.mkDefault true;
+    sound.enable = true;
   };
 
   i18n.extraLocaleSettings = {

@@ -1,10 +1,8 @@
 { pkgs, config, lib, ... }:
 with lib;
-let cfg = config.modules.nixos.pipewire;
+let cfg = config.modules.nixos.sound;
 in {
-  options = {
-    modules.nixos.pipewire = { enable = mkEnableOption "pipewire"; };
-  };
+  options = { modules.nixos.sound = { enable = mkEnableOption "sound"; }; };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ pavucontrol ];
@@ -16,9 +14,6 @@ in {
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
     };
-
   };
 }

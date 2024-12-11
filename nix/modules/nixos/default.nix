@@ -14,12 +14,11 @@
     ./vmware.nix
     ./flatpak.nix
     ./zerotier.nix
-    ./pulseaudio.nix
     ./teamviewer.nix
     ./network.nix
     ./kubernetes.nix
     ./ssh.nix
-    ./pipewire.nix
+    ./sound.nix
     ./nightlight.nix
     ./storage.nix
     ./hyprland.nix
