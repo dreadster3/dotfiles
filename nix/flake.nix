@@ -90,11 +90,12 @@
         };
         "deck@steamdeck" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = { inherit inputs outputs lib; };
           modules = [
             ./home/dreadster/steamdeck.nix
             stylix.homeManagerModules.stylix
             sops-nix.homeManagerModules.sops
+            catppuccin.homeManagerModules.catppuccin
           ];
         };
       };

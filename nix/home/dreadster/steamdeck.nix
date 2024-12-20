@@ -1,25 +1,18 @@
 { config, lib, pkgs, ... }:
 let
-  catppuccinpkg = pkgs.catppuccin-gtk.override {
-    variant = "mocha";
-    accents = [ "blue" ];
-  };
+  catppuccinConfig = config.catppuccin;
+  mkUpper = str:
+    (lib.toUpper (builtins.substring 0 1 str))
+    + (builtins.substring 1 (builtins.stringLength str) str);
 in {
-  imports = [ ../../../modules/homemanager ./default.nix ];
 
-  home.username = "deck";
-  home.homeDirectory = "/home/deck";
+  imports = [ ./base/personal.nix ];
 
-  home.packages = with pkgs; [
-    droidcam
-    openvpn
-    betterdiscordctl
-    catppuccinpkg
-    catppuccin-cursors.mochaBlue
-    unzip
-    zip
-    xclip
-  ];
+  # Enable experimental nix features
+  nix.package = pkgs.nix;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 
   stylix = {
     enable = true;
@@ -27,16 +20,19 @@ in {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor = {
-      name = "catppuccin-mocha-blue-cursors";
-      package = pkgs.catppuccin-cursors.mochaBlue;
+      name =
+        "catppuccin-${catppuccinConfig.flavor}-${catppuccinConfig.accent}-cursors";
+      package = pkgs.catppuccin-cursors."${catppuccinConfig.flavor}${
+          mkUpper catppuccinConfig.accent
+        }";
       size = 32;
     };
 
     fonts = {
       monospace = {
-        name = "FiraCode Nerd Font";
+        name = "Mononoki Nerd Font";
         package = pkgs.nerdfonts.override {
-          fonts = [ "FiraCode" "VictorMono" "Iosevka" ];
+          fonts = [ "FiraCode" "Mononoki" "VictorMono" "Iosevka" ];
         };
       };
 
@@ -51,22 +47,30 @@ in {
     };
   };
 
-  # Enable experimental nix features
-  nix.package = pkgs.nix;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+  home.username = "deck";
+  home.homeDirectory = "/home/deck";
+
+  home.packages = with pkgs; [
+    droidcam
+    openvpn
+    betterdiscordctl
+    unzip
+    zip
+    xclip
+  ];
+
+  fonts.fontconfig.enable = true;
 
   modules.homemanager = {
-    zsh = {
+    catppuccin = {
       enable = true;
-      sourceNix = true;
+      accent = "mauve";
     };
-    # wezterm.enable = true;
-    kitty.enable = lib.mkForce false;
+    zsh.sourceNix = true;
+    alacritty.package = pkgs.emptyDirectory;
     dunst.enable = true;
-    guake.enable = true;
     obsmic.enable = true;
+    pentest.enable = true;
   };
 
   programs.home-manager.enable = true;
