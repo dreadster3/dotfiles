@@ -19,7 +19,6 @@ in {
     programs.alacritty = {
       enable = true;
       package = cfg.package;
-      catppuccin.enable = true;
       settings = {
         font = {
           size = settings.font.size;

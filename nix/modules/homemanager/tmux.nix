@@ -7,7 +7,6 @@ in {
   config = mkIf cfg.enable {
     programs.tmux = {
       enable = true;
-      catppuccin.enable = false;
       shell = "${pkgs.zsh}/bin/zsh";
       keyMode = "vi";
       prefix = "C-b";

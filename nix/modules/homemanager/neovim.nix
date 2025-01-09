@@ -36,7 +36,6 @@ in {
   options = {
     modules.homemanager.neovim = {
       enable = mkEnableOption "neovim";
-      catppuccin.enable = false;
       package = mkOption {
         type = types.package;
         default = pkgs.neovim-unwrapped;
@@ -120,7 +119,6 @@ in {
 
     programs.neovim = {
       enable = true;
-      catppuccin.enable = false;
       package = cfg.package;
       defaultEditor = true;
       extraPackages = with pkgs;

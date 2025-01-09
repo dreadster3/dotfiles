@@ -29,6 +29,10 @@ in {
       enable = true;
       flavor = cfg.flavor;
       accent = cfg.accent;
+
+      nvim.enable = false;
+      alacritty.enable = true;
+      tmux.enable = false;
     };
   };
 }
