@@ -20,7 +20,7 @@ in {
     }];
 
     wayland.windowManager.hyprland.settings.bind =
-      [ "$mainMod, Q, exec, ${cfg.package}/bin/wlogout" ];
+      [ "$mainMod, Q, exec, pkill wlogout || ${cfg.package}/bin/wlogout" ];
 
     programs.wlogout = {
       enable = true;
@@ -56,7 +56,7 @@ in {
           keybind = "o";
         }
       ];
-      # style = import ./style.nix { inherit config; };
+      style = mkForce (import ./style.nix { inherit config; });
     };
 
   };
