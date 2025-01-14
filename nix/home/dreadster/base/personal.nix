@@ -13,6 +13,7 @@
     lshw
     usbutils
     ethtool
+    chromium
 
     sops
   ];

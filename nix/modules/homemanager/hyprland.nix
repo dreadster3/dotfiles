@@ -155,6 +155,7 @@ in {
           "noinitialfocus,class:^(xwaylandvideobridge)$"
           "stayfocused, title:^()$,class:^(steam)$"
           "minsize 1 1, title:^()$,class:^(steam)$"
+          "tile,initialTitle:^(ErgoDox EZ Configurator)$"
         ];
 
         workspace = foldlAttrs (acc: name: monitor:
