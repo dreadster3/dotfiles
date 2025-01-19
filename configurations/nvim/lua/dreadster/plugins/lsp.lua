@@ -212,7 +212,7 @@ return {
 		dependencies = { "lspconfig" },
 		event = { "BufReadPost *.cs" },
 	},
-	{ "ray-x/go.nvim", event = { "BufReadPost *.go" }, opts = {} },
+	{ "ray-x/go.nvim", version = "*", event = { "BufReadPost *.go" }, opts = {} },
 	{
 		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
