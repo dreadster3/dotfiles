@@ -25,7 +25,6 @@
     bspwm.enable = true;
     # kubernetes.enable = true;
     ssh.enable = true;
-    pulseaudio.enable = false;
   };
 
   networking.hostName = "nixosvm";
