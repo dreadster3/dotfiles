@@ -194,7 +194,11 @@ return {
 			end
 		end,
 	},
-	{ "williamboman/mason.nvim", name = "mason", opts = {} },
+	{
+		"williamboman/mason.nvim",
+		name = "mason",
+		opts = {},
+	},
 	{
 		"glepnir/lspsaga.nvim",
 		dependencies = { "icons", "treesitter" },
