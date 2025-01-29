@@ -5,6 +5,8 @@ return {
 		dependencies = { "mason" },
 		cmd = "ConformInfo",
 		event = { "BufWritePre" },
+		---@module "conform"
+		---@type conform.setupOpts
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -16,6 +18,8 @@ return {
 				sh = { "beautysh" },
 				json = { "prettier" },
 				markdown = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
 				["*"] = { "codespell" },
 				["_"] = { "trim_whitespace" },
 			},
@@ -44,6 +48,9 @@ return {
 				["*"] = { "typos" },
 			},
 			linters = {
+				luacheck = {
+					args_prepend = { "--globals", "vim" },
+				},
 				staticcheck = {
 					cmd = "staticcheck",
 					args = { "-f", "json", "./..." },
@@ -112,6 +119,10 @@ return {
 			for name, linter in pairs(opts.linters) do
 				if type(linter) == "table" and type(lint.linters[name]) == "table" then
 					lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name], linter)
+					if type(linter.args_prepend) == "table" then
+						lint.linters[name].args = lint.linters[name].args or {}
+						vim.list_extend(lint.linters[name].args, linter.args_prepend)
+					end
 				else
 					lint.linters[name] = linter
 				end

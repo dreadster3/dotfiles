@@ -344,7 +344,7 @@ return {
 			{
 				"<leader>rp",
 				function()
-					require("refactoring").debug.print_var(nil)
+					require("refactoring").debug.print_var({})
 				end,
 				mode = "v",
 				desc = "Debug Print Variable",
