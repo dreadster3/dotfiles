@@ -4,28 +4,8 @@ return {
 		name = "dap",
 		dependencies = {
 			"dapui",
-			{
-				"jay-babu/mason-nvim-dap.nvim",
-				name = "mason-dap",
-				dependencies = { "mason" },
-				cmd = { "DapInstall", "DapUninstall" },
-				opts = function()
-					return {
-						ensure_installed = {},
-						automatic_installation = true,
-						handlers = {},
-					}
-				end,
-			},
+			"mason-dap",
 		},
-		init = function()
-			vim.fn.sign_define("DapBreakpoint", {
-				text = "",
-				texthl = "Error",
-				linehl = "",
-				numhl = "",
-			})
-		end,
 		keys = {
 			{
 				"<F5>",
@@ -63,29 +43,41 @@ return {
 				desc = "DAP Toggle Breakpoint",
 			},
 		},
+		config = function(_, opts)
+			local dap = require("dap")
+			local dapui = require("dapui")
+
+			vim.fn.sign_define("DapBreakpoint", {
+				text = "",
+				texthl = "Error",
+				linehl = "",
+				numhl = "",
+			})
+
+			dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+			dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		end,
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		name = "dapui",
-		lazy = true,
+		main = "dapui",
 		dependencies = { "nvim-neotest/nvim-nio" },
-		config = function(_, opts)
-			-- local nvim_tree = require("nvim-tree.api")
-			-- local dap = require("dap")
-			-- local dapui = require("dapui")
-			-- dapui.setup(opts)
-			-- dap.listeners.after.event_initialized["dapui_config"] = function()
-			-- 	nvim_tree.tree.close()
-			-- 	dapui.open({})
-			-- end
-			-- dap.listeners.before.event_terminated["dapui_config"] = function()
-			-- 	nvim_tree.tree.open()
-			-- 	dapui.close({})
-			-- end
-			-- dap.listeners.before.event_exited["dapui_config"] = function()
-			-- 	nvim_tree.tree.open()
-			-- 	dapui.close({})
-			-- end
+		opts = {},
+	},
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		name = "mason-dap",
+		lazy = true,
+		dependencies = { "mason" },
+		cmd = { "DapInstall", "DapUninstall" },
+		opts = function()
+			return {
+				automatic_installation = true,
+				ensure_installed = {},
+				handlers = {},
+			}
 		end,
 	},
 }

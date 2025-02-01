@@ -132,7 +132,9 @@ return {
 			vim.api.nvim_create_autocmd(opts.events, {
 				group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
 				callback = debounce(100, function()
-					lint.try_lint()
+					if vim.opt_local.modifiable:get() then
+						lint.try_lint()
+					end
 				end),
 			})
 
