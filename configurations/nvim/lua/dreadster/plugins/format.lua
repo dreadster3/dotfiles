@@ -128,7 +128,19 @@ return {
 				end
 			end
 
-			lint.linters_by_ft = opts.linters_by_ft
+			local linters_by_ft = {}
+			for ft, linters in pairs(opts.linters_by_ft) do
+				linters_by_ft[ft] = {}
+				for _, linter in ipairs(linters) do
+					if vim.fn.executable(lint.linters[linter].cmd) == 1 then
+						vim.list_extend(linters_by_ft[ft], { linter })
+					else
+						vim.notify("Linter " .. linter .. " not found.", vim.log.levels.WARN)
+					end
+				end
+			end
+
+			lint.linters_by_ft = linters_by_ft
 			vim.api.nvim_create_autocmd(opts.events, {
 				group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
 				callback = debounce(100, function()
