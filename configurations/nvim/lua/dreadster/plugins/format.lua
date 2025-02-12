@@ -20,6 +20,7 @@ return {
 				markdown = { "prettier" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
+				proto = { "buf" },
 				["*"] = { "codespell" },
 				["_"] = { "trim_whitespace" },
 			},
