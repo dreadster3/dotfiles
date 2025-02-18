@@ -77,7 +77,7 @@
     zsh = {
       enable = true;
       dynamicEnvVariables = lib.mkDefault {
-        open_api_key = config.sops.secrets.openai_api_key.path;
+        openai_api_key = config.sops.secrets.openai_api_key.path;
       };
     };
     xdg.enable = true;

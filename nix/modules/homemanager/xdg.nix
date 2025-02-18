@@ -10,14 +10,29 @@ in {
     xdg = {
       desktopEntries = {
         firefox = {
-          name = "firefox";
+          name = "Firefox";
           exec = getExe config.modules.homemanager.firefox.package;
+          terminal = false;
+          genericName = "Web Browser";
+          icon = "firefox";
+          mimeType = [
+            "text/html"
+            "text/xml"
+            "application/xhtml+xml"
+            "application/vnd.mozilla.xul+xml"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
         };
       };
 
       mimeApps = {
         enable = true;
-        defaultApplications = { "x-www-browser" = "firefox.desktop"; };
+        defaultApplications = {
+          "x-www-browser" = "firefox.desktop";
+          "x-scheme-handler/http" = "firefox.desktop";
+          "x-scheme-handler/https" = "firefox.desktop";
+        };
       };
     };
   };

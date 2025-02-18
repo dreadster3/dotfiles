@@ -157,6 +157,11 @@ in {
         ] ++ goPackages ++ rustPackages ++ pythonPackages;
     };
 
+    home.packages = with pkgs; [ openssl pkg-config ];
+    home.sessionVariables = {
+      PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    };
+
     xdg.desktopEntries.neovim = {
       name = "Neovim";
       genericName = "Text Editor";
