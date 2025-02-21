@@ -3,8 +3,9 @@ return {
 		"mfussenegger/nvim-dap",
 		name = "dap",
 		dependencies = {
-			"dapui",
 			"mason-dap",
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
 		},
 		keys = {
 			{
@@ -58,13 +59,6 @@ return {
 			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 			dap.listeners.before.event_exited["dapui_config"] = dapui.close
 		end,
-	},
-	{
-		"rcarriga/nvim-dap-ui",
-		name = "dapui",
-		main = "dapui",
-		dependencies = { "nvim-neotest/nvim-nio" },
-		opts = {},
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
