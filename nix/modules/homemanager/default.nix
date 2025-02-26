@@ -47,7 +47,7 @@
     ./mechvibes
     ./x11eventcallbacks
     ./rofi
-    ./spicetify
+    ./spotify
     ./obsmic
     ./direnv.nix
     ./poetry.nix

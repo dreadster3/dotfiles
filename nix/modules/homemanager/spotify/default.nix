@@ -1,23 +1,35 @@
 { pkgs, config, lib, ... }:
 with lib;
 let
-  cfg = config.modules.homemanager.spicetify;
-  spicetify = getExe cfg.package;
+  cfg = config.modules.homemanager.spotify;
+  spicetify = getExe cfg.spicetify.package;
 in {
 
   options = {
-    modules.homemanager.spicetify = {
-      enable = mkEnableOption "spicetify-cli";
+    modules.homemanager.spotify = {
+      enable = mkEnableOption "spotify";
       package = mkOption {
         type = types.package;
-        default = pkgs.unstable.spicetify-cli;
-        description = "The package to install spicetify-cli";
+        default = pkgs.spotify;
+        description = "The package to install spotify";
+      };
+      spicetify = mkOption {
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "spotify.spicetify";
+            package = mkOption {
+              type = types.package;
+              default = pkgs.spicetify-cli;
+              description = "The package to install spicetify-cli";
+            };
+          };
+        };
       };
     };
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [
+    nixpkgs.overlays = mkIf cfg.spicetify.enable [
       (final: prev: {
         spotify = prev.spotify.overrideAttrs (old: {
           postInstall = ''
@@ -48,12 +60,13 @@ in {
             ${spicetify} config replace_colors 1
             ${spicetify} config overwrite_assets 1
 
-            ${spicetify} backup apply
+            ${spicetify} apply
           '';
         });
       })
     ];
 
-    home.packages = with pkgs; [ spotify cfg.package ];
+    home.packages = with pkgs;
+      [ cfg.package ] ++ optional cfg.spicetify.enable cfg.spicetify.package;
   };
 }

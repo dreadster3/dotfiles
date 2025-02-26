@@ -23,6 +23,8 @@ in {
 
     hypnotix
     rustdesk-flutter
+
+    pkgs.unstable.fiddler-everywhere
   ];
 
   modules.homemanager = {
@@ -65,7 +67,11 @@ in {
     picom.enable = true;
     flameshot.enable = true;
     aio.enable = true;
-    spicetify.enable = true;
+    spotify = {
+      enable = true;
+      # NOTE: Currently not working
+      spicetify.enable = false;
+    };
     helix.enable = true;
     thunderbird.enable = true;
     gtk.enable = true;
