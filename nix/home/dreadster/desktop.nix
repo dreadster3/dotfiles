@@ -23,8 +23,6 @@ in {
 
     hypnotix
     rustdesk-flutter
-
-    pkgs.unstable.fiddler-everywhere
   ];
 
   modules.homemanager = {
