@@ -15,6 +15,8 @@
     ethtool
     chromium
 
+    pnpm-shell-completion
+
     sops
   ];
 
