@@ -67,8 +67,7 @@ in {
     aio.enable = true;
     spotify = {
       enable = true;
-      # NOTE: Currently not working
-      spicetify.enable = false;
+      spicetify.enable = true;
     };
     helix.enable = true;
     thunderbird.enable = true;

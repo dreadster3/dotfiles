@@ -60,7 +60,7 @@ in {
             ${spicetify} config replace_colors 1
             ${spicetify} config overwrite_assets 1
 
-            ${spicetify} apply
+            ${spicetify} backup apply
           '';
         });
       })
