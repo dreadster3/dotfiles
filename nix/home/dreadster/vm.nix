@@ -43,7 +43,6 @@ in {
     flameshot.enable = true;
     mechvibes.enable = true;
     x11eventcallbacks.enable = true;
-    picom.enable = true;
     betterlockscreen.enable = true;
     guake.enable = true;
 
