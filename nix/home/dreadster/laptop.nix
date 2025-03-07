@@ -4,7 +4,7 @@ let
 
   terminal = pkgs.alacritty;
 in {
-  imports = [ ./base/personal.nix ];
+  imports = [ ./profiles/personal.nix ];
 
   home.packages = with pkgs; [
     playerctl

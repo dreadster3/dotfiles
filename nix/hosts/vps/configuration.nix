@@ -7,8 +7,11 @@
     ../profiles/server.nix
 
     ./hardware-configuration.nix
-    ./home.nix
   ];
+
+  home-manager.users = {
+    dreadster = import ../../home/dreadster/profiles/server.nix;
+  };
 
   modules.nixos = {
     grub = {

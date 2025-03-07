@@ -11,7 +11,7 @@
     config.allowUnfree = true;
   };
 
-  home.packages = with pkgs; [ killall tldr wget curl file tree ];
+  home.packages = with pkgs; [ killall curl file ];
 
   home = {
     username = lib.mkDefault "dreadster";

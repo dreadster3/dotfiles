@@ -6,7 +6,10 @@
     zathura
     kubectl
     neofetch
+    tldr
+    wget
     fzf
+    tree
 
     dig
     pciutils

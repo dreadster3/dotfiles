@@ -3,7 +3,7 @@ let
   primaryMonitor = "Virtual-1";
   secondaryMonitor = "Virtual-2";
 in {
-  imports = [ ./base/personal.nix ];
+  imports = [ ./profiles/personal.nix ];
 
   home.packages = with pkgs; [ remmina ];
 

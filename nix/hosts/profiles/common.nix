@@ -25,7 +25,7 @@ in {
 
   modules.nixos = {
     grub.enable = true;
-    docker.enable = true;
+    docker.enable = lib.mkDefault true;
     ssh.enable = true;
     zsh.enable = true;
     storage.enable = true;
@@ -42,12 +42,7 @@ in {
     libraries = [ ];
   };
 
-  nix = {
-    settings = {
-      trusted-users = [ "@wheel" ];
-      experimental-features = [ "nix-command" "flakes" ];
-    };
-  };
+  nix.settings.trusted-users = [ "@wheel" ];
 
   stylix.enable = lib.mkDefault false;
   catppuccin.enable = lib.mkDefault false;

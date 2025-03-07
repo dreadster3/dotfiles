@@ -6,7 +6,7 @@ let
     + (builtins.substring 1 (builtins.stringLength str) str);
 in {
 
-  imports = [ ./base/personal.nix ];
+  imports = [ ./profiles/personal.nix ];
 
   # Enable experimental nix features
   nix.package = pkgs.nix;
