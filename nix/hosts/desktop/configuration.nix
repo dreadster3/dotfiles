@@ -11,7 +11,7 @@
     ./home.nix
   ];
 
-  environment.systemPackages = with pkgs; [ vlc libvlc ];
+  environment.systemPackages = with pkgs; [ vlc libvlc via unstable.qmk ];
 
   users.groups.plugdev = { };
   users.users.dreadster.extraGroups = [ "plugdev" ];
@@ -41,6 +41,9 @@
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="0666", SYMLINK+="stm32_dfu"
     # Keymapp Flashing rules for the Voyager
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
+
+    # AT32 DFU
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", TAG+="uaccess"
   '';
 
   # Bootloader.
@@ -60,6 +63,10 @@
 
     hyprland.enable = true;
   };
+
+  services.udev.packages = [ pkgs.via ];
+  hardware.keyboard.qmk.enable = true;
+  programs.adb.enable = true;
 
   networking.hostName = "nixos-desktop";
   networking.interfaces.eno1.wakeOnLan = {

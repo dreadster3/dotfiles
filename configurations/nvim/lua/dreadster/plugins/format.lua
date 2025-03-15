@@ -3,10 +3,33 @@ return {
 		"stevearc/conform.nvim",
 		name = "conform",
 		dependencies = { "mason" },
-		cmd = "ConformInfo",
+		cmd = { "ConformInfo", "FormatDisable", "FormatEnable" },
 		event = { "BufWritePre" },
 		---@module "conform"
 		---@type conform.setupOpts
+		config = function(_, opts)
+			require("conform").setup(opts)
+
+			vim.api.nvim_create_user_command("FormatDisable", function(args)
+				if args.bang then
+					-- :FormatDisable! disables autoformat for this buffer only
+					vim.b.disable_autoformat = true
+				else
+					-- :FormatDisable disables autoformat globally
+					vim.g.disable_autoformat = true
+				end
+			end, {
+				desc = "Disable autoformat-on-save",
+				bang = true, -- allows the ! variant
+			})
+
+			vim.api.nvim_create_user_command("FormatEnable", function()
+				vim.b.disable_autoformat = false
+				vim.g.disable_autoformat = false
+			end, {
+				desc = "Re-enable autoformat-on-save",
+			})
+		end,
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -27,10 +50,22 @@ return {
 			default_format_opts = {
 				lsp_format = "fallback",
 			},
-			format_on_save = {
-				lsp_format = "fallback",
-				timeout_ms = 500,
-			},
+			format_on_save = function(bufnr)
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+
+				local disable_filenames = { "keymap.c" }
+
+				if vim.tbl_contains(disable_filenames, vim.fn.expand("%:t")) then
+					return
+				end
+
+				return {
+					lsp_format = "fallback",
+					timeout_ms = 500,
+				}
+			end,
 		},
 	},
 	{

@@ -7,7 +7,7 @@ with lib; {
       shell = pkgs.zsh;
       isNormalUser = true;
       description = "Admin";
-      extraGroups = [ "networkmanager" "wheel" ]
+      extraGroups = [ "networkmanager" "wheel" "adbusers" ]
         ++ optional config.virtualisation.docker.enable "docker";
     };
   };
