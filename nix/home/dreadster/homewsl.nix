@@ -13,7 +13,7 @@ in {
     experimental-features = nix-command flakes
   '';
 
-  home.packages = with pkgs; [ systemd ];
+  home.packages = with pkgs; [ systemd unstable.qmk ];
 
   stylix = {
     enable = true;
