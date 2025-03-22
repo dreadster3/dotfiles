@@ -29,6 +29,7 @@ in {
       enable = true;
       networkInterface = { name = "ens33"; };
     };
+    picom.enable = true;
     rofi.enable = true;
     sxhkd.enable = true;
     bspwm = {
