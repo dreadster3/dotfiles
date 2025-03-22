@@ -19,7 +19,7 @@
 
   modules.nixos = {
     grub.enable = true;
-    zsd.enable = true;
+    zsh.enable = true;
   };
 
   time.timeZone = "Europe/Lisbon";
