@@ -20,6 +20,7 @@
   modules.nixos = {
     grub.enable = true;
     zsh.enable = true;
+    x11.enable = true;
     i3.enable = true;
   };
 
