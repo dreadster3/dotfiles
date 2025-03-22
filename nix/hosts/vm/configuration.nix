@@ -66,7 +66,10 @@
       config.allowUnfree = true;
     };
 
-    modules.homemanager = { alacritty.enable = true; };
+    modules.homemanager = {
+      alacritty.enable = true;
+      zsh.enable = true;
+    };
 
     home.stateVersion = "24.11";
   };
