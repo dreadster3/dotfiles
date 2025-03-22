@@ -19,7 +19,7 @@ in {
         enable = true;
         package = pkgs.i3-rounded;
         config = {
-          keybinds = let modifier = config.xsession.windowManager.i3.modifier;
+          keybinds = let modifier = "Mod4";
           in lib.mkOptionDefault { "${modifier}+w" = "kill"; };
           modifier = "Mod4";
           terminal = "alacritty";
