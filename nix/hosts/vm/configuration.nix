@@ -59,6 +59,17 @@
     [ inputs.catppuccin.homeManagerModules.catppuccin ];
 
   home-manager.users.dreadster = {
+    imports = [ outputs.homeManagerModules ];
+
+    nixpkgs = {
+      overlays = [
+        outputs.overlays.additions
+        outputs.overlays.modifications
+        outputs.overlays.unstable-packages
+      ];
+
+      config.allowUnfree = true;
+    };
     modules.homemanager = { alacritty.enable = true; };
 
     home.stateVersion = "24.11";
