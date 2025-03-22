@@ -32,6 +32,7 @@ return {
 		end,
 		opts = {
 			formatters_by_ft = {
+				c = { "clang_format" },
 				lua = { "stylua" },
 				go = { "goimports", "gofmt" },
 				rust = { "rustfmt" },
@@ -55,7 +56,7 @@ return {
 					return
 				end
 
-				local disable_filenames = { "keymap.c" }
+				local disable_filenames = {}
 
 				if vim.tbl_contains(disable_filenames, vim.fn.expand("%:t")) then
 					return
