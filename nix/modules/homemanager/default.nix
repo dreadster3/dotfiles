@@ -55,6 +55,8 @@
     ./bitwarden.nix
     ./catppuccin
     ./ssh.nix
+
+    ./i3.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

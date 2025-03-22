@@ -18,8 +18,8 @@
 
   modules.nixos = {
     x11.enable = true;
-    bspwm.enable = true;
-    # kubernetes.enable = true;
+    i3.enable = true;
+    xfce.enable = true;
     ssh.enable = true;
   };
 
