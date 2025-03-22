@@ -1,4 +1,4 @@
-{ hostname, inputs, outputs, config, pkgs, ... }: {
+{ name, inputs, outputs, config, pkgs, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules
@@ -39,7 +39,7 @@
 
   environment.systemPackages = with pkgs; [ wget vim git curl unzip zip ];
 
-  networking.hostName = hostname;
+  networking.hostName = name;
 
   virtualisation.vmware.guest.enable = true;
 
