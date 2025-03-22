@@ -17,7 +17,10 @@
     config.allowUnfree = true;
   };
 
-  modules.nixos = { grub.enable = true; };
+  modules.nixos = {
+    grub.enable = true;
+    zsd.enable = true;
+  };
 
   time.timeZone = "Europe/Lisbon";
   i18n = {
