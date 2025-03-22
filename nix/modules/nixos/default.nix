@@ -29,5 +29,6 @@
     ./rustdesk.nix
     ./qmk.nix
     ./oryx.nix
+    ./i3.nix
   ];
 }

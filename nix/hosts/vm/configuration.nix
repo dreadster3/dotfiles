@@ -20,6 +20,7 @@
   modules.nixos = {
     grub.enable = true;
     zsh.enable = true;
+    i3.enable = true;
   };
 
   time.timeZone = "Europe/Lisbon";
@@ -37,12 +38,6 @@
       LC_TIME = "en_US.UTF-8";
     };
   };
-
-  services.xserver = {
-    enable = true;
-    windowManager.i3.enable = true;
-  };
-  services.displayManager = { defaultSession = "none+i3"; };
 
   networking.networkmanager.enable = true;
 
@@ -70,6 +65,7 @@
 
       config.allowUnfree = true;
     };
+
     modules.homemanager = { alacritty.enable = true; };
 
     home.stateVersion = "24.11";
