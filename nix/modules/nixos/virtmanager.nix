@@ -17,6 +17,14 @@ in {
     };
     programs.virt-manager.enable = true;
 
+    users.extraUsers.dreadster.extraGroups = [ "libvirtd" "kvm" "input" ];
+
+    boot.extraModprobeConfig = ''
+      options kvm_intel nested=1
+      options kvm_intel emulate_invalid_guest_state=0
+      options kvm ignore_msrs=1
+    '';
+
     environment.etc = {
       "ovmf/edk2-x86_64-secure-code.fd" = {
         source = config.virtualisation.libvirtd.qemu.package

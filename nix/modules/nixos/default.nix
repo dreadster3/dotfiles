@@ -27,5 +27,7 @@
     ./coolify.nix
     ./fail2ban.nix
     ./rustdesk.nix
+    ./qmk.nix
+    ./oryx.nix
   ];
 }
