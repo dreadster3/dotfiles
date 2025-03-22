@@ -79,7 +79,7 @@
             [ ./hosts/laptop/configuration.nix stylix.nixosModules.stylix ];
         };
         pentestvm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs lib; };
+          specialArgs = { inherit name inputs outputs lib; };
           modules = [
             ./hosts/vm/configuration.nix
             catppuccin.nixosModules.catppuccin
