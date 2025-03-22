@@ -19,6 +19,8 @@
   modules.nixos = {
     x11.enable = true;
     i3.enable = true;
+    sddm.enable = true;
+
     ssh.enable = true;
   };
 
