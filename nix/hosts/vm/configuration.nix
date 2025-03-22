@@ -41,5 +41,7 @@
 
   networking.hostName = hostname;
 
+  virtualisation.vmware.guest.enable = true;
+
   system.stateVersion = "24.11";
 }
