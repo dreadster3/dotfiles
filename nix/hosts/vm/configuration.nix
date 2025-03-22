@@ -60,6 +60,8 @@
 
   home-manager.users.dreadster = {
     modules.homemanager = { alacritty.enable = true; };
+
+    home.stateVersion = "24.11";
   };
 
   system.stateVersion = "24.11";
