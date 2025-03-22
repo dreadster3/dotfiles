@@ -6,6 +6,7 @@ in {
     modules.nixos.xfce = {
       enable = mkEnableOption "xfce";
       windowManager = mkOption {
+        default = { };
         type =
           types.submodule { options = { enable = mkEnableOption "xfce"; }; };
       };
