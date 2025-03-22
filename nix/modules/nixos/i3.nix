@@ -2,8 +2,10 @@
 with lib;
 let
   cfg = config.modules.nixos.i3;
-  desktopManager =
-    if config.xserver.desktopManager.xfce.enable then "xfce" else "none";
+  desktopManager = if config.services.xserver.desktopManager.xfce.enable then
+    "xfce"
+  else
+    "none";
 in {
   options = { modules.nixos.i3 = { enable = mkEnableOption "i3"; }; };
 
