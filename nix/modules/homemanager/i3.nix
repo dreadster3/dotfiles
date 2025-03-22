@@ -22,7 +22,7 @@ in {
 
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
-          in mkDefaultOption { "${mod}+w" = "kill"; };
+          in mkOptionDefault { "${mod}+w" = "kill"; };
 
         gaps = {
           inner = 10;
