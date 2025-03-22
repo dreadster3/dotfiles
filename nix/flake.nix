@@ -78,6 +78,14 @@
           modules =
             [ ./hosts/laptop/configuration.nix stylix.nixosModules.stylix ];
         };
+        pentestvm = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs lib; };
+          modules = [
+            ./hosts/vm/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            stylix.nixosModules.stylix
+          ];
+        };
         nixvps = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
           modules = [

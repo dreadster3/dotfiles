@@ -54,9 +54,9 @@ in {
         variables = [ "--all" ];
       };
       extraConfig = ''
-        bind = $mainMod, ESC, submap, clean
+        bind = $mainMod, escape, submap, clean
         submap = clean
-        bind = $mainMod, ESC, submap, reset
+        bind = $mainMod, escape, submap, reset
         submap = reset
       '';
       settings = {
