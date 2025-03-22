@@ -25,6 +25,7 @@
 
   networking.hostName = "nixosvm";
 
+  services.xserver.videoDrivers = [ "vmware" ];
   virtualisation.vmware.guest.enable = true;
 
   system.stateVersion = "23.11";
