@@ -10,14 +10,6 @@ in {
       xkb.layout = "us";
     };
 
-    environment.systemPackages = with pkgs; [
-      # Wallpapers
-      nitrogen
-      # Screenshots
-      flameshot
-      # Lockscreen
-      betterlockscreen
-      xclip
-    ];
+    environment.systemPackages = with pkgs; [ nitrogen flameshot xclip ];
   };
 }

@@ -38,6 +38,12 @@
     };
   };
 
+  services.xserver = {
+    enable = true;
+    windowManager.i3.enable = true;
+  };
+  services.displayManager = { defaultSession = "none+i3"; };
+
   networking.networkmanager.enable = true;
 
   environment.systemPackages = with pkgs; [ wget vim git curl unzip zip ];
@@ -45,6 +51,16 @@
   networking.hostName = hostname;
 
   virtualisation.vmware.guest.enable = true;
+
+  home-manager.extraSpecialArgs = { inherit inputs outputs; };
+  home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "bkp";
+  home-manager.sharedModules =
+    [ inputs.catppuccin.homeManagerModules.catppuccin ];
+
+  home-manager.users.dreadster = {
+    modules.homemanager = { alacritty.enable = true; };
+  };
 
   system.stateVersion = "24.11";
 }
