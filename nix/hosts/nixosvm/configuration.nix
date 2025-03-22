@@ -13,11 +13,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [
-      intel-ocl
-      intel-compute-runtime
-      intel-media-driver
-    ];
+    extraPackages = with pkgs; [ pocl ];
   };
 
   modules.nixos = {
@@ -30,7 +26,6 @@
   networking.hostName = "nixosvm";
 
   virtualisation.vmware.guest.enable = true;
-  services.xserver.videoDrivers = [ "modesetting" ];
 
   system.stateVersion = "23.11";
 }
