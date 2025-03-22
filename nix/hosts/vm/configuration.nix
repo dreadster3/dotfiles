@@ -37,7 +37,7 @@
 
   networking.networkmanager.enable = true;
 
-  environemnt.systemPackages = with pkgs; [ wget vim git curl unzip zip ];
+  environment.systemPackages = with pkgs; [ wget vim git curl unzip zip ];
 
   networking.hostName = hostname;
 
