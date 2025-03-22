@@ -36,5 +36,16 @@ in {
         nvidiaBusId = "PCI:1:0:0";
       };
     };
+
+    home-manager.sharedModules = [{
+      wayland.windowManager.hyprland.settings.env =
+        mkIf config.programs.hyprland.enable [
+          "LIBVA_DRIVER_NAME,nvidia"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          "NVD_BACKEND,direct"
+          "__GL_VRR_ALLOWED,0"
+        ];
+    }];
   };
 }

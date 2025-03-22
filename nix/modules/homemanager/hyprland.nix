@@ -53,6 +53,12 @@ in {
         enableXdgAutostart = true;
         variables = [ "--all" ];
       };
+      extraConfig = ''
+        bind = $mainMod, ESC, submap, clean
+        submap = clean
+        bind = $mainMod, ESC, submap, reset
+        submap = reset
+      '';
       settings = {
         "$mainMod" = "SUPER";
         debug.disable_logs = false;
@@ -86,13 +92,16 @@ in {
         cursor = { no_hardware_cursors = true; };
 
         env = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "NVD_BACKEND,direct"
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
+
+          # GTK Variables
+          "GDK_BACKEND,wayland,x11,*"
+
+          # QT Variables
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         ];
 
         decoration = {

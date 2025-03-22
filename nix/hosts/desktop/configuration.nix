@@ -30,6 +30,7 @@
     oryx.enable = true;
     qmk.enable = true;
 
+    vmware.enable = true;
     hyprland.enable = true;
   };
 
