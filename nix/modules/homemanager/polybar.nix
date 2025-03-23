@@ -104,11 +104,17 @@ in {
   };
   config = mkIf cfg.enable {
 
-    modules.homemanager.polybar.script = concatStringsSep "\n" (mapAttrsToList
-      (name: monitor:
+    modules.homemanager.polybar.script = let
+      path_add = "";
+      monitors_reload = concatStringsSep "\n" (mapAttrsToList (name: monitor:
         "MONITOR=${name} ${getExe cfg.package} --reload ${
           if monitor.primary then "main" else "secondary"
         } &") monitors);
+    in ''
+      export PATH=$PATH:/run/current-system/sw/bin
+
+      ${monitors_reload}
+    '';
 
     programs.zsh.shellAliases = {
       polybar_all = "(pkill polybar || true) && ${
