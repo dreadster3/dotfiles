@@ -36,6 +36,7 @@
     ./flameshot.nix
     ./bat.nix
     ./nitrogen.nix
+    ./autolock.nix
 
     ./hyprland.nix
     ./hyprlock.nix

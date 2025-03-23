@@ -26,8 +26,5 @@ in {
       package = cfg.package;
       arguments = cfg.arguments;
     };
-
-    # Disable xautolock, to use xidlehook instead
-    services.screen-locker.xautolock.enable = false;
   };
 }

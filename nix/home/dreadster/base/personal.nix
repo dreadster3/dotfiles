@@ -30,34 +30,6 @@
   };
   stylix.enable = true;
 
-  services = {
-    xidlehook = {
-      enable = true;
-      not-when-audio = true;
-      not-when-fullscreen = true;
-
-      timers = [
-        {
-          delay = 5 * 60;
-          command =
-            "${pkgs.libnotify}/bin/notify-send 'Inactive' 'Locking session in 5 minutes'";
-          canceller =
-            "${pkgs.libnotify}/bin/notify-send 'Activity detected' 'Lock session cancelled'";
-        }
-        {
-          # Lock the session after 10 min idle
-          delay = 10 * 60;
-          command = "loginctl lock-session";
-        }
-        {
-          # Suspend the system after 15 min idle
-          delay = 15 * 60;
-          command = "systemctl suspend";
-        }
-      ];
-    };
-  };
-
   modules.homemanager = {
     settings = {
       enable = true;
@@ -70,6 +42,7 @@
       };
     };
 
+    autolock.enable = true;
     firefox.enable = true;
     ssh.enable = true;
     stylix.enable = true;
