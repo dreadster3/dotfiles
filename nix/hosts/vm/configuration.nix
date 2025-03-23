@@ -25,6 +25,7 @@
     ssh.enable = true;
   };
 
+  services.displayManager.defaultSession = mkForce "none+bspwm";
   services.desktopManager.plasma6.enable = true;
 
   networking.hostName = hostname;
