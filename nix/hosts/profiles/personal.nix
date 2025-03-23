@@ -66,6 +66,7 @@ in {
   };
 
   i18n.extraLocaleSettings = {
+    LC_ALL = "en_US.UTF-8";
     LC_ADDRESS = "pt_PT.UTF-8";
     LC_IDENTIFICATION = "pt_PT.UTF-8";
     LC_MEASUREMENT = "pt_PT.UTF-8";
