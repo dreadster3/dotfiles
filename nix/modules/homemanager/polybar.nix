@@ -125,6 +125,9 @@ in {
       notification = false;
     }];
 
+    xsession.windowManager.bspwm.startupPrograms =
+      [ "systemctl --user restart polybar" ];
+
     services = {
       polybar = {
         enable = true;
