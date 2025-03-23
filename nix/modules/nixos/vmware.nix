@@ -20,7 +20,8 @@ in {
       extraConfig = ''
         wsFeatureDarkModeSupported = "TRUE"
         mks.gl.allowUnsupportedDrivers = "TRUE"
-        mks.vk.allowUnsupportedDevices = "TRUE"'';
+        mks.vk.allowUnsupportedDevices = "TRUE"
+      '';
     };
   };
 }
