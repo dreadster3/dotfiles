@@ -52,8 +52,8 @@ in {
     xsession.windowManager.i3.config.keybindings =
       let modifier = config.xsession.windowManager.i3.config.modifier;
       in mkOptionDefault {
-        "${modifier}+space" = "exec ${packagePath} -show drun";
-        "${modifier}+q" = "exec ${packagePath} -show p -modi 'p:${
+        "${modifier}+space" = "exec pkill rofi || ${packagePath} -show drun";
+        "${modifier}+q" = "exec pkill rofi || ${packagePath} -show p -modi 'p:${
             getExe cfg.powermenu.package
           }'";
       };
