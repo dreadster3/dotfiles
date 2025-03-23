@@ -53,11 +53,11 @@ in {
 
       };
       extraConfig = ''
-        workspace 1 output "Virtual1"
-        workspace 2 output "Virtual1"
-        workspace 3 output "Virtual1"
-        workspace 4 output "Virtual1"
-        workspace 5 output "Virtual1"
+        workspace number 1 output "Virtual1"
+        workspace number 2 output "Virtual1"
+        workspace number 3 output "Virtual1"
+        workspace number 4 output "Virtual1"
+        workspace number 5 output "Virtual1"
       '';
     };
   };
