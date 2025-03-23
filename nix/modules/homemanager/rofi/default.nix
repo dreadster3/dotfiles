@@ -49,7 +49,7 @@ in {
       "$mainMod, Space, exec, pkill rofi || ${packagePath} -show drun"
     ];
 
-    xsession.windowManager.i3.keybindings =
+    xsession.windowManager.i3.config.keybindings =
       let modifier = config.xsession.windowManager.i3.config.modifier;
       in mkOptionDefault {
         "${modifier}+space" = "${packagePath} -show drun";
