@@ -108,7 +108,7 @@ in {
           if monitor.primary then "main" else "secondary"
         } &") monitors);
     in ''
-      export PATH=$PATH:/run/current-system/sw/bin
+      export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
       export XDG_DATA_DIRS=$XDG_DATA_DIRS:${config.home.homeDirectory}/.nix-profile/share
 
       ${monitors_reload}
@@ -154,7 +154,7 @@ in {
             # Appearance
             background = "\${colors.base}";
             foreground = "\${colors.text}";
-            # radius = 10;
+            radius = 10;
             border-size = 0;
 
             # Fonts
@@ -167,7 +167,7 @@ in {
             modules-center = modules_center;
             modules-right = modules_right;
 
-            wm-restack = "i3";
+            wm-restack = "bspwm";
           };
           "bar/secondary" = {
             monitor = "\${env:MONITOR:}";
