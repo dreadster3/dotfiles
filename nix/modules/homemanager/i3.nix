@@ -23,7 +23,11 @@ in {
 
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
-          in mkOptionDefault { "${modifier}+w" = "kill"; };
+          in mkOptionDefault {
+            "${modifier}+w" = "kill";
+            "${modifier}+l" = "exec loginctl lock-session";
+            "${modifier}+Control+q" = "exec loginctl lock-session";
+          };
 
         gaps = {
           inner = 10;
