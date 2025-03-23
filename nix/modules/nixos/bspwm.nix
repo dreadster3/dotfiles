@@ -11,12 +11,12 @@ in {
     }];
 
     services.xserver.windowManager.bspwm.enable = true;
+
+    services.xserver.desktopManager.xterm.enable = false;
+
+    services.displayManager.defaultSession = mkDefault "none+bspwm";
+
+    home-manager.sharedModules =
+      [{ modules.homemanager.bspwm.enable = mkDefault true; }];
   };
-
-  services.xserver.desktopManager.xterm.enable = false;
-
-  services.displayManager.defaultSession = mkDefault "none+bspwm";
-
-  home-manager.sharedModules =
-    [{ modules.homemanager.bspwm.enable = mkDefault true; }];
 }
