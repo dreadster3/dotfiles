@@ -26,9 +26,8 @@
   };
 
   qt.enable = true;
-  programs.xwayland.enable = true;
   services.displayManager.defaultSession = lib.mkForce "none+bspwm";
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   networking.hostName = hostname;
 
