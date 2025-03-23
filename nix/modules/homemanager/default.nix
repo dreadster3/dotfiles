@@ -7,8 +7,8 @@
     ./openrgb.nix
     ./mangohud.nix
     ./zsh.nix
-    ./alacritty.nix
     ./firefox.nix
+    ./alacritty.nix
     ./kitty.nix
     ./sxhkd.nix
     ./nerdfonts.nix
@@ -35,6 +35,8 @@
     ./tmux.nix
     ./flameshot.nix
     ./bat.nix
+    ./nitrogen.nix
+    ./autolock.nix
 
     ./hyprland.nix
     ./hyprlock.nix
@@ -51,11 +53,10 @@
     ./obsmic
     ./direnv.nix
     ./poetry.nix
-    ./xdg.nix
     ./bitwarden.nix
     ./catppuccin
     ./ssh.nix
-  ];
 
-  nixpkgs.config.allowUnfree = true;
+    ./i3.nix
+  ];
 }

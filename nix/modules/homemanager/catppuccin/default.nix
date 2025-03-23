@@ -30,9 +30,20 @@ in {
       flavor = cfg.flavor;
       accent = cfg.accent;
 
-      nvim.enable = false;
       alacritty.enable = true;
-      tmux.enable = false;
+      tmux = {
+        enable = true;
+        extraConfig = ''
+          set -g @catppuccin_window_tabs_enabled 'on'
+          set -g @catppuccin_date_time "%H:%M"
+          set -g @catppuccin_window_left_separator ""
+          set -g @catppuccin_window_right_separator " "
+          set -g @catppuccin_status_modules_right "application cpu session host date_time"
+        '';
+      };
+
+      # Neovim configurations add the theme
+      nvim.enable = false;
     };
   };
 }

@@ -13,10 +13,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.sxhkd.keybindings = { "Print" = "${getExe cfg.package} gui"; };
-
-    xsession.windowManager.bspwm.startupPrograms = [ "${getExe cfg.package}" ];
-
     home.packages = [ cfg.package ];
+
+    services.sxhkd.keybindings = { "Print" = "${getExe cfg.package} gui"; };
+    xsession.windowManager.bspwm.startupPrograms = [ "${getExe cfg.package}" ];
+    xsession.windowManager.i3.config.startup = [{
+      command = "${getExe cfg.package}";
+      notification = false;
+    }];
   };
 }

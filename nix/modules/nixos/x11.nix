@@ -10,14 +10,11 @@ in {
       xkb.layout = "us";
     };
 
-    environment.systemPackages = with pkgs; [
-      # Wallpapers
-      nitrogen
-      # Screenshots
-      flameshot
-      # Lockscreen
-      betterlockscreen
-      xclip
-    ];
+    environment.systemPackages = with pkgs; [ betterlockscreen xclip ];
+
+    qt.enable = true;
+
+    home-manager.sharedModules =
+      [{ modules.homemanager = { flameshot.enable = mkDefault true; }; }];
   };
 }

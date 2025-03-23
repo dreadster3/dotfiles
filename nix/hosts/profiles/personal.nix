@@ -4,8 +4,7 @@ let
   mkUpper = str:
     (lib.toUpper (builtins.substring 0 1 str))
     + (builtins.substring 1 (builtins.stringLength str) str);
-in
-{
+in {
   imports = [ ./common.nix ];
 
   security.pki.certificateFiles = [ ../../../certificates/issuer.crt ];
@@ -57,13 +56,7 @@ in
     flake = "/home/dreadster/Documents/projects/github/dotfiles/nix";
   };
 
-  environment.systemPackages = with pkgs; [
-    eog
-    networkmanagerapplet
-    openvpn
-    clinfo
-    postman
-  ];
+  environment.systemPackages = with pkgs; [ eog networkmanagerapplet firefox ];
 
   modules.nixos = {
     catppuccin.enable = true;
@@ -73,6 +66,7 @@ in
   };
 
   i18n.extraLocaleSettings = {
+    LC_ALL = "en_US.UTF-8";
     LC_ADDRESS = "pt_PT.UTF-8";
     LC_IDENTIFICATION = "pt_PT.UTF-8";
     LC_MEASUREMENT = "pt_PT.UTF-8";

@@ -7,6 +7,7 @@
     kubectl
     neofetch
     fzf
+    tldr
 
     dig
     pciutils
@@ -27,34 +28,7 @@
 
     secrets.openai_api_key = { };
   };
-
-  services = {
-    xidlehook = {
-      enable = true;
-      not-when-audio = true;
-      not-when-fullscreen = true;
-
-      timers = [
-        {
-          delay = 5 * 60;
-          command =
-            "${pkgs.libnotify}/bin/notify-send 'Inactive' 'Locking session in 5 minutes'";
-          canceller =
-            "${pkgs.libnotify}/bin/notify-send 'Activity detected' 'Lock session cancelled'";
-        }
-        {
-          # Lock the session after 10 min idle
-          delay = 10 * 60;
-          command = "loginctl lock-session";
-        }
-        {
-          # Suspend the system after 15 min idle
-          delay = 15 * 60;
-          command = "systemctl suspend";
-        }
-      ];
-    };
-  };
+  stylix.enable = true;
 
   modules.homemanager = {
     settings = {
@@ -67,22 +41,20 @@
         italic.family = "VictorMono Nerd Font";
       };
     };
+
+    firefox.enable = true;
     ssh.enable = true;
-
     stylix.enable = true;
-
     direnv.enable = true;
     bat.enable = true;
     alacritty.enable = true;
     kitty.enable = true;
-    sxhkd.enable = true;
     zsh = {
       enable = true;
       dynamicEnvVariables = lib.mkDefault {
         openai_api_key = config.sops.secrets.openai_api_key.path;
       };
     };
-    xdg.enable = true;
     neovim = {
       enable = true;
       package = lib.mkDefault pkgs.unstable.neovim-unwrapped;
@@ -110,11 +82,10 @@
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;
-    rofi.powermenu.enable = true;
+    rofi.powermenu.enable = lib.mkDefault true;
   };
 
   systemd.user.startServices = "sd-switch";
-  stylix.enable = true;
 
   programs.git = {
     enable = true;

@@ -11,7 +11,7 @@
     config.allowUnfree = true;
   };
 
-  home.packages = with pkgs; [ killall tldr wget curl file tree ];
+  home.packages = with pkgs; [ wget curl file tree ];
 
   home = {
     username = lib.mkDefault "dreadster";
@@ -35,9 +35,6 @@
     btop.enable = true;
     tmux.enable = true;
   };
-
-  stylix.enable = lib.mkDefault false;
-  catppuccin.enable = lib.mkDefault false;
 
   programs.home-manager.enable = true;
 

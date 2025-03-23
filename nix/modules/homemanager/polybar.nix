@@ -100,20 +100,19 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    # Disable the default polybar service
-    systemd.user.services.polybar = lib.mkForce { };
 
-    xsession.windowManager.bspwm.startupPrograms = mapAttrsToList
-      (name: monitor:
-        "MONITOR=${name} ${getExe cfg.package} --reload ${
-          if monitor.primary then "main" else "secondary"
-        }") monitors;
-
-    modules.homemanager.polybar.script = concatStringsSep "\n" (mapAttrsToList
-      (name: monitor:
+    modules.homemanager.polybar.script = let
+      path_add = "";
+      monitors_reload = concatStringsSep "\n" (mapAttrsToList (name: monitor:
         "MONITOR=${name} ${getExe cfg.package} --reload ${
           if monitor.primary then "main" else "secondary"
         } &") monitors);
+    in ''
+      export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
+      export XDG_DATA_DIRS=$XDG_DATA_DIRS:${config.home.homeDirectory}/.nix-profile/share
+
+      ${monitors_reload}
+    '';
 
     programs.zsh.shellAliases = {
       polybar_all = "(pkill polybar || true) && ${
@@ -121,10 +120,21 @@ in {
         }";
     };
 
+    xsession.windowManager.i3.config.startup = [{
+      command = "systemctl --user restart polybar";
+      always = true;
+      notification = false;
+    }];
+
+    xsession.windowManager.bspwm.startupPrograms =
+      [ "systemctl --user restart polybar" ];
+
     services = {
       polybar = {
         enable = true;
-        package = cfg.package;
+        package = cfg.package.override {
+          i3Support = config.xsession.windowManager.i3.enable;
+        };
         script = cfg.script;
         extraConfig = cfg.extraConfig;
         config = {
@@ -156,9 +166,6 @@ in {
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = modules_right;
-
-            # Window Manager
-            wm-restack = "bspwm";
           };
           "bar/secondary" = {
             monitor = "\${env:MONITOR:}";
@@ -188,41 +195,6 @@ in {
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
-
-            # Window Manager
-            wm-restack = "bspwm";
-          };
-          "bar/remote" = {
-            monitor = "rdp0";
-
-            # Size
-            width = "98%";
-            height = "36";
-
-            # Position
-            bottom = false;
-            fixed-center = true;
-            offset-x = "10";
-            offset-y = "1%";
-
-            # Appearance
-            background = "\${colors.base}";
-            foreground = "\${colors.text}";
-            radius = 10;
-            border-size = 0;
-
-            # Fonts
-            font-0 = "Fira Code Nerd Font:pixelsize=12;3";
-            font-1 = "Iosevka Nerd Font:pixelsize=14;4";
-
-            # Modules
-            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
-            modules-left = modules_left;
-            modules-center = modules_center;
-            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
-
-            # Window Manager
-            wm-restack = "bspwm";
           };
           "module/cpu" = {
             type = "internal/cpu";
@@ -443,6 +415,23 @@ in {
             label-empty-padding = 1;
           };
 
+          "module/i3" = {
+            type = "internal/i3";
+            ping-workspaces = true;
+            strip-wsnumbers = true;
+            enable-scroll = true;
+
+            format = "<label-state>";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.${config.catppuccin.accent}}";
+
+            label-focused = "";
+            label-focused-padding = 1;
+
+            label-unfocused = "";
+            label-unfocused-padding = 1;
+          };
+
           "module/filesystem" = {
             type = "internal/fs";
 
@@ -552,13 +541,13 @@ in {
             content-background = "\${colors.mantle}";
             content-padding = 2;
 
-            click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''
-              PATH=/run/current-system/sw/bin:$PATH
+            click-left = ''
               ${getExe config.programs.rofi.finalPackage} -show p -modi "p:${
                 getExe config.modules.homemanager.rofi.powermenu.package
               }"
-            '');
+            '';
           };
+          "settings" = { screenchange-reload = true; };
         };
       };
     };

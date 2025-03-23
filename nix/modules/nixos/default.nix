@@ -11,7 +11,6 @@
     ./docker.nix
     ./nvidia.nix
     ./thunar.nix
-    ./vmware.nix
     ./flatpak.nix
     ./zerotier.nix
     ./teamviewer.nix
@@ -22,12 +21,15 @@
     ./nightlight.nix
     ./storage.nix
     ./hyprland.nix
-    ./virtmanager.nix
     ./catppuccin.nix
     ./coolify.nix
     ./fail2ban.nix
     ./rustdesk.nix
     ./qmk.nix
     ./oryx.nix
+    ./xfce.nix
+    ./i3.nix
+    ./sddm.nix
+    ./virtualisation
   ];
 }

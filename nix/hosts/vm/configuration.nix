@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ hostname, config, pkgs, lib, ... }: {
   imports = [
     ../profiles/personal.nix
 
@@ -18,14 +18,16 @@
 
   modules.nixos = {
     x11.enable = true;
-    bspwm.enable = true;
-    # kubernetes.enable = true;
+    sddm.enable = true;
+    virtualisation.vmware.guest.enable = true;
+
     ssh.enable = true;
   };
 
-  networking.hostName = "nixosvm";
+  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.defaultSession = lib.mkForce "none+i3";
 
-  virtualisation.vmware.guest.enable = true;
+  networking.hostName = hostname;
 
   system.stateVersion = "23.11";
 }

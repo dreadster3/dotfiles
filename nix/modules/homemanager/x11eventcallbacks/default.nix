@@ -28,14 +28,12 @@ in {
       Service = {
         ExecStart = "${cfg.package}/bin/x11_event_callbacks "
           + pkgs.writers.writeBash "restart_polybar.sh" ''
-            bspc wm --restart
             nitrogen --restore 2> /dev/null
-            pkill polybar
-            ${config.modules.homemanager.polybar.script}
+            systemctl --user restart polybar
           '';
         Environment = [
           "DISPLAY=:0"
-          "PATH=/run/current-system/sw/bin:${pkgs.nitrogen}/bin:${pkgs.polybar}/bin"
+          "PATH=/run/current-system/sw/bin:${pkgs.nitrogen}/bin"
         ];
         StandardOutput = "journal+console";
         StandardError = "journal+console";

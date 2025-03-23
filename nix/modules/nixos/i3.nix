@@ -1,29 +1,32 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.modules.nixos.bspwm;
+let
+  cfg = config.modules.nixos.i3;
+  desktopManager = if config.services.xserver.desktopManager.xfce.enable then
+    "xfce"
+  else
+    "none";
 in {
-  options = { modules.nixos.bspwm = { enable = mkEnableOption "bspwm"; }; };
+  options = { modules.nixos.i3 = { enable = mkEnableOption "i3"; }; };
 
   config = mkIf cfg.enable {
     assertions = [{
       assertion = config.services.xserver.enable;
-      message = "xserver must be enabled to use bspwm";
+      message = "xserver must be enabled to use xfce";
     }];
 
-    services.xserver.windowManager.bspwm.enable = true;
+    services.xserver.windowManager.i3.enable = true;
 
     services.xserver.desktopManager.xterm.enable = false;
 
-    services.displayManager.defaultSession = mkDefault "none+bspwm";
+    services.displayManager.defaultSession = mkDefault "${desktopManager}+i3";
 
     home-manager.sharedModules = [{
       modules.homemanager = {
-        bspwm.enable = mkDefault true;
-        sxhkd.enable = mkDefault true;
+        i3.enable = mkDefault true;
         polybar.enable = mkDefault true;
         rofi.enable = mkDefault true;
         betterlockscreen.enable = mkDefault true;
-        picom.enable = mkDefault true;
         autolock.enable = mkDefault true;
         nitrogen.enable = mkDefault true;
       };

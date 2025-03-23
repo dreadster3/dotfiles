@@ -11,7 +11,7 @@ in {
       enable = mkEnableOption "rofi";
       package = mkOption {
         type = types.package;
-        default = pkgs.rofi-wayland;
+        default = pkgs.rofi;
         description = "Package to use for rofi";
       };
       terminal = mkOption {
@@ -48,6 +48,15 @@ in {
       "$mainMod, D, exec, pkill rofi || ${packagePath} -show drun"
       "$mainMod, Space, exec, pkill rofi || ${packagePath} -show drun"
     ];
+
+    xsession.windowManager.i3.config.keybindings =
+      let modifier = config.xsession.windowManager.i3.config.modifier;
+      in mkOptionDefault {
+        "${modifier}+space" = "exec pkill rofi || ${packagePath} -show drun";
+        "${modifier}+q" = "exec pkill rofi || ${packagePath} -show p -modi 'p:${
+            getExe cfg.powermenu.package
+          }'";
+      };
 
     programs.rofi = {
       enable = true;
