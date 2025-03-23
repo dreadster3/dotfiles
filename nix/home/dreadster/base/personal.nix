@@ -27,6 +27,7 @@
 
     secrets.openai_api_key = { };
   };
+  stylix.enable = true;
 
   services = {
     xidlehook = {
@@ -67,15 +68,13 @@
         italic.family = "VictorMono Nerd Font";
       };
     };
+
     ssh.enable = true;
-
     stylix.enable = true;
-
     direnv.enable = true;
     bat.enable = true;
     alacritty.enable = true;
     kitty.enable = true;
-    sxhkd.enable = true;
     zsh = {
       enable = true;
       dynamicEnvVariables = lib.mkDefault {
@@ -110,11 +109,10 @@
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;
-    rofi.powermenu.enable = true;
+    rofi.powermenu.enable = lib.mkDefault true;
   };
 
   systemd.user.startServices = "sd-switch";
-  stylix.enable = true;
 
   programs.git = {
     enable = true;
