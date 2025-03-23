@@ -16,7 +16,11 @@ in {
 
     services.displayManager.defaultSession = mkDefault "none+bspwm";
 
-    home-manager.sharedModules =
-      [{ modules.homemanager.bspwm.enable = mkDefault true; }];
+    home-manager.sharedModules = [{
+      modules.homemanager = {
+        bspwm.enable = mkDefault true;
+        sxhkd.enable = mkDefault true;
+      };
+    }];
   };
 }
