@@ -7,7 +7,7 @@ in {
       enable = mkEnableOption "i3";
       package = mkOption {
         type = types.package;
-        default = pkgs.i3-rounded;
+        default = pkgs.i3;
       };
     };
   };
