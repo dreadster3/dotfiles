@@ -57,10 +57,24 @@
       homeManagerModules = import ./modules/homemanager;
 
       nixosConfigurations = {
-        nixosvm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs lib; };
+        devbox = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            hostname = "devbox";
+            inherit inputs outputs lib;
+          };
           modules = [
-            ./hosts/nixosvm/configuration.nix
+            ./hosts/vm/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            stylix.nixosModules.stylix
+          ];
+        };
+        pentestbox = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            hostname = "pentestbox";
+            inherit inputs outputs lib;
+          };
+          modules = [
+            ./hosts/vm/configuration.nix
             catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
           ];

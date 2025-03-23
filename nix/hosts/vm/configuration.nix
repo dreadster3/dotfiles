@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ hostname, config, pkgs, ... }: {
   imports = [
     ../profiles/personal.nix
 
@@ -24,7 +24,7 @@
     ssh.enable = true;
   };
 
-  networking.hostName = "nixosvm";
+  networking.hostName = hostname;
 
   services.xserver.videoDrivers = [ "vmware" ];
   virtualisation.vmware.guest.enable = true;
