@@ -111,7 +111,7 @@ in {
           if monitor.primary then "main" else "secondary"
         } &") monitors);
     in ''
-      export PATH=$PATH:/run/current-system/sw/bin
+      export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
 
       ${monitors_reload}
     '';
