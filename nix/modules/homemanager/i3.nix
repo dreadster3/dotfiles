@@ -39,7 +39,7 @@ in {
           smartGaps = true;
         };
 
-        workspaceOutputAssign = mapAttrs (name: monitor:
+        workspaceOutputAssign = mapAttrsToList (name: monitor:
           (map (value: {
             output = name;
             workspace = value;
