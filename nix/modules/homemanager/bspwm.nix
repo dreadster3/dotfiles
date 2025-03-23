@@ -2,18 +2,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.bspwm;
-
-  monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors
-    // {
-      rdp0 = { workspaces = [ 1 2 3 4 5 ]; };
-    };
-
-  fix_script = pkgs.writers.writeBash "fix_remote.sh" ''
-    bspc wm --restart
-    sleep 1
-    bspc monitor MONITOR --remove
-    bspc monitor rdp0 -d "1" "2" "3" "4" "5"
-    MONITOR='rdp0' polybar --reload secondary &'';
+  monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
 in {
   options = {
     modules.homemanager.bspwm = {
@@ -39,7 +28,6 @@ in {
       message = "No monitors configured";
     }];
 
-    programs.zsh.shellAliases.fix_remote = "${fix_script} & disown && exit";
     xsession.windowManager.bspwm = {
       enable = true;
       settings = {
@@ -56,9 +44,9 @@ in {
         right_padding = 0;
         bottom_padding = 0;
       };
+
       startupPrograms = cfg.startupPrograms ++ [
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-        "${getExe pkgs.nitrogen} --restore"
         "xsetroot -cursor_name left_ptr"
       ];
 

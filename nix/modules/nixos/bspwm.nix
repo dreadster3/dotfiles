@@ -3,7 +3,7 @@ with lib;
 let cfg = config.modules.nixos.bspwm;
 in
 {
-  options = { modules.nixos.bspwm = { enable = mkEnableOption "Bspwm"; }; };
+  options = { modules.nixos.bspwm = { enable = mkEnableOption "bspwm"; }; };
 
   config = mkIf cfg.enable {
     assertions = [{
@@ -11,14 +11,13 @@ in
       message = "xserver must be enabled to use bspwm";
     }];
 
-    services.xserver = { windowManager = { bspwm = { enable = true; }; }; };
+    services.xserver.windowManager.bspwm.enable = true; };
 
-    services.displayManager = {
-      defaultSession = "none+bspwm";
-      sddm = {
-        enable = true;
-        package = pkgs.kdePackages.sddm;
-      };
-    };
+    services.xserver.desktopManager.xterm.enable = false;
+
+    services.displayManager.defaultSession = mkDefault "none+bspwm";
+
+    home-manager.sharedModules =
+      [{ modules.homemanager.bspwm.enable = mkDefault true; }];
   };
 }

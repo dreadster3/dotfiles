@@ -61,17 +61,25 @@ in {
           smartGaps = true;
         };
 
-        # workspaceOutputAssign = mapAttrsToList (name: monitor:
-        #   (map (value: {
-        #     output = name;
-        #     workspace = value;
-        #   }) monitor.workspaces)) monitors;
-
         workspaceOutputAssign = foldlAttrs (acc: name: monitor:
           acc ++ (map (value: {
             output = name;
             workspace = toString value;
           }) monitor.workspaces)) [ ] monitors;
+
+        startup = [
+          {
+            command =
+              "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+            notification = false;
+            always = false;
+          }
+          {
+            command = "xsetroot -cursor_name left_ptr";
+            notification = false;
+            always = false;
+          }
+        ];
 
       };
     };
