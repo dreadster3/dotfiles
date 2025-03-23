@@ -111,7 +111,7 @@ in {
           if monitor.primary then "main" else "secondary"
         } &") monitors);
     in ''
-      export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
+      export PATH=$PATH:/run/current-system/sw/bin
 
       ${monitors_reload}
     '';
@@ -153,7 +153,7 @@ in {
             # Appearance
             background = "\${colors.base}";
             foreground = "\${colors.text}";
-            radius = 10;
+            # radius = 10;
             border-size = 0;
 
             # Fonts
@@ -165,6 +165,8 @@ in {
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = modules_right;
+
+            wm-restack = "i3";
           };
           "bar/secondary" = {
             monitor = "\${env:MONITOR:}";
