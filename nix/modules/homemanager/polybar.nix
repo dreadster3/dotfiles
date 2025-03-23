@@ -414,23 +414,6 @@ in {
             label-empty-padding = 1;
           };
 
-          "module/i3" = {
-            type = "internal/i3";
-            pin-workspaces = true;
-            index-sort = true;
-            enable-scroll = true;
-            wrapping_scroll = true;
-
-            ws-icon-0 = "1;";
-            ws-icon-1 = "2;";
-            ws-icon-2 = "3;";
-            ws-icon-3 = "4;";
-
-            label-separator = "|";
-            label-separator-padding = 2;
-            label-separator-foreground = "#ffb52a";
-          };
-
           "module/filesystem" = {
             type = "internal/fs";
 
