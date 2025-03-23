@@ -201,38 +201,6 @@ in {
             # Window Manager
             wm-restack = "bspwm";
           };
-          "bar/remote" = {
-            monitor = "rdp0";
-
-            # Size
-            width = "98%";
-            height = "36";
-
-            # Position
-            bottom = false;
-            fixed-center = true;
-            offset-x = "10";
-            offset-y = "1%";
-
-            # Appearance
-            background = "\${colors.base}";
-            foreground = "\${colors.text}";
-            radius = 10;
-            border-size = 0;
-
-            # Fonts
-            font-0 = "Fira Code Nerd Font:pixelsize=12;3";
-            font-1 = "Iosevka Nerd Font:pixelsize=14;4";
-
-            # Modules
-            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
-            modules-left = modules_left;
-            modules-center = modules_center;
-            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
-
-            # Window Manager
-            wm-restack = "bspwm";
-          };
           "module/cpu" = {
             type = "internal/cpu";
             interval = 1;
@@ -563,12 +531,11 @@ in {
             content-background = "\${colors.mantle}";
             content-padding = 2;
 
-            click-left = toString (pkgs.writers.writeBash "launch_powermenu" ''
-              PATH=/run/current-system/sw/bin:$PATH
+            click-left = ''
               ${getExe config.programs.rofi.finalPackage} -show p -modi "p:${
                 getExe config.modules.homemanager.rofi.powermenu.package
               }"
-            '');
+            '';
           };
         };
       };
