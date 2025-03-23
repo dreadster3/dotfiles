@@ -7,6 +7,7 @@
     ./openrgb.nix
     ./mangohud.nix
     ./zsh.nix
+    ./firefox.nix
     ./alacritty.nix
     ./kitty.nix
     ./sxhkd.nix
