@@ -45,13 +45,20 @@ in {
         #     workspace = value;
         #   }) monitor.workspaces)) monitors;
 
-        workspaceOutputAssign = foldlAttrs (acc: name: monitor:
-          acc ++ (map (value: {
-            output = name;
-            workspace = "number ${toString value}";
-          }) monitor.workspaces)) [ ] monitors;
+        # workspaceOutputAssign = foldlAttrs (acc: name: monitor:
+        #   acc ++ (map (value: {
+        #     output = name;
+        #     workspace = "number ${toString value}";
+        #   }) monitor.workspaces)) [ ] monitors;
 
       };
+      extraConfig = ''
+        workspace 1 output "Virtual1"
+        workspace 2 output "Virtual1"
+        workspace 3 output "Virtual1"
+        workspace 4 output "Virtual1"
+        workspace 5 output "Virtual1"
+      '';
     };
   };
 }
