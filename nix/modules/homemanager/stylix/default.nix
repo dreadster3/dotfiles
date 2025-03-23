@@ -14,6 +14,7 @@ in {
         gtk.enable = true;
         hyprpaper.enable = true;
         mangohud.enable = true;
+        i3.enable = true;
       };
     };
 
