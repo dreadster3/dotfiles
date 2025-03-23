@@ -6,9 +6,12 @@ let
   monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 
+  workspaces_module =
+    if config.xsession.windowManager.i3.enable then "i3" else "workspaces";
+
   modules_left = [
     "launcher"
-    "workspaces"
+    workspaces_module
     "explorer"
     "github"
     "reddit"
@@ -100,14 +103,6 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    # Disable the default polybar service
-    systemd.user.services.polybar = lib.mkForce { };
-
-    xsession.windowManager.bspwm.startupPrograms = mapAttrsToList
-      (name: monitor:
-        "MONITOR=${name} ${getExe cfg.package} --reload ${
-          if monitor.primary then "main" else "secondary"
-        }") monitors;
 
     modules.homemanager.polybar.script = concatStringsSep "\n" (mapAttrsToList
       (name: monitor:
@@ -121,10 +116,18 @@ in {
         }";
     };
 
+    xsession.windowManager.i3.config.startup = [{
+      command = "systemctl --user restart polybar";
+      always = true;
+      notification = false;
+    }];
+
     services = {
       polybar = {
         enable = true;
-        package = cfg.package;
+        package = cfg.package.override {
+          i3Support = config.xsession.windowManager.i3.enable;
+        };
         script = cfg.script;
         extraConfig = cfg.extraConfig;
         config = {
@@ -442,6 +445,8 @@ in {
             label-empty = "";
             label-empty-padding = 1;
           };
+
+          "module/i3" = { type = "internal/i3"; };
 
           "module/filesystem" = {
             type = "internal/fs";
