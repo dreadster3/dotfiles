@@ -28,7 +28,7 @@
 
   services.xserver.videoDrivers = [ "vmware" ];
   virtualisation.vmware.guest.enable = true;
-  xsession.windowManager.i3.config.startup = [{
+  xserver.windowManager.i3.config.startup = [{
     command =
       "${config.virtualisation.vmware.guest.package}/bin/vmware-user-suid-wrapper";
     always = true;
