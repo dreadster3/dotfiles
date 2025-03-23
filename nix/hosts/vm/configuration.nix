@@ -18,13 +18,15 @@
 
   modules.nixos = {
     x11.enable = true;
-    bspwm.enable = true;
+    i3.enable = true;
     sddm.enable = true;
     virtualisation.vmware.guest.enable = true;
 
     ssh.enable = true;
   };
 
+  qt.enable = true;
+  programs.xwayland.enable = true;
   services.displayManager.defaultSession = lib.mkForce "none+bspwm";
   services.desktopManager.plasma6.enable = true;
 
