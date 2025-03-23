@@ -3,7 +3,7 @@ with lib;
 let cfg = config.modules.nixos.virtualisation.vmware.guest;
 in {
   options = {
-    modules.nixos.virtualisation = {
+    modules.nixos.virtualisation.vmware.guest = {
       enable = mkEnableOption "virtualisation.vmware.guest";
     };
   };
