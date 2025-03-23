@@ -7,7 +7,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xidlehook = {
+    services.xidlehook = {
       enable = true;
       not-when-audio = true;
       not-when-fullscreen = true;
