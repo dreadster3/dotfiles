@@ -31,7 +31,6 @@ in {
     };
     flameshot.enable = true;
     x11eventcallbacks.enable = true;
-    # betterlockscreen.enable = true;
 
     pentest.enable = true;
   };
