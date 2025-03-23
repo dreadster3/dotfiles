@@ -49,6 +49,14 @@ in {
       "$mainMod, Space, exec, pkill rofi || ${packagePath} -show drun"
     ];
 
+    xsession.windowManager.i3.keybindings =
+      let modifier = config.xsession.windowManager.i3.config.modifier;
+      in mkOptionDefault {
+        "${modifier}+space" = "${packagePath} -show drun";
+        "${modifier}+q" =
+          "${packagePath} -show p -modi 'p:${getExe cfg.powermenu.package}'";
+      };
+
     programs.rofi = {
       enable = true;
       package = cfg.package;
