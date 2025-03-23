@@ -14,17 +14,6 @@ in {
       mouse = true;
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
-        {
-          plugin = catppuccin;
-          extraConfig = ''
-            set -g @catppuccin_flavour 'mocha'
-            set -g @catppuccin_window_tabs_enabled 'on'
-            set -g @catppuccin_date_time "%H:%M"
-            set -g @catppuccin_window_left_separator ""
-            set -g @catppuccin_window_right_separator " "
-            set -g @catppuccin_status_modules_right "application cpu session host date_time"
-          '';
-        }
         { plugin = resurrect; }
         {
           plugin = continuum;
