@@ -49,7 +49,7 @@ in {
           acc ++ (map (value: {
             output = name;
             workspace = value;
-          }))) [ ] monitors;
+          }) monitor.workspaces)) [ ] monitors;
 
       };
     };
