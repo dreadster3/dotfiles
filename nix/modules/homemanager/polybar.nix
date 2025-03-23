@@ -6,12 +6,9 @@ let
   monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 
-  workspaces_module =
-    if config.xsession.windowManager.i3.enable then "i3" else "workspaces";
-
   modules_left = [
     "launcher"
-    workspaces_module
+    "workspaces"
     "explorer"
     "github"
     "reddit"
