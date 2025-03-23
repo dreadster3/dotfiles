@@ -36,6 +36,6 @@ in {
     services.screen-locker.enable = true;
 
     # Disable xautolock to use xidlehook
-    servcies.screen-locker.xautolock.enable = false;
+    services.screen-locker.xautolock.enable = false;
   };
 }
