@@ -56,38 +56,29 @@ in {
       };
     };
 
+    firefox.enable = true;
+    aio.enable = true;
     openrgb = {
       enable = true;
       startup.enable = true;
     };
-    betterlockscreen.enable = true;
     dunst.enable = true;
-    picom.enable = true;
-    flameshot.enable = true;
-    aio.enable = true;
     spotify = {
       enable = true;
       spicetify.enable = true;
     };
-    helix.enable = true;
     thunderbird.enable = true;
     gtk.enable = true;
     mechvibes.enable = true;
     mangohud.enable = true;
-    firefox.enable = true;
+    pentest.enable = true;
 
-    polybar.enable = true;
-    rofi.enable = true;
-    sxhkd.enable = true;
-    bspwm = {
-      enable = true;
-      startupPrograms = [
-        "${
-          lib.getExe pkgs.xorg.xrandr
-        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
-        "${lib.getExe pkgs.xorg.xrandr} --output rdp0 --primary"
-      ];
-    };
+    bspwm.startupPrograms = [
+      "${
+        lib.getExe pkgs.xorg.xrandr
+      } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
+    ];
+
     xbindkeys = {
       enable = true;
       settings = {
@@ -102,20 +93,10 @@ in {
       };
     };
 
-    pentest.enable = true;
-
     # Hyprland
-    hyprland.enable = true;
-    hyprpaper = {
-      enable = true;
-      wallpapers = {
-        "DP-1" = ../../../wallpapers/shinobu.jpg;
-        "HDMI-A-1" = ../../../wallpapers/anime_vertical.png;
-      };
+    hyprpaper.wallpapers = {
+      "DP-1" = ../../../wallpapers/shinobu.jpg;
+      "HDMI-A-1" = ../../../wallpapers/anime_vertical.png;
     };
-    wlogout.enable = true;
-    hypridle.enable = true;
-    hyprlock.enable = true;
-    waybar.enable = true;
   };
 }

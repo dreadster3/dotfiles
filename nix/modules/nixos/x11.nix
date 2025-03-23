@@ -17,7 +17,6 @@ in {
     home-manager.sharedModules = [{
       modules.homemanager = {
         autolock.enable = mkDefault true;
-        betterlockscreen.enable = mkDefault true;
         flameshot.enable = mkDefault true;
         nitrogen.enable = mkDefault true;
       };

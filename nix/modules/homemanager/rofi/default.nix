@@ -11,7 +11,7 @@ in {
       enable = mkEnableOption "rofi";
       package = mkOption {
         type = types.package;
-        default = pkgs.rofi-wayland;
+        default = pkgs.rofi;
         description = "Package to use for rofi";
       };
       terminal = mkOption {

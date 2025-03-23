@@ -18,7 +18,6 @@
 
   modules.nixos = {
     x11.enable = true;
-    i3.enable = true;
     sddm.enable = true;
     virtualisation.vmware.guest.enable = true;
 

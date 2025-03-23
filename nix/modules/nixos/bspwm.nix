@@ -20,6 +20,10 @@ in {
       modules.homemanager = {
         bspwm.enable = mkDefault true;
         sxhkd.enable = mkDefault true;
+        polybar.enable = mkDefault true;
+        rofi.enable = mkDefault true;
+        betterlockscreen.enable = mkDefault true;
+        picom.enable = mkDefault true;
       };
     }];
   };

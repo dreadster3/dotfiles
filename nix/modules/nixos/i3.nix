@@ -21,7 +21,13 @@ in {
 
     services.displayManager.defaultSession = mkDefault "${desktopManager}+i3";
 
-    home-manager.sharedModules =
-      [{ modules.homemanager.i3.enable = mkDefault true; }];
+    home-manager.sharedModules = [{
+      modules.homemanager = {
+        i3.enable = mkDefault true;
+        polybar.enable = mkDefault true;
+        rofi.enable = mkDefault true;
+        betterlockscreen.enable = mkDefault true;
+      };
+    }];
   };
 }

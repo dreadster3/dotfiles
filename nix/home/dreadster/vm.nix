@@ -19,16 +19,6 @@ in {
 
     gtk.enable = true;
     dunst.enable = true;
-
-    # X11
-    polybar = {
-      enable = true;
-      networkInterface = { name = "ens33"; };
-    };
-    rofi = {
-      enable = true;
-      package = pkgs.rofi;
-    };
     flameshot.enable = true;
     x11eventcallbacks.enable = true;
 
