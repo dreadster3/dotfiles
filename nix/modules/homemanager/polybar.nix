@@ -109,6 +109,7 @@ in {
         } &") monitors);
     in ''
       export PATH=$PATH:/run/current-system/sw/bin
+      export XDG_DATA_DIRS=$XDG_DATA_DIRS:${config.home.homeDirectory}/.nix-profile/share
 
       ${monitors_reload}
     '';
