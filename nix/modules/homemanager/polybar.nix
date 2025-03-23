@@ -11,7 +11,7 @@ let
 
   modules_left = [
     "launcher"
-    workspaces_module
+    "workspaces"
     "explorer"
     "github"
     "reddit"
@@ -546,6 +546,7 @@ in {
               }"
             '';
           };
+          "settings" = { screenchange-reload = true; };
         };
       };
     };
