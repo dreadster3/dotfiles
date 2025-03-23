@@ -14,11 +14,11 @@ in {
     };
 
   in mkIf cfg.enable {
-    catppuccin = catppuccinConfig;
-
-    catppuccin.gitea.enable = false;
-    catppuccin.forgejo.enable = false;
-    catppuccin.fcitx5.enable = false;
+    catppuccin = catppuccinConfig // {
+      gitea.enable = false;
+      forgejo.enable = false;
+      fcitx5.enable = false;
+    };
 
     home-manager.sharedModules =
       [{ modules.homemanager.catppuccin = mkDefault catppuccinConfig; }];
