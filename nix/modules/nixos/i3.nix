@@ -17,6 +17,8 @@ in {
 
     services.xserver.windowManager.i3.enable = true;
 
+    services.xserver.desktopManager.xterm.enable = false;
+
     services.displayManager.defaultSession = mkDefault "${desktopManager}+i3";
 
     home-manager.sharedModules =
