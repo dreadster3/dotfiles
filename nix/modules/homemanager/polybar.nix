@@ -415,6 +415,7 @@ in {
           };
 
           "module/i3" = {
+            type = "internal/i3";
             ping-workspaces = true;
             strip-wsnumbers = true;
             enable-scroll = true;
