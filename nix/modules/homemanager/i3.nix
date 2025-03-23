@@ -23,7 +23,7 @@ in {
         terminal = "alacritty";
         bars = [ ];
 
-        defaultWorkspace = "workspace number 1";
+        defaultWorkspace = "workspace 1";
 
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
