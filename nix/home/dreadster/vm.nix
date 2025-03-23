@@ -26,7 +26,7 @@ in {
       enable = true;
       networkInterface = { name = "ens33"; };
     };
-    # rofi.enable = true;
+    rofi.enable = true;
     # sxhkd.enable = true;
     # bspwm = {
     #   enable = true;
