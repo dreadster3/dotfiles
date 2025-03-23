@@ -165,9 +165,6 @@ in {
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = modules_right;
-
-            # Window Manager
-            wm-restack = "bspwm";
           };
           "bar/secondary" = {
             monitor = "\${env:MONITOR:}";
@@ -197,9 +194,6 @@ in {
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
-
-            # Window Manager
-            wm-restack = "bspwm";
           };
           "module/cpu" = {
             type = "internal/cpu";
