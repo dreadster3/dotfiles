@@ -35,6 +35,7 @@
     ./tmux.nix
     ./flameshot.nix
     ./bat.nix
+    ./nitrogen.nix
 
     ./hyprland.nix
     ./hyprlock.nix
