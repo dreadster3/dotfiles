@@ -19,7 +19,7 @@ in {
       config = {
         modifier = "Mod4";
         terminal = "alacritty";
-        bars = { };
+        bars = [ ];
 
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
