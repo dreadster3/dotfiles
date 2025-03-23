@@ -8,7 +8,6 @@
     ./mangohud.nix
     ./zsh.nix
     ./alacritty.nix
-    ./firefox.nix
     ./kitty.nix
     ./sxhkd.nix
     ./nerdfonts.nix
