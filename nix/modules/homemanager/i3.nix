@@ -15,6 +15,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.polybar.config."bar/main".wm-restack = "i3";
+
     xsession.windowManager.i3 = {
       enable = true;
       package = cfg.package;

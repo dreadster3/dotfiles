@@ -28,6 +28,8 @@ in {
       message = "No monitors configured";
     }];
 
+    services.polybar.config."bar/main".wm-restack = "bspwm";
+
     xsession.windowManager.bspwm = {
       enable = true;
       settings = {
