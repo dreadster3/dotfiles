@@ -166,8 +166,6 @@ in {
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = modules_right;
-
-            wm-restack = "bspwm";
           };
           "bar/secondary" = {
             monitor = "\${env:MONITOR:}";
