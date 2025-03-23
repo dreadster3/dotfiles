@@ -39,11 +39,17 @@ in {
           smartGaps = true;
         };
 
-        workspaceOutputAssign = mapAttrsToList (name: monitor:
-          (map (value: {
+        # workspaceOutputAssign = mapAttrsToList (name: monitor:
+        #   (map (value: {
+        #     output = name;
+        #     workspace = value;
+        #   }) monitor.workspaces)) monitors;
+
+        workspaceOutputAssign = foldlAttrs (acc: name: monitor:
+          acc ++ (map (value: {
             output = name;
             workspace = value;
-          }) monitor.workspaces)) monitors;
+          }))) [ ] monitors;
 
       };
     };
