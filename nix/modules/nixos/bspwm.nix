@@ -24,6 +24,8 @@ in {
         rofi.enable = mkDefault true;
         betterlockscreen.enable = mkDefault true;
         picom.enable = mkDefault true;
+        autolock.enable = mkDefault true;
+        nitrogen.enable = mkDefault true;
       };
     }];
   };

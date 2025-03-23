@@ -14,12 +14,7 @@ in {
 
     qt.enable = true;
 
-    home-manager.sharedModules = [{
-      modules.homemanager = {
-        autolock.enable = mkDefault true;
-        flameshot.enable = mkDefault true;
-        nitrogen.enable = mkDefault true;
-      };
-    }];
+    home-manager.sharedModules =
+      [{ modules.homemanager = { flameshot.enable = mkDefault true; }; }];
   };
 }
