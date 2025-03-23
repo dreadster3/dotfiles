@@ -48,7 +48,7 @@ in {
         workspaceOutputAssign = foldlAttrs (acc: name: monitor:
           acc ++ (map (value: {
             output = name;
-            workspace = "number ${value}";
+            workspace = "number ${toString value}";
           }) monitor.workspaces)) [ ] monitors;
 
       };
