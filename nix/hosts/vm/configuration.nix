@@ -18,12 +18,13 @@
 
   modules.nixos = {
     x11.enable = true;
-    bspwm.enable = true;
     sddm.enable = true;
     virtualisation.vmware.guest.enable = true;
 
     ssh.enable = true;
   };
+
+  services.desktopManager.plasma6.enable = true;
 
   networking.hostName = hostname;
 
