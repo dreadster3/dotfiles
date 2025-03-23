@@ -7,6 +7,7 @@
     kubectl
     neofetch
     fzf
+    tldr
 
     dig
     pciutils
@@ -81,7 +82,6 @@
         openai_api_key = config.sops.secrets.openai_api_key.path;
       };
     };
-    xdg.enable = true;
     neovim = {
       enable = true;
       package = lib.mkDefault pkgs.unstable.neovim-unwrapped;
