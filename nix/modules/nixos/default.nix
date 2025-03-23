@@ -30,5 +30,6 @@
     ./xfce.nix
     ./i3.nix
     ./sddm.nix
+    ./virtualisation
   ];
 }
