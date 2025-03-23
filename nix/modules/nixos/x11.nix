@@ -12,6 +12,8 @@ in {
 
     environment.systemPackages = with pkgs; [ betterlockscreen xclip ];
 
+    qt.enable = true;
+
     home-manager.sharedModules = [{
       modules.homemanager = {
         autolock.enable = mkDefault true;

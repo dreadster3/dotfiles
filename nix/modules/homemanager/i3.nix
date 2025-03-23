@@ -34,6 +34,9 @@ in {
             "${modifier}+l" = "exec loginctl lock-session";
             "${modifier}+Control+q" = "exec loginctl lock-session";
 
+            "${modifier}+Control+Left" = "workspace next";
+            "${modifier}+Control+Right" = "workspace next";
+
             "${modifier}+1" = "workspace 1";
             "${modifier}+2" = "workspace 2";
             "${modifier}+3" = "workspace 3";
