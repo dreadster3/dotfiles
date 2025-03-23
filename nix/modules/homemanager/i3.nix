@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.modules.homemanager.i3;
+let
+  cfg = config.modules.homemanager.i3;
+  monitors = config.modules.homemanager.settings.monitors.x11;
 in {
   options = {
     modules.homemanager.i3 = {
@@ -21,6 +23,8 @@ in {
         terminal = "alacritty";
         bars = [ ];
 
+        defaultWorkspace = "workspace number 1";
+
         keybindings =
           let modifier = config.xsession.windowManager.i3.config.modifier;
           in mkOptionDefault {
@@ -32,7 +36,15 @@ in {
         gaps = {
           inner = 10;
           outer = 5;
+          smartGaps = true;
         };
+
+        workspaceOutputAssign = mapAttrs (name: monitor:
+          (map (value: {
+            output = name;
+            workspace = value;
+          }) monitor.workspaces)) monitors;
+
       };
     };
   };
