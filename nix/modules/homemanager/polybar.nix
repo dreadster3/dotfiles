@@ -11,7 +11,7 @@ let
 
   modules_left = [
     "launcher"
-    "workspaces"
+    workspaces_module
     "explorer"
     "github"
     "reddit"
@@ -412,6 +412,22 @@ in {
             label-urgent-padding = 1;
             label-empty = "";
             label-empty-padding = 1;
+          };
+
+          "module/i3" = {
+            ping-workspaces = true;
+            strip-wsnumbers = true;
+            enable-scroll = true;
+
+            format = "<label-state>";
+            format-background = "\${colors.mantle}";
+            format-foreground = "\${colors.${config.catppuccin.accent}}";
+
+            label-focused = "";
+            label-focused-padding = 1;
+
+            label-unfocused = "";
+            label-unfocused-padding = 1;
           };
 
           "module/filesystem" = {
