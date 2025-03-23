@@ -13,7 +13,7 @@ in {
     virtualisation.vmware.guest.enable = true;
 
     home-manager.sharedModules = [{
-      xserver.windowManager.i3.config.startup = [{
+      xsession.windowManager.i3.config.startup = [{
         command =
           "${config.virtualisation.vmware.guest.package}/bin/vmware-user-suid-wrapper";
         always = true;
