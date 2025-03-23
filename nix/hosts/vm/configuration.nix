@@ -20,14 +20,12 @@
     x11.enable = true;
     i3.enable = true;
     sddm.enable = true;
+    virtualisation.vmware.guest.enable = true;
 
     ssh.enable = true;
   };
 
   networking.hostName = hostname;
-
-  services.xserver.videoDrivers = [ "vmware" ];
-  virtualisation.vmware.guest.enable = true;
 
   system.stateVersion = "23.11";
 }

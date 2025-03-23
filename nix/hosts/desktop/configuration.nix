@@ -26,11 +26,13 @@
     xrdp.enable = true;
     ssh.enable = true;
     zerotier.enable = true;
-    virtmanager.enable = true;
     oryx.enable = true;
     qmk.enable = true;
 
-    vmware.enable = true;
+    virtualisation = {
+      qemu.host.enable = true;
+      vmware.host.enable = true;
+    };
     hyprland.enable = true;
   };
 

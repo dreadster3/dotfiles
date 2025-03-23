@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.nixos.virtmanager;
+let cfg = config.modules.nixos.virtualisation.qemu.host;
 in {
   options = {
-    modules.nixos.virtmanager = { enable = mkEnableOption "virtmanager"; };
+    modules.nixos.virtualisation.qemu.host = {
+      enable = mkEnableOption "virtualisation.qemu.host";
+    };
   };
 
   config = mkIf cfg.enable {

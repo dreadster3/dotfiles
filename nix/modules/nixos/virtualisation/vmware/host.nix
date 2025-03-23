@@ -1,10 +1,10 @@
 { pkgs, config, lib, ... }:
 with lib;
-let cfg = config.modules.nixos.vmware;
+let cfg = config.modules.nixos.virtualisation.vmware.host;
 in {
   options = {
-    modules.nixos.vmware = {
-      enable = mkEnableOption "vmware";
+    modules.nixos.virtualisation.vmware.host = {
+      enable = mkEnableOption "virtualisation.vmware.host";
       package = mkOption {
         type = types.package;
         default = pkgs.vmware-workstation;
