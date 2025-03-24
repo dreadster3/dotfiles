@@ -8,7 +8,8 @@ with lib; {
       isNormalUser = true;
       description = "Admin";
       extraGroups = [ "networkmanager" "wheel" "adbusers" ]
-        ++ optional config.virtualisation.docker.enable "docker";
+        ++ optional config.virtualisation.docker.enable "docker"
+        ++ optional config.programs.wireshark.enable "wireshark";
     };
   };
 }

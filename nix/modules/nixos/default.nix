@@ -31,5 +31,6 @@
     ./i3.nix
     ./sddm.nix
     ./virtualisation
+    ./wireshark.nix
   ];
 }
