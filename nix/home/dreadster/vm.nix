@@ -3,7 +3,7 @@ let primaryMonitor = "Virtual1";
 in {
   imports = [ ./base/personal.nix ];
 
-  home.packages = with pkgs; [ remmina ];
+  home.packages = with pkgs; [ remmina openvpn ];
 
   modules.homemanager = {
     settings = {
