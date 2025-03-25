@@ -1,6 +1,5 @@
 { inputs, outputs, lib, config, pkgs, ... }:
 with lib; {
-
   users.users = {
     root.hashedPassword = "!";
     dreadster = {
