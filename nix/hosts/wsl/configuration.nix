@@ -11,6 +11,7 @@
     qt.enable = true;
     catppuccin.enable = true;
     qmk.enable = true;
+    stylix.enable = true;
   };
 
   wsl = {
