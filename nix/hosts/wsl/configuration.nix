@@ -1,5 +1,11 @@
 { config, pkgs, ... }: {
-  imports = [ ../profiles/base.nix ../users.nix ./home.nix ];
+  imports = [
+    ../profiles/base.nix
+    ../users.nix
+    ./home.nix
+
+    ./hardware-configuration.nix
+  ];
 
   modules.nixos = {
     qt.enable = true;
