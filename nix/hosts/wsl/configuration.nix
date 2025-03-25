@@ -23,5 +23,7 @@
 
   networking.hostName = "nixwsl";
 
+  security.sudo.wheelNeedsPassword = false;
+
   system.stateVersion = "24.11";
 }
