@@ -144,14 +144,12 @@ in {
             monitor = "\${env:MONITOR:}";
 
             # Size
-            width = "99%";
+            width = "100%";
             height = "36";
 
             # Position
             bottom = false;
             fixed-center = true;
-            offset-x = "10";
-            offset-y = "1%";
 
             # Appearance
             background = "\${colors.base}";
