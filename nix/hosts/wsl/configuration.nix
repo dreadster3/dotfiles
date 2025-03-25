@@ -12,6 +12,7 @@
     catppuccin.enable = true;
     qmk.enable = true;
     stylix.enable = true;
+    wireshark.enable = true;
   };
 
   wsl = {
