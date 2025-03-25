@@ -1,4 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   catppuccinConfig = config.catppuccin;
   mkUpper = str:

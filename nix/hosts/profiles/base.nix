@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ inputs, outputs, config, lib, pkgs, ... }: {
   imports =
     [ inputs.home-manager.nixosModules.home-manager outputs.nixosModules ];
 
