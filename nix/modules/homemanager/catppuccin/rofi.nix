@@ -2,7 +2,7 @@
 with lib;
 let
   inherit (config.lib.formats.rasi) mkLiteral;
-  cfg = config.programs.rofi.catppuccin;
+  cfg = config.catppuccin.rofi;
   accent = mkLiteral "@${config.catppuccin.accent}";
 in {
   options = { };
@@ -11,10 +11,10 @@ in {
     programs.rofi = {
       theme = {
         "*" = mapAttrs (n: v: mkLiteral v) config.catppuccin.colors;
-        prompt.background-color = accent;
-        window.border-color = accent;
+        prompt.text-color = mkForce accent;
+        window.border-color = mkForce accent;
+        "element selected.normal".background-color = mkForce accent;
       };
-
     };
   };
 }

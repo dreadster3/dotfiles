@@ -10,9 +10,8 @@ in {
       xkb.layout = "us";
     };
 
-    environment.systemPackages = with pkgs; [ betterlockscreen xclip ];
-
-    qt.enable = true;
+    environment.systemPackages = with pkgs; [ xclip ];
+    services.xserver.desktopManager.xterm.enable = false;
 
     home-manager.sharedModules =
       [{ modules.homemanager = { flameshot.enable = mkDefault true; }; }];

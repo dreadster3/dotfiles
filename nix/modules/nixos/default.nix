@@ -32,5 +32,6 @@
     ./sddm.nix
     ./virtualisation
     ./wireshark.nix
+    ./qt.nix
   ];
 }

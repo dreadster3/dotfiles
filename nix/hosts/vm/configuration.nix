@@ -18,15 +18,13 @@
 
   modules.nixos = {
     x11.enable = true;
+    i3.enable = true;
     sddm.enable = true;
     virtualisation.vmware.guest.enable = true;
     wireshark.enable = true;
 
     ssh.enable = true;
   };
-
-  services.desktopManager.plasma6.enable = true;
-  # services.displayManager.defaultSession = lib.mkForce "none+i3";
 
   networking.hostName = hostname;
 

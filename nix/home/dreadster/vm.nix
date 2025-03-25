@@ -22,6 +22,8 @@ in {
     flameshot.enable = true;
     x11eventcallbacks.enable = true;
 
+    picom.enable = false;
+
     pentest.enable = true;
   };
 }

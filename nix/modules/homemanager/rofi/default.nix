@@ -65,15 +65,13 @@ in {
       plugins = [ ] ++ optional cfg.powermenu.enable cfg.powermenu.package;
       terminal = getExe terminal;
       location = "center";
-      theme = {
-        window.border = mkLiteral "3px solid";
-        window.border-radius = mkLiteral "12px";
-      };
+      theme = import ./theme.nix { inherit config lib; };
       extraConfig = {
         modi = "drun";
         show-icons = true;
         display-drun = " ";
         drun-display-format = "{name}";
+        matching = "fuzzy";
       };
     };
 

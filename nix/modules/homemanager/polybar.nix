@@ -110,6 +110,8 @@ in {
     in ''
       export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
       export XDG_DATA_DIRS=$XDG_DATA_DIRS:${config.home.homeDirectory}/.nix-profile/share
+      export QT_STYLE_OVERRIDE="${config.qt.style.name}"
+      export QT_QPA_PLATFORMTHEME="${config.qt.platformTheme.name}"
 
       ${monitors_reload}
     '';

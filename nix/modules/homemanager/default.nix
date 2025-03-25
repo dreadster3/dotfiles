@@ -58,5 +58,6 @@
     ./ssh.nix
 
     ./i3.nix
+    ./qt.nix
   ];
 }

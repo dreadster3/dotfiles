@@ -15,6 +15,7 @@ in {
         hyprpaper.enable = true;
         mangohud.enable = true;
         i3.enable = true;
+        # qt.enable = true;
       };
     };
 

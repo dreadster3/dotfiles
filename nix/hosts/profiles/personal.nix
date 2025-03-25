@@ -56,9 +56,12 @@ in {
     flake = "/home/dreadster/Documents/projects/github/dotfiles/nix";
   };
 
+  programs.dconf.enable = true;
+
   environment.systemPackages = with pkgs; [ eog networkmanagerapplet firefox ];
 
   modules.nixos = {
+    qt.enable = true;
     catppuccin.enable = true;
     thunar.enable = true;
     network.enable = true;

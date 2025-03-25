@@ -31,6 +31,8 @@ in {
       accent = cfg.accent;
 
       alacritty.enable = true;
+      rofi.enable = true;
+      kvantum.enable = true;
       tmux = {
         enable = true;
         extraConfig = ''

@@ -15,7 +15,7 @@ in {
 
     margin = mkLiteral "0px";
     padding = mkLiteral "0px";
-    border = mkLiteral "0px solid";
+    border = mkLiteral "1px solid";
     border-radius = mkLiteral "12px";
     # border-color = mkLiteral "@selected";
     cursor = mkLiteral "default";
@@ -49,7 +49,7 @@ in {
   prompt = {
     enabled = true;
     background-color = mkLiteral "inherit";
-    # text-color = "inherit";
+    text-color = mkLiteral "inherit";
   };
 
   textbox-prompt-colon = {
@@ -115,7 +115,7 @@ in {
     # text-color = "@foreground";
   };
   "element selected.normal" = {
-    background-color = mkForce (mkLiteral "@blue");
+    background-color = mkLiteral "@blue";
     # text-color = "@foreground";
   };
   element-icon = {
