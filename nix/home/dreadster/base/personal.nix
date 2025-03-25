@@ -14,7 +14,6 @@
     lshw
     usbutils
     ethtool
-    chromium
 
     pnpm-shell-completion
 
