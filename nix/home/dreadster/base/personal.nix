@@ -41,6 +41,7 @@
       };
     };
 
+    gtk.enable = true;
     firefox.enable = true;
     ssh.enable = true;
     stylix.enable = true;

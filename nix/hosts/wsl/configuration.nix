@@ -29,6 +29,7 @@
     stylix.enable = true;
     wireshark.enable = true;
     nvidia.enable = true;
+    thunar.enable = true;
   };
 
   hardware.graphics.extraPackages = with pkgs; [ pocl ];
