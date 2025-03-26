@@ -91,6 +91,4 @@
     userName = "dreadster3";
     userEmail = "afonso.antunes@live.com.pt";
   };
-
-  home.stateVersion = "23.11";
 }
