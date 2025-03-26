@@ -1,14 +1,12 @@
 { config, pkgs, ... }: {
   imports = [
-    ../profiles/base.nix
-    ../users.nix
-    ./home.nix
+    ../../profiles/nixos/base.nix
 
+    ./dreadster.nix
     ./hardware-configuration.nix
   ];
 
   nixpkgs.config.cudaSupport = true;
-  home-manager.sharedModules = [{ nixpkgs.config.cudaSupport = true; }];
 
   environment.sessionVariables = {
     CUDA_PATH = "${pkgs.cudatoolkit}";

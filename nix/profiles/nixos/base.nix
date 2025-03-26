@@ -12,6 +12,9 @@
     config.allowUnfree = true;
   };
 
+  # Disable root password
+  users.users.root.hashedPassword = "!";
+
   nix = {
     settings = {
       trusted-users = [ "@wheel" ];

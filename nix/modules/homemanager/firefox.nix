@@ -13,41 +13,28 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = with pkgs; [ cfg.package xdg-utils ];
 
     xdg = {
-      desktopEntries = {
-        firefox = {
-          name = "Firefox";
-          exec = getExe cfg.package;
-          terminal = false;
-          genericName = "Web Browser";
-          icon = "firefox";
-          mimeType = [
-            "text/html"
-            "text/xml"
-            "application/xhtml+xml"
-            "application/vnd.mozilla.xul+xml"
-            "x-scheme-handler/http"
-            "x-scheme-handler/https"
-          ];
-        };
-      };
-
       mime.enable = true;
       mimeApps = {
         enable = true;
         defaultApplications = {
-          "x-www-browser" = "firefox.desktop";
-          "text-html" = "firefox.desktop";
-          "x-scheme-handler/http" = "firefox.desktop";
-          "x-scheme-handler/https" = "firefox.desktop";
-          "application/x-extension-htm" = "firefox.desktop";
-          "application/x-extension-html" = "firefox.desktop";
-          "application/x-extension-shtml" = "firefox.desktop";
-          "application/xhtml+xml" = "firefox.desktop";
-          "application/x-extension-xhtml" = "firefox.desktop";
-          "application/x-extension-xht" = "firefox.desktop";
+          "x-www-browser" = "${cfg.package.meta.mainProgram}.desktop";
+          "text-html" = "${cfg.package.meta.mainProgram}.desktop";
+          "x-scheme-handler/http" = "${cfg.package.meta.mainProgram}.desktop";
+          "x-scheme-handler/https" = "${cfg.package.meta.mainProgram}.desktop";
+          "application/x-extension-htm" =
+            "${cfg.package.meta.mainProgram}.desktop";
+          "application/x-extension-html" =
+            "${cfg.package.meta.mainProgram}.desktop";
+          "application/x-extension-shtml" =
+            "${cfg.package.meta.mainProgram}.desktop";
+          "application/xhtml+xml" = "${cfg.package.meta.mainProgram}.desktop";
+          "application/x-extension-xhtml" =
+            "${cfg.package.meta.mainProgram}.desktop";
+          "application/x-extension-xht" =
+            "${cfg.package.meta.mainProgram}.desktop";
         };
       };
     };
