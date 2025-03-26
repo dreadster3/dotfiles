@@ -26,10 +26,12 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, catppuccin, stylix
-    , sops-nix, ... }@inputs:
+    , sops-nix, nixos-wsl, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -93,6 +95,15 @@
             ./hosts/vps/configuration.nix
             catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
+          ];
+        };
+        nixwsl = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs lib; };
+          modules = [
+            ./hosts/wsl/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            stylix.nixosModules.stylix
+            nixos-wsl.nixosModules.default
           ];
         };
       };

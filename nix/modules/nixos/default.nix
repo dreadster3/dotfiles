@@ -33,5 +33,6 @@
     ./virtualisation
     ./wireshark.nix
     ./qt.nix
+    ./stylix.nix
   ];
 }

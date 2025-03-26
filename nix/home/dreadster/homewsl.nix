@@ -1,69 +1,10 @@
-{ config, lib, pkgs, ... }:
-let
-  catppuccinConfig = config.catppuccin;
-  mkUpper = str:
-    (lib.toUpper (builtins.substring 0 1 str))
-    + (builtins.substring 1 (builtins.stringLength str) str);
-in {
+{ config, lib, pkgs, ... }: {
   imports = [ ./base/personal.nix ];
 
-  # Enable experimental nix features
-  nix.package = pkgs.nix;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
-  home.packages = with pkgs; [ systemd unstable.qmk ];
-
-  stylix = {
-    enable = true;
-    image = ../../../wallpapers/furina.jpg;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-
-    cursor = {
-      name =
-        "catppuccin-${catppuccinConfig.flavor}-${catppuccinConfig.accent}-cursors";
-      package = pkgs.catppuccin-cursors."${catppuccinConfig.flavor}${
-          mkUpper catppuccinConfig.accent
-        }";
-      size = 32;
-    };
-
-    fonts = {
-      monospace = {
-        name = "Mononoki Nerd Font";
-        package = pkgs.nerdfonts.override {
-          fonts = [ "FiraCode" "Mononoki" "VictorMono" "Iosevka" ];
-        };
-      };
-
-      serif = config.stylix.fonts.monospace;
-      sansSerif = config.stylix.fonts.monospace;
-      emoji = config.stylix.fonts.monospace;
-
-      sizes = {
-        terminal = 18;
-        desktop = 12;
-      };
-    };
-  };
-
-  fonts.fontconfig.enable = true;
-
-  modules.homemanager = {
-    catppuccin = {
-      enable = true;
-      accent = "mauve";
-    };
-    firefox.enable = true;
-    zsh.sourceNix = true;
-    pentest.enable = true;
-    kitty.package = pkgs.emptyDirectory;
-    alacritty = {
-      package = pkgs.emptyDirectory;
-      yaml = true;
-    };
-  };
+  modules.homemanager = { pentest.enable = true; };
 
   programs.home-manager.enable = true;
+
+  home.stateVersion = "24.11";
 }
+
