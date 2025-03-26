@@ -18,6 +18,8 @@
   wsl = {
     enable = true;
     defaultUser = "dreadster";
+    useWindowsDriver = true;
+    startMenuLaunchers = true;
   };
 
   networking.hostName = "nixwsl";
