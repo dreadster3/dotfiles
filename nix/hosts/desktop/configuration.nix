@@ -6,9 +6,10 @@
   imports = [
     # Include the results of the hardware scan.
     ../profiles/personal.nix
+    ../users.nix
+    ./home.nix
 
     ./hardware-configuration.nix
-    ./home.nix
   ];
 
   environment.systemPackages = with pkgs; [ vlc libvlc ];

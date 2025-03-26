@@ -6,9 +6,9 @@
   imports = [
     ../profiles/server.nix
     ../users.nix
+    ./home.nix
 
     ./hardware-configuration.nix
-    ./home.nix
   ];
 
   modules.nixos = {

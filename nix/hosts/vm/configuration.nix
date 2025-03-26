@@ -5,9 +5,10 @@
 { hostname, config, pkgs, lib, ... }: {
   imports = [
     ../profiles/personal.nix
+    ../users.nix
+    ./home.nix
 
     ./hardware-configuration.nix
-    ./home.nix
   ];
 
   hardware.graphics = {
