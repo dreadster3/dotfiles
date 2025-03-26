@@ -4,9 +4,8 @@
 
 { hostname, config, pkgs, lib, ... }: {
   imports = [
-    ../profiles/personal.nix
-    ../users.nix
-    ./home.nix
+    ../../profiles/nixos/personal.nix
+    ./dreadster.nix
 
     ./hardware-configuration.nix
   ];
@@ -28,6 +27,8 @@
   };
 
   networking.hostName = hostname;
+
+  security.sudo.wheelNeedsPassword = false;
 
   system.stateVersion = "23.11";
 }
