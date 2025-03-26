@@ -99,4 +99,6 @@ in {
       "HDMI-A-1" = ../../../wallpapers/anime_vertical.png;
     };
   };
+
+  home.stateVersion = "23.11";
 }

@@ -5,6 +5,7 @@
 { config, pkgs, ... }: {
   imports = [
     ../profiles/server.nix
+    ../users.nix
 
     ./hardware-configuration.nix
     ./home.nix
