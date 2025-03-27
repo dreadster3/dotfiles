@@ -22,7 +22,6 @@ in {
             set -g @continuum-save-interval '10'
           '';
         }
-        cpu
         better-mouse-mode
         vim-tmux-navigator
         yank
