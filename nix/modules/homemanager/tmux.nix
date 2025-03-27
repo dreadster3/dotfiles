@@ -24,6 +24,22 @@ in {
         }
         cpu
         better-mouse-mode
+        vim-tmux-navigator
+        yank
+        {
+          plugin = tmux-thumbs;
+          extraConfig = ''
+            set -g @thumbs-unique enabled
+          '';
+        }
+        tmux-fzf
+        {
+          plugin = pkgs.unstable.tmuxPlugins.tmux-sessionx;
+          extraConfig = ''
+            set -g @sessionx-bind 's'
+            set -g @sessionx-filter-current 'false'
+          '';
+        }
       ];
       extraConfig = ''
         bind-key v split-window -v

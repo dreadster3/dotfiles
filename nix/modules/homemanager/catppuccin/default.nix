@@ -36,11 +36,18 @@ in {
       tmux = {
         enable = true;
         extraConfig = ''
-          set -g @catppuccin_window_tabs_enabled 'on'
-          set -g @catppuccin_date_time "%H:%M"
-          set -g @catppuccin_window_left_separator ""
-          set -g @catppuccin_window_right_separator " "
-          set -g @catppuccin_status_modules_right "application cpu session host date_time"
+          set -g @catppuccin_window_text " #W"
+          set -g @catppuccin_window_number "#I"
+          set -g @catppuccin_window_current_number "#F"
+          set -g @catppuccin_window_status_style "rounded"
+          set -g status-right-length 100
+          set -g status-left-length 100
+          set -g status-left ""
+          set -g status-right "#{E:@catppuccin_status_host}"
+          set -ag status-right "#{E:@catppuccin_status_application}"
+          set -agF status-right "#{E:@catppuccin_status_cpu}"
+          set -ag status-right "#{E:@catppuccin_status_session}"
+          set -ag status-right "#{E:@catppuccin_status_uptime}"
         '';
       };
 
