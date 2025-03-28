@@ -216,7 +216,19 @@ return {
 		dependencies = { "lspconfig" },
 		event = { "BufReadPost *.cs" },
 	},
-	{ "ray-x/go.nvim", version = "*", event = { "BufReadPost *.go" }, opts = {} },
+	-- { "ray-x/go.nvim", enabled = false, version = "*", event = { "BufReadPost *.go" }, opts = {} },
+	{
+		"ray-x/go.nvim",
+		dependencies = {
+			"ray-x/guihua.lua",
+			"lspconfig",
+			"treesitter",
+		},
+		version = "v0.9.0",
+		main = "go",
+		event = { "CmdlineEnter" },
+		ft = { "go", 'gomod' },
+	},
 	{
 		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
