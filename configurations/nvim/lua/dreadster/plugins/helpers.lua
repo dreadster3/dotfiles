@@ -1,30 +1,19 @@
 return {
 	{
-		"terrortylor/nvim-comment",
+		"numToStr/Comment.nvim",
 		name = "nvim_comment",
-		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 		keys = {
-			{ "<C-/>", ":CommentToggle<CR>", desc = "Toggle comment for line" },
-			{
-				"<C-/>",
-				":'<,'>CommentToggle<CR>",
-				mode = "v",
-				desc = "Toggle comment for line",
-			},
-			{ "<C-_>", ":CommentToggle<CR>", desc = "Toggle comment for line" },
-			{
-				"<C-_>",
-				":'<,'>CommentToggle<CR>",
-				mode = "v",
-				desc = "Toggle comment for line",
-			},
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line",        mode = "n" },
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_visual)",  desc = "Toggle comment for line visual", mode = "v" },
+			{ "<C-_>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line",        mode = "n" },
+			{ "<C-_>", "<Plug>(comment_toggle_linewise_visual)",  desc = "Toggle comment for line visual", mode = "v" },
 		},
-		cmd = { "CommentToggle" },
-		opts = {
-			hook = function()
-				require("ts_context_commentstring.internal").update_commentstring({})
-			end,
-		},
+	},
+	{
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
 	{
 		"windwp/nvim-autopairs",
@@ -76,7 +65,7 @@ return {
 			end,
 		},
 	},
-	{ "folke/todo-comments.nvim", event = "BufReadPre", opts = {} },
+	{ "folke/todo-comments.nvim", event = "BufReadPre",     opts = {} },
 	{
 		"RRethy/vim-illuminate",
 		name = "illuminate",
@@ -118,10 +107,10 @@ return {
 		name = "yanky",
 		lazy = false,
 		keys = {
-			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
-			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
-			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
-			{ "<c-n>", "<Plug>(YankyCycleForward)", mode = { "n", "x" } },
+			{ "y",     "<Plug>(YankyYank)",          mode = { "n", "x" } },
+			{ "p",     "<Plug>(YankyPutAfter)",      mode = { "n", "x" } },
+			{ "P",     "<Plug>(YankyPutBefore)",     mode = { "n", "x" } },
+			{ "<c-n>", "<Plug>(YankyCycleForward)",  mode = { "n", "x" } },
 			{ "<c-p>", "<Plug>(YankyCycleBackward)", mode = { "n", "x" } },
 		},
 		opts = {
@@ -137,7 +126,7 @@ return {
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
 		end,
 	},
-	{ "rhysd/git-messenger.vim", cmd = { "GitMessenger" }, opts = {} },
+	{ "rhysd/git-messenger.vim",  cmd = { "GitMessenger" }, opts = {} },
 	{
 		"chrisgrieser/nvim-early-retirement",
 		name = "earlyretirement",
