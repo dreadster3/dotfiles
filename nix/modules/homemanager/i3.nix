@@ -31,7 +31,6 @@ in {
           let modifier = config.xsession.windowManager.i3.config.modifier;
           in mkOptionDefault {
             "${modifier}+w" = "kill";
-            "${modifier}+l" = "exec loginctl lock-session";
             "${modifier}+Control+q" = "exec loginctl lock-session";
 
             "${modifier}+Control+Left" = "workspace next";
@@ -58,6 +57,14 @@ in {
             "${modifier}+Shift+8" = "move container to workspace 8";
             "${modifier}+Shift+9" = "move container to workspace 9";
             "${modifier}+Shift+0" = "move container to workspace 10";
+
+            "${modifier}+h" = "focus left";
+            "${modifier}+j" = "focus down";
+            "${modifier}+k" = "focus up";
+            "${modifier}+l" = "focus right";
+
+            "${modifier}+Shift+h" = "split h";
+            "${modifier}+Shift+v" = "split v";
           };
 
         gaps = {
