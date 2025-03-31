@@ -14,19 +14,19 @@ return {
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		name = "copilot-chat",
-		cmd = { "CopilotChat" },
+		cmd = { "CopilotChat", "CopilotChatAgents", "CopilotChatModels", "CopilotChatExplain" },
 		branch = "canary",
 		enabled = function()
-			utils = require("dreadster.utils")
+			local utils = require("dreadster.utils")
 			return utils.is_mac()
 		end,
 		dependencies = {
-			{ "copilot" }, -- or github/copilot.vim
+			{ "copilot" },      -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
 		keys = {
-			{ "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
+			{ "<leader>a",  "",             desc = "+ai",                           mode = { "n", "v" } },
 			{
 				"<leader>aa",
 				function()
@@ -55,9 +55,9 @@ return {
 				mode = { "n", "v" },
 			},
 			-- Show help actions with telescope
-			{ "<leader>ad", pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
+			{ "<leader>ad", pick("help"),   desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
 			-- Show prompts actions with telescope
-			{ "<leader>ap", pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
+			{ "<leader>ap", pick("prompt"), desc = "Prompt Actions (CopilotChat)",  mode = { "n", "v" } },
 		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
