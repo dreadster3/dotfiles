@@ -94,7 +94,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		name = "copilot",
 		enabled = function()
-			utils = require("dreadster.utils")
+			local utils = require("dreadster.utils")
 			return utils.is_mac()
 		end,
 		cmd = { "Copilot" },
@@ -118,7 +118,7 @@ return {
 		"zbirenbaum/copilot-cmp",
 		name = "copilotcmp",
 		enabled = function()
-			utils = require("dreadster.utils")
+			local utils = require("dreadster.utils")
 			return utils.is_mac()
 		end,
 		main = "copilot_cmp",
