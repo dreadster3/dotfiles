@@ -22,8 +22,6 @@
     sddm.enable = true;
     virtualisation.vmware.guest.enable = true;
     wireshark.enable = true;
-
-    ssh.enable = true;
   };
 
   networking.hostName = hostname;

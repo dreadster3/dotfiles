@@ -12,6 +12,8 @@ in {
       xwayland.enable = true;
     };
 
+    modules.nixos.sddm.enable = true;
+
     home-manager.sharedModules = [{
       modules.homemanager = {
         hyprland.enable = mkDefault true;

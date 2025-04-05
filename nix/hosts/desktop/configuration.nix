@@ -5,9 +5,8 @@
 { config, pkgs, ... }: {
   imports = [
     # Include the results of the hardware scan.
-    ../profiles/personal.nix
-    ../users.nix
-    ./home.nix
+    ../../profiles/nixos/personal.nix
+    ./dreadster3.nix
 
     ./hardware-configuration.nix
   ];
@@ -19,16 +18,14 @@
     openrgb.enable = true;
     x11.enable = true;
     nightlight.enable = true;
-    bspwm.enable = true;
     flatpak.enable = true;
     nvidia.enable = true;
     steam.enable = true;
     teamviewer.enable = true;
     xrdp.enable = true;
-    ssh.enable = true;
-    zerotier.enable = true;
     oryx.enable = true;
     qmk.enable = true;
+    zerotier.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;
