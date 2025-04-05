@@ -41,8 +41,8 @@ in {
         }
       ];
       extraConfig = ''
-        bind-key v split-window -v
-        bind-key h split-window -h
+        bind-key v split-window -v -c '#{pane_current_path}'
+        bind-key h split-window -h -c '#{pane_current_path}'
       '';
     };
   };
