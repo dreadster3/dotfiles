@@ -30,6 +30,7 @@
     virtualisation = {
       qemu.host.enable = true;
       vmware.host.enable = true;
+      waydroid.host.enable = true;
     };
     hyprland.enable = true;
   };
