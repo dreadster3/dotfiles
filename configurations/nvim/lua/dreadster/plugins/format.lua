@@ -5,8 +5,6 @@ return {
 		dependencies = { "mason" },
 		cmd = { "ConformInfo", "FormatDisable", "FormatEnable" },
 		event = { "BufWritePre" },
-		---@module "conform"
-		---@type conform.setupOpts
 		config = function(_, opts)
 			require("conform").setup(opts)
 
@@ -30,6 +28,8 @@ return {
 				desc = "Re-enable autoformat-on-save",
 			})
 		end,
+		---@module "conform"
+		---@type conform.setupOpts
 		opts = {
 			formatters_by_ft = {
 				c = { "clang_format" },
@@ -45,6 +45,7 @@ return {
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
 				proto = { "buf" },
+				toml = { "taplo" },
 				["*"] = { "codespell" },
 				["_"] = { "trim_whitespace" },
 			},
@@ -53,12 +54,6 @@ return {
 			},
 			format_on_save = function(bufnr)
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-					return
-				end
-
-				local disable_filenames = {}
-
-				if vim.tbl_contains(disable_filenames, vim.fn.expand("%:t")) then
 					return
 				end
 
