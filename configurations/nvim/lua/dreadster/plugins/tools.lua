@@ -8,28 +8,12 @@ return {
 	},
 	{
 		"akinsho/toggleterm.nvim",
-		dependencies = { "lualine" },
+		dependencies = {
+			"lualine",
+			"christoomey/vim-tmux-navigator", -- Sets the keybinds to navigate between windows
+		},
 		name = "toggleterm",
 		version = "*",
-		init = function()
-			-- Terminal Toggle
-			function _G.set_terminal_keymaps()
-				local opts = { noremap = true, buffer = 0 }
-
-				if vim.bo.filetype ~= "toggleterm" then
-					return
-				end
-
-				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-				vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-				vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-			end
-
-			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-		end,
 		cmd = "ToggleTerm",
 		keys = {
 			{
@@ -199,7 +183,7 @@ return {
 				desc = "Replace in files (Spectre)"
 			}
 		}
-,
+		,
 	},
 	{
 		"cshuaimin/ssr.nvim",
@@ -239,7 +223,7 @@ return {
 			picker = "telescope",
 		},
 	},
-	{ "lervag/vimtex", name = "vimtex", init = function() end },
+	{ "lervag/vimtex",          name = "vimtex",   init = function() end },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -384,10 +368,10 @@ return {
 			"TmuxNavigatorProcessList",
 		},
 		keys = {
-			{ "<c-h>", "<cmd>TmuxNavigateLeft<cr>" },
-			{ "<c-j>", "<cmd>TmuxNavigateDown<cr>" },
-			{ "<c-k>", "<cmd>TmuxNavigateUp<cr>" },
-			{ "<c-l>", "<cmd>TmuxNavigateRight<cr>" },
+			{ "<c-h>", "<cmd>TmuxNavigateLeft<cr>",  mode = { "n", "t" } },
+			{ "<c-j>", "<cmd>TmuxNavigateDown<cr>",  mode = { "n", "t" } },
+			{ "<c-k>", "<cmd>TmuxNavigateUp<cr>",    mode = { "n", "t" } },
+			{ "<c-l>", "<cmd>TmuxNavigateRight<cr>", mode = { "n", "t" } },
 		},
 		init = function()
 			vim.g.tmux_navigator_no_mappings = 1
