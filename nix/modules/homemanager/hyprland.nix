@@ -84,10 +84,9 @@ in {
           gaps_in = 5;
           gaps_out = 20;
           border_size = 2;
+          resize_on_border = true;
           layout = "dwindle";
         };
-
-        cursor = { no_hardware_cursors = true; };
 
         env = [
           "XCURSOR_SIZE,24"
@@ -141,6 +140,7 @@ in {
           pseudotile = true;
           preserve_split = true;
           smart_split = true;
+          smart_resizing = false;
         };
 
         device = {
@@ -149,18 +149,32 @@ in {
         };
 
         windowrulev2 = [
-          "animation slide,class:^(wofi)$"
-          "float,class:^(pavucontrol)$"
+          # Animations
+          "animation slide, class:^(wofi)$"
+          "animation slide, class:^(rofi)$"
 
+          # Floating
+          "float, class:^(pavucontrol)$"
+
+          # Tile
+          "tile,initialTitle:^(ErgoDox EZ Configurator)$"
+
+          # xwaylandvideobridge
           "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
           "noanim,class:^(xwaylandvideobridge)$"
           "nofocus,class:^(xwaylandvideobridge)$"
           "noinitialfocus,class:^(xwaylandvideobridge)$"
 
+          # steam
           "stayfocused, title:^()$,class:^(steam)$"
           "minsize 1 1, title:^()$,class:^(steam)$"
 
-          "tile,initialTitle:^(ErgoDox EZ Configurator)$"
+          # Picture-in-Picture
+          "float, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
+          "move 73% 72%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$ "
+          "size 25%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
+          "float, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
+          "pin, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
         ];
 
         workspace = foldlAttrs (acc: name: monitor:
