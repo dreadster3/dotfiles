@@ -29,6 +29,7 @@ in {
         betterlockscreen.enable = mkDefault true;
         autolock.enable = mkDefault true;
         nitrogen.enable = mkDefault true;
+        polkit.enable = mkDefault true;
       };
     }];
   };

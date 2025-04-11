@@ -61,7 +61,6 @@ in {
       '';
       settings = {
         "$mainMod" = "SUPER";
-        debug.disable_logs = false;
 
         monitor = mapAttrsToList (name: monitor:
           "${name},${monitor.resolution},${monitor.position},${
@@ -72,7 +71,6 @@ in {
         exec-once = [
           ''
             ${pkgs.hyprland}/bin/hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         ] ++ cfg.startupPrograms;
 
         input = {
@@ -140,11 +138,10 @@ in {
         };
 
         dwindle = {
-          pseudotile = "yes";
-          preserve_split = "yes";
+          pseudotile = true;
+          preserve_split = true;
+          smart_split = true;
         };
-
-        master = { new_status = "master"; };
 
         device = {
           name = "epic-mouse-v1";
@@ -154,16 +151,15 @@ in {
         windowrulev2 = [
           "animation slide,class:^(wofi)$"
           "float,class:^(pavucontrol)$"
-          "float,title:^(Guake!)$"
-          "move 10% 5%, title:^(Guake!)$"
-          "size 80% 50%, title:^(Guake!)$"
-          "animation slide, title:^(Guake!)$"
+
           "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
           "noanim,class:^(xwaylandvideobridge)$"
           "nofocus,class:^(xwaylandvideobridge)$"
           "noinitialfocus,class:^(xwaylandvideobridge)$"
+
           "stayfocused, title:^()$,class:^(steam)$"
           "minsize 1 1, title:^()$,class:^(steam)$"
+
           "tile,initialTitle:^(ErgoDox EZ Configurator)$"
         ];
 
@@ -173,25 +169,39 @@ in {
 
         bind = [
           "$mainMod, Return, exec, ${getExe terminal}"
+
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, ${getExe cfg.fileManager}"
+
+          # Mode keybinds
           "$mainMod, S, togglefloating,"
           "$mainMod, F, fullscreen"
           "$mainMod, P, pseudo, # dwindle"
-          "$mainMod, J, togglesplit, # dwindle"
-          # ", Print, exec, QT_SCALE_FACTOR=0.80 flameshot gui"
+          "$mainMod, T, togglesplit, # dwindle"
+
+          "$mainMod_SHIFT, L, exec, systemctl suspend"
+
+          # Print screen keybinds
           ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave screen"
           "SHIFT, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area"
-          # "$mainMod, L, exec, ~/.config/hypr/scripts/lock_screen.sh"
-          "$mainMod_SHIFT, L, exec, systemctl suspend"
-          ", F12, exec, guake-toggle"
+
+          # Move focus arrow keybinds
           "$mainMod, left, movefocus, l"
           "$mainMod, right, movefocus, r"
           "$mainMod, up, movefocus, u"
           "$mainMod, down, movefocus, d"
+
+          # Move focus vim keybinds
+          "$mainMod, h, movefocus, l"
+          "$mainMod, l, movefocus, r"
+          "$mainMod, k, movefocus, u"
+          "$mainMod, j, movefocus, d"
+
+          # Workspace keybinds
           "$mainMod_CTRL, left, workspace, r-1"
           "$mainMod_CTRL, right, workspace, r+1"
+
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
           "$mainMod, 3, workspace, 3"
@@ -202,6 +212,7 @@ in {
           "$mainMod, 8, workspace, 8"
           "$mainMod, 9, workspace, 9"
           "$mainMod, 0, workspace, 10"
+
           "$mainMod SHIFT, 1, movetoworkspace, 1"
           "$mainMod SHIFT, 2, movetoworkspace, 2"
           "$mainMod SHIFT, 3, movetoworkspace, 3"
@@ -212,23 +223,24 @@ in {
           "$mainMod SHIFT, 8, movetoworkspace, 8"
           "$mainMod SHIFT, 9, movetoworkspace, 9"
           "$mainMod SHIFT, 0, movetoworkspace, 10"
+
           "$mainMod, mouse_down, workspace, m+1"
           "$mainMod, mouse_up, workspace, m-1"
-          ", XF86AudioMute, exec, amixer -D pipewire set Master 1+ toggle"
-          ", XF86AudioPlay, exec, ${
-            lib.getExe pkgs.playerctl
-          } --player spotify play-pause"
-          ", XF86AudioPrev, exec, ${
-            lib.getExe pkgs.playerctl
-          } --player spotify previous"
-          ", XF86AudioNext, exec,  ${
-            lib.getExe pkgs.playerctl
-          } --player spotify next"
+
         ];
 
-        binde = [
-          ", XF86AudioRaiseVolume, exec, amixer -D pipewire sset Master 5%+"
-          ", XF86AudioLowerVolume, exec, amixer -D pipewire sset Master 5%-"
+        bindel = [
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ];
+
+        bindl = [
+          ", XF86AudioPlay, exec, playerctl --player spotify play-pause"
+          ", XF86AudioPause, exec, playerctl --player spotify play-pause"
+          ", XF86AudioPrev, exec, playerctl --player spotify previous"
+          ", XF86AudioNext, exec, playerctl --player spotify next"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ];
 
         bindm = [
@@ -237,6 +249,5 @@ in {
         ];
       };
     };
-
   };
 }

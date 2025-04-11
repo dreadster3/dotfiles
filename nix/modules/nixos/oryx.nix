@@ -6,7 +6,6 @@ in {
 
   config = mkIf cfg.enable {
     users.groups.plugdev = { };
-    users.users.dreadster.extraGroups = [ "plugdev" ];
 
     services.udev.extraRules = ''
       # Rules for Oryx web flashing and live training
@@ -34,5 +33,7 @@ in {
       # Keymapp Flashing rules for the Voyager
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
     '';
+
+    home-manager.sharedModules = [{ home.packages = with pkgs; [ chromium ]; }];
   };
 }

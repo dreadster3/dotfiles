@@ -37,6 +37,7 @@
     ./bat.nix
     ./nitrogen.nix
     ./autolock.nix
+    ./polkit.nix
 
     ./hyprland.nix
     ./hyprlock.nix

@@ -24,6 +24,10 @@ in {
         hypridle.enable = mkDefault true;
         hyprlock.enable = mkDefault true;
         hyprpaper.enable = mkDefault true;
+        polkit = {
+          enable = mkDefault true;
+          package = mkDefault pkgs.unstable.hyprpolkitagent;
+        };
       };
     }];
   };

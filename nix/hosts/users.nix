@@ -6,6 +6,7 @@ with lib; {
     description = "Admin";
     extraGroups = [ "networkmanager" "wheel" "adbusers" ]
       ++ optional config.virtualisation.docker.enable "docker"
-      ++ optional config.programs.wireshark.enable "wireshark";
+      ++ optional config.programs.wireshark.enable "wireshark"
+      ++ optional config.modules.nixos.oryx.enable "plugdev";
   };
 }
