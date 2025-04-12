@@ -15,7 +15,6 @@ in {
       wineWowPackages.stable
       pkgs.unstable.winetricks
 
-      discord
       betterdiscordctl
 
       qalculate-gtk

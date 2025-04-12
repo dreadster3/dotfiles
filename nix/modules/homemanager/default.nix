@@ -38,6 +38,7 @@
     ./nitrogen.nix
     ./autolock.nix
     ./polkit.nix
+    ./gammastep.nix
 
     ./hyprland.nix
     ./hyprlock.nix

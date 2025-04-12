@@ -53,6 +53,8 @@
   # Enable onedrive
   services.onedrive.enable = true;
 
+  services.flatpak.enable = true;
+
   services.printing.enable = true;
 
   system.stateVersion = "23.11";
