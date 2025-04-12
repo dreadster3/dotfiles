@@ -170,11 +170,16 @@ in {
           "minsize 1 1, title:^()$,class:^(steam)$"
 
           # Picture-in-Picture
-          "float, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
           "move 73% 72%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$ "
           "size 25%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
           "float, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
           "pin, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
+
+          # Popout
+          "move 73% 72%, initialTitle:^(.*)([Pp]opout)(.*)$"
+          "size 25%, initialTitle:^(.*)([Pp]opout)(.*)$"
+          "float, initialTitle:^(.*)([Pp]opout)(.*)$"
+          "pin, initialTitle:^(.*)([Pp]opout)(.*)$"
         ];
 
         workspace = foldlAttrs (acc: name: monitor:
