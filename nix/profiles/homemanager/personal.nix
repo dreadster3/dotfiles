@@ -3,7 +3,6 @@
 
   home.packages = with pkgs; [
     feh
-    zathura
     kubectl
     neofetch
     fzf
@@ -79,6 +78,7 @@
     ranger.enable = true;
     lazygit.enable = true;
     bitwarden.enable = true;
+    zathura.enable = true;
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;

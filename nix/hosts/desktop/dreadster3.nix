@@ -73,12 +73,6 @@ in {
       mangohud.enable = true;
       pentest.enable = true;
 
-      bspwm.startupPrograms = [
-        "${
-          lib.getExe pkgs.xorg.xrandr
-        } --output ${primaryMonitor} --primary --output ${secondaryMonitor} --left-of ${primaryMonitor} --rotate left"
-      ];
-
       # Hyprland
       hyprpaper.wallpapers = {
         "DP-1" = ../../../wallpapers/shinobu.jpg;

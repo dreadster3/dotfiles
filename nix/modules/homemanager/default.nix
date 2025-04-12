@@ -58,6 +58,7 @@
     ./bitwarden.nix
     ./catppuccin
     ./ssh.nix
+    ./zathura.nix
 
     ./i3.nix
     ./qt.nix
