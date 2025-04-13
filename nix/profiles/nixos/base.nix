@@ -1,4 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }: {
+{ inputs, outputs, pkgs, ... }: {
   imports =
     [ inputs.home-manager.nixosModules.home-manager outputs.nixosModules ];
 
@@ -40,7 +40,9 @@
     libraries = [ ];
   };
 
-  home-manager.extraSpecialArgs = { inherit inputs outputs; };
-  home-manager.backupFileExtension = "bkp";
-  home-manager.sharedModules = [ inputs.catppuccin.homeModules.catppuccin ];
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    backupFileExtension = "bkp";
+    sharedModules = [ inputs.catppuccin.homeModules.catppuccin ];
+  };
 }

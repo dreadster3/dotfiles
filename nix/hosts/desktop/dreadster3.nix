@@ -1,8 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
-let
-  primaryMonitor = "DP-0";
-  secondaryMonitor = "HDMI-0";
-in {
+{ pkgs, ... }: {
   imports = [ ../users.nix ];
 
   home-manager.users.dreadster = {

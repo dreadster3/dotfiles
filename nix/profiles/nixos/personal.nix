@@ -1,22 +1,23 @@
-{ inputs, outputs, config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [ ./common.nix ];
 
   security.pki.certificateFiles = [ ../../../certificates/issuer.crt ];
 
   # Run appimages directly
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
+  programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+
+    };
+    nh = {
+      enable = true;
+      flake = "/etc/nixos";
+    };
+    dconf.enable = true;
   };
 
-  programs.nh = {
-    enable = true;
-    flake = "/home/dreadster/Documents/projects/github/dotfiles/nix";
-  };
-
-  programs.dconf.enable = true;
-
-  environment.systemPackages = with pkgs; [ eog networkmanagerapplet firefox ];
+  environment.systemPackages = with pkgs; [ eog firefox ];
 
   modules.nixos = {
     qt.enable = true;

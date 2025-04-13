@@ -154,6 +154,10 @@ in {
 
           # Bash
           beautysh
+
+          # nix
+          statix
+          deadnix
         ] ++ goPackages ++ rustPackages ++ pythonPackages;
     };
 

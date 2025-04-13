@@ -17,7 +17,7 @@
   # be accessible through 'pkgs.stable'
   unstable-packages = final: _prev: {
     stable = import inputs.nixpkgs-stable {
-      system = final.system;
+      inherit (final) system;
       config.allowUnfree = true;
     };
   };

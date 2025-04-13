@@ -1,4 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }: {
+{ outputs, lib, pkgs, ... }: {
   imports = [ outputs.homeManagerModules ];
 
   nixpkgs = {
@@ -11,18 +11,18 @@
     config.allowUnfree = true;
   };
 
-  home.packages = with pkgs; [ wget curl file tree ];
-
   home = {
     username = lib.mkDefault "dreadster";
     homeDirectory = lib.mkDefault "/home/dreadster";
-  };
 
-  home.sessionVariables = {
-    XDG_CACHE_DIR = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    KUBECONFIG = "$HOME/.kube/config";
+    packages = with pkgs; [ wget curl file tree ];
+
+    sessionVariables = {
+      XDG_CACHE_DIR = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      KUBECONFIG = "$HOME/.kube/config";
+    };
   };
 
   xdg.userDirs = {

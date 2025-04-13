@@ -1,4 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }: {
   imports = [ ./common.nix inputs.sops-nix.homeManagerModules.sops ];
 
   home.packages = with pkgs; [
@@ -15,6 +15,7 @@
     ethtool
 
     pnpm-shell-completion
+    nix-init
 
     sops
   ];

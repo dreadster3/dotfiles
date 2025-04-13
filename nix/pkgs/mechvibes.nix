@@ -1,4 +1,4 @@
-{ appimageTools, lib, fetchurl, writers }:
+{ appimageTools, lib, fetchurl }:
 
 let
   pname = "mechvibes";

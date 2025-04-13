@@ -11,6 +11,7 @@ in {
     modules.homemanager.zsh = {
       enable = mkEnableOption "zsh";
       sourceNix = mkEnableOption "zsh.sourceNix";
+
       dynamicEnvVariables = mkOption {
         type = types.attrsOf types.str;
         default = { };
@@ -51,7 +52,17 @@ in {
       ];
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "sudo" ];
+        plugins = [
+          "alias-finder"
+          "common-aliases"
+          "emoji"
+          "git"
+          "sudo"
+          "tmux"
+          "terraform"
+          "golang"
+          "rust"
+        ];
         custom = "$HOME/.oh-my-zsh/custom";
       };
       shellAliases = {

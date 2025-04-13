@@ -45,7 +45,7 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       lib = nixpkgs.lib.extend
-        (final: prev: (import ./lib { lib = prev; }) // home-manager.lib);
+        (_: prev: (import ./lib { lib = prev; }) // home-manager.lib);
     in {
       packages =
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});

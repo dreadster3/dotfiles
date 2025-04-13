@@ -1,6 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }:
-let
-in {
+{ ... }: {
   imports = [ ./common.nix ];
 
   modules.nixos = { fail2ban.enable = true; };

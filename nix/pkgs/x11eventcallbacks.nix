@@ -2,8 +2,7 @@
 
 with lib;
 
-let
-in stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   name = "x11eventcallbacks";
 
   src = fetchFromGitHub {

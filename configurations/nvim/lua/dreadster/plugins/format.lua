@@ -77,6 +77,7 @@ return {
 				rust = { "clippy" },
 				terraform = { "tflint", "trivy" },
 				go = { "staticcheck", "trivy", "nilaway" },
+				nix = { "statix", "deadnix" },
 				["*"] = { "typos" },
 			},
 			linters = {

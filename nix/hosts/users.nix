@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 with lib; {
   users.users.dreadster = {
     shell = pkgs.zsh;

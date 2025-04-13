@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     # Include the results of the hardware scan.
     ../../profiles/nixos/personal.nix
@@ -46,16 +46,15 @@
   };
 
   # Suspend on idle
-  services.logind.extraConfig = ''
-    IdleAction=suspend
-    IdleActionSec=15min
-  '';
+  services = {
+    logind.extraConfig = ''
+      IdleAction=suspend
+      IdleActionSec=15min
+    '';
 
-  # List services that you want to enable:
-  # Enable onedrive
-  services.onedrive.enable = true;
-
-  services.flatpak.enable = true;
+    onedrive.enable = true;
+    flatpak.enable = true;
+  };
 
   system.stateVersion = "23.11";
 }
