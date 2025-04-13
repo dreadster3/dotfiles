@@ -24,7 +24,7 @@ let
 
   pythonPackages = optionals cfg.python.enable ([
     (cfg.python.package.withPackages (ps: with ps; [ ruff mypy ]))
-    pkgs.unstable.basedpyright
+    pkgs.basedpyright
     pkgs.djhtml
   ]);
 

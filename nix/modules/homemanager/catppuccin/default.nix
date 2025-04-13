@@ -36,14 +36,19 @@ in {
       '';
     }];
 
+    home.pointerCursor.gtk.enable = true;
+
     catppuccin = {
       enable = true;
       flavor = cfg.flavor;
       accent = cfg.accent;
 
+      cursors.enable = true;
+
       alacritty.enable = true;
       rofi.enable = true;
       kvantum.enable = true;
+
       tmux = {
         enable = true;
         extraConfig = ''

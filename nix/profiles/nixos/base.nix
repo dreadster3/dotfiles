@@ -42,6 +42,5 @@
 
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
   home-manager.backupFileExtension = "bkp";
-  home-manager.sharedModules =
-    [ inputs.catppuccin.homeManagerModules.catppuccin ];
+  home-manager.sharedModules = [ inputs.catppuccin.homeModules.catppuccin ];
 }

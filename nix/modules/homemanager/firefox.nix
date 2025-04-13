@@ -20,21 +20,24 @@ in {
       mimeApps = {
         enable = true;
         defaultApplications = {
-          "x-www-browser" = "${cfg.package.meta.mainProgram}.desktop";
-          "text-html" = "${cfg.package.meta.mainProgram}.desktop";
-          "x-scheme-handler/http" = "${cfg.package.meta.mainProgram}.desktop";
-          "x-scheme-handler/https" = "${cfg.package.meta.mainProgram}.desktop";
+          "x-www-browser" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
+          "text-html" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
+          "x-scheme-handler/http" =
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
+          "x-scheme-handler/https" =
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/x-extension-htm" =
-            "${cfg.package.meta.mainProgram}.desktop";
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/x-extension-html" =
-            "${cfg.package.meta.mainProgram}.desktop";
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/x-extension-shtml" =
-            "${cfg.package.meta.mainProgram}.desktop";
-          "application/xhtml+xml" = "${cfg.package.meta.mainProgram}.desktop";
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
+          "application/xhtml+xml" =
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/x-extension-xhtml" =
-            "${cfg.package.meta.mainProgram}.desktop";
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/x-extension-xht" =
-            "${cfg.package.meta.mainProgram}.desktop";
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
         };
       };
     };

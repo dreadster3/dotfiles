@@ -20,7 +20,12 @@ in {
       fcitx5.enable = false;
     };
 
-    home-manager.sharedModules =
-      [{ modules.homemanager.catppuccin = mkDefault catppuccinConfig; }];
+    environment.variables.XCURSOR_SIZE = 24;
+
+    home-manager.sharedModules = [{
+      modules.homemanager.catppuccin = mkDefault catppuccinConfig;
+      home.pointerCursor.size =
+        strings.toInt config.environment.variables.XCURSOR_SIZE;
+    }];
   };
 }

@@ -16,21 +16,10 @@ in {
       base16Scheme =
         "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-      cursor = {
-        name =
-          "catppuccin-${catppuccinConfig.flavor}-${catppuccinConfig.accent}-cursors";
-        package = pkgs.catppuccin-cursors."${catppuccinConfig.flavor}${
-            mkUpper catppuccinConfig.accent
-          }";
-        size = 24;
-      };
-
       fonts = {
         monospace = {
           name = "Mononoki Nerd Font";
-          package = pkgs.nerdfonts.override {
-            fonts = [ "Mononoki" "FiraCode" "VictorMono" "Iosevka" ];
-          };
+          package = pkgs.nerd-fonts.mononoki;
         };
 
         serif = config.stylix.fonts.monospace;
@@ -44,7 +33,13 @@ in {
       };
 
       # Disable modules supported by catppuccin
-      targets = { grub.enable = false; };
+      targets = {
+        grub.enable = false;
+        qt.enable = false;
+      };
     };
+
+    home-manager.sharedModules =
+      [{ modules.homemanager.stylix.enable = mkDefault true; }];
   };
 }

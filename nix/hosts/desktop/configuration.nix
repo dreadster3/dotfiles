@@ -15,6 +15,7 @@
 
   # Bootloader.
   modules.nixos = {
+    aio.enable = true;
     openrgb.enable = true;
     x11.enable = true;
     nightlight.enable = true;
@@ -22,14 +23,14 @@
     nvidia.enable = true;
     steam.enable = true;
     teamviewer.enable = true;
-    xrdp.enable = true;
     oryx.enable = true;
     qmk.enable = true;
     zerotier.enable = true;
+    nerdfonts.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;
-      vmware.host.enable = true;
+      # vmware.host.enable = true;
       waydroid.host.enable = true;
     };
     hyprland.enable = true;

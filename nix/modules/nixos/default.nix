@@ -22,7 +22,6 @@
     ./storage.nix
     ./hyprland.nix
     ./catppuccin.nix
-    ./coolify.nix
     ./fail2ban.nix
     ./rustdesk.nix
     ./qmk.nix
@@ -34,5 +33,7 @@
     ./wireshark.nix
     ./qt.nix
     ./stylix.nix
+    ./aio.nix
+    ./nerdfonts.nix
   ];
 }

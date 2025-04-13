@@ -8,14 +8,13 @@ in {
 
   config = mkIf cfg.enable {
     stylix = {
+      enable = true;
       autoEnable = false;
       targets = {
-        feh.enable = true;
         gtk.enable = true;
-        hyprpaper.enable = true;
+        feh.enable = true;
         mangohud.enable = true;
         i3.enable = true;
-        # qt.enable = true;
       };
     };
 

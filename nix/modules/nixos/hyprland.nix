@@ -16,7 +16,11 @@ in {
 
     home-manager.sharedModules = [{
       modules.homemanager = {
-        hyprland.enable = mkDefault true;
+        hyprland = {
+          enable = mkDefault true;
+          package = mkDefault config.programs.hyprland.package;
+          portalPackage = mkDefault config.programs.hyprland.portalPackage;
+        };
         rofi.enable = mkDefault true;
         rofi.package = mkDefault pkgs.rofi-wayland;
         waybar.enable = mkDefault true;
@@ -26,7 +30,7 @@ in {
         hyprpaper.enable = mkDefault true;
         polkit = {
           enable = mkDefault true;
-          package = mkDefault pkgs.unstable.hyprpolkitagent;
+          package = mkDefault pkgs.hyprpolkitagent;
         };
       };
     }];

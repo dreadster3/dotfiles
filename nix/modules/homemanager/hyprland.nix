@@ -14,6 +14,14 @@ in {
   options = {
     modules.homemanager.hyprland = {
       enable = mkEnableOption "hyprland";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.hyprland;
+      };
+      portalPackage = mkOption {
+        type = types.package;
+        default = pkgs.xdg-desktop-portal-hyprland;
+      };
       terminal = mkOption {
         type = types.nullOr types.package;
         default = null;
@@ -53,12 +61,16 @@ in {
         enableXdgAutostart = true;
         variables = [ "--all" ];
       };
+
+      plugins = with pkgs.hyprlandPlugins; [ hyprexpo ];
+
       extraConfig = ''
         bind = $mainMod, ESC, submap, clean
         submap = clean
         bind = $mainMod, ESC, submap, reset
         submap = reset
       '';
+
       settings = {
         "$mainMod" = "SUPER";
 
@@ -68,10 +80,7 @@ in {
           }${transformToString monitor.transform}") monitors
           ++ [ "Unknown-1,disable" ",preferred,auto,1.0" ];
 
-        exec-once = [
-          ''
-            ${pkgs.hyprland}/bin/hyprctl setcursor "Catppuccin-Mocha-Blue-Cursors" 24''
-        ] ++ cfg.startupPrograms;
+        exec-once = cfg.startupPrograms;
 
         input = {
           kb_layout = "us";
@@ -81,17 +90,18 @@ in {
         };
 
         general = {
-          gaps_in = 5;
-          gaps_out = 20;
+          gaps_in = 4;
+          gaps_out = 5;
+          gaps_workspaces = 50;
+
           border_size = 2;
           resize_on_border = true;
           layout = "dwindle";
+          no_focus_fallback = true;
+          allow_tearing = true;
         };
 
         env = [
-          "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
-
           # GTK Variables
           "GDK_BACKEND,wayland,x11,*"
 
@@ -104,35 +114,71 @@ in {
         decoration = {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-          rounding = 8;
+          rounding = 20;
 
           blur = {
             enabled = true;
-            size = 3;
-            passes = 1;
+            xray = true;
+            new_optimizations = true; # Needed by xray
+            size = 14;
+            passes = 4;
+            brightness = 1;
+            noise = 1.0e-2;
+            contrast = 1;
+            popups = true;
+            popups_ignorealpha = 0.6;
           };
 
           shadow = {
             enabled = true;
-            range = 4;
-            render_power = 3;
+            ignore_window = true;
+            offset = "0 2";
+            range = 20;
+            render_power = 4;
           };
         };
 
         animations = {
-          enabled = "yes";
+          enabled = true;
 
           # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+          bezier = [
+            # "myBezier, 0.05, 0.9, 0.1, 1.05"
+            "linear, 0, 0, 1, 1"
+            "md3_standard, 0.2, 0, 0, 1"
+            "md3_decel, 0.05, 0.7, 0.1, 1"
+            "md3_accel, 0.3, 0, 0.8, 0.15"
+            "overshot, 0.05, 0.9, 0.1, 1.1"
+            "crazyshot, 0.1, 1.5, 0.76, 0.92 "
+            "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
+            "menu_decel, 0.1, 1, 0, 1"
+            "menu_accel, 0.38, 0.04, 1, 0.07"
+            "easeInOutCirc, 0.85, 0, 0.15, 1"
+            "easeOutCirc, 0, 0.55, 0.45, 1"
+            "easeOutExpo, 0.16, 1, 0.3, 1"
+            "softAcDecel, 0.26, 0.26, 0.15, 1"
+            "md2, 0.4, 0, 0.2, 1"
+          ];
 
           animation = [
-            "windows, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 80%"
+            # "windows, 1, 7, myBezier"
+            # "windowsOut, 1, 7, default, popin 80%"
+            # "border, 1, 10, default"
+            # "borderangle, 1, 8, default"
+            # "fade, 1, 7, default"
+            # "workspaces, 1, 6, default"
+            "windows, 1, 3, md3_decel, popin 60%"
+            "windowsIn, 1, 3, md3_decel, popin 60%"
+            "windowsOut, 1, 3, md3_accel, popin 60%"
             "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "workspaces, 1, 6, default"
+            "fade, 1, 3, md3_decel"
+            "layersIn, 1, 3, menu_decel, slide"
+            "layersOut, 1, 1.6, menu_accel"
+            "fadeLayersIn, 1, 2, menu_decel"
+            "fadeLayersOut, 1, 0.5, menu_accel"
+            "workspaces, 1, 7, menu_decel, slide"
+            "specialWorkspace, 1, 3, md3_decel, slidevert"
           ];
         };
 
@@ -143,18 +189,15 @@ in {
           smart_resizing = false;
         };
 
-        device = {
-          name = "epic-mouse-v1";
-          sensitivity = -0.5;
-        };
-
         windowrulev2 = [
           # Animations
           "animation slide, class:^(wofi)$"
           "animation slide, class:^(rofi)$"
 
-          # Floating
-          "float, class:^(pavucontrol)$"
+          # pavucontrol
+          "float, class:^(org.pulseaudio.pavucontrol)$"
+          "size 45%, class:^(org.pulseaudio.pavucontrol)$"
+          "center%, class:^(org.pulseaudio.pavucontrol)$"
 
           # Tile
           "tile,initialTitle:^(ErgoDox EZ Configurator)$"
@@ -196,26 +239,46 @@ in {
           # Mode keybinds
           "$mainMod, S, togglefloating,"
           "$mainMod, F, fullscreen"
-          "$mainMod, P, pseudo, # dwindle"
           "$mainMod, T, togglesplit, # dwindle"
+          "$mainMod, P, pin"
 
-          "$mainMod_SHIFT, L, exec, systemctl suspend"
+          "Alt, Tab, cyclenext"
+          "Alt, Tab, bringactivetotop"
+
+          "SUPER, Tab, hyprexpo:expo, toggle"
+
+          # Minimize
+          "$mainMod, C, togglespecialworkspace, minimize"
+          "$mainMod, C, movetoworkspace, +0"
+          "$mainMod, C, togglespecialworkspace, minimize"
+          "$mainMod, C, movetoworkspace, special:minimize"
+          "$mainMod, C, togglespecialworkspace, minimize"
 
           # Print screen keybinds
           ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave screen"
           "SHIFT, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area"
 
-          # Move focus arrow keybinds
+          # Move arrow keybinds
           "$mainMod, left, movefocus, l"
           "$mainMod, right, movefocus, r"
           "$mainMod, up, movefocus, u"
           "$mainMod, down, movefocus, d"
 
-          # Move focus vim keybinds
+          "$mainMod+Shift, left, movewindow, l"
+          "$mainMod+Shift, right, movewindow, r"
+          "$mainMod+Shift, up, movewindow, u"
+          "$mainMod+Shift, down, movewindow, d"
+
+          # Move vim keybinds
           "$mainMod, h, movefocus, l"
           "$mainMod, l, movefocus, r"
           "$mainMod, k, movefocus, u"
           "$mainMod, j, movefocus, d"
+
+          "$mainMod+Shift, h, movewindow, l"
+          "$mainMod+Shift, l, movewindow, r"
+          "$mainMod+Shift, k, movewindow, u"
+          "$mainMod+Shift, j, movewindow, d"
 
           # Workspace keybinds
           "$mainMod_CTRL, left, workspace, r-1"
@@ -266,6 +329,25 @@ in {
           "$mainMod, mouse:272, movewindow"
           "$mainMod, mouse:273, resizewindow"
         ];
+
+        misc = {
+          enable_swallow = false;
+          force_default_wallpaper = 0;
+          disable_hyprland_logo = false;
+          new_window_takes_over_fullscreen = 2;
+          allow_session_lock_restore = true;
+          initial_workspace_tracking = 0; # Disabled
+          vfr = true;
+          vrr = 1; # Enable vsync
+        };
+
+        plugin = {
+          hyprexpo = {
+            columns = 3;
+            gap_size = 5;
+            workspace_method = "first 1";
+          };
+        };
       };
     };
   };

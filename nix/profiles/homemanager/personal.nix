@@ -26,15 +26,11 @@
 
     secrets.openai_api_key = { };
   };
-  stylix.enable = true;
 
   modules.homemanager = {
     settings = {
       enable = true;
       font = {
-        package = pkgs.nerdfonts.override {
-          fonts = [ "Mononoki" "FiraCode" "VictorMono" "Iosevka" ];
-        };
         normal.style = "Bold";
         italic.family = "VictorMono Nerd Font";
       };
@@ -56,23 +52,14 @@
     };
     neovim = {
       enable = true;
-      package = lib.mkDefault pkgs.unstable.neovim-unwrapped;
       go = lib.mkDefault {
         enable = true;
-        package = pkgs.unstable.go;
-        languageServer = {
-          enable = true;
-          package = pkgs.unstable.gopls;
-        };
+        languageServer.enable = true;
       };
       rust = lib.mkDefault { enable = true; };
       python = lib.mkDefault {
         enable = true;
-        package = pkgs.unstable.python3;
-        poetry = {
-          enable = true;
-          package = pkgs.unstable.poetry;
-        };
+        poetry.enable = true;
       };
     };
     ranger.enable = true;

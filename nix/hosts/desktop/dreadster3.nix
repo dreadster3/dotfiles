@@ -13,7 +13,7 @@ in {
       remmina
 
       wineWowPackages.stable
-      pkgs.unstable.winetricks
+      winetricks
 
       betterdiscordctl
 
@@ -24,7 +24,7 @@ in {
       dbeaver-bin
 
       hypnotix
-      rustdesk-flutter
+      pkgs.stable.rustdesk-flutter
     ];
 
     modules.homemanager = {
@@ -58,7 +58,6 @@ in {
         };
       };
 
-      aio.enable = true;
       openrgb = {
         enable = true;
         startup.enable = true;
@@ -67,11 +66,13 @@ in {
       spotify = {
         enable = true;
         spicetify.enable = true;
+        spicetify.package = pkgs.stable.spicetify-cli;
       };
       thunderbird.enable = true;
       gtk.enable = true;
       mangohud.enable = true;
       pentest.enable = true;
+      easyeffects.enable = true;
 
       # Hyprland
       hyprpaper.wallpapers = {

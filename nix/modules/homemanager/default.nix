@@ -14,7 +14,6 @@
     ./nerdfonts.nix
     ./neovim.nix
     ./bspwm.nix
-    ./aio.nix
     ./gtk.nix
     ./btop.nix
     ./wofi
@@ -59,6 +58,7 @@
     ./catppuccin
     ./ssh.nix
     ./zathura.nix
+    ./easyeffects.nix
 
     ./i3.nix
     ./qt.nix

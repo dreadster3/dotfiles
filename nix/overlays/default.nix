@@ -14,9 +14,9 @@
     };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
+  # be accessible through 'pkgs.stable'
   unstable-packages = final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
+    stable = import inputs.nixpkgs-stable {
       system = final.system;
       config.allowUnfree = true;
     };

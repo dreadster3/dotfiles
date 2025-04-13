@@ -115,10 +115,6 @@ in {
       font = mkOption {
         type = types.submodule {
           options = {
-            package = mkOption {
-              type = types.package;
-              default = pkgs.nerdfonts;
-            };
             size = mkOption {
               type = types.int;
               default = 18;
@@ -132,8 +128,6 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ cfg.font.package ];
-
     modules.homemanager.settings.theme.colors =
       themes.${cfg.theme.name}.${cfg.theme.variant};
     modules.homemanager.settings.font = { };

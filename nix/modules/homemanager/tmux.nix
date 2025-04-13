@@ -33,7 +33,7 @@ in {
         }
         tmux-fzf
         {
-          plugin = pkgs.unstable.tmuxPlugins.tmux-sessionx;
+          plugin = tmux-sessionx;
           extraConfig = ''
             set -g @sessionx-bind 's'
             set -g @sessionx-filter-current 'false'
