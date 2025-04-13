@@ -35,5 +35,6 @@
     ./stylix.nix
     ./aio.nix
     ./nerdfonts.nix
+    ./printing.nix
   ];
 }

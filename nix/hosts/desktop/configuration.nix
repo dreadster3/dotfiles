@@ -34,6 +34,7 @@
       waydroid.host.enable = true;
     };
     hyprland.enable = true;
+    printing.enable = true;
   };
 
   programs.adb.enable = true;
@@ -55,8 +56,6 @@
   services.onedrive.enable = true;
 
   services.flatpak.enable = true;
-
-  services.printing.enable = true;
 
   system.stateVersion = "23.11";
 }
