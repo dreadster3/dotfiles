@@ -211,6 +211,8 @@ in {
           # steam
           "stayfocused, title:^()$,class:^(steam)$"
           "minsize 1 1, title:^()$,class:^(steam)$"
+          "immediate, class:^(steam_app)"
+          "immediate, title:.*.exe"
 
           # Picture-in-Picture
           "move 73% 72%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$ "
