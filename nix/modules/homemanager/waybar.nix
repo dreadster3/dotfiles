@@ -50,13 +50,11 @@ in {
       })
     ];
 
-    wayland.windowManager.hyprland.settings.exec-once =
-      [ "${cfg.package}/bin/waybar &" ];
-
     programs.waybar = {
       inherit (cfg) package;
 
       enable = true;
+      systemd.enable = true;
       settings = {
         mainBar = {
           layer = "top";
