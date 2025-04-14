@@ -40,11 +40,10 @@ in {
       message = "waybar requires the hyprland window manager to be enabled";
     }];
 
-    home.packages = with pkgs;
-      [ ] ++ optional (cfg.brightness.enable) (pkgs.brightnessctl);
+    home.packages = optional cfg.brightness.enable pkgs.brightnessctl;
 
     nixpkgs.overlays = [
-      (self: super: {
+      (_: super: {
         waybar = super.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         });
@@ -55,16 +54,17 @@ in {
       [ "${cfg.package}/bin/waybar &" ];
 
     programs.waybar = {
+      inherit (cfg) package;
+
       enable = true;
-      package = cfg.package;
       settings = {
         mainBar = {
           layer = "top";
           modules-left =
             [ "custom/launcher" "hyprland/workspaces" "cpu" "memory" "disk" ];
           modules-center = [ "clock" ];
-          modules-right = optional (cfg.battery.enable) ("battery")
-            ++ optional (cfg.brightness.enable) ("backlight")
+          modules-right = optional cfg.battery.enable "battery"
+            ++ optional cfg.brightness.enable "backlight"
             ++ [ "pulseaudio" "tray" ];
           "custom/launcher" = {
             format = "";
@@ -78,27 +78,41 @@ in {
             on-scroll-down = "hyprctl dispatch workspace r-1";
             on-scroll-up = "hyprctl dispatch workspace r+1";
             format = "{icon}";
+            format-icons = {
+              active = "";
+              empty = "";
+              default = "";
+            };
             active-only = true;
             persistent-workspaces =
-              mapAttrs (name: value: value.workspaces) monitors;
+              mapAttrs (_: value: value.workspaces) monitors;
           };
           cpu = {
             interval = 10;
             format = " {usage}%";
             max-length = 10;
+            on-click = "alacritty -e btop";
           };
           memory = {
             interval = 30;
             format = " {}%";
             max-length = 10;
+            on-click = "alacritty -e btop";
           };
           disk = {
             interval = 30;
             format = "󰋊 {percentage_used}%";
             path = "/";
+            on-click = "thunar";
           };
-          clock = { format = "  {:%e %b %Y %H:%M}  "; };
-          tray = { spacing = 8; };
+          clock = {
+            format = "  {:%d/%m/%Y %H:%M}  ";
+            tooltip-format = "  {:%d %B %Y %T}  ";
+          };
+          tray = {
+            spacing = 8;
+            show-passive-items = true;
+          };
           pulseaudio = {
             scroll-step = 5;
             format = "{volume}% {icon}";
@@ -112,12 +126,12 @@ in {
               phone = "";
               portable = "";
               car = "";
-              default = [ "" ];
+              default = [ "" "" " " ];
             };
-            on-click = "amixer -D pipewire set Master 1+ toggle";
+            on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             on-click-right = "pavucontrol";
-            on-scroll-up = "amixer -D pipewire sset Master 1%+";
-            on-scroll-down = "amixer -D pipewire sset Master 1%-";
+            on-scroll-up = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+";
+            on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           };
           backlight = {
             device = "intel_backlight";

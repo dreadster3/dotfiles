@@ -1,5 +1,5 @@
 { config, ... }:
-let accent = config.accent;
+let inherit (config) accent;
 in ''
   * {
     border: none;
@@ -41,6 +41,7 @@ in ''
   #workspaces {
     border-radius: 10px;
     margin: 5px;
+    padding-right: 5px;
     background-color: @base;
     border-width: 1.3px;
     border-color: @surface1;
@@ -51,22 +52,7 @@ in ''
     border-radius: 10px;
     padding: 5px;
     background: transparent;
-    color: @text;
-  }
-
-  #workspaces button.active {
-    border-radius: 10px;
-    color: @base;
-    background: @${accent};
-    padding-left: 8px;
-    padding-right: 8px;
-    margin: 1.5px;
-  }
-
-  #workspaces button.hover {
-    border-radius: 10px;
-    background: @surface2;
-    margin: 1px;
+    color: @${accent};
   }
 
   #cpu {
