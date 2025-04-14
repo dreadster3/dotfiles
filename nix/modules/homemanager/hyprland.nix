@@ -64,13 +64,6 @@ in {
 
       plugins = with pkgs.hyprlandPlugins; [ hyprexpo ];
 
-      extraConfig = ''
-        bind = $mainMod, ESC, submap, clean
-        submap = clean
-        bind = $mainMod, ESC, submap, reset
-        submap = reset
-      '';
-
       settings = {
         "$mainMod" = "SUPER";
 
@@ -351,6 +344,13 @@ in {
           };
         };
       };
+
+      extraConfig = ''
+        bind = $mainMod, Escape, submap, clean
+        submap = clean
+        bind = $mainMod, Escape, submap, reset
+        submap = reset
+      '';
     };
   };
 }
