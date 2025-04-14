@@ -83,7 +83,8 @@ in {
               empty = "";
               default = "";
             };
-            active-only = true;
+
+            active-only = false;
             persistent-workspaces =
               mapAttrs (_: value: value.workspaces) monitors;
           };
