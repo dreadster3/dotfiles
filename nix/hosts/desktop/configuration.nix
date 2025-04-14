@@ -13,6 +13,9 @@
 
   environment.systemPackages = with pkgs; [ vlc libvlc ];
 
+  # Disable usb autosuspend
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+
   # Bootloader.
   modules.nixos = {
     aio.enable = true;

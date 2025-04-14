@@ -10,10 +10,6 @@
       binfmt = true;
 
     };
-    nh = {
-      enable = true;
-      flake = "/etc/nixos";
-    };
     dconf.enable = true;
   };
 

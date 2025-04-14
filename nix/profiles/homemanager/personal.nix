@@ -75,9 +75,17 @@
 
   systemd.user.startServices = "sd-switch";
 
-  programs.git = {
-    enable = true;
-    userName = "dreadster3";
-    userEmail = "afonso.antunes@live.com.pt";
+  programs = {
+    nh = {
+      enable = true;
+      flake =
+        "${config.home.homeDirectory}/Documents/projects/github/dotfiles/nix";
+    };
+
+    git = {
+      enable = true;
+      userName = "dreadster3";
+      userEmail = "afonso.antunes@live.com.pt";
+    };
   };
 }
