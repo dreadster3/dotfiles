@@ -67,7 +67,7 @@ in {
             ++ optional cfg.brightness.enable "backlight"
             ++ [ "pulseaudio" "tray" ];
           "custom/launcher" = {
-            format = "";
+            format = "";
             on-click = "pkill rofi || ${
                 getExe config.programs.rofi.finalPackage
               } -show drun";
