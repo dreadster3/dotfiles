@@ -8,10 +8,5 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    programs.thunderbird = {
-      enable = true;
-      profiles = { default = { isDefault = true; }; };
-    };
-  };
+  config = mkIf cfg.enable { home.packages = with pkgs; [ thunderbird ]; };
 }
