@@ -62,7 +62,7 @@ in {
         variables = [ "--all" ];
       };
 
-      plugins = with pkgs.hyprlandPlugins; [ hyprexpo ];
+      plugins = with pkgs.hyprlandPlugins; [ hyprspace ];
 
       settings = {
         "$mainMod" = "SUPER";
@@ -240,7 +240,7 @@ in {
           "Alt, Tab, cyclenext"
           "Alt, Tab, bringactivetotop"
 
-          "SUPER, Tab, hyprexpo:expo, toggle"
+          "$mainMod, Tab, overview:toggle,"
 
           # Minimize
           "$mainMod, C, togglespecialworkspace, minimize"
@@ -250,8 +250,9 @@ in {
           "$mainMod, C, togglespecialworkspace, minimize"
 
           # Print screen keybinds
-          ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave screen"
-          "SHIFT, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area"
+          ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave output"
+          "Shift, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area"
+          "Ctrl+Shift, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave screen"
 
           # Move arrow keybinds
           "$mainMod, left, movefocus, l"
@@ -276,8 +277,8 @@ in {
           "$mainMod+Shift, j, movewindow, d"
 
           # Workspace keybinds
-          "$mainMod_CTRL, left, workspace, r-1"
-          "$mainMod_CTRL, right, workspace, r+1"
+          "$mainMod+Ctrl, left, workspace, r-1"
+          "$mainMod+Ctrl, right, workspace, r+1"
 
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
@@ -290,16 +291,16 @@ in {
           "$mainMod, 9, workspace, 9"
           "$mainMod, 0, workspace, 10"
 
-          "$mainMod SHIFT, 1, movetoworkspace, 1"
-          "$mainMod SHIFT, 2, movetoworkspace, 2"
-          "$mainMod SHIFT, 3, movetoworkspace, 3"
-          "$mainMod SHIFT, 4, movetoworkspace, 4"
-          "$mainMod SHIFT, 5, movetoworkspace, 5"
-          "$mainMod SHIFT, 6, movetoworkspace, 6"
-          "$mainMod SHIFT, 7, movetoworkspace, 7"
-          "$mainMod SHIFT, 8, movetoworkspace, 8"
-          "$mainMod SHIFT, 9, movetoworkspace, 9"
-          "$mainMod SHIFT, 0, movetoworkspace, 10"
+          "$mainMod+Shift, 1, movetoworkspace, 1"
+          "$mainMod+Shift, 2, movetoworkspace, 2"
+          "$mainMod+Shift, 3, movetoworkspace, 3"
+          "$mainMod+Shift, 4, movetoworkspace, 4"
+          "$mainMod+Shift, 5, movetoworkspace, 5"
+          "$mainMod+Shift, 6, movetoworkspace, 6"
+          "$mainMod+Shift, 7, movetoworkspace, 7"
+          "$mainMod+Shift, 8, movetoworkspace, 8"
+          "$mainMod+Shift, 9, movetoworkspace, 9"
+          "$mainMod+Shift, 0, movetoworkspace, 10"
 
           "$mainMod, mouse_down, workspace, m+1"
           "$mainMod, mouse_up, workspace, m-1"
@@ -334,14 +335,6 @@ in {
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
           vrr = 1; # Enable vsync
-        };
-
-        plugin = {
-          hyprexpo = {
-            columns = 3;
-            gap_size = 5;
-            workspace_method = "first 1";
-          };
         };
       };
 
