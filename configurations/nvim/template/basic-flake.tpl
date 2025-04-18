@@ -1,3 +1,4 @@
+;; nix
 {
   description = "Flake template";
 

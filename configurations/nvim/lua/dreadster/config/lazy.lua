@@ -16,6 +16,7 @@ return function(opts)
 		spec = {
 			-- {"LazyVim/LazyVim", import = "lazyvim.plugins", opts = {}},
 			{ import = "dreadster.plugins" },
+			{ import = "dreadster.plugins.lang" }, -- Programming languages support
 		},
 		defaults = { lazy = false },
 		-- install = {colorscheme = {"catppuccin-mocha"}},

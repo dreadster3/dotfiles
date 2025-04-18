@@ -143,6 +143,9 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
+				signature = {
+					auto_open = { enabled = false },
+				},
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
@@ -153,6 +156,19 @@ return {
 				lsp_doc_border = false, -- add a border to hover docs and signature help
 			},
 			messages = { enabled = false },
+		},
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		opts = {
+			bind = true,
+			floating_window_above_cur_line = false,
+			floating_window_off_x = 0,
+			floating_window_off_y = -2,
+			handler_opts = {
+				border = "rounded",
+			},
 		},
 	},
 	{

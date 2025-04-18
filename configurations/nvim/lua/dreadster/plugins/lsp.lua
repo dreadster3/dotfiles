@@ -5,7 +5,6 @@ return {
 			"mason",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
-			"b0o/schemastore.nvim",
 		},
 		name = "lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
@@ -21,34 +20,30 @@ return {
 		},
 		opts = function()
 			return {
-				document_highlight = { enabled = false },
 				capabilities = {
-					textDocument = {
-						foldingRange = {
-							lineFoldingOnly = true,
+					workspace = {
+						fileOperations = {
+							didRename = true,
+							willRename = true,
 						},
 					},
 				},
 				diagnostics = {
-					virtual_text = false, -- disable virtual text
-					signs = {
-						active = {
-							{ name = "DiagnosticSignError", text = "" },
-							{ name = "DiagnosticSignWarn", text = "" },
-							{ name = "DiagnosticSignHint", text = "" },
-							{ name = "DiagnosticSignInfo", text = "" },
-						},
-					},
-					update_in_insert = true,
 					underline = true,
+					update_in_insert = false,
+					virtual_text = {
+						spacing = 4,
+						source = "if_many",
+						prefix = "●",
+					},
 					severity_sort = true,
-					float = {
-						focusable = true,
-						style = "minimal",
-						border = "rounded",
-						source = "always",
-						header = "",
-						prefix = "",
+					signs = {
+						text = {
+							[vim.diagnostic.severity.ERROR] = "",
+							[vim.diagnostic.severity.WARN] = "",
+							[vim.diagnostic.severity.HINT] = "",
+							[vim.diagnostic.severity.INFO] = "",
+						},
 					},
 				},
 				servers = {
@@ -62,8 +57,6 @@ return {
 						},
 					},
 					texlab = { mason = false },
-					basedpyright = { mason = false, single_file_support = true },
-					ruff = { mason = false },
 					omnisharp = {
 						enable_editorconfig_support = true,
 						enable_ms_build_load_projects_on_demand = false,
@@ -73,23 +66,12 @@ return {
 						sdk_include_prereleases = true,
 						analyze_open_documents_only = false,
 					},
-					rust_analyzer = { mason = false },
 					clangd = {
 						filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 					},
 					terraformls = {},
 					tflint = {},
 					bashls = {},
-					jsonls = {
-						settings = {
-							json = {
-								schemas = require("schemastore").json.schemas(),
-								validate = { enable = true },
-							},
-						},
-					},
-					gopls = { mason = false },
-					yamlls = {},
 					eslint = { mason = false, settings = { format = false } },
 				},
 				setup = {
@@ -103,24 +85,17 @@ return {
 							opts.handlers = { ["textDocument/definition"] = handler }
 						end
 					end,
-					yamlls = function(_, opts)
-						local cfg = require("yaml-companion").setup(opts)
-
-						for key, value in pairs(cfg) do
-							opts[key] = value
-						end
-					end,
 				},
 			}
 		end,
 		config = function(_, opts)
 			-- Diagnostics
-			for _, sign in ipairs(opts.diagnostics.signs.active) do
-				vim.fn.sign_define(sign.name, {
-					texthl = sign.name,
-					text = sign.text,
-					numhl = "",
-				})
+			if type(opts.diagnostics.signs) ~= "boolean" then
+				for severity, icon in pairs(opts.diagnostics.signs.text) do
+					local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+					name = "DiagnosticSign" .. name
+					vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+				end
 			end
 
 			vim.diagnostic.config(opts.diagnostics)
@@ -140,19 +115,15 @@ return {
 				has_cmp_nvim_lsp and cmp_nvim_lsp.default_capabilities() or {},
 				opts.capabilities or {}
 			)
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			capabilities.textDocument.completion.completionItem.resolveSupport = {
-				properties = {
-					"documentation",
-					"detail",
-					"additionalTextEdits",
-				},
-			}
 
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
 					capabilities = vim.deepcopy(capabilities or {}),
 				}, servers[server] or {})
+
+				if server_opts.enabled == false then
+					return
+				end
 
 				if opts.setup[server] then
 					if opts.setup[server](server, server_opts) then
@@ -210,65 +181,6 @@ return {
 			},
 			outline = { layout = "float" },
 		},
-	},
-	{
-		"Hoffs/omnisharp-extended-lsp.nvim",
-		dependencies = { "lspconfig" },
-		event = { "BufReadPost *.cs" },
-	},
-	-- { "ray-x/go.nvim", enabled = false, version = "*", event = { "BufReadPost *.go" }, opts = {} },
-	{
-		"ray-x/go.nvim",
-		dependencies = {
-			"ray-x/guihua.lua",
-			"lspconfig",
-			"treesitter",
-		},
-		version = "v0.9.0",
-		main = "go",
-		event = { "CmdlineEnter" },
-		ft = { "go", 'gomod' },
-	},
-	{
-		"Saecki/crates.nvim",
-		event = { "BufRead Cargo.toml" },
-		init = function()
-			vim.api.nvim_create_autocmd("BufReadPre", {
-				group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
-				pattern = "Cargo.toml",
-				callback = function()
-					local cmp = require("cmp")
-					cmp.setup.buffer({ sources = { { name = "crates" } } })
-
-					local opts = { noremap = true, silent = true }
-					local keymap = vim.api.nvim_buf_set_keymap
-					keymap(0, "n", "<F4>", "<cmd>lua require('crates').show_popup()<CR>", opts)
-					keymap(0, "n", "cf", "<cmd>lua require('crates').show_features_popup()<CR>", opts)
-					keymap(0, "n", "cr", "<cmd>lua require('crates').reload()<CR>", opts)
-					keymap(0, "n", "cd", "<cmd>lua require('crates').open_crates_io()<CR>", opts)
-					keymap(0, "n", "cu", "<cmd>lua require('crates').update_crate()<CR>", opts)
-					keymap(0, "n", "cU", "<cmd>lua require('crates').update_all_crates()<CR>", opts)
-				end,
-			})
-		end,
-		config = function(_, opts)
-			require("crates").setup(opts)
-
-			local cargo_reload_group = vim.api.nvim_create_augroup("cargo_reload", { clear = true })
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				pattern = "Cargo.toml",
-				group = cargo_reload_group,
-				callback = function()
-					require("crates").reload()
-				end,
-			})
-		end,
-	},
-	{
-		"simrat39/rust-tools.nvim",
-		dependencies = { "lspconfig" },
-		event = "BufReadPre *.rs",
-		opts = {},
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
@@ -368,17 +280,5 @@ return {
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("refactoring")
 		end,
 		opts = {},
-	},
-	{
-		"someone-stole-my-name/yaml-companion.nvim",
-		name = "yaml-companion",
-		lazy = false,
-		dependencies = {
-			{ "lspconfig" },
-			{ "nvim-lua/plenary.nvim" },
-		},
-		config = function()
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("yaml_schema")
-		end,
 	},
 }

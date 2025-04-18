@@ -1,3 +1,4 @@
+;; nix
 {
   description = "Description for the project";
 

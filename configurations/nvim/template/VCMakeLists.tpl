@@ -1,3 +1,4 @@
+;; cmake
 cmake_minimum_required(VERSION 3.23)
 
 set(VCPKG_ROOT "/opt/vcpkg" CACHE STRING "Vcpkg root directory")

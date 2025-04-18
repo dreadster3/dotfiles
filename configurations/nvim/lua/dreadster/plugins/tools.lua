@@ -37,89 +37,22 @@ return {
 		},
 	},
 	{
-		"iamcco/markdown-preview.nvim",
-		name = "markdown-preview",
-		version = "*",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview" },
-		build = "cd app && npx --yes yarn install",
-		ft = { "markdown" },
-		keys = {
-			{
-				"<leader>md",
-				"<CMD>MarkdownPreviewToggle<CR>",
-				desc = "Toggle markdown preview",
-			},
-		},
-	},
-	{
-		"hiphish/rainbow-delimiters.nvim",
-		version = "*",
-		name = "rainbow",
-		main = "rainbow-delimiters.setup",
-		opts = {
-			blacklist = { "markdown" },
-		},
-	},
-	{
 		"nvimdev/template.nvim",
 		version = false,
+		lazy = false,
 		name = "template",
 		cmd = { "Template" },
-		init = function()
-			local mappings = {
-				typescript = { "function.ts" },
-				cmake = { "VCMakeLists.txt" },
-				text = { "conanfile.txt" },
-				yaml = { "clangformat" },
-			}
-
-			local temp_table = {}
-
-			for filetype, filenames in pairs(mappings) do
-				for _, filename in ipairs(filenames) do
-					temp_table[filename] = filetype
-				end
-			end
-
-			-- Add any template that filetype cannot be detected
-			vim.filetype.add({ filename = temp_table })
-		end,
 		config = function(_, opts)
 			require("template").setup(opts)
-
 			require("template").register("{{_dir_}}", function()
 				vim.fn.expand("%:p:h")
 			end)
-
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("find_template")
 		end,
 		opts = {
 			author = "dreadster3",
 			email = "afonso.antunes@live.com.pt",
 			temp_dir = vim.fn.expand("$HOME/.config/nvim/template"),
-		},
-	},
-	{
-		"johnfrankmorgan/whitespace.nvim",
-		name = "whitespace",
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = { "WhitespaceTrim" },
-		init = function()
-			vim.api.nvim_create_user_command("WhitespaceTrim", function()
-				require("whitespace").trim()
-			end, {})
-		end,
-		opts = {
-			highlight = "DiffDelete",
-			ignored_filetypes = {
-				"TelescopePrompt",
-				"Trouble",
-				"help",
-				"noice",
-				"glow",
-				"gitcommit",
-			},
-			ignore_terminal = true,
 		},
 	},
 	{
@@ -183,7 +116,7 @@ return {
 				desc = "Replace in files (Spectre)"
 			}
 		}
-		,
+,
 	},
 	{
 		"cshuaimin/ssr.nvim",
@@ -223,7 +156,7 @@ return {
 			picker = "telescope",
 		},
 	},
-	{ "lervag/vimtex",          name = "vimtex",   init = function() end },
+	{ "lervag/vimtex", name = "vimtex", init = function() end },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -345,17 +278,6 @@ return {
 			})
 		end,
 	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		name = "render-markdown",
-		dependencies = { "treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
-		ft = { "markdown" },
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {
-			file_types = { "markdown" },
-		},
-	},
 	{ "laytan/cloak.nvim", opts = {} },
 	{
 		"christoomey/vim-tmux-navigator",
@@ -368,13 +290,23 @@ return {
 			"TmuxNavigatorProcessList",
 		},
 		keys = {
-			{ "<c-h>", "<cmd>TmuxNavigateLeft<cr>",  mode = { "n", "t" } },
-			{ "<c-j>", "<cmd>TmuxNavigateDown<cr>",  mode = { "n", "t" } },
-			{ "<c-k>", "<cmd>TmuxNavigateUp<cr>",    mode = { "n", "t" } },
+			{ "<c-h>", "<cmd>TmuxNavigateLeft<cr>", mode = { "n", "t" } },
+			{ "<c-j>", "<cmd>TmuxNavigateDown<cr>", mode = { "n", "t" } },
+			{ "<c-k>", "<cmd>TmuxNavigateUp<cr>", mode = { "n", "t" } },
 			{ "<c-l>", "<cmd>TmuxNavigateRight<cr>", mode = { "n", "t" } },
 		},
 		init = function()
 			vim.g.tmux_navigator_no_mappings = 1
 		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		name = "nvim_comment",
+		keys = {
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line", mode = "n" },
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_visual)", desc = "Toggle comment for line visual", mode = "v" },
+			{ "<C-_>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line", mode = "n" },
+			{ "<C-_>", "<Plug>(comment_toggle_linewise_visual)", desc = "Toggle comment for line visual", mode = "v" },
+		},
 	},
 }

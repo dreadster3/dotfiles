@@ -34,9 +34,6 @@ return {
 			formatters_by_ft = {
 				c = { "clang_format" },
 				lua = { "stylua" },
-				go = { "goimports", "gofmt" },
-				rust = { "rustfmt" },
-				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				terraform = { "terraform_fmt" },
 				nix = { "nixfmt" },
 				sh = { "beautysh" },
@@ -73,10 +70,7 @@ return {
 			events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 			linters_by_ft = {
 				lua = { "luacheck" },
-				python = { "ruff", "mypy" },
-				rust = { "clippy" },
 				terraform = { "tflint", "trivy" },
-				go = { "staticcheck", "trivy", "nilaway" },
 				nix = { "statix", "deadnix" },
 				["*"] = { "typos" },
 			},
