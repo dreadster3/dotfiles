@@ -12,8 +12,19 @@ return {
 		},
 		cmd = { "Telescope" },
 		keys = {
+			{
+				"<leader>fb",
+				"<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
+				desc = "Buffers",
+			},
 			{ "<leader>ff", ":Telescope find_files<CR>", desc = "Find files" },
-			{ "<C-f>", ":Telescope live_grep<CR>", desc = "Live grep" },
+			{ "<leader>fg", ":Telescope live_grep<CR>", desc = "Live grep" },
+			{ "<leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
+			{ "<leader>fs", "<cmd>Telescope <CR>", desc = "Status" },
+
+			-- Git
+			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
+			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
 		},
 		opts = function()
 			local opts = {

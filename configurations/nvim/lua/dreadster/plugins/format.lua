@@ -39,8 +39,6 @@ return {
 				sh = { "beautysh" },
 				json = { "prettier" },
 				markdown = { "prettier" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
 				proto = { "buf" },
 				toml = { "taplo" },
 				["*"] = { "codespell" },

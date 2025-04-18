@@ -51,7 +51,7 @@ return {
 						mason = false,
 						settings = {
 							Lua = {
-								diagnostics = { globals = { "vim" } },
+								diagnostics = { globals = { "vim", "Snacks" } },
 								workspace = { checkThirdParty = false },
 							},
 						},
@@ -100,9 +100,10 @@ return {
 
 			vim.diagnostic.config(opts.diagnostics)
 
-			local handlers = require("dreadster.utils.lsp_handlers")
-
-			handlers.on_attach()
+			require("dreadster.utils.lsp").on_attach(function(client, buffer)
+				vim.notify("Setting keymaps")
+				require("dreadster.utils.keymaps").on_attach(client, buffer)
+			end)
 
 			-- Servers
 			local servers = opts.servers

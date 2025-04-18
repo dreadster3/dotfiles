@@ -37,16 +37,27 @@ return {
 			},
 		},
 		opts = {
+			presets = "helix",
 			spec = {
 				{
 					mode = { "n", "v" },
-					{ "[", group = "Previous" },
-					{ "]", group = "Next" },
+					{ "<leader>c", group = "code" },
+					{ "<leader>b", group = "buffer" },
+					{ "<leader>d", group = "debug" },
+					{ "<leader>f", group = "file/find" },
+					{ "<leader>g", group = "git" },
+					{ "<leader>gh", group = "hunks" },
+					{ "<leader>q", group = "quit/session" },
+					{ "<leader>s", group = "search" },
+					{ "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+					{ "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+					{ "[", group = "prev" },
+					{ "]", group = "next" },
+					{ "g", group = "goto" },
+					{ "gs", group = "surround" },
+					{ "z", group = "fold" },
 				},
 			},
-			delay = function(ctx)
-				return 500
-			end,
 		},
 	},
 	{ "folke/todo-comments.nvim", event = "BufReadPre", opts = {} },
@@ -55,24 +66,24 @@ return {
 		name = "illuminate",
 		main = "illuminate",
 		event = { "BufReadPre", "BufNewFile" },
-		keys = {
-			{
-				"[[",
-				function()
-					require("illuminate").goto_prev_reference(false)
-				end,
-				mode = "n",
-				desc = "Goto next Reference",
-			},
-			{
-				"]]",
-				function()
-					require("illuminate").goto_next_reference(false)
-				end,
-				mode = "n",
-				desc = "Goto previous Reference",
-			},
-		},
+		-- keys = {
+		-- 	{
+		-- 		"[[",
+		-- 		function()
+		-- 			require("illuminate").goto_prev_reference(false)
+		-- 		end,
+		-- 		mode = "n",
+		-- 		desc = "Goto next Reference",
+		-- 	},
+		-- 	{
+		-- 		"]]",
+		-- 		function()
+		-- 			require("illuminate").goto_next_reference(false)
+		-- 		end,
+		-- 		mode = "n",
+		-- 		desc = "Goto previous Reference",
+		-- 	},
+		-- },
 		opts = {
 			delay = 200,
 			large_file_cutoff = 5000,
@@ -89,15 +100,28 @@ return {
 	{
 		"gbprod/yanky.nvim",
 		name = "yanky",
-		lazy = false,
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		keys = {
-			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
-			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
-			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
-			{ "<c-n>", "<Plug>(YankyCycleForward)", mode = { "n", "x" } },
-			{ "<c-p>", "<Plug>(YankyCycleBackward)", mode = { "n", "x" } },
+			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
+			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
+			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
+			{ "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Text After Selection" },
+			{ "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Selection" },
+			{ "[y", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
+			{ "]y", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
+			{ "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
+			{ "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
+			{ "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
+			{ "[P", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
+			{ ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and Indent Right" },
+			{ "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and Indent Left" },
+			{ ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
+			{ "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
+			{ "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
+			{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
 		},
 		opts = {
+			highlight = { timer = 150 },
 			picker = {
 				telescope = {
 					use_default_mappings = true,
@@ -106,7 +130,6 @@ return {
 		},
 		config = function(_, opts)
 			require("yanky").setup(opts)
-
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
 		end,
 	},

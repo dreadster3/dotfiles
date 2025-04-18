@@ -3,7 +3,8 @@ return {
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		enabled = function()
-			return not require("dreadster.utils").is_mac()
+			local utils = require("dreadster.utils")
+			return not utils.is_mac()
 		end,
 		lazy = false,
 		version = false, -- set this if you want to always pull the latest change

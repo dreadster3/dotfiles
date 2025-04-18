@@ -1,8 +1,8 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter" },
 		name = "cmp",
+		event = { "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -13,7 +13,6 @@ return {
 			"luasnip",
 			"saadparwaiz1/cmp_luasnip",
 			"cmpgit",
-			"copilotcmp",
 		},
 		config = function(_, opts)
 			local cmp = require("cmp")
@@ -25,7 +24,7 @@ return {
 				})
 			end
 		end,
-		opts = function(_, opts)
+		opts = function()
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 			local kind_icons = {
 				Text = "󰉿",
@@ -63,7 +62,7 @@ return {
 
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
-			local local_opts = vim.tbl_deep_extend("force", opts or {}, {
+			return {
 				completion = { completeopt = "menuone,noselect,noinsert" },
 				preselect = cmp.PreselectMode.Item,
 				window = {
@@ -154,17 +153,15 @@ return {
 						end,
 					}),
 				},
-				sources = {
-					{ name = "lazydev", group_index = 0 },
-					{ name = "path", group_index = 0 },
-					{ name = "copilot", group_index = 0, max_item_count = 3 },
-					{ name = "codeium", group_index = 0, max_item_count = 3 },
-					{ name = "nvim_lsp", group_index = 0 },
-					{ name = "luasnip", group_index = 0, max_item_count = 3 },
-					{ name = "emoji", group_index = 0, trigger_characters = { ":" } },
-					{ name = "git", group_index = 1 },
-					{ name = "buffer", group_index = 2, max_item_count = 5 },
-				},
+				sources = cmp.config.sources({
+					{ name = "lazydev" },
+					{ name = "nvim_lsp" },
+					{ name = "path" },
+					{ name = "luasnip", max_item_count = 3 },
+					{ name = "emoji", trigger_characters = { ":" } },
+					{ name = "git" },
+					{ name = "buffer", max_item_count = 5 },
+				}),
 				experimental = {
 					ghost_text = {
 						hl_group = "CmpGhostText",
@@ -173,9 +170,7 @@ return {
 				disabled_filetypes = {
 					"sagarename",
 				},
-			})
-
-			return local_opts
+			}
 		end,
 	},
 	{
