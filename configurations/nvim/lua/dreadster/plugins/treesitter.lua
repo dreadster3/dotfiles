@@ -39,7 +39,8 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		name = "treesitter-context",
-		event = { "BufReadPost", "BufNewFile" },
+		cmd = { "TSContextEnable", "TSContextDisable", "TSContextToggle" },
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		keys = {
 			{
 				"gc",
@@ -49,7 +50,10 @@ return {
 				desc = "Go to treesitter context",
 			},
 		},
-		opts = {},
+		opts = {
+			mode = "cursor",
+			max_lines = 3,
+		},
 	},
 	{
 		"echasnovski/mini.ai",

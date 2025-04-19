@@ -36,10 +36,39 @@ return {
 		"folke/trouble.nvim",
 		cmd = "Trouble",
 		keys = {
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+			{ "<leader>xs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+			{ "<leader>xS", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/... (Trouble)" },
+			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 			{
-				"<leader>gl",
-				":Trouble diagnostics<CR>",
-				desc = "Trouble diagnostics",
+				"[q",
+				function()
+					if require("trouble").is_open() then
+						require("trouble").prev({ skip_groups = true, jump = true })
+					else
+						local ok, err = pcall(vim.cmd.cprev)
+						if not ok then
+							vim.notify(err, vim.log.levels.ERROR)
+						end
+					end
+				end,
+				desc = "Previous Trouble/Quickfix Item",
+			},
+			{
+				"]q",
+				function()
+					if require("trouble").is_open() then
+						require("trouble").next({ skip_groups = true, jump = true })
+					else
+						local ok, err = pcall(vim.cmd.cnext)
+						if not ok then
+							vim.notify(err, vim.log.levels.ERROR)
+						end
+					end
+				end,
+				desc = "Next Trouble/Quickfix Item",
 			},
 		},
 		opts = {},
@@ -50,44 +79,33 @@ return {
 		dependencies = { "icons" },
 		event = "BufReadPost",
 		keys = {
-			{
-				"¬",
-				":BufferLineCycleNext<CR>",
-				desc = "Cycle to next buffer in buffer line",
-			},
-			{
-				"<A-l>",
-				":BufferLineCycleNext<CR>",
-				desc = "Cycle to next buffer in buffer line",
-			},
-			{
-				"]b",
-				":BufferLineCycleNext<CR>",
-				desc = "Cycle to next buffer in buffer line",
-			},
-			{
-				"<A-h>",
-				":BufferLineCyclePrev<CR>",
-				desc = "Cycle to previous buffer in buffer line",
-			},
-			{
-				"˙",
-				":BufferLineCyclePrev<CR>",
-				desc = "Cycle to previous buffer in buffer line",
-			},
-			{
-				"[b",
-				":BufferLineCyclePrev<CR>",
-				desc = "Cycle to previous buffer in buffer line",
-			},
+			{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+			{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+			{ "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+			{ "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+			{ "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Buffers to the Left" },
+			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+			{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+			{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+			{ "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+			{ "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
 		},
 		opts = {
 			options = {
+				close_command = function(n)
+					Snacks.bufdelete(n)
+				end,
+				right_mouse_command = function(n)
+					Snacks.bufdelete(n)
+				end,
+				diagnostics = "nvim_lsp",
 				offsets = {
 					{
-						filetype = "NvimTree",
-						text = "File Explorer",
-						text_align = "center",
+						filetype = "neo-tree",
+						text = "Neo-tree",
+						highlight = "Directory",
+						text_align = "left",
 					},
 				},
 			},
@@ -143,16 +161,29 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
+				signature = {
+					auto_open = { enabled = false },
+				},
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
 				bottom_search = true, -- use a classic bottom cmdline for search
 				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
 			},
-			messages = { enabled = false },
+		},
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		opts = {
+			bind = true,
+			floating_window_above_cur_line = false,
+			floating_window_off_x = 0,
+			floating_window_off_y = -2,
+			handler_opts = {
+				border = "rounded",
+			},
 		},
 	},
 	{

@@ -1,3 +1,4 @@
+;; yaml
 BasedOnStyle: LLVM
 IndentWidth: 4
 ContinuationIndentWidth: 4

@@ -1,3 +1,4 @@
+;; typescript
 function {{_file_name_}}() {
 	return (<div></div>);
 }

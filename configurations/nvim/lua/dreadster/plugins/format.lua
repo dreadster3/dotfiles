@@ -33,17 +33,7 @@ return {
 		opts = {
 			formatters_by_ft = {
 				c = { "clang_format" },
-				lua = { "stylua" },
-				go = { "goimports", "gofmt" },
-				rust = { "rustfmt" },
-				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-				terraform = { "terraform_fmt" },
-				nix = { "nixfmt" },
 				sh = { "beautysh" },
-				json = { "prettier" },
-				markdown = { "prettier" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
 				proto = { "buf" },
 				toml = { "taplo" },
 				["*"] = { "codespell" },
@@ -67,68 +57,12 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		name = "nvim-lint",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {
 			-- Event to trigger linters
 			events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 			linters_by_ft = {
-				lua = { "luacheck" },
-				python = { "ruff", "mypy" },
-				rust = { "clippy" },
-				terraform = { "tflint", "trivy" },
-				go = { "staticcheck", "trivy", "nilaway" },
-				nix = { "statix", "deadnix" },
 				["*"] = { "typos" },
-			},
-			linters = {
-				luacheck = {
-					args_prepend = { "--globals", "vim" },
-				},
-				staticcheck = {
-					cmd = "staticcheck",
-					args = { "-f", "json", "./..." },
-					append_fname = false,
-				},
-				nilaway = {
-					cmd = "nilaway",
-					args = { "-json", "-pretty-print=false", "./..." },
-					append_fname = false,
-					stdin = false,
-					stream = "stdout",
-					ignore_exitcode = true,
-					parser = function(output, bufnr)
-						local diagnostics = {}
-						local decoded = vim.json.decode(output)
-						local bufname = vim.api.nvim_buf_get_name(bufnr)
-
-						for _, nilaway in pairs(decoded) do
-							local messages = nilaway.nilaway
-							for _, result in ipairs(messages) do
-								local position_str = result.posn
-								local splits = vim.split(position_str, ":")
-								local filename = splits[1]
-								local row = tonumber(splits[2]) - 1
-								local column = tonumber(splits[3]) - 1
-								local message = result.message
-
-								if filename ~= bufname then
-									break
-								end
-
-								table.insert(diagnostics, {
-									lnum = row,
-									col = column,
-									end_col = column,
-									end_lnum = row,
-									severity = vim.diagnostic.severity.WARN,
-									message = message,
-								})
-							end
-						end
-
-						return diagnostics
-					end,
-				},
 			},
 		},
 		config = function(_, opts)
@@ -164,11 +98,16 @@ return {
 			local linters_by_ft = {}
 			for ft, linters in pairs(opts.linters_by_ft) do
 				linters_by_ft[ft] = {}
-				for _, linter in ipairs(linters) do
-					if vim.fn.executable(lint.linters[linter].cmd) == 1 then
-						vim.list_extend(linters_by_ft[ft], { linter })
+				for _, l in ipairs(linters) do
+					local linter = lint.linters[l]
+					if type(linter) == "function" then
+						linter = linter()
+					end
+
+					if vim.fn.executable(linter.cmd) == 1 then
+						vim.list_extend(linters_by_ft[ft], { l })
 					else
-						vim.notify("Linter " .. linter .. " not found.", vim.log.levels.WARN)
+						vim.notify("Linter " .. l .. " not found.", vim.log.levels.WARN)
 					end
 				end
 			end

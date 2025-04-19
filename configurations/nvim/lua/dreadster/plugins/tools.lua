@@ -37,89 +37,22 @@ return {
 		},
 	},
 	{
-		"iamcco/markdown-preview.nvim",
-		name = "markdown-preview",
-		version = "*",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview" },
-		build = "cd app && npx --yes yarn install",
-		ft = { "markdown" },
-		keys = {
-			{
-				"<leader>md",
-				"<CMD>MarkdownPreviewToggle<CR>",
-				desc = "Toggle markdown preview",
-			},
-		},
-	},
-	{
-		"hiphish/rainbow-delimiters.nvim",
-		version = "*",
-		name = "rainbow",
-		main = "rainbow-delimiters.setup",
-		opts = {
-			blacklist = { "markdown" },
-		},
-	},
-	{
 		"nvimdev/template.nvim",
 		version = false,
+		lazy = false,
 		name = "template",
 		cmd = { "Template" },
-		init = function()
-			local mappings = {
-				typescript = { "function.ts" },
-				cmake = { "VCMakeLists.txt" },
-				text = { "conanfile.txt" },
-				yaml = { "clangformat" },
-			}
-
-			local temp_table = {}
-
-			for filetype, filenames in pairs(mappings) do
-				for _, filename in ipairs(filenames) do
-					temp_table[filename] = filetype
-				end
-			end
-
-			-- Add any template that filetype cannot be detected
-			vim.filetype.add({ filename = temp_table })
-		end,
 		config = function(_, opts)
 			require("template").setup(opts)
-
 			require("template").register("{{_dir_}}", function()
 				vim.fn.expand("%:p:h")
 			end)
-
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("find_template")
 		end,
 		opts = {
 			author = "dreadster3",
 			email = "afonso.antunes@live.com.pt",
 			temp_dir = vim.fn.expand("$HOME/.config/nvim/template"),
-		},
-	},
-	{
-		"johnfrankmorgan/whitespace.nvim",
-		name = "whitespace",
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = { "WhitespaceTrim" },
-		init = function()
-			vim.api.nvim_create_user_command("WhitespaceTrim", function()
-				require("whitespace").trim()
-			end, {})
-		end,
-		opts = {
-			highlight = "DiffDelete",
-			ignored_filetypes = {
-				"TelescopePrompt",
-				"Trouble",
-				"help",
-				"noice",
-				"glow",
-				"gitcommit",
-			},
-			ignore_terminal = true,
 		},
 	},
 	{
@@ -158,7 +91,35 @@ return {
 			datapath = vim.fn.stdpath("data"),
 		},
 	},
-	{ "stevearc/overseer.nvim", name = "overseer", opts = {} },
+	{
+		"stevearc/overseer.nvim",
+		name = "overseer",
+		cmd = {
+			"OverseerOpen",
+			"OverseerClose",
+			"OverseerToggle",
+			"OverseerSaveBundle",
+			"OverseerLoadBundle",
+			"OverseerDeleteBundle",
+			"OverseerRunCmd",
+			"OverseerRun",
+			"OverseerInfo",
+			"OverseerBuild",
+			"OverseerQuickAction",
+			"OverseerTaskAction",
+			"OverseerClearCache",
+		},
+		keys = {
+			{ "<leader>ow", "<cmd>OverseerToggle<cr>", desc = "Task list" },
+			{ "<leader>oo", "<cmd>OverseerRun<cr>", desc = "Run task" },
+			{ "<leader>oq", "<cmd>OverseerQuickAction<cr>", desc = "Action recent task" },
+			{ "<leader>oi", "<cmd>OverseerInfo<cr>", desc = "Overseer Info" },
+			{ "<leader>ob", "<cmd>OverseerBuild<cr>", desc = "Task builder" },
+			{ "<leader>ot", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
+			{ "<leader>oc", "<cmd>OverseerClearCache<cr>", desc = "Clear cache" },
+		},
+		opts = {},
+	},
 	{
 		"danymat/neogen",
 		name = "neogen",
@@ -183,7 +144,7 @@ return {
 				desc = "Replace in files (Spectre)"
 			}
 		}
-		,
+,
 	},
 	{
 		"cshuaimin/ssr.nvim",
@@ -223,139 +184,7 @@ return {
 			picker = "telescope",
 		},
 	},
-	{ "lervag/vimtex",          name = "vimtex",   init = function() end },
-	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-			"nvim-lua/plenary.nvim",
-			"antoinemadec/FixCursorHold.nvim",
-			"treesitter",
-			"nvim-neotest/neotest-go",
-			"nvim-neotest/neotest-python",
-		},
-		keys = {
-			{ "<leader>t", "", desc = "+test" },
-			{
-				"<leader>tt",
-				function()
-					require("neotest").run.run(vim.fn.expand("%"))
-				end,
-				desc = "Run File (Neotest)",
-			},
-			{
-				"<leader>tT",
-				function()
-					require("neotest").run.run(vim.uv.cwd())
-				end,
-				desc = "Run All Test Files (Neotest)",
-			},
-			{
-				"<leader>tr",
-				function()
-					require("neotest").run.run()
-				end,
-				desc = "Run Nearest (Neotest)",
-			},
-			{
-				"<leader>tl",
-				function()
-					require("neotest").run.run_last()
-				end,
-				desc = "Run Last (Neotest)",
-			},
-			{
-				"<leader>ts",
-				function()
-					require("neotest").summary.toggle()
-				end,
-				desc = "Toggle Summary (Neotest)",
-			},
-			{
-				"<leader>to",
-				function()
-					require("neotest").output.open({ enter = true, auto_close = true })
-				end,
-				desc = "Show Output (Neotest)",
-			},
-			{
-				"<leader>tO",
-				function()
-					require("neotest").output_panel.toggle()
-				end,
-				desc = "Toggle Output Panel (Neotest)",
-			},
-			{
-				"<leader>tS",
-				function()
-					require("neotest").run.stop()
-				end,
-				desc = "Stop (Neotest)",
-			},
-			{
-				"<leader>tw",
-				function()
-					require("neotest").watch.toggle(vim.fn.expand("%"))
-				end,
-				desc = "Toggle Watch (Neotest)",
-			},
-			{
-				"<leader>tW",
-				function()
-					require("neotest").watch.toggle(vim.uv.cwd())
-				end,
-				desc = "Toggle Watch (Neotest)",
-			},
-		},
-		opts = function()
-			local opts = {
-				adapters = {
-					require("neotest-go")({ recursive_run = true }),
-					require("neotest-python"),
-				},
-			}
-
-			return opts
-		end,
-		config = function(_, opts)
-			-- get neotest namespace (api call creates or returns namespace)
-			local neotest_ns = vim.api.nvim_create_namespace("neotest")
-			vim.diagnostic.config({
-				virtual_text = {
-					format = function(diagnostic)
-						local message =
-							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
-						return message
-					end,
-				},
-			}, neotest_ns)
-
-			require("neotest").setup(opts)
-
-			vim.api.nvim_create_user_command("NeotestWatch", function(args)
-				local first = tostring(args.fargs[1])
-				if first == "" then
-					first = vim.uv.cwd() or vim.fn.expand("%s")
-				end
-
-				require("neotest").watch.toggle(first)
-			end, {
-				desc = "Neotest watch current working directory",
-				nargs = "?",
-			})
-		end,
-	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		name = "render-markdown",
-		dependencies = { "treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
-		ft = { "markdown" },
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {
-			file_types = { "markdown" },
-		},
-	},
+	{ "lervag/vimtex", name = "vimtex", init = function() end },
 	{ "laytan/cloak.nvim", opts = {} },
 	{
 		"christoomey/vim-tmux-navigator",
@@ -368,13 +197,34 @@ return {
 			"TmuxNavigatorProcessList",
 		},
 		keys = {
-			{ "<c-h>", "<cmd>TmuxNavigateLeft<cr>",  mode = { "n", "t" } },
-			{ "<c-j>", "<cmd>TmuxNavigateDown<cr>",  mode = { "n", "t" } },
-			{ "<c-k>", "<cmd>TmuxNavigateUp<cr>",    mode = { "n", "t" } },
+			{ "<c-h>", "<cmd>TmuxNavigateLeft<cr>", mode = { "n", "t" } },
+			{ "<c-j>", "<cmd>TmuxNavigateDown<cr>", mode = { "n", "t" } },
+			{ "<c-k>", "<cmd>TmuxNavigateUp<cr>", mode = { "n", "t" } },
 			{ "<c-l>", "<cmd>TmuxNavigateRight<cr>", mode = { "n", "t" } },
 		},
 		init = function()
 			vim.g.tmux_navigator_no_mappings = 1
 		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		name = "nvim_comment",
+		keys = {
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line", mode = "n" },
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_visual)", desc = "Toggle comment for line visual", mode = "v" },
+			{ "<C-_>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line", mode = "n" },
+			{ "<C-_>", "<Plug>(comment_toggle_linewise_visual)", desc = "Toggle comment for line visual", mode = "v" },
+		},
+	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			rename = { enabled = true },
+			buffer = { enabled = true },
+			words = { enable = true },
+		},
 	},
 }

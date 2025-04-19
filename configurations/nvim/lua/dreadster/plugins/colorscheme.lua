@@ -32,6 +32,9 @@ return {
 					FloatBorder = { fg = colors[accent_name] },
 					FloatTitle = { fg = colors.text },
 
+					-- LSP saga
+					SagaBorder = { fg = colors[accent_name] },
+
 					-- Neotree
 					NeoTreeDirectoryName = { fg = colors[accent_name] },
 					NeoTreeDirectoryIcon = { fg = colors[accent_name] },
@@ -41,6 +44,11 @@ return {
 					-- Noice
 					NoiceCmdlinePopupBorder = { fg = colors[accent_name] },
 					NoiceCmdlineIcon = { fg = colors[accent_name] },
+
+					-- Cmp
+					CmpItemKindCopilot = { fg = colors.green },
+					CmpItemKindCodeium = { fg = colors.green },
+					CmpGhostText = { link = "Comment", default = true },
 				}
 			end,
 		},

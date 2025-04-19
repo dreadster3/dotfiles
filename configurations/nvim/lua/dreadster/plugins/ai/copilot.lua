@@ -15,18 +15,18 @@ return {
 		"CopilotC-Nvim/CopilotChat.nvim",
 		name = "copilot-chat",
 		cmd = { "CopilotChat", "CopilotChatAgents", "CopilotChatModels", "CopilotChatExplain" },
-		branch = "canary",
+		branch = "main",
 		enabled = function()
 			local utils = require("dreadster.utils")
 			return utils.is_mac()
 		end,
 		dependencies = {
-			{ "copilot" },      -- or github/copilot.vim
+			{ "copilot" }, -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
 		keys = {
-			{ "<leader>a",  "",             desc = "+ai",                           mode = { "n", "v" } },
+			{ "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
 			{
 				"<leader>aa",
 				function()
@@ -55,9 +55,9 @@ return {
 				mode = { "n", "v" },
 			},
 			-- Show help actions with telescope
-			{ "<leader>ad", pick("help"),   desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
+			{ "<leader>ad", pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
 			-- Show prompts actions with telescope
-			{ "<leader>ap", pick("prompt"), desc = "Prompt Actions (CopilotChat)",  mode = { "n", "v" } },
+			{ "<leader>ap", pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
 		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
@@ -93,12 +93,13 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		name = "copilot",
+		build = "Copilot auth",
 		enabled = function()
 			local utils = require("dreadster.utils")
 			return utils.is_mac()
 		end,
 		cmd = { "Copilot" },
-		event = { "InsertEnter" },
+		event = { "BufReadPost" },
 		opts = {
 			panel = {
 				enabled = false,
@@ -114,24 +115,45 @@ return {
 			},
 		},
 	},
-	{
-		"zbirenbaum/copilot-cmp",
-		name = "copilotcmp",
-		enabled = function()
-			local utils = require("dreadster.utils")
-			return utils.is_mac()
-		end,
-		main = "copilot_cmp",
-		lazy = true,
-		dependencies = { "copilot" },
-		opts = {},
-		config = function(_, opts)
-			local copilot_cmp = require("copilot_cmp")
-			copilot_cmp.setup(opts)
 
-			require("dreadster.utils.lsp").on_attach(function(_)
-				copilot_cmp._on_insert_enter({})
-			end, "copilot")
-		end,
+	{
+		"hrsh7th/nvim-cmp",
+		optional = true,
+		dependencies = {
+			{
+				"zbirenbaum/copilot-cmp",
+				name = "copilotcmp",
+				enabled = function()
+					local utils = require("dreadster.utils")
+					return utils.is_mac()
+				end,
+				main = "copilot_cmp",
+				lazy = true,
+				dependencies = { "copilot" },
+				opts = {},
+				config = function(_, opts)
+					local copilot_cmp = require("copilot_cmp")
+					copilot_cmp.setup(opts)
+
+					require("dreadster.utils.lsp").on_attach(function(_)
+						copilot_cmp._on_insert_enter({})
+					end, "copilot")
+				end,
+				specs = {
+					{
+						"hrsh7th/nvim-cmp",
+						optional = true,
+						---@param opts cmp.ConfigSchema
+						opts = function(_, opts)
+							table.insert(opts.sources, 1, {
+								name = "copilot",
+								group_index = 1,
+								priority = 100,
+							})
+						end,
+					},
+				},
+			},
+		},
 	},
 }

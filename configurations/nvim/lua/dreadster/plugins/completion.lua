@@ -1,19 +1,15 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter" },
 		name = "cmp",
+		event = { "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-emoji",
-			"saadparwaiz1/cmp_luasnip",
+			"petertriho/cmp-git",
 			"onsails/lspkind-nvim",
-			"luasnip",
-			"saadparwaiz1/cmp_luasnip",
-			"cmpgit",
-			"copilotcmp",
 		},
 		config = function(_, opts)
 			local cmp = require("cmp")
@@ -25,8 +21,7 @@ return {
 				})
 			end
 		end,
-		opts = function(_, opts)
-			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+		opts = function()
 			local kind_icons = {
 				Text = "󰉿",
 				Method = "󰆧",
@@ -54,36 +49,21 @@ return {
 				Operator = "",
 				TypeParameter = " ",
 				Misc = " ",
-				Copilot = "",
-				Codeium = "",
+				Copilot = " ",
+				Codeium = "󰘦 ",
 			}
-
-			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-			vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#6CC644" })
 
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
-			local local_opts = vim.tbl_deep_extend("force", opts or {}, {
+			return {
 				completion = { completeopt = "menuone,noselect,noinsert" },
 				preselect = cmp.PreselectMode.Item,
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
-				snippet = {
-					expand = function(args)
-						-- For `vsnip` user.
-						-- vim.fn["vsnip#anonymous"](args.body)
-
-						-- For `luasnip` user.
-						require("luasnip").lsp_expand(args.body)
-
-						-- For `ultisnips` user.
-						-- vim.fn["UltiSnips#Anon"](args.body)
-					end,
-				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-d>"] = cmp.mapping.scroll_docs(-4),
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping(function(_)
 						if cmp.visible() then
@@ -100,13 +80,15 @@ return {
 						if cmp.visible() then
 							cmp.select_next_item()
 						else
-							fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+							fallback()
 						end
 					end, { "i", "s" }),
 
-					["<S-Tab>"] = cmp.mapping(function()
+					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
+						else
+							fallback()
 						end
 					end, { "i", "s" }),
 				}),
@@ -154,17 +136,14 @@ return {
 						end,
 					}),
 				},
-				sources = {
-					{ name = "lazydev", group_index = 0 },
-					{ name = "path", group_index = 0 },
-					{ name = "copilot", group_index = 0, max_item_count = 3 },
-					{ name = "codeium", group_index = 0, max_item_count = 3 },
-					{ name = "nvim_lsp", group_index = 0 },
-					{ name = "luasnip", group_index = 0, max_item_count = 3 },
-					{ name = "emoji", group_index = 0, trigger_characters = { ":" } },
-					{ name = "git", group_index = 1 },
-					{ name = "buffer", group_index = 2, max_item_count = 5 },
-				},
+				sources = cmp.config.sources({
+					{ name = "lazydev" },
+					{ name = "nvim_lsp" },
+					{ name = "path" },
+					{ name = "emoji", trigger_characters = { ":" } },
+					{ name = "git" },
+					{ name = "buffer", max_item_count = 5 },
+				}),
 				experimental = {
 					ghost_text = {
 						hl_group = "CmpGhostText",
@@ -173,41 +152,7 @@ return {
 				disabled_filetypes = {
 					"sagarename",
 				},
-			})
-
-			return local_opts
+			}
 		end,
-	},
-	{
-		"petertriho/cmp-git",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		name = "cmpgit",
-		lazy = true,
-		opts = {},
-	},
-	{
-		"L3MON4D3/LuaSnip",
-		name = "luasnip",
-		dependencies = { "rafamadriz/friendly-snippets" },
-		lazy = true,
-		version = "*",
-		build = "make install_jsregexp",
-		config = function(_, opts)
-			require("luasnip").setup(opts)
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
-	},
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		cmd = "LazyDev",
-		opts = {
-			library = {
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				{ path = "LazyVim", words = { "LazyVim" } },
-				{ path = "lazy.nvim", words = { "LazyVim" } },
-			},
-		},
 	},
 }
