@@ -55,6 +55,7 @@ return {
 
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
+			local defaults = require("cmp.config.default")()
 			return {
 				completion = { completeopt = "menuone,noselect,noinsert" },
 				preselect = cmp.PreselectMode.Item,
@@ -152,6 +153,7 @@ return {
 				disabled_filetypes = {
 					"sagarename",
 				},
+				sorting = defaults.sorting,
 			}
 		end,
 	},
