@@ -81,6 +81,7 @@
   "telescope": { "branch": "master", "commit": "a4ed82509cecc56df1c7138920a1aeaf246c0ac5" },
   "telescope-media-files": { "branch": "master", "commit": "0826c7a730bc4d36068f7c85cf4c5b3fd9fb570a" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
+  "telescope-terraform-doc.nvim": { "branch": "main", "commit": "28efe1f3cb2ed4c83fa69000ae8afd2f85d62826" },
   "template": { "branch": "main", "commit": "59955db23613985e031d340756d5c01aebd583a3" },
   "tint": { "branch": "master", "commit": "586e87f00c8b0f5e857cefe10839e41f3e8c6d01" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },

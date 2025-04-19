@@ -33,7 +33,6 @@ return {
 		opts = {
 			formatters_by_ft = {
 				c = { "clang_format" },
-				terraform = { "terraform_fmt" },
 				nix = { "nixfmt" },
 				sh = { "beautysh" },
 				json = { "prettier" },
@@ -66,7 +65,6 @@ return {
 			-- Event to trigger linters
 			events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 			linters_by_ft = {
-				terraform = { "tflint", "trivy" },
 				nix = { "statix", "deadnix" },
 				["*"] = { "typos" },
 			},
