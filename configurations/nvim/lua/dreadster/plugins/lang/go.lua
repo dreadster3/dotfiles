@@ -68,7 +68,12 @@ return {
 		version = "v0.9.0",
 		main = "go",
 		ft = { "go", "gomod" },
-		opts = {},
+		opts = {
+			lsp_inlay_hints = {
+				enable = false,
+				style = "inlay",
+			},
+		},
 		event = { "CmdlineEnter" },
 		specs = {
 			{

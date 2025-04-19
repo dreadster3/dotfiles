@@ -77,6 +77,9 @@ return {
 				require("dreadster.utils.keymaps").on_attach(client, buffer)
 			end)
 
+			-- Enable inlay hints
+			vim.lsp.inlay_hint.enable()
+
 			-- Servers
 			local servers = opts.servers
 			local has_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
