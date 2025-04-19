@@ -33,7 +33,6 @@ return {
 		opts = {
 			formatters_by_ft = {
 				c = { "clang_format" },
-				lua = { "stylua" },
 				terraform = { "terraform_fmt" },
 				nix = { "nixfmt" },
 				sh = { "beautysh" },
@@ -67,15 +66,11 @@ return {
 			-- Event to trigger linters
 			events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 			linters_by_ft = {
-				lua = { "luacheck" },
 				terraform = { "tflint", "trivy" },
 				nix = { "statix", "deadnix" },
 				["*"] = { "typos" },
 			},
 			linters = {
-				luacheck = {
-					args_prepend = { "--globals", "vim" },
-				},
 				staticcheck = {
 					cmd = "staticcheck",
 					args = { "-f", "json", "./..." },

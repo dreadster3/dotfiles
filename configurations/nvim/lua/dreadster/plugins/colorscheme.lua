@@ -41,6 +41,11 @@ return {
 					-- Noice
 					NoiceCmdlinePopupBorder = { fg = colors[accent_name] },
 					NoiceCmdlineIcon = { fg = colors[accent_name] },
+
+					-- Cmp
+					CmpItemKindCopilot = { fg = colors.green },
+					CmpItemKindCodeium = { fg = colors.green },
+					CmpGhostText = { link = "Comment", default = true },
 				}
 			end,
 		},

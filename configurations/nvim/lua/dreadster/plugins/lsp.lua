@@ -101,7 +101,6 @@ return {
 			vim.diagnostic.config(opts.diagnostics)
 
 			require("dreadster.utils.lsp").on_attach(function(client, buffer)
-				vim.notify("Setting keymaps")
 				require("dreadster.utils.keymaps").on_attach(client, buffer)
 			end)
 
