@@ -39,7 +39,6 @@ return {
 	{
 		"nvimdev/template.nvim",
 		version = false,
-		lazy = false,
 		name = "template",
 		cmd = { "Template" },
 		config = function(_, opts)
