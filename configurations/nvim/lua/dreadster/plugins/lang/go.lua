@@ -78,8 +78,7 @@ return {
 		specs = {
 			{
 				"dap",
-
-        -- stylua: ignore
+				-- stylua: ignore
 				keys = {
 					{ "<leader>dc", ":GoDebug<CR>", ft = { "go" }, desc = "[Go] Debug" },
 					{ "<F5>", ":GoDebug<CR>", ft = { "go" }, desc = "[Go] Debug" },
