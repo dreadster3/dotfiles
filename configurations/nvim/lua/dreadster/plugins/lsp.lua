@@ -47,43 +47,16 @@ return {
 					},
 				},
 				servers = {
-					lua_ls = {
-						mason = false,
-						settings = {
-							Lua = {
-								diagnostics = { globals = { "vim", "Snacks" } },
-								workspace = { checkThirdParty = false },
-							},
-						},
-					},
 					texlab = { mason = false },
-					omnisharp = {
-						enable_editorconfig_support = true,
-						enable_ms_build_load_projects_on_demand = false,
-						enable_roslyn_analyzers = false,
-						organize_imports_on_format = true,
-						enable_import_completion = true,
-						sdk_include_prereleases = true,
-						analyze_open_documents_only = false,
-					},
 					clangd = {
 						filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 					},
-					terraformls = {},
-					tflint = {},
 					bashls = {},
 					eslint = { mason = false, settings = { format = false } },
 				},
 				setup = {
 					clangd = function(_, opts)
 						opts.capabilities.offsetEncoding = "utf-8"
-					end,
-					omnisharp = function(_, opts)
-						local utils = require("dreadster.utils")
-						if utils.check_module_installed("omnisharp_extended") then
-							local handler = require("omnisharp_extended").handler
-							opts.handlers = { ["textDocument/definition"] = handler }
-						end
 					end,
 				},
 			}
@@ -174,13 +147,23 @@ return {
 		"glepnir/lspsaga.nvim",
 		dependencies = { "icons", "treesitter" },
 		event = { "LspAttach" },
-		opts = {
-			ui = {
-				border = "rounded",
-				kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-			},
-			outline = { layout = "float" },
-		},
+		opts = function()
+			local keymaps = require("dreadster.utils.keymaps").get()
+			table.insert(keymaps, { "gx", ":Lspsaga show_line_diagnostics<CR>", desc = "Show Line Diagnostics" })
+			table.insert(keymaps, { "gxx", ":Lspsaga show_buf_diagnostics<CR>", desc = "Show Buffer Diagnostics" })
+			table.insert(
+				keymaps,
+				{ "gxxx", ":Lspsaga show_workspace_diagnostics<CR>", desc = "Show Workspace Diagnostics" }
+			)
+			table.insert(keymaps, { "K", ":Lspsaga hover_doc<CR>", desc = "Lspsaga Hover Doc" })
+
+			return {
+				ui = {
+					kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+				},
+				outline = { layout = "float" },
+			}
+		end,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
@@ -188,91 +171,20 @@ return {
 		name = "refactoring",
 		dependencies = { "nvim-lua/plenary.nvim", "treesitter" },
 		main = "refactoring",
+    -- stylua: ignore
 		keys = {
 			{ "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
-			{
-				"<leader>rs",
-				function()
-					require("telescope").extensions.refactoring.refactors()
-				end,
-				mode = { "n", "x", "v" },
-				desc = "Refactor",
-			},
-			{
-				"<leader>ri",
-				function()
-					require("refactoring").refactor("Inline Variable")
-				end,
-				mode = { "n", "v" },
-				desc = "Inline Variable",
-			},
-			{
-				"<leader>rb",
-				function()
-					require("refactoring").refactor("Extract Block")
-				end,
-				desc = "Extract Block",
-			},
-			{
-				"<leader>rf",
-				function()
-					require("refactoring").refactor("Extract Block To File")
-				end,
-				desc = "Extract Block To File",
-			},
-			{
-				"<leader>rP",
-				function()
-					require("refactoring").debug.printf({ below = false })
-				end,
-				desc = "Debug Print",
-			},
-			{
-				"<leader>rp",
-				function()
-					require("refactoring").debug.print_var({ normal = true })
-				end,
-				desc = "Debug Print Variable",
-			},
-			{
-				"<leader>rc",
-				function()
-					require("refactoring").debug.cleanup({})
-				end,
-				desc = "Debug Cleanup",
-			},
-			{
-				"<leader>rf",
-				function()
-					require("refactoring").refactor("Extract Function")
-				end,
-				mode = "v",
-				desc = "Extract Function",
-			},
-			{
-				"<leader>rF",
-				function()
-					require("refactoring").refactor("Extract Function To File")
-				end,
-				mode = "v",
-				desc = "Extract Function To File",
-			},
-			{
-				"<leader>rx",
-				function()
-					require("refactoring").refactor("Extract Variable")
-				end,
-				mode = "v",
-				desc = "Extract Variable",
-			},
-			{
-				"<leader>rp",
-				function()
-					require("refactoring").debug.print_var({})
-				end,
-				mode = "v",
-				desc = "Debug Print Variable",
-			},
+			{ "<leader>rs", function() require("telescope").extensions.refactoring.refactors() end, mode = { "n", "x", "v" }, desc = "Refactor" },
+			{ "<leader>ri", function() require("refactoring").refactor("Inline Variable") end, mode = { "n", "v" }, desc = "Inline Variable" },
+			{ "<leader>rb", function() require("refactoring").refactor("Extract Block") end, desc = "Extract Block" },
+			{ "<leader>rf", function() require("refactoring").refactor("Extract Block To File") end, desc = "Extract Block To File" },
+			{ "<leader>rP", function() require("refactoring").debug.printf({ below = false }) end, desc = "Debug Print" },
+			{ "<leader>rp", function() require("refactoring").debug.print_var({ normal = true }) end, desc = "Debug Print Variable" },
+			{ "<leader>rc", function() require("refactoring").debug.cleanup({}) end, desc = "Debug Cleanup" },
+			{ "<leader>rf", function() require("refactoring").refactor("Extract Function") end, mode = "v", desc = "Extract Function" },
+			{ "<leader>rF", function() require("refactoring").refactor("Extract Function To File") end, mode = "v", desc = "Extract Function To File" },
+			{ "<leader>rx", function() require("refactoring").refactor("Extract Variable") end, mode = "v", desc = "Extract Variable" },
+			{ "<leader>rp", function() require("refactoring").debug.print_var({}) end, mode = "v", desc = "Debug Print Variable" },
 		},
 		config = function(_, opts)
 			require("refactoring").setup(opts)

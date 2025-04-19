@@ -1,8 +1,18 @@
 return {
 	{
 		"rainbow",
+		optional = true,
 		opts = {
 			blacklist = { "markdown" },
+		},
+	},
+	{
+		"conform",
+		optional = true,
+		opts = {
+			formatters_by_ft = {
+				markdown = { "prettier" },
+			},
 		},
 	},
 	{

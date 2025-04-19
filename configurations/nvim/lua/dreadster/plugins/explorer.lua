@@ -9,14 +9,9 @@ return {
 			"MunifTanjim/nui.nvim",
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
+    -- stylua: ignore
 		keys = {
-			{
-				"<leader>e",
-				function()
-					require("neo-tree.command").execute({ action = "focus", toggle = false, dir = vim.fn.getcwd() })
-				end,
-				desc = "Focus neotree",
-			},
+			{ "<leader>e", function() require("neo-tree.command").execute({ action = "focus", toggle = false, dir = vim.fn.getcwd() }) end, desc = "Focus neotree" },
 		},
 		init = function()
 			-- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,

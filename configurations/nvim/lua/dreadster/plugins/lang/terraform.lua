@@ -1,5 +1,15 @@
 return {
 	{
+		"lspconfig",
+		optional = true,
+		opts = {
+			servers = {
+				terraformls = {},
+				tflint = {},
+			},
+		},
+	},
+	{
 		"conform",
 		optional = true,
 		opts = {
@@ -16,8 +26,8 @@ return {
 		optional = true,
 		opts = {
 			linters_by_ft = {
-				terraform = { "tflint", "trivy" },
-				tf = { "tflint", "trivy" },
+				terraform = { "terraform_validate", "tflint", "trivy" },
+				tf = { "terraform_validate", "tflint", "trivy" },
 			},
 		},
 	},

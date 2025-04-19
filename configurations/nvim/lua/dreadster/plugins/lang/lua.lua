@@ -1,5 +1,22 @@
 return {
 	{
+		"lspconfig",
+		optional = true,
+		opts = {
+			servers = {
+				lua_ls = {
+					mason = false,
+					settings = {
+						Lua = {
+							diagnostics = { globals = { "vim", "Snacks" } },
+							workspace = { checkThirdParty = false },
+						},
+					},
+				},
+			},
+		},
+	},
+	{
 		"folke/lazydev.nvim",
 		ft = "lua",
 		cmd = "LazyDev",

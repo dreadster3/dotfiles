@@ -1,6 +1,7 @@
 return {
 	{
 		"lspconfig",
+		optional = true,
 		opts = {
 			servers = {
 				jsonls = {
@@ -23,6 +24,7 @@ return {
 	},
 	{
 		"conform",
+		optional = true,
 		opts = {
 			formatters_by_ft = {
 				json = { "prettier" },

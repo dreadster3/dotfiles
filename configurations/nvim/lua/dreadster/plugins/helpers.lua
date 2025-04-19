@@ -2,39 +2,20 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		name = "autopairs",
-		dependencies = {
-			{
-				"windwp/nvim-ts-autotag",
-				name = "autopairs-ts",
-				opts = {
-					opts = {
-						enable = true,
-						enable_rename = true,
-						enable_close = true,
-						enable_close_on_slash = true,
-					},
-				},
-			},
-		},
 		event = { "InsertEnter" },
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
-		opts = { check_ts = true },
+		opts = {},
 	},
 	{
 		"folke/which-key.nvim",
 		version = "*",
 		event = "VeryLazy",
+    -- stylua: ignore
 		keys = {
-			{
-				"<leader>?",
-				function()
-					require("which-key").show({ global = false })
-				end,
-				desc = "Buffer Keymaps (which-key)",
-			},
+			{ "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Keymaps (which-key)" },
 		},
 		opts = {
 			presets = "helix",
@@ -56,47 +37,28 @@ return {
 					{ "g", group = "goto" },
 					{ "gs", group = "surround" },
 					{ "z", group = "fold" },
+					{
+						"<leader>b",
+						group = "buffer",
+						expand = function()
+							return require("which-key.extras").expand.buf()
+						end,
+					},
+					{
+						"<leader>w",
+						group = "windows",
+						proxy = "<c-w>",
+						expand = function()
+							return require("which-key.extras").expand.win()
+						end,
+					},
+					-- better descriptions
+					{ "gx", desc = "Open with system app" },
 				},
 			},
 		},
 	},
 	{ "folke/todo-comments.nvim", event = "BufReadPre", opts = {} },
-	{
-		"RRethy/vim-illuminate",
-		name = "illuminate",
-		main = "illuminate",
-		event = { "BufReadPre", "BufNewFile" },
-		-- keys = {
-		-- 	{
-		-- 		"[[",
-		-- 		function()
-		-- 			require("illuminate").goto_prev_reference(false)
-		-- 		end,
-		-- 		mode = "n",
-		-- 		desc = "Goto next Reference",
-		-- 	},
-		-- 	{
-		-- 		"]]",
-		-- 		function()
-		-- 			require("illuminate").goto_next_reference(false)
-		-- 		end,
-		-- 		mode = "n",
-		-- 		desc = "Goto previous Reference",
-		-- 	},
-		-- },
-		opts = {
-			delay = 200,
-			large_file_cutoff = 5000,
-			large_file_overrides = {
-				providers = {
-					"lsp",
-				},
-			},
-		},
-		config = function(_, opts)
-			require("illuminate").configure(opts)
-		end,
-	},
 	{
 		"gbprod/yanky.nvim",
 		name = "yanky",
