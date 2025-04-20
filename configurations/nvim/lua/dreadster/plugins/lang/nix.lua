@@ -3,10 +3,8 @@ return {
 		"conform",
 		optional = true,
 		opts = {
-			linters_by_ft = {
-				formatters_by_ft = {
-					nix = { "nixfmt" },
-				},
+			formatters_by_ft = {
+				nix = { "nixfmt" },
 			},
 		},
 	},

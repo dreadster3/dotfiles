@@ -3,6 +3,7 @@
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 8
+vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
@@ -27,7 +28,7 @@ vim.g.mapleader = " "
 -- Fold settings
 vim.opt.foldenable = true
 vim.opt.foldcolumn = "1" -- '0' is not bad
-vim.opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.opt.foldlevelstart = 99
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

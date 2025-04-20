@@ -13,6 +13,7 @@ in {
       newSession = true;
       mouse = true;
       terminal = "tmux-256color";
+      escapeTime = 0;
       plugins = with pkgs.tmuxPlugins; [
         { plugin = resurrect; }
         {
