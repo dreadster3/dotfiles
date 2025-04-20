@@ -38,4 +38,5 @@
   };
 
   security.polkit.enable = true;
+  environment.etc.hosts.mode = "0744";
 }
