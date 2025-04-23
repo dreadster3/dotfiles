@@ -16,6 +16,7 @@ in {
     services.displayManager.sddm = {
       enable = true;
       package = mkForce cfg.package;
+      wayland.enable = true;
     };
   };
 }

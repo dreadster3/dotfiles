@@ -20,7 +20,6 @@
   modules.nixos = {
     aio.enable = true;
     openrgb.enable = true;
-    x11.enable = true;
     nightlight.enable = true;
     flatpak.enable = true;
     nvidia.enable = true;

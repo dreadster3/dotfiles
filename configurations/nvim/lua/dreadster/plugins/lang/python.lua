@@ -13,7 +13,9 @@ return {
 		"nvim-lint",
 		optional = true,
 		opts = {
-			python = { "ruff", "mypy" },
+			linters_by_ft = {
+				python = { "ruff", "mypy" },
+			},
 		},
 	},
 	{
