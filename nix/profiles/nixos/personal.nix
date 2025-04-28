@@ -22,6 +22,7 @@
     network.enable = true;
     sound.enable = true;
     stylix.enable = true;
+    nerdfonts.enable = true;
   };
 
   i18n.extraLocaleSettings = {

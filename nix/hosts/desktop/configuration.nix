@@ -28,7 +28,6 @@
     oryx.enable = true;
     qmk.enable = true;
     zerotier.enable = true;
-    nerdfonts.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;

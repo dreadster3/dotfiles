@@ -7,7 +7,7 @@ in {
   home-manager.users.dreadster = {
     imports = [ ../../profiles/homemanager/personal.nix ];
 
-    home.packages = with pkgs; [ remmina openvpn unstable.warp-terminal ];
+    home.packages = with pkgs; [ remmina openvpn warp-terminal ];
 
     modules.homemanager = {
       settings = {
