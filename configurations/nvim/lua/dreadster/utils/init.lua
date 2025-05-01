@@ -1,7 +1,7 @@
 local M = {}
 
 --- Check if a module is installed and log a warning if it is not
----@param module_name name of the module to check
+---@param module_name string name of the module to check
 M.log_module_failed_load = function(module_name)
 	vim.notify("Failed to load module", vim.log.levels.WARN, { title = module_name })
 end

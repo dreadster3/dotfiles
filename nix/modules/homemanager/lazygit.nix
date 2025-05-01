@@ -13,5 +13,11 @@ in {
     };
   };
 
-  config = mkIf cfg.enable { programs.lazygit = { enable = true; }; };
+  config = mkIf cfg.enable {
+    programs.lazygit = {
+      enable = true;
+      settings = { os = { editPreset = "nvim-remote"; }; };
+    };
+  };
+
 }

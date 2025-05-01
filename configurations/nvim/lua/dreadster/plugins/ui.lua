@@ -107,6 +107,9 @@ return {
 						highlight = "Directory",
 						text_align = "left",
 					},
+					{
+						filetype = "snacks_layout_box",
+					},
 				},
 			},
 		},
@@ -187,46 +190,6 @@ return {
 		},
 	},
 	{
-		"folke/zen-mode.nvim",
-		name = "zenmode",
-		cmd = "ZenMode",
-		keys = { { "<leader>zz", ":ZenMode<CR>", desc = "Toggle zen mode" } },
-		opts = { plugins = { twilight = { enabled = false } } },
-	},
-	{
-		"folke/twilight.nvim",
-		name = "twilight",
-		cmd = "Twilight",
-		opts = { treesitter = true, context = 10 },
-	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		event = { "BufReadPost", "BufNewFile" },
-		opts = {
-			indent = {
-				char = "│",
-				tab_char = "│",
-			},
-			scope = { show_start = false, show_end = false },
-			exclude = {
-				filetypes = {
-					"help",
-					"alpha",
-					"dashboard",
-					"neo-tree",
-					"Trouble",
-					"trouble",
-					"lazy",
-					"mason",
-					"notify",
-					"toggleterm",
-					"lazyterm",
-				},
-			},
-		},
-	},
-	{
 		"echasnovski/mini.icons",
 		name = "icons",
 		main = "mini.icons",
@@ -273,21 +236,5 @@ return {
 		name = "ufo",
 		dependencies = { "kevinhwang91/promise-async" },
 		opts = {},
-	},
-	{
-		"karb94/neoscroll.nvim",
-		name = "neoscroll",
-		opts = {
-			mappings = {
-				"<C-u>",
-				"<C-d>",
-				"<C-b>",
-				"<C-y>",
-				"<C-e>",
-				"zt",
-				"zz",
-				"zb",
-			},
-		},
 	},
 }

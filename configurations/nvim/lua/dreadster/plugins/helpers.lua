@@ -97,15 +97,6 @@ return {
 	},
 	{ "rhysd/git-messenger.vim", cmd = { "GitMessenger" }, opts = {} },
 	{
-		"chrisgrieser/nvim-early-retirement",
-		name = "earlyretirement",
-		main = "early-retirement",
-		event = "VeryLazy",
-		opts = {
-			retirementAgeMins = 15,
-		},
-	},
-	{
 		"rmagatti/auto-session",
 		lazy = false,
 		name = "autosession",

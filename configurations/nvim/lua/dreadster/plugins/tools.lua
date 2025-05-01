@@ -4,7 +4,7 @@ return {
 		name = "lazygit",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		cmd = "LazyGit",
-		keys = { { "<leader>g", "<CMD>LazyGit<CR>", desc = "Lanch lazygit" } },
+		keys = { { "<leader>gg", "<CMD>LazyGit<CR>", desc = "Lazygit" } },
 	},
 	{
 		"akinsho/toggleterm.nvim",
@@ -219,11 +219,23 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
+		-- stylua: ignore
+		keys = {
+            { "<leader>gg",  function() Snacks.lazygit() end, desc = "Lazygit" },
+            { "<leader>z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+			{ "<leader>Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+		},
 		---@type snacks.Config
 		opts = {
-			rename = { enabled = true },
 			buffer = { enabled = true },
+			indent = { enabled = true },
+			input = { enabled = true },
+			lazygit = { enabled = false },
+			rename = { enabled = true },
+			scope = { enabled = true },
+			scroll = { enable = true },
 			words = { enable = true },
+			zen = { enable = true },
 		},
 	},
 }

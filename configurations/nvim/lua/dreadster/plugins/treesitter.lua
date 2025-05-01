@@ -41,15 +41,6 @@ return {
 		name = "treesitter-context",
 		cmd = { "TSContextEnable", "TSContextDisable", "TSContextToggle" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		keys = {
-			{
-				"gc",
-				function()
-					require("treesitter-context").go_to_context(vim.v.count1)
-				end,
-				desc = "Go to treesitter context",
-			},
-		},
 		opts = {
 			mode = "cursor",
 			max_lines = 3,
