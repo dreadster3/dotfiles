@@ -59,7 +59,9 @@ return {
 	{
 		"nvim-lint",
 		opts = {
-			rust = { "clippy" },
+			linters_by_ft = {
+				rust = { "clippy" },
+			},
 		},
 	},
 	{

@@ -48,9 +48,6 @@ return {
 				},
 				servers = {
 					texlab = { mason = false },
-					clangd = {
-						filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-					},
 					bashls = {},
 					eslint = { mason = false, settings = { format = false } },
 				},

@@ -32,7 +32,7 @@ return {
 		},
 	},
 	{
-		"telescope",
+		"telescope.nvim",
 		optional = true,
 		specs = {
 			{

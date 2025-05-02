@@ -1,8 +1,6 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		name = "telescope",
-		main = "telescope",
 		version = false,
 		lazy = true,
 		dependencies = {

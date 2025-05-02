@@ -175,7 +175,7 @@ return {
 		name = "octo",
 		cmd = "Octo",
 		event = { { event = "BufReadCmd", pattern = "octo://*" } },
-		dependencies = { "telescope", "nvim-lua/plenary.nvim", "icons" },
+		dependencies = { "telescope.nvim", "nvim-lua/plenary.nvim", "icons" },
 		opts = {
 			enable_builtin = true,
 			default_to_projects_v2 = true,
@@ -221,7 +221,7 @@ return {
 		lazy = false,
 		-- stylua: ignore
 		keys = {
-            { "<leader>gg",  function() Snacks.lazygit() end, desc = "Lazygit" },
+            -- { "<leader>gg",  function() Snacks.lazygit() end, desc = "Lazygit" },
             { "<leader>z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
 			{ "<leader>Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
 		},

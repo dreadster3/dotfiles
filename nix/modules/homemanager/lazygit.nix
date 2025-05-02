@@ -16,7 +16,10 @@ in {
   config = mkIf cfg.enable {
     programs.lazygit = {
       enable = true;
-      settings = { os = { editPreset = "nvim-remote"; }; };
+      settings = {
+        os.editPreset = "nvim-remote";
+        gui.nerdFontsVersion = 3;
+      };
     };
   };
 
