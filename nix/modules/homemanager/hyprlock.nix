@@ -30,7 +30,7 @@ in {
 
     programs.hyprlock = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       settings = {
         background =
           [{ path = toString ../../../wallpapers/ctp_line_mocha_mauve.jpg; }];

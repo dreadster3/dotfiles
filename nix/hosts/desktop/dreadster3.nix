@@ -72,8 +72,8 @@
 
       # Hyprland
       hyprpaper.wallpapers = {
-        "DP-1" = ../../../wallpapers/shinobu.jpg;
-        "HDMI-A-1" = ../../../wallpapers/anime_vertical.png;
+        "DP-1" = ../../../wallpapers/skirk.png;
+        "HDMI-A-1" = ../../../wallpapers/gojo.png;
       };
     };
 
