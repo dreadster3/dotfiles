@@ -2,6 +2,7 @@
   imports = [
     ./settings.nix
     ./stylix
+    ./git.nix
 
     ./lazygit.nix
     ./openrgb.nix

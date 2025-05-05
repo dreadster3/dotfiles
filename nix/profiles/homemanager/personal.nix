@@ -37,6 +37,12 @@
       };
     };
 
+    git = {
+      enable = true;
+      username = "dreadster3";
+      email = "afonso.antunes@live.com.pt";
+    };
+
     gtk.enable = true;
     firefox.enable = true;
     ssh.enable = true;
@@ -80,12 +86,6 @@
       enable = true;
       flake =
         "${config.home.homeDirectory}/Documents/projects/github/dotfiles/nix";
-    };
-
-    git = {
-      enable = true;
-      userName = "dreadster3";
-      userEmail = "afonso.antunes@live.com.pt";
     };
   };
 }
