@@ -343,6 +343,8 @@ in {
         submap = clean
         bind = $mainMod, Escape, submap, reset
         submap = reset
+
+        source = $HOME/.config/hypr/monitors.conf
       '';
     };
   };
