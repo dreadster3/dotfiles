@@ -25,8 +25,9 @@ function M.on_load(name, fn)
 	end
 end
 
+---@param name string Name of the telescope extension to load
 function M.lazy_load_telescope_extension(name)
-	M.on_load("telescope", function()
+	M.on_load("telescope.nvim", function()
 		require("telescope").load_extension(name)
 	end)
 end
