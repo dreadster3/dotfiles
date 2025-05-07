@@ -2,7 +2,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.alacritty;
-  settings = config.modules.homemanager.settings;
+  inherit (config.modules.homemanager) settings;
 in {
   options = {
     modules.homemanager.alacritty = {
@@ -16,15 +16,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [ ueberzugpp ];
+
     programs.alacritty = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       settings = {
-        font = {
-          size = settings.font.size;
-          normal = settings.font.normal;
-          italic = settings.font.italic;
-        };
+        font = { inherit (settings.font) size normal italic; };
 
         window = {
           padding = {

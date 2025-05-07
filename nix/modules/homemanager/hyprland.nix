@@ -27,11 +27,6 @@ in {
         default = null;
         description = "Terminal to use.";
       };
-      fileManager = mkOption {
-        type = types.package;
-        default = pkgs.xfce.thunar;
-        description = "File manager to use.";
-      };
       monitors = mkOption {
         type = types.monitorMap;
         default = { };
@@ -229,7 +224,8 @@ in {
 
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
-          "$mainMod, E, exec, ${getExe cfg.fileManager}"
+          "$mainMod, E, exec, ${getExe pkgs.alacritty} -e yazi"
+          "$mainMod+Shift, E, exec, ${getExe pkgs.xfce.thunar}"
 
           # Mode keybinds
           "$mainMod, S, togglefloating,"

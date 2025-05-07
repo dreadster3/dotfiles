@@ -18,14 +18,8 @@ in {
       package = cfg.package;
     };
 
-    xdg = {
-      mime.enable = true;
-      mimeApps = {
-        enable = true;
-        defaultApplications = {
-          "application/pdf" = mkDefault "org.pwmt.zathura.desktop";
-        };
-      };
+    xdg.mimeApps.defaultApplications = {
+      "application/pdf" = mkDefault "org.pwmt.zathura.desktop";
     };
   };
 }

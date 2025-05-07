@@ -64,5 +64,7 @@
     ./i3.nix
     ./qt.nix
     ./flatpak.nix
+    ./yazi.nix
+    ./eog.nix
   ];
 }

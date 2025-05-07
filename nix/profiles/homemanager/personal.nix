@@ -43,6 +43,7 @@
       email = "afonso.antunes@live.com.pt";
     };
 
+    eog.enable = true;
     gtk.enable = true;
     firefox.enable = true;
     ssh.enable = true;
@@ -69,7 +70,7 @@
         poetry.enable = true;
       };
     };
-    ranger.enable = true;
+    yazi.enable = true;
     lazygit.enable = true;
     bitwarden.enable = true;
     zathura.enable = true;

@@ -103,6 +103,7 @@ in {
             format = "󰋊 {percentage_used}%";
             path = "/";
             on-click = "thunar";
+            on-click-right = "alacritty -e yazi";
           };
           clock = {
             format = "   {:%H:%M:%S} ";
