@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, ... }: {
   imports = [ ../users.nix ];
 
   home-manager.users.dreadster = {
@@ -7,6 +7,7 @@
     nixpkgs.config.cudaSupport = true;
 
     modules.homemanager = {
+      alacritty.enable = lib.mkForce false;
       firefox.enable = true;
       pentest.enable = true;
     };
