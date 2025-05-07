@@ -66,5 +66,6 @@
     ./flatpak.nix
     ./yazi.nix
     ./eog.nix
+    ./zoxide.nix
   ];
 }

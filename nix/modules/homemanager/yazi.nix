@@ -22,6 +22,8 @@ in {
       ffmpeg # Video thumbnail
     ];
 
+    modules.homemanager.zoxide.enable = mkDefault true;
+
     programs.yazi = {
       enable = true;
       inherit (cfg) package;

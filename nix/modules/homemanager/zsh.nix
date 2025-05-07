@@ -4,7 +4,7 @@ let
   cfg = config.modules.homemanager.zsh;
 
   dynamicEnvVariables =
-    foldlAttrs (acc: name: value: "export ${toUpper name}=$(cat ${value})") ""
+    foldlAttrs (_: name: value: "export ${toUpper name}=$(cat ${value})") ""
     cfg.dynamicEnvVariables;
 in {
   options = {
@@ -30,11 +30,6 @@ in {
         "source $HOME/.nix-profile/etc/profile.d/nix.sh");
       plugins = [
         {
-          name = "zsh-z";
-          file = "share/zsh-z/zsh-z.plugin.zsh";
-          src = pkgs.zsh-z;
-        }
-        {
           name = "zsh-nix-shell";
           file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
           src = pkgs.zsh-nix-shell;
@@ -49,7 +44,12 @@ in {
           src = ../../../configurations/powerlevel10k;
           file = "p10k.zsh";
         }
-      ];
+      ] ++ optional (!config.programs.zoxide.enable) {
+        name = "zsh-z";
+        file = "share/zsh-z/zsh-z.plugin.zsh";
+        src = pkgs.zsh-z;
+      };
+
       oh-my-zsh = {
         enable = true;
         plugins = [
