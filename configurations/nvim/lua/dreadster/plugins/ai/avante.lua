@@ -15,13 +15,14 @@ return {
 			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = "make BUILD_FROM_SOURCE=true",
+		build = "make",
 		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
 		dependencies = {
 			"treesitter",
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			"echasnovski/mini.pick",
 			"icons",
 			{
 				-- support for image pasting
@@ -42,6 +43,7 @@ return {
 			},
 			{
 				"render-markdown",
+				optional = true,
 				opts = {
 					file_types = { "Avante" },
 				},
