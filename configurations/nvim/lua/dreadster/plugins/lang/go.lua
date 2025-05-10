@@ -1,6 +1,7 @@
 return {
 	{
 		"lspconfig",
+		optional = true,
 		opts = {
 			servers = {
 				gopls = {

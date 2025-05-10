@@ -27,6 +27,7 @@ in {
     programs.yazi = {
       enable = true;
       inherit (cfg) package;
+      shellWrapperName = "y";
       plugins = {
         inherit (pkgs.yaziPlugins)
           diff git mount lsar chmod smart-enter smart-filter;
