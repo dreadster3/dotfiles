@@ -1,6 +1,8 @@
 { pkgs, ... }: {
   imports = [ ../users.nix ];
 
+  users.users.dreadster.extraGroups = [ "dialout" ];
+
   home-manager.users.dreadster = {
     imports = [ ../../profiles/homemanager/personal.nix ];
 

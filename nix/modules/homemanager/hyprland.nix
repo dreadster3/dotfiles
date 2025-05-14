@@ -341,6 +341,7 @@ in {
         submap = reset
 
         source = $HOME/.config/hypr/monitors.conf
+        source = $HOME/.config/hypr/startup.conf
       '';
     };
   };
