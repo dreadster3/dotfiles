@@ -21,6 +21,8 @@
       postman
       dbeaver-bin
 
+      shell-gpt
+
       hypnotix
       pkgs.stable.rustdesk-flutter
     ];
