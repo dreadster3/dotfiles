@@ -2,11 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [
-    ../profiles/server.nix
-    ../users.nix
-    ./home.nix
+    ../../profiles/nixos/server.nix
+    ./dreadster.nix
+    ./coolify.nix
 
     ./hardware-configuration.nix
   ];
@@ -22,20 +22,16 @@
     };
   };
 
-  users.groups.coolify = { gid = 9999; };
-  users.users.coolify = {
-    shell = pkgs.bash;
-    isSystemUser = true;
-    hashedPassword = "!";
-    group = "coolify";
-    uid = 9999;
-    extraGroups = [ "docker" "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIlwnL7LOKNAGPCQvoaHcIwWi600lwQmeiY8fu56JQ6 coolify@nixvps"
+  services.chrony = {
+    enable = true;
+    servers = [
+      "0.europe.pool.ntp.org"
+      "1.europe.pool.ntp.org"
+      "2.europe.pool.ntp.org"
+      "3.europe.pool.ntp.org"
     ];
   };
 
   networking.hostName = "nixvps";
-
   system.stateVersion = "23.11";
 }
