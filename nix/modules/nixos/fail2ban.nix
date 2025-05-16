@@ -16,7 +16,7 @@ in {
         factor = "24";
         overalljails = true;
       };
-      ignoreIP = [ "172.19.0.0/16" ];
+      ignoreIP = [ "172.16.0.0/12" ];
     };
   };
 }

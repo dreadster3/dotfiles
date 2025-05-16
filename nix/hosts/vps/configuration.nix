@@ -32,6 +32,8 @@
     ];
   };
 
+  modules.nixos.ssh.permitRootLogin = "prohibit-password";
+
   networking.hostName = "nixvps";
   system.stateVersion = "23.11";
 }
