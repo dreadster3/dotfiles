@@ -20,6 +20,7 @@ in {
       jq # JSON preview
       unzip # Archive preview
       ffmpeg # Video thumbnail
+      dragon-drop # Drag and drop
     ];
 
     modules.homemanager.zoxide.enable = mkDefault true;
@@ -32,9 +33,7 @@ in {
         inherit (pkgs.yaziPlugins)
           diff git mount lsar chmod smart-enter smart-filter;
       };
-      initLua = ''
-        require("git"):setup()
-      '';
+      initLua = builtins.readFile ./init.lua;
       settings = {
         plugin.prepend_fetchers = [
           {
@@ -83,6 +82,32 @@ in {
             on = "F";
             run = "plugin smart-filter";
             desc = "Smart filter";
+          }
+          {
+            on = "!";
+            for = "unix";
+            run = ''shell "$SHELL" --block'';
+            desc = "OPEN $SHELL here";
+          }
+          {
+            on = "<C-n>";
+            run =
+              ''shell -- ${getExe pkgs.dragon-drop} -x -i -T "$1" --confirm'';
+            desc = "Drag and drop";
+          }
+          {
+            on = "y";
+            run = [
+              ''
+                shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list''
+              "yank"
+            ];
+            desc = "Yank and Copy file path to clipboard";
+          }
+          {
+            on = [ "g" "r" ];
+            run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
+            desc = "cd to git root";
           }
         ];
       };
