@@ -1,10 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [ ../users.nix ];
 
   users.users.dreadster.extraGroups = [ "dialout" ];
 
   home-manager.users.dreadster = {
-    imports = [ ../../profiles/homemanager/personal.nix ];
+    imports = [
+      ../../profiles/homemanager/personal.nix
+      inputs.zen-browser.homeModules.beta
+    ];
 
     home.packages = with pkgs; [
       playerctl
@@ -81,17 +84,18 @@
       };
     };
 
+    programs.zen-browser.enable = true;
     xdg.mimeApps.defaultApplications = {
-      "x-www-browser" = "app.zen_browser.zen.desktop";
-      "text-html" = "app.zen_browser.zen.desktop";
-      "x-scheme-handler/http" = "app.zen_browser.zen.desktop";
-      "x-scheme-handler/https" = "app.zen_browser.zen.desktop";
-      "application/x-extension-htm" = "app.zen_browser.zen.desktop";
-      "application/x-extension-html" = "app.zen_browser.zen.desktop";
-      "application/x-extension-shtml" = "app.zen_browser.zen.desktop";
-      "application/xhtml+xml" = "app.zen_browser.zen.desktop";
-      "application/x-extension-xhtml" = "app.zen_browser.zen.desktop";
-      "application/x-extension-xht" = "app.zen_browser.zen.desktop";
+      "x-www-browser" = "zen-beta.desktop";
+      "text-html" = "zen-beta.desktop";
+      "x-scheme-handler/http" = "zen-beta.desktop";
+      "x-scheme-handler/https" = "zen-beta.desktop";
+      "application/x-extension-htm" = "zen-beta.desktop";
+      "application/x-extension-html" = "zen-beta.desktop";
+      "application/x-extension-shtml" = "zen-beta.desktop";
+      "application/xhtml+xml" = "zen-beta.desktop";
+      "application/x-extension-xhtml" = "zen-beta.desktop";
+      "application/x-extension-xht" = "zen-beta.desktop";
     };
 
     home.stateVersion = "23.11";

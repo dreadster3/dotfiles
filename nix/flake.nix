@@ -28,6 +28,12 @@
     };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, catppuccin, stylix, sops-nix
