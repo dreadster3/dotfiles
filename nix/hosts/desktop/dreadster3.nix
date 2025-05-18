@@ -81,6 +81,19 @@
       };
     };
 
+    xdg.mimeApps.defaultApplications = {
+      "x-www-browser" = "app.zen_browser.zen.desktop";
+      "text-html" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/http" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/https" = "app.zen_browser.zen.desktop";
+      "application/x-extension-htm" = "app.zen_browser.zen.desktop";
+      "application/x-extension-html" = "app.zen_browser.zen.desktop";
+      "application/x-extension-shtml" = "app.zen_browser.zen.desktop";
+      "application/xhtml+xml" = "app.zen_browser.zen.desktop";
+      "application/x-extension-xhtml" = "app.zen_browser.zen.desktop";
+      "application/x-extension-xht" = "app.zen_browser.zen.desktop";
+    };
+
     home.stateVersion = "23.11";
   };
 }
