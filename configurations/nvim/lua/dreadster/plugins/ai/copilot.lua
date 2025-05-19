@@ -41,6 +41,12 @@ return {
 				question_header = "  " .. user .. " ",
 				answer_header = "  Copilot ",
 				auto_insert_mode = true,
+				mappings = {
+					reset = {
+						normal = "<leader>ax",
+						insert = "<C-l>",
+					},
+				},
 				window = {
 					width = 0.2,
 				},
