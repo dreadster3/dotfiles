@@ -7,6 +7,8 @@ with lib; {
     extraGroups = [ "networkmanager" "wheel" "adbusers" ]
       ++ optional config.virtualisation.docker.enable "docker"
       ++ optional config.programs.wireshark.enable "wireshark"
-      ++ optional config.modules.nixos.oryx.enable "plugdev";
+      ++ optional config.modules.nixos.oryx.enable "plugdev"
+      ++ optional config.hardware.sane.enable "scanner"
+      ++ optional config.services.printing.enable "lp";
   };
 }

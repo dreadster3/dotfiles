@@ -7,7 +7,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.printing.enable = true;
-    services.printing.drivers = with pkgs; [ hplipWithPlugin ];
+    environment.systemPackages = with pkgs; [ hplipWithPlugin simple-scan ];
+
+    services.printing = {
+      enable = true;
+      drivers = with pkgs; [ hplipWithPlugin ];
+    };
+
+    services.avahi = { enable = true; };
+
+    hardware.sane = {
+      enable = true;
+      extraBackends = with pkgs; [ hplipWithPlugin ];
+    };
   };
 }
