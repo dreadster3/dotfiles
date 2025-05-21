@@ -6,7 +6,6 @@ return {
 			local utils = require("dreadster.utils")
 			return not utils.is_mac()
 		end,
-		lazy = false,
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
 			provider = "openai",
@@ -44,10 +43,11 @@ return {
 			{
 				"render-markdown",
 				optional = true,
-				opts = {
-					file_types = { "Avante" },
-				},
 				ft = { "Avante" },
+				opts = function(_, opts)
+					table.insert(opts.file_types, "Avante")
+					return opts
+				end,
 			},
 		},
 	},
