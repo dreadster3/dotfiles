@@ -16,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     programs.wireshark = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
     };
   };
 }

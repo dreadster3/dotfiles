@@ -28,6 +28,7 @@
     oryx.enable = true;
     qmk.enable = true;
     zerotier.enable = true;
+    wireshark.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;
