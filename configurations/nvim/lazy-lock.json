@@ -50,7 +50,7 @@
   "mini.pick": { "branch": "main", "commit": "f02e64580a547346128799ba667dfc0e29737532" },
   "miniai": { "branch": "main", "commit": "b91997d220086e92edc1fec5ce82094dcc234291" },
   "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
-  "neotest": { "branch": "master", "commit": "ef492755730e59e1d8122c461abbd086bee4c76b" },
+  "neotest": { "branch": "master", "commit": "d66cf4e05a116957f0d3a7755a24291c7d1e1f72" },
   "neotest-golang": { "branch": "main", "commit": "5d1fdb068914ac23593495e71ecf9b1fad309b45" },
   "neotest-python": { "branch": "master", "commit": "a2861ab3c9a0bf75a56b11835c2bfc8270f5be7e" },
   "neotree": { "branch": "v3.x", "commit": "f481de16a0eb59c985abac8985e3f2e2f75b4875" },

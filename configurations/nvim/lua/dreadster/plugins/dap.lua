@@ -94,6 +94,7 @@ return {
 	{
 		"nvim-neotest/neotest",
 		name = "neotest",
+		version = "*",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
