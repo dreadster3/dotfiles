@@ -3,7 +3,7 @@ return {
 		"stevearc/conform.nvim",
 		name = "conform",
 		dependencies = { "mason" },
-		cmd = { "ConformInfo", "FormatDisable", "FormatEnable" },
+		cmd = { "ConformInfo", "Format", "FormatDisable", "FormatEnable" },
 		event = { "BufWritePre" },
 		config = function(_, opts)
 			require("conform").setup(opts)
@@ -26,6 +26,12 @@ return {
 				vim.g.disable_autoformat = false
 			end, {
 				desc = "Re-enable autoformat-on-save",
+			})
+
+			vim.api.nvim_create_user_command("Format", function()
+				require("conform").format({ async = true })
+			end, {
+				desc = "Format buffer",
 			})
 		end,
 		---@module "conform"
