@@ -21,7 +21,7 @@ in {
         enable = true;
         defaultApplications = {
           "x-www-browser" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "text-html" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
+          "text/html" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "x-scheme-handler/http" =
             mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "x-scheme-handler/https" =
@@ -33,6 +33,8 @@ in {
           "application/x-extension-shtml" =
             mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/xhtml+xml" =
+            mkDefault "${cfg.package.meta.mainProgram}.desktop";
+          "application/xhtml_xml" =
             mkDefault "${cfg.package.meta.mainProgram}.desktop";
           "application/x-extension-xhtml" =
             mkDefault "${cfg.package.meta.mainProgram}.desktop";

@@ -238,4 +238,21 @@ return {
 			zen = { enable = true },
 		},
 	},
+	-- NOTE: plugin still early in development, check once matured
+	{
+		"marcocofano/excalidraw.nvim",
+		enabled = false,
+		name = "excalidraw",
+		ft = { "markdown" },
+		cmd = "Excalidraw",
+		opts = {
+			storage_dir = "~/.excalidraw",
+			templates_dir = "~/.excalidraw/templates",
+			open_on_create = true,
+			relative_path = true,
+			picker = {
+				link_scene_mapping = "<C-l>",
+			},
+		},
+	},
 }

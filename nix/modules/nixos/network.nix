@@ -8,8 +8,11 @@ in {
 
   config = mkIf cfg.enable {
     programs.nm-applet.enable = true;
-    networking.networkmanager.enable = true;
-    networking.firewall.enable = true;
-    networking.firewall.allowPing = false;
+
+    networking = {
+      networkmanager.enable = true;
+      firewall.enable = true;
+      firewall.allowPing = false;
+    };
   };
 }

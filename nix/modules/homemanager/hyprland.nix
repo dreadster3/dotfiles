@@ -189,6 +189,7 @@ in {
 
           # Tile
           "tile,initialTitle:^(ErgoDox EZ Configurator)$"
+          "tile,initialTitle:^(Excalidraw)$"
 
           # xwaylandvideobridge
           "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"

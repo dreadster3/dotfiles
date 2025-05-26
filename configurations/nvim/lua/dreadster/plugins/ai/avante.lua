@@ -44,6 +44,8 @@ return {
 				"render-markdown",
 				optional = true,
 				ft = { "Avante" },
+				--- @module 'render-markdown'
+				--- @param opts render.md.UserConfig
 				opts = function(_, opts)
 					table.insert(opts.file_types, "Avante")
 					return opts
