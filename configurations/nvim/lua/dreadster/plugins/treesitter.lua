@@ -2,34 +2,42 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		name = "treesitter",
+		main = "nvim-treesitter.configs",
 		dependencies = { "nvim-treesitter/playground" },
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
 		build = ":TSUpdate",
 		version = "*",
 		event = { "BufReadPost", "BufNewFile" },
+		---@type TSConfig
+		---@diagnostic disable-next-line: missing-fields
 		opts = {
 			ensure_installed = {
-				"c",
+				"bash",
+				"diff",
+				"json",
 				"lua",
-				"typescript",
-				"tsx",
-				"html",
-				"java",
-				"cpp",
-				"c_sharp",
-				"css",
-				"go",
 				"markdown",
 				"markdown_inline",
+				"printf",
 				"python",
+				"query",
 				"regex",
+				"vim",
+				"vimdoc",
+				"yaml",
 			},
-			sync_install = false,
 			auto_install = true,
-			highlight = { enable = true, disable = {} },
+			sync_install = false,
+			highlight = { enable = true },
 			indent = { enable = true },
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
+				},
+			},
 			context_commentstring = { enable = true },
 			playground = {
 				enable = true,
@@ -39,6 +47,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		name = "treesitter-context",
+		dependencies = { "treesitter" },
 		cmd = { "TSContextEnable", "TSContextDisable", "TSContextToggle" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {
@@ -49,6 +58,7 @@ return {
 	{
 		"echasnovski/mini.ai",
 		name = "miniai",
+		dependencies = { "treesitter" },
 		main = "mini.ai",
 		event = "VeryLazy",
 		opts = function()
