@@ -4,10 +4,11 @@ let
   inherit (config.lib.formats.rasi) mkLiteral;
   cfg = config.catppuccin.rofi;
   accent = mkLiteral "@${config.catppuccin.accent}";
+  inherit (config.catppuccin) enable;
 in {
   options = { };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && enable) {
     programs.rofi = {
       theme = {
         "*" = mapAttrs (n: v: mkLiteral v) config.catppuccin.colors;

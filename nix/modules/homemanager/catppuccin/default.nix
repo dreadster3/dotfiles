@@ -2,8 +2,15 @@
 with lib;
 let cfg = config.modules.homemanager.catppuccin;
 in {
-  imports =
-    [ ./hyprland.nix ./waybar ./rofi.nix ./colors.nix ./bspwm.nix ./dunst.nix ];
+  imports = [
+    ./hyprland.nix
+    ./waybar
+    ./rofi.nix
+    ./colors.nix
+    ./bspwm.nix
+    ./dunst.nix
+    ./tmux.nix
+  ];
 
   options = {
     modules.homemanager.catppuccin = {
@@ -25,42 +32,18 @@ in {
       CATPPUCCIN_ACCENT = cfg.accent;
     };
 
-    programs.tmux.plugins = with pkgs.tmuxPlugins; [{
-      plugin = cpu;
-      extraConfig = ''
-        set -g status-right "#{E:@catppuccin_status_host}"
-        set -ag status-right "#{E:@catppuccin_status_application}"
-        set -agF status-right "#{E:@catppuccin_status_cpu}"
-        set -ag status-right "#{E:@catppuccin_status_session}"
-        set -ag status-right "#{E:@catppuccin_status_uptime}"
-      '';
-    }];
-
     home.pointerCursor.gtk.enable = true;
 
     catppuccin = {
       enable = true;
-      flavor = cfg.flavor;
-      accent = cfg.accent;
+      inherit (cfg) flavor accent;
 
       cursors.enable = true;
-
       alacritty.enable = true;
       rofi.enable = true;
       kvantum.enable = true;
 
-      tmux = {
-        enable = true;
-        extraConfig = ''
-          set -g @catppuccin_window_text " #W"
-          set -g @catppuccin_window_number "#I"
-          set -g @catppuccin_window_current_number "#F"
-          set -g @catppuccin_window_status_style "rounded"
-          set -g status-right-length 100
-          set -g status-left-length 100
-          set -g status-left ""
-        '';
-      };
+      tmux.enable = true;
 
       # Neovim configurations add the theme
       nvim.enable = false;
