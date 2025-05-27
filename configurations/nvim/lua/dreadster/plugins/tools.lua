@@ -28,6 +28,12 @@ return {
 				mode = { "n", "t", "x" },
 				desc = "Toggle terminal float",
 			},
+			{
+				"«",
+				'<CMD>execute v:count . "ToggleTerm direction=float"<CR>',
+				mode = { "n", "t", "x" },
+				desc = "Toggle terminal float",
+			},
 		},
 		opts = {
 			open_mapping = "<Nop>",
