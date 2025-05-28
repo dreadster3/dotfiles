@@ -22,6 +22,7 @@ in {
       enable = true;
       inherit (cfg) package;
       settings = {
+        # env = { "TERM" = "xterm-256color"; };
         font = { inherit (settings.font) size normal italic; };
 
         window = {

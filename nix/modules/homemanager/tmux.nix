@@ -12,17 +12,10 @@ in {
       prefix = "C-b";
       newSession = true;
       mouse = true;
-      terminal = "tmux-256color";
+      terminal = "screen-256color";
+      focusEvents = true;
       escapeTime = 0;
       plugins = with pkgs.tmuxPlugins; [
-        { plugin = resurrect; }
-        {
-          plugin = continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '10'
-          '';
-        }
         better-mouse-mode
         vim-tmux-navigator
         yank
@@ -40,10 +33,19 @@ in {
             set -g @sessionx-filter-current 'false'
           '';
         }
+        { plugin = resurrect; }
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-save-interval '10'
+          '';
+        }
       ];
       extraConfig = ''
         bind-key v split-window -v -c '#{pane_current_path}'
         bind-key h split-window -h -c '#{pane_current_path}'
+        set-option -a terminal-features 'alacritty:RGB'
       '';
     };
   };

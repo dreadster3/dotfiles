@@ -236,4 +236,17 @@ return {
 		dependencies = { "kevinhwang91/promise-async" },
 		opts = {},
 	},
+	{
+		"nvzone/minty",
+		dependencies = { "nvzone/volt" },
+		cmd = { "Shades", "Huefy" },
+	},
+	{
+		"NvChad/ui",
+		name = "nvchad-ui",
+		lazy = false,
+		init = function()
+			require("nvchad.colorify").run()
+		end,
+	},
 }

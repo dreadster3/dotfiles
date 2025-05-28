@@ -28,7 +28,46 @@ return {
 			},
 			custom_highlights = function(colors)
 				local accent_name = require("dreadster.utils.ui").get_accent_name()
-				return {
+				local generate_color = require("dreadster.utils.colors").mix
+
+				local cmp_hl = {
+					CmpItemKindSnippet = { fg = colors.mauve },
+					CmpItemKindKeyword = { fg = colors.red },
+					CmpItemKindText = { fg = colors.teal },
+					CmpItemKindMethod = { fg = colors.blue },
+					CmpItemKindConstructor = { fg = colors.blue },
+					CmpItemKindFunction = { fg = colors.blue },
+					CmpItemKindFolder = { fg = colors.blue },
+					CmpItemKindModule = { fg = colors.blue },
+					CmpItemKindConstant = { fg = colors.peach },
+					CmpItemKindField = { fg = colors.green },
+					CmpItemKindProperty = { fg = colors.green },
+					CmpItemKindEnum = { fg = colors.green },
+					CmpItemKindUnit = { fg = colors.green },
+					CmpItemKindClass = { fg = colors.yellow },
+					CmpItemKindVariable = { fg = colors.flamingo },
+					CmpItemKindFile = { fg = colors.blue },
+					CmpItemKindInterface = { fg = colors.yellow },
+					CmpItemKindColor = { fg = colors.red },
+					CmpItemKindReference = { fg = colors.red },
+					CmpItemKindEnumMember = { fg = colors.red },
+					CmpItemKindStruct = { fg = colors.blue },
+					CmpItemKindValue = { fg = colors.peach },
+					CmpItemKindEvent = { fg = colors.blue },
+					CmpItemKindOperator = { fg = colors.blue },
+					CmpItemKindTypeParameter = { fg = colors.blue },
+					CmpItemKindCopilot = { fg = colors.green },
+					CmpItemKindCodeium = { fg = colors.green },
+				}
+
+				for key, value in pairs(cmp_hl) do
+					cmp_hl[key] = {
+						fg = value.fg,
+						bg = generate_color(value.fg, colors.base, 70),
+					}
+				end
+
+				return vim.tbl_deep_extend("force", {
 					FloatBorder = { fg = colors[accent_name] },
 					FloatTitle = { fg = colors.text },
 
@@ -46,10 +85,14 @@ return {
 					NoiceCmdlineIcon = { fg = colors[accent_name] },
 
 					-- Cmp
-					CmpItemKindCopilot = { fg = colors.green },
-					CmpItemKindCodeium = { fg = colors.green },
 					CmpGhostText = { link = "Comment", default = true },
-				}
+
+					CmpItemMenu = { fg = colors.overlay0, italic = true },
+					CmpPmenu = { bg = colors.base },
+					CmpItemAbbr = { fg = colors.text },
+					CmpItemAbbrMatch = { fg = colors.blue, bold = true },
+					CmpSel = { bg = colors[accent_name], fg = colors.base, bold = true },
+				}, cmp_hl)
 			end,
 		},
 	},

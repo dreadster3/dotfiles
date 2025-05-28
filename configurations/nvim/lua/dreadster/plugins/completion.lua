@@ -22,45 +22,18 @@ return {
 			end
 		end,
 		opts = function()
-			local kind_icons = {
-				Text = "󰉿",
-				Method = "󰆧",
-				Function = "󰊕",
-				Constructor = "",
-				Field = "",
-				Variable = "󰀫",
-				Class = "",
-				Interface = "",
-				Module = "",
-				Property = "",
-				Unit = "",
-				Value = "󰎠",
-				Enum = "",
-				Keyword = "󰌋",
-				Snippet = "",
-				Color = "󰏘",
-				File = "󰈙",
-				Reference = "",
-				Folder = "󰉋",
-				EnumMember = "",
-				Constant = "󰏿",
-				Struct = "",
-				Event = "",
-				Operator = "",
-				TypeParameter = " ",
-				Misc = " ",
-				Copilot = " ",
-				Codeium = "󰘦 ",
-			}
-
+			local kind_icons = require("dreadster.utils.ui").lsp_icons
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local defaults = require("cmp.config.default")()
+			-- local cmp_menu_max_screen_ratio = 1 / 2
 			return {
 				completion = { completeopt = "menuone,noselect,noinsert" },
 				preselect = cmp.PreselectMode.Item,
 				window = {
-					completion = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered({
+						winhighlight = "Normal:Normal,CursorLine:CmpSel,Search:None,FloatBorder:FloatBorder",
+					}),
 					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
@@ -96,20 +69,21 @@ return {
 				formatting = {
 					format = lspkind.cmp_format({
 						mode = "symbol_text", -- show only symbol annotations
-						maxwidth = {
-							abbr = function()
-								local max_width = math.ceil((1 / 3) * vim.fn.winwidth(0))
-								local kind = math.ceil((1 / 3) * 0.25 * vim.fn.winwidth(0))
-								local menu = math.min(math.ceil((1 / 3) * 0.2 * vim.fn.winwidth(0)), 6)
-								return max_width - kind - menu
-							end,
-							kind = function()
-								return math.ceil((1 / 3) * 0.25 * vim.fn.winwidth(0))
-							end,
-							menu = function()
-								return math.min(math.ceil((1 / 3) * 0.2 * vim.fn.winwidth(0)), 6)
-							end,
-						},
+						-- maxwidth = {
+						-- 	abbr = function()
+						-- 		local max_width = math.ceil(cmp_menu_max_screen_ratio * vim.fn.winwidth(0))
+						-- 		local kind = math.ceil(cmp_menu_max_screen_ratio * 0.25 * vim.fn.winwidth(0))
+						-- 		local menu =
+						-- 			math.min(math.ceil(cmp_menu_max_screen_ratio * 0.2 * vim.fn.winwidth(0)), 6)
+						-- 		return max_width - kind - menu
+						-- 	end,
+						-- 	kind = function()
+						-- 		return math.ceil(cmp_menu_max_screen_ratio * 0.25 * vim.fn.winwidth(0))
+						-- 	end,
+						-- 	menu = function()
+						-- 		return math.min(math.ceil(cmp_menu_max_screen_ratio * 0.2 * vim.fn.winwidth(0)), 6)
+						-- 	end,
+						-- },
 						ellipsis_char = "...",
 						show_labelDetails = true,
 
@@ -118,24 +92,21 @@ return {
 						-- The function below will be called before any actual modifications from lspkind
 						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
 						before = function(entry, item)
-							local menu_icon = {
-								nvim_lsp = "[LSP]",
-								git = "[Git]",
-								luasnip = "[SNIP]",
-								buffer = "[BUF]",
-								path = "[PATH]",
-								nvim_lsp_signature_help = "[SIG]",
-								lazydev = "[LDEV]",
-								copilot = "[AI]",
-								codeium = "[AI]",
-								-- nvim_lua = "[Lua]"
-							}
+							local icon = kind_icons[item.kind] or ""
+							local kind = item.kind or ""
 
-							item.menu = menu_icon[entry.source.name]
+							item.menu = kind
+							item.menu_hl_group = "LineNr"
+							item.kind = icon .. " "
+
+							if kind == "Color" then
+								require("dreadster.utils.colors").lsp(entry, item, "")
+							end
 
 							return item
 						end,
 					}),
+					fields = { "kind", "abbr", "menu" },
 				},
 				sources = cmp.config.sources({
 					{ name = "lazydev" },
