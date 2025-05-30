@@ -32,7 +32,7 @@ return {
 				preselect = cmp.PreselectMode.Item,
 				window = {
 					completion = cmp.config.window.bordered({
-						winhighlight = "Normal:Normal,CursorLine:CmpSel,Search:None,FloatBorder:FloatBorder",
+						winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None,FloatBorder:FloatBorder",
 					}),
 					documentation = cmp.config.window.bordered(),
 				},
@@ -109,12 +109,12 @@ return {
 					fields = { "kind", "abbr", "menu" },
 				},
 				sources = cmp.config.sources({
-					{ name = "lazydev" },
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-					{ name = "emoji", trigger_characters = { ":" } },
-					{ name = "git" },
-					{ name = "buffer", max_item_count = 5 },
+					{ name = "lazydev", group_index = 1 },
+					{ name = "nvim_lsp", group_index = 1 },
+					{ name = "path", group_index = 1 },
+					{ name = "emoji", group_index = 1, trigger_characters = { ":" } },
+					{ name = "git", group_index = 1 },
+					{ name = "buffer", group_index = 1, max_item_count = 5 },
 				}),
 				experimental = {
 					ghost_text = {

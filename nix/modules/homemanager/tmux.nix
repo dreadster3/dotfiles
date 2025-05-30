@@ -12,7 +12,7 @@ in {
       prefix = "C-b";
       newSession = true;
       mouse = true;
-      terminal = "screen-256color";
+      terminal = "alacritty";
       focusEvents = true;
       escapeTime = 0;
       plugins = with pkgs.tmuxPlugins; [
@@ -45,7 +45,7 @@ in {
       extraConfig = ''
         bind-key v split-window -v -c '#{pane_current_path}'
         bind-key h split-window -h -c '#{pane_current_path}'
-        set-option -a terminal-features 'alacritty:RGB'
+        set -ga terminal-features '*:clipboard:strikethrough:usstyle:RGB'
       '';
     };
   };

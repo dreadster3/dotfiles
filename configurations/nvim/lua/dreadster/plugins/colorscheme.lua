@@ -11,6 +11,7 @@ return {
 			transparent_background = true,
 			integrations = {
 				treesitter = true,
+				blink_cmp = false,
 				cmp = true,
 				gitsigns = true,
 				lsp_saga = true,
@@ -26,6 +27,9 @@ return {
 				illuminate = true,
 				lsp_trouble = true,
 			},
+
+			--- @module 'catppuccin'
+			--- @param colors CtpColors<string>
 			custom_highlights = function(colors)
 				local accent_name = require("dreadster.utils.ui").get_accent_name()
 				local generate_color = require("dreadster.utils.colors").mix
@@ -87,11 +91,11 @@ return {
 					-- Cmp
 					CmpGhostText = { link = "Comment", default = true },
 
-					CmpItemMenu = { fg = colors.overlay0, italic = true },
+					CmpItemMenu = { fg = colors.overlay0 },
 					CmpPmenu = { bg = colors.base },
-					CmpItemAbbr = { fg = colors.text },
-					CmpItemAbbrMatch = { fg = colors.blue, bold = true },
-					CmpSel = { bg = colors[accent_name], fg = colors.base, bold = true },
+					CmpItemAbbr = { fg = colors.subtext0, italic = true, bold = false },
+					CmpItemAbbrMatch = { fg = colors.text, italic = false, bold = true },
+					CmpSel = { bg = colors[accent_name], fg = colors.base },
 				}, cmp_hl)
 			end,
 		},

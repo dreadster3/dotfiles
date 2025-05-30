@@ -1,32 +1,31 @@
 { config, lib, pkgs, ... }:
-with lib;
 let
   cfg = config.modules.homemanager.zsh;
 
-  dynamicEnvVariables =
-    foldlAttrs (_: name: value: "export ${toUpper name}=$(cat ${value})") ""
+  dynamicEnvVariables = lib.mapAttrsToList
+    (name: value: "export ${lib.toUpper name}=$(cat ${value})")
     cfg.dynamicEnvVariables;
 in {
   options = {
     modules.homemanager.zsh = {
-      enable = mkEnableOption "zsh";
-      sourceNix = mkEnableOption "zsh.sourceNix";
+      enable = lib.mkEnableOption "zsh";
+      sourceNix = lib.mkEnableOption "zsh.sourceNix";
 
-      dynamicEnvVariables = mkOption {
-        type = types.attrsOf types.str;
+      dynamicEnvVariables = lib.mkOption {
+        type = lib.types.attrsOf lib.types.str;
         default = { };
       };
     };
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.zsh = {
       enable = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       sessionVariables = { "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin"; };
-      initExtra = concatStringsSep "\n" ([ dynamicEnvVariables ]
-        ++ optional cfg.sourceNix
+      initExtra = lib.concatStringsSep "\n" (dynamicEnvVariables
+        ++ lib.optional cfg.sourceNix
         "source $HOME/.nix-profile/etc/profile.d/nix.sh");
       plugins = [
         {
@@ -44,7 +43,7 @@ in {
           src = ../../../configurations/powerlevel10k;
           file = "p10k.zsh";
         }
-      ] ++ optional (!config.programs.zoxide.enable) {
+      ] ++ lib.optional (!config.programs.zoxide.enable) {
         name = "zsh-z";
         file = "share/zsh-z/zsh-z.plugin.zsh";
         src = pkgs.zsh-z;

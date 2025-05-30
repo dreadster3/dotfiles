@@ -7,10 +7,24 @@ return {
 			return not utils.is_mac()
 		end,
 		version = false, -- set this if you want to always pull the latest change
+		---@class avante.Config
 		opts = {
 			provider = "openai",
+			auto_suggestions_provider = "claude",
 			openai = {
-				model = "gpt-4o",
+				model = "o4-mini",
+			},
+			claude = {
+				model = "claude-sonnet-4-20250514",
+			},
+			behaviour = {
+				auto_suggestions = false,
+			},
+			vendors = {
+				["claude-opus-4"] = {
+					__inherited_from = "claude",
+					model = "claude-opus-4-20250514",
+				},
 			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

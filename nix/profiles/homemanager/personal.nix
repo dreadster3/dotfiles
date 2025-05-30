@@ -26,6 +26,7 @@
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     secrets.openai_api_key = { };
+    secrets.anthropic_api_key = { };
   };
 
   modules.homemanager = {
@@ -56,6 +57,7 @@
       enable = true;
       dynamicEnvVariables = lib.mkDefault {
         openai_api_key = config.sops.secrets.openai_api_key.path;
+        anthropic_api_key = config.sops.secrets.anthropic_api_key.path;
       };
     };
     neovim = {
