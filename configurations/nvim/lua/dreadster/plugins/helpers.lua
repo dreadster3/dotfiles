@@ -116,9 +116,10 @@ return {
 	},
 	{
 		"hiphish/rainbow-delimiters.nvim",
-		version = "*",
-		name = "rainbow",
+		name = "rainbow-delimiters",
 		main = "rainbow-delimiters.setup",
+		version = "*",
+		dependencies = { "treesitter" },
 		opts = {},
 	},
 	{

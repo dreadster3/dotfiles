@@ -238,14 +238,23 @@ return {
 	},
 	{
 		"nvzone/minty",
-		dependencies = { "nvzone/volt" },
-		cmd = { "Shades", "Huefy" },
+		dependencies = { "nvzone/volt", "nvzone/menu" },
+		cmd = { "Huefy", "Shades" },
+		opts = {
+			huefy = {
+				border = false,
+			},
+			shades = {
+				border = false,
+			},
+		},
 	},
 	{
 		"NvChad/ui",
 		name = "nvchad-ui",
 		lazy = false,
 		init = function()
+			vim.g.nvmark_hovered = true
 			require("nvchad.colorify").run()
 		end,
 	},

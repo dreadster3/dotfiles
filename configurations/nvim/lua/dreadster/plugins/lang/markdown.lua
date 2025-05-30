@@ -1,6 +1,6 @@
 return {
 	{
-		"rainbow",
+		"rainbow-delimiters",
 		optional = true,
 		opts = {
 			blacklist = { "markdown" },

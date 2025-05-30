@@ -71,12 +71,35 @@ return {
 					}
 				end
 
+				local huefyns = vim.api.nvim_create_namespace("Huefy")
+				local huefyinputns = vim.api.nvim_create_namespace("HuefyInput")
+				local huefytoolsns = vim.api.nvim_create_namespace("HuefyTools")
+				local shadesns = vim.api.nvim_create_namespace("NvShades")
+				local set_hl = vim.api.nvim_set_hl
+
+				set_hl(huefyns, "ExDarkBg", { bg = colors.base })
+				set_hl(huefyns, "ExDarkBorder", { link = "FloatBorder" })
+				set_hl(huefyns, "ExBlack3bg", { bg = colors.base, link = "FloatTitle" })
+
+				set_hl(huefyinputns, "ExBlack2border", { link = "FloatBorder" })
+				set_hl(huefyinputns, "ExBlack2Bg", { bg = colors.base })
+
+				set_hl(huefytoolsns, "ExBlack2border", { link = "FloatBorder" })
+				set_hl(huefytoolsns, "ExBlack2Bg", { bg = colors.base })
+
+				set_hl(shadesns, "ExBlack2border", { link = "FloatBorder" })
+				set_hl(shadesns, "ExBlack2Bg", { bg = colors.base })
+				set_hl(shadesns, "pmenusel", { bg = colors.base, link = "FloatTitle" })
+				set_hl(shadesns, "ExRed", { fg = colors.red })
+				set_hl(shadesns, "ExGreen", { fg = colors.green })
+				set_hl(shadesns, "Function", { fg = colors.text })
+
 				return vim.tbl_deep_extend("force", {
-					FloatBorder = { fg = colors[accent_name] },
 					FloatTitle = { fg = colors.text },
+					FloatBorder = { fg = colors[accent_name] },
 
 					-- LSP saga
-					SagaBorder = { fg = colors[accent_name] },
+					SagaBorder = { link = "FloatBorder" },
 
 					-- Neotree
 					NeoTreeDirectoryName = { fg = colors[accent_name] },
@@ -85,7 +108,7 @@ return {
 					NeoTreeTitleBar = { fg = colors.mantle, bg = colors[accent_name] },
 
 					-- Noice
-					NoiceCmdlinePopupBorder = { fg = colors[accent_name] },
+					NoiceCmdlinePopupBorder = { link = "FloatBorder" },
 					NoiceCmdlineIcon = { fg = colors[accent_name] },
 
 					-- Cmp
