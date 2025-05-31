@@ -9,13 +9,16 @@ return {
 		version = false, -- set this if you want to always pull the latest change
 		---@class avante.Config
 		opts = {
-			provider = "openai",
-			auto_suggestions_provider = "claude",
+			provider = "gemini",
+			auto_suggestions_provider = "gemini",
 			openai = {
 				model = "o4-mini",
 			},
 			claude = {
 				model = "claude-sonnet-4-20250514",
+			},
+			gemini = {
+				model = "gemini-2.5-flash-preview-05-20",
 			},
 			behaviour = {
 				auto_suggestions = false,

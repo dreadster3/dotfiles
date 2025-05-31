@@ -27,6 +27,7 @@
 
     secrets.openai_api_key = { };
     secrets.anthropic_api_key = { };
+    secrets.gemini_api_key = { };
   };
 
   modules.homemanager = {
@@ -58,6 +59,7 @@
       dynamicEnvVariables = lib.mkDefault {
         openai_api_key = config.sops.secrets.openai_api_key.path;
         anthropic_api_key = config.sops.secrets.anthropic_api_key.path;
+        gemini_api_key = config.sops.secrets.gemini_api_key.path;
       };
     };
     neovim = {

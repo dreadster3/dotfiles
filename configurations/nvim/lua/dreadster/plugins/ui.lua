@@ -238,7 +238,7 @@ return {
 	},
 	{
 		"nvzone/minty",
-		dependencies = { "nvzone/volt", "nvzone/menu" },
+		dependencies = { "nvzone/volt" },
 		cmd = { "Huefy", "Shades" },
 		opts = {
 			huefy = {
