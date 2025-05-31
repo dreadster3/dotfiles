@@ -21,6 +21,8 @@ return {
 	{
 		"petertriho/nvim-scrollbar",
 		name = "scrollbar",
+		dependencies = { "gitsigns" },
+		event = "VeryLazy",
 		config = function(_, opts)
 			require("scrollbar").setup(opts)
 			require("scrollbar.handlers.gitsigns").setup()
@@ -140,7 +142,7 @@ return {
 			},
 		},
 	},
-	{ "levouh/tint.nvim", name = "tint", opts = {} },
+	{ "levouh/tint.nvim", event = "VeryLazy", name = "tint", opts = {} },
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",

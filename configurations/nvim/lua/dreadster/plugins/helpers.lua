@@ -120,12 +120,13 @@ return {
 		main = "rainbow-delimiters.setup",
 		version = "*",
 		dependencies = { "treesitter" },
+		event = { "BufReadPre", "BufWritePre", "BufNewFile" },
 		opts = {},
 	},
 	{
 		"johnfrankmorgan/whitespace.nvim",
 		name = "whitespace",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufWritePre", "BufNewFile" },
 		cmd = { "WhitespaceTrim" },
 		init = function()
 			vim.api.nvim_create_user_command("WhitespaceTrim", function()
@@ -145,4 +146,5 @@ return {
 			ignore_terminal = true,
 		},
 	},
+	{ "echasnovski/mini.move", event = { "BufReadPost", "BufWritePost", "BufNewFile" }, version = "*", opts = {} },
 }

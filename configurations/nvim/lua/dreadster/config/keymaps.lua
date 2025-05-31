@@ -32,14 +32,14 @@ noremap({ "i", "n", "s" }, "<esc>", function()
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- Move lines
-noremap("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-noremap("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-noremap("n", "∆", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-noremap("n", "˚", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-noremap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-noremap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-noremap("i", "∆", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-noremap("i", "˚", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+-- noremap("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+-- noremap("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+-- noremap("n", "∆", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+-- noremap("n", "˚", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+-- noremap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+-- noremap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+-- noremap("i", "∆", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+-- noremap("i", "˚", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 
 -- Commenting
 noremap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })

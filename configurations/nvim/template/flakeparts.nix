@@ -1,4 +1,3 @@
-;; nix
 {
   description = "Description for the project";
 
@@ -25,6 +24,9 @@
 
         # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
         packages.default = pkgs.hello;
+
+        # Dev shells
+        devShells.default = pkgs.mkShell { buildInputs = [ ]; };
       };
       flake = {
         # The usual flake attributes can be defined here, including system-
