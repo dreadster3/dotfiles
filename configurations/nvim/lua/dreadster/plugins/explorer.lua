@@ -82,4 +82,28 @@ return {
 			}
 		end,
 	},
+	{
+		"mikavilpas/yazi.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			{
+				"snacks.nvim",
+				opts = {
+					buffer = { enabled = true },
+				},
+			},
+		},
+		keys = {
+			{ "<leader>y", "", desc = "+yazi", mode = { "n", "v" } },
+			{ "<leader>yf", "<cmd>Yazi<cr>", desc = "Open yazi at the current file" },
+			{ "<leader>yc", "<cmd>Yazi cwd<cr>", desc = "Open yazi at the current directory" },
+			{ "<leader>yt", "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session" },
+		},
+		opts = {
+			open_for_directories = false,
+			keymaps = {
+				show_help = "g?",
+			},
+		},
+	},
 }
