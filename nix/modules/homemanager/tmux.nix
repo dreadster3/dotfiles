@@ -29,7 +29,7 @@ in {
         {
           plugin = tmux-sessionx;
           extraConfig = ''
-            set -g @sessionx-bind 's'
+            set -g @sessionx-bind 'o'
             set -g @sessionx-filter-current 'false'
           '';
         }

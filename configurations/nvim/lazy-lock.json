@@ -53,7 +53,7 @@
   "minty": { "branch": "main", "commit": "aafc9e8e0afe6bf57580858a2849578d8d8db9e0" },
   "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
   "neotest": { "branch": "master", "commit": "d66cf4e05a116957f0d3a7755a24291c7d1e1f72" },
-  "neotest-golang": { "branch": "main", "commit": "5718217f750704210a6b62f6b294e272f2bf5516" },
+  "neotest-golang": { "branch": "main", "commit": "6cab68fab3f527119a74f1ef4f82622a0dcdfcb4" },
   "neotest-python": { "branch": "master", "commit": "34c9f6f3dc53fc462ea658b5071238037f95f7aa" },
   "neotree": { "branch": "v3.x", "commit": "f481de16a0eb59c985abac8985e3f2e2f75b4875" },
   "noice.nvim": { "branch": "main", "commit": "cf758e9df66451889aab56613a21b8673f045ec2" },

@@ -30,6 +30,7 @@ in {
             x = 20;
             y = 20;
           };
+          opacity = 0.6;
         };
 
         keyboard.bindings = [{

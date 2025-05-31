@@ -31,6 +31,7 @@ return {
 			--- @module 'catppuccin'
 			--- @param colors CtpColors<string>
 			custom_highlights = function(colors)
+				local transparent_background = require("catppuccin").options.transparent_background
 				local accent_name = require("dreadster.utils.ui").get_accent_name()
 				local generate_color = require("dreadster.utils.colors").mix
 
@@ -77,19 +78,27 @@ return {
 				local shadesns = vim.api.nvim_create_namespace("NvShades")
 				local set_hl = vim.api.nvim_set_hl
 
-				set_hl(huefyns, "ExDarkBg", { bg = colors.base })
+				set_hl(huefyns, "ExDarkBg", { bg = transparent_background and colors.none or colors.base })
 				set_hl(huefyns, "ExDarkBorder", { link = "FloatBorder" })
-				set_hl(huefyns, "ExBlack3bg", { bg = colors.base, link = "FloatTitle" })
+				set_hl(
+					huefyns,
+					"ExBlack3bg",
+					{ bg = transparent_background and colors.none or colors.base, link = "FloatTitle" }
+				)
 
 				set_hl(huefyinputns, "ExBlack2border", { link = "FloatBorder" })
-				set_hl(huefyinputns, "ExBlack2Bg", { bg = colors.base })
+				set_hl(huefyinputns, "ExBlack2Bg", { bg = transparent_background and colors.none or colors.base })
 
 				set_hl(huefytoolsns, "ExBlack2border", { link = "FloatBorder" })
-				set_hl(huefytoolsns, "ExBlack2Bg", { bg = colors.base })
+				set_hl(huefytoolsns, "ExBlack2Bg", { bg = transparent_background and colors.none or colors.base })
 
 				set_hl(shadesns, "ExBlack2border", { link = "FloatBorder" })
-				set_hl(shadesns, "ExBlack2Bg", { bg = colors.base })
-				set_hl(shadesns, "pmenusel", { bg = colors.base, link = "FloatTitle" })
+				set_hl(shadesns, "ExBlack2Bg", { bg = transparent_background and colors.none or colors.base })
+				set_hl(
+					shadesns,
+					"pmenusel",
+					{ bg = transparent_background and colors.none or colors.base, link = "FloatTitle" }
+				)
 				set_hl(shadesns, "ExRed", { fg = colors.red })
 				set_hl(shadesns, "ExGreen", { fg = colors.green })
 				set_hl(shadesns, "Function", { fg = colors.text })
@@ -115,7 +124,7 @@ return {
 					CmpGhostText = { link = "Comment", default = true },
 
 					CmpItemMenu = { fg = colors.overlay0 },
-					CmpPmenu = { bg = colors.base },
+					CmpPmenu = { bg = (transparent_background and colors.none) or colors.base },
 					CmpItemAbbr = { fg = colors.subtext0, italic = true, bold = false },
 					CmpItemAbbrMatch = { fg = colors.text, italic = false, bold = true },
 					CmpSel = { bg = colors[accent_name], fg = colors.base },
