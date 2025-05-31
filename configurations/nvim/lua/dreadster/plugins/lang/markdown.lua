@@ -7,11 +7,31 @@ return {
 		},
 	},
 	{
+		"lspconfig",
+		optional = true,
+		opts = {
+			servers = {
+				marksman = {
+					mason = false,
+				},
+			},
+		},
+	},
+	{
 		"conform",
 		optional = true,
 		opts = {
 			formatters_by_ft = {
-				markdown = { "prettier" },
+				markdown = { "prettier", "markdownlint-cli2" },
+			},
+		},
+	},
+	{
+		"nvim-lint",
+		optional = true,
+		opts = {
+			linters_by_ft = {
+				markdown = { "markdownlint-cli2" },
 			},
 		},
 	},

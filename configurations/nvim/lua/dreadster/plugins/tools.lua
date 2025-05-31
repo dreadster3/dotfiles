@@ -190,7 +190,7 @@ return {
 		},
 	},
 	{ "lervag/vimtex", name = "vimtex", init = function() end },
-	{ "laytan/cloak.nvim", opts = {} },
+	{ "laytan/cloak.nvim", event = { "BufReadPre .env", "BufNewFile .env" }, opts = {} },
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {

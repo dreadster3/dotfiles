@@ -31,6 +31,7 @@ return {
 	},
 	{
 		"conform",
+		optional = true,
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -39,6 +40,7 @@ return {
 	},
 	{
 		"nvim-lint",
+		optional = true,
 		opts = {
 			linters_by_ft = {
 				lua = { "luacheck" },

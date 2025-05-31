@@ -233,6 +233,7 @@ return {
 	{
 		"kevinhwang91/nvim-ufo",
 		name = "ufo",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		dependencies = { "kevinhwang91/promise-async" },
 		opts = {},
 	},

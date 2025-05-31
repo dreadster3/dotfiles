@@ -158,6 +158,9 @@ in {
           # nix
           statix
           deadnix
+
+          # markdown
+          marksman
         ] ++ goPackages ++ rustPackages ++ pythonPackages;
     };
 
