@@ -18,15 +18,16 @@ let
   rustPackages = optionals cfg.rust.enable [
     cfg.rust.package
     pkgs.cargo
+    pkgs.clippy
     pkgs.rustfmt
     pkgs.rust-analyzer
   ];
 
-  pythonPackages = optionals cfg.python.enable ([
-    (cfg.python.package.withPackages (ps: with ps; [ ruff mypy ]))
+  pythonPackages = optionals cfg.python.enable [
+    (cfg.python.package.withPackages (ps: with ps; [ ruff mypy debugpy ]))
     pkgs.basedpyright
     pkgs.djhtml
-  ]);
+  ];
 
   poetryPackage =
     cfg.python.poetry.package.override { python3 = cfg.python.package; };

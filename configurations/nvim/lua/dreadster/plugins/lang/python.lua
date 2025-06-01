@@ -51,7 +51,10 @@ return {
           { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
         },
 		config = function()
-			require("dap-python").setup(require("dreadster.utils").get_pkg_path("debugpy", "/venv/bin/python"))
+			local utils = require("dreadster.utils")
+			local path = utils.is_nixos() and "python" or utils.get_pkg_path("debugpy", "/venv/bin/python")
+
+			require("dap-python").setup(path)
 		end,
 	},
 	{

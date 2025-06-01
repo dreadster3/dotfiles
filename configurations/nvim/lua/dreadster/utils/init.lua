@@ -30,6 +30,11 @@ M.is_linux = function()
 	return uname.sysname == "Linux"
 end
 
+M.is_nixos = function()
+	local uname = vim.loop.os_uname()
+	return M.is_linux() and uname.version:find("NixOS")
+end
+
 M.is_wsl = function()
 	local uname = vim.loop.os_uname()
 
