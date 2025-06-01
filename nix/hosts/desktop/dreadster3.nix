@@ -28,6 +28,7 @@
 
       hypnotix
       pkgs.stable.rustdesk-flutter
+      claude-code
     ];
 
     modules.homemanager = {

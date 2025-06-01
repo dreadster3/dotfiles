@@ -89,4 +89,13 @@ return {
 			},
 		},
 	},
+	{
+		"neotest",
+		optional = true,
+		opts = {
+			adapters = {
+				["rustaceanvim.neotest"] = {},
+			},
+		},
+	},
 }
