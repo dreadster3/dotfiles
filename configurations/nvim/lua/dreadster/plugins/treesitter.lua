@@ -6,7 +6,7 @@ return {
 		dependencies = { "nvim-treesitter/playground" },
 		build = ":TSUpdate",
 		version = "*",
-		event = { "BufReadPost", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "VeryLazy" },
 		---@type TSConfig
 		---@diagnostic disable-next-line: missing-fields
 		opts = {
