@@ -6,7 +6,12 @@ return {
 		dependencies = { "nvim-treesitter/playground" },
 		build = ":TSUpdate",
 		version = "*",
-		event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+		event = { "BufReadPre", "BufWritePre", "BufNewFile", "VeryLazy" },
+		lazy = vim.fn.argc(-1) == 0,
+		init = function(plugin)
+			require("lazy.core.loader").add_to_rtp(plugin)
+			require("nvim-treesitter.query_predicates")
+		end,
 		---@type TSConfig
 		---@diagnostic disable-next-line: missing-fields
 		opts = {

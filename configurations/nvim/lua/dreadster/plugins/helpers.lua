@@ -106,6 +106,10 @@ return {
 			session_lens = {
 				load_on_setup = false,
 			},
+			post_restore_cmds = {
+				-- Forces treesitter to reload
+				"e",
+			},
 		},
 	},
 	{
@@ -119,7 +123,6 @@ return {
 		name = "rainbow-delimiters",
 		main = "rainbow-delimiters.setup",
 		version = "*",
-		dependencies = { "treesitter" },
 		event = { "BufReadPre", "BufWritePre", "BufNewFile" },
 		opts = {},
 	},
