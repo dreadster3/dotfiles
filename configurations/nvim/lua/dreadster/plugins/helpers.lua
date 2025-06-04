@@ -147,4 +147,18 @@ return {
 		},
 	},
 	{ "echasnovski/mini.move", event = { "BufReadPost", "BufWritePost", "BufNewFile" }, version = "*", opts = {} },
+	{
+		"m4xshen/hardtime.nvim",
+		event = { "VeryLazy" },
+		version = "*",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {
+			disable_mouse = false,
+			restriction_mode = "hint",
+			disabled_filetypes = {
+				lazy = false, -- Enable Hardtime in lazy filetype
+				["dapui*"] = false, -- Enable Hardtime in filetype starting with dapui
+			},
+		},
+	},
 }
