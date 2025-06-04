@@ -106,6 +106,7 @@ return {
 				return vim.tbl_deep_extend("force", {
 					FloatTitle = { fg = colors.text },
 					FloatBorder = { fg = colors[accent_name] },
+					LineNr = { fg = (transparent_background and colors.overlay0) or colors.surface1 },
 
 					-- LSP saga
 					SagaBorder = { link = "FloatBorder" },
