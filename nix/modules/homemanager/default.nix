@@ -67,5 +67,6 @@
     ./yazi
     ./eog.nix
     ./zoxide.nix
+    ./nh.nix
   ];
 }

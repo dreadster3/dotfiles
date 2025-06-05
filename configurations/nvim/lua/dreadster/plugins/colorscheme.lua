@@ -108,6 +108,9 @@ return {
 					FloatBorder = { fg = colors[accent_name] },
 					LineNr = { fg = (transparent_background and colors.overlay0) or colors.surface1 },
 
+					-- Gitsigns
+					GitSignsCurrentLineBlame = { link = "LineNr" },
+
 					-- LSP saga
 					SagaBorder = { link = "FloatBorder" },
 

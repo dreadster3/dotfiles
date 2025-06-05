@@ -11,23 +11,23 @@ return {
 		opts = {
 			provider = "gemini",
 			auto_suggestions_provider = "gemini",
-			openai = {
-				model = "o4-mini",
-			},
-			claude = {
-				model = "claude-sonnet-4-20250514",
-			},
-			gemini = {
-				model = "gemini-2.5-flash-preview-05-20",
-			},
-			behaviour = {
-				auto_suggestions = false,
-			},
-			vendors = {
+			providers = {
+				openai = {
+					model = "o4-mini",
+				},
+				claude = {
+					model = "claude-sonnet-4-20250514",
+				},
+				gemini = {
+					model = "gemini-2.5-flash-preview-05-20",
+				},
 				["claude-opus-4"] = {
 					__inherited_from = "claude",
 					model = "claude-opus-4-20250514",
 				},
+			},
+			behaviour = {
+				auto_suggestions = false,
 			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

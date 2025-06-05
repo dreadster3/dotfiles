@@ -78,6 +78,7 @@
     lazygit.enable = true;
     bitwarden.enable = true;
     zathura.enable = true;
+    nh.enable = true;
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;
@@ -85,12 +86,4 @@
   };
 
   systemd.user.startServices = "sd-switch";
-
-  programs = {
-    nh = {
-      enable = true;
-      flake =
-        "${config.home.homeDirectory}/Documents/projects/github/dotfiles/nix";
-    };
-  };
 }
