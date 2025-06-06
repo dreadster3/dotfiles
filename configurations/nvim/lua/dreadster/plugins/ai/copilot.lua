@@ -39,6 +39,7 @@ return {
 			local user = vim.env.USER or "User"
 			return {
 				question_header = "  " .. user .. " ",
+				model = "claude-sonnet-4",
 				answer_header = "  Copilot ",
 				auto_insert_mode = true,
 				mappings = {

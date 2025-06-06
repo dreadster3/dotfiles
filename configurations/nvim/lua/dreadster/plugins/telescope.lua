@@ -2,13 +2,19 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		version = false,
-		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-media-files.nvim",
 			"nvim-telescope/telescope-symbols.nvim",
+			{
+				"nvim-telescope/telescope-ui-select.nvim",
+				config = function()
+					require("telescope").load_extension("ui-select")
+				end,
+			},
 		},
 		cmd = { "Telescope" },
+		event = { "VeryLazy" },
 		keys = {
 			{
 				"<leader>fb",
@@ -61,7 +67,9 @@ return {
 						n = { ["q"] = require("telescope.actions").close },
 					},
 				},
-				extensions = { media_files = { find_cmd = "rg" } },
+				extensions = {
+					media_files = { find_cmd = "rg" },
+				},
 			}
 
 			return opts
