@@ -24,10 +24,11 @@
     defaultSopsFile = lib.mkDefault ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-
-    secrets.openai_api_key = { };
-    secrets.anthropic_api_key = { };
-    secrets.gemini_api_key = { };
+    secrets = {
+      openai_api_key = { };
+      anthropic_api_key = { };
+      gemini_api_key = { };
+    };
   };
 
   modules.homemanager = {

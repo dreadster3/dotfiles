@@ -21,6 +21,8 @@ vim.opt.wrap = false
 vim.opt.title = true
 vim.opt.termguicolors = true
 
+vim.opt.equalalways = false
+
 vim.opt.clipboard = "unnamedplus"
 
 vim.g.mapleader = " "

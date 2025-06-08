@@ -63,24 +63,23 @@ return {
 	{
 		"ahmedkhalf/project.nvim",
 		name = "project",
-		cmd = { "ProjectRoot", "Telescope" },
-		event = { "VeryLazy" },
+		event = "VeryLazy",
+		cmd = { "ProjectRoot" },
 		keys = {
 			{
 				"<leader>fp",
-				":Telescope projects<CR>",
+				"<cmd>Telescope projects<CR>",
 				desc = "Find projects",
 			},
 		},
 		config = function(_, opts)
 			require("project_nvim").setup(opts)
-
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("projects")
 		end,
 		opts = {
 			on_config_done = nil,
-			manual_mode = true,
-			detection_methods = { "pattern" },
+			manual_mode = false,
+			detection_methods = { "lsp", "pattern" },
 			patterns = {
 				".git",
 				"_darcs",
