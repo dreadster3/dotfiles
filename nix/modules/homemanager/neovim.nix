@@ -157,6 +157,7 @@ in {
           beautysh
 
           # nix
+          nil
           statix
           deadnix
 

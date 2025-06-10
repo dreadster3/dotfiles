@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
   ];
 
-  environment.systemPackages = with pkgs; [ vlc libvlc ];
+  environment.systemPackages = with pkgs; [ vlc libvlc quickshell ];
 
   # Disable usb autosuspend
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];

@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     zen-browser = {
@@ -36,8 +41,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, stylix, sops-nix
-    , nixos-wsl, ... }@inputs:
+  outputs = { self, quickshell, nixpkgs, home-manager, catppuccin, stylix
+    , sops-nix, nixos-wsl, ... }@inputs:
     let
       inherit (self) outputs;
 

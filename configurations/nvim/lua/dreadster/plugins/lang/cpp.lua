@@ -5,6 +5,9 @@ return {
 		opts = {
 			servers = {
 				neocmake = {},
+				qmlls = {
+					cmd = { "qmlls", "-E" },
+				},
 				clangd = {
 					cmd = {
 						"clangd",
