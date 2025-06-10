@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
   ];
 
-  environment.systemPackages = with pkgs; [ vlc libvlc quickshell ];
+  environment.systemPackages = with pkgs; [ vlc libvlc quickshell ddcutil ];
 
   # Disable usb autosuspend
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
@@ -29,6 +29,7 @@
     qmk.enable = true;
     zerotier.enable = true;
     wireshark.enable = true;
+    bluetooth.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;

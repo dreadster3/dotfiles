@@ -6,7 +6,12 @@ in {
     modules.nixos.nerdfonts = { enable = mkEnableOption "nerdfonts"; };
   };
   config = mkIf cfg.enable {
-    fonts.packages = with pkgs.nerd-fonts; [ fira-code mononoki victor-mono ];
+    fonts.packages = with pkgs.nerd-fonts; [
+      fira-code
+      mononoki
+      victor-mono
+      pkgs.material-symbols
+    ];
     fonts.fontconfig.enable = true;
 
     home-manager.sharedModules =

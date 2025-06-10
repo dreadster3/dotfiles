@@ -36,5 +36,6 @@
     ./aio.nix
     ./nerdfonts.nix
     ./printing.nix
+    ./bluetooth.nix
   ];
 }

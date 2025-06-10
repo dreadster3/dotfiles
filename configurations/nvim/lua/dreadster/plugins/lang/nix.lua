@@ -1,5 +1,16 @@
 return {
 	{
+		"lspconfig",
+		optional = true,
+		opts = {
+			servers = {
+				nil_ls = {
+					mason = false,
+				},
+			},
+		},
+	},
+	{
 		"conform",
 		optional = true,
 		opts = {

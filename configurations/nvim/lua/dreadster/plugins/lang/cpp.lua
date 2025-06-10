@@ -37,6 +37,7 @@ return {
 		optional = true,
 		opts = {
 			formatters_by_ft = {
+				qml = { "qmlformat" },
 				cmake = { "cmake_format" },
 				cpp = { "clang-format" },
 			},
