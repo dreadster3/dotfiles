@@ -68,5 +68,6 @@
     ./eog.nix
     ./zoxide.nix
     ./nh.nix
+    ./ollama.nix
   ];
 }

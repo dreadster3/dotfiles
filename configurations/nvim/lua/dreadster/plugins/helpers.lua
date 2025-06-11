@@ -113,12 +113,6 @@ return {
 		},
 	},
 	{
-		"b0o/SchemaStore.nvim",
-		name = "schemastore",
-		lazy = true,
-		version = false, -- last release is way too old
-	},
-	{
 		"hiphish/rainbow-delimiters.nvim",
 		name = "rainbow-delimiters",
 		main = "rainbow-delimiters.setup",
