@@ -30,6 +30,7 @@
     zerotier.enable = true;
     wireshark.enable = true;
     bluetooth.enable = true;
+    mobile.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;

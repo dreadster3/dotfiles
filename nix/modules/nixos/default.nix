@@ -37,5 +37,6 @@
     ./nerdfonts.nix
     ./printing.nix
     ./bluetooth.nix
+    ./mobile.nix
   ];
 }
