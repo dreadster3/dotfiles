@@ -2,6 +2,9 @@
   imports = [ ../users.nix ];
 
   users.users.dreadster.extraGroups = [ "dialout" ];
+  users.users.dreadster.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsZxq/uKw1n8bFeXo+Ez+YXbhWwu2AA2LHX3YD74MFU"
+  ];
 
   home-manager.users.dreadster = {
     imports = [
