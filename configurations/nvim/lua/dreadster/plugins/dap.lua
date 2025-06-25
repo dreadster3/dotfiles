@@ -100,7 +100,7 @@ return {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
-			"treesitter",
+			"nvim-treesitter",
 		},
     -- stylua: ignore
 		keys = {

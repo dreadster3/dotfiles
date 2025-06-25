@@ -64,7 +64,7 @@ return {
 		dependencies = {
 			"ray-x/guihua.lua",
 			"lspconfig",
-			"treesitter",
+			"nvim-treesitter",
 		},
 		version = "v0.9.0",
 		main = "go",

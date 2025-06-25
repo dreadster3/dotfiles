@@ -159,7 +159,7 @@ return {
 	},
 	{
 		"glepnir/lspsaga.nvim",
-		dependencies = { "icons", "treesitter" },
+		dependencies = { "icons", "nvim-treesitter" },
 		event = { "LspAttach" },
 		opts = function()
 			local keymaps = require("dreadster.utils.keymaps").get()
@@ -183,7 +183,7 @@ return {
 		"ThePrimeagen/refactoring.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		name = "refactoring",
-		dependencies = { "nvim-lua/plenary.nvim", "treesitter" },
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter" },
 		main = "refactoring",
     -- stylua: ignore
 		keys = {

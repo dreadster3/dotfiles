@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		name = "treesitter",
 		main = "nvim-treesitter.configs",
 		dependencies = { "nvim-treesitter/playground" },
 		build = ":TSUpdate",
@@ -52,7 +51,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		name = "treesitter-context",
-		dependencies = { "treesitter" },
+		dependencies = { "nvim-treesitter" },
 		cmd = { "TSContextEnable", "TSContextDisable", "TSContextToggle" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {
@@ -63,7 +62,7 @@ return {
 	{
 		"echasnovski/mini.ai",
 		name = "miniai",
-		dependencies = { "treesitter" },
+		dependencies = { "nvim-treesitter" },
 		main = "mini.ai",
 		event = "VeryLazy",
 		opts = function()
