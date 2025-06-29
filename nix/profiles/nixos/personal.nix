@@ -8,14 +8,14 @@
     appimage = {
       enable = true;
       binfmt = true;
-
     };
     dconf.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ eog firefox ];
+  environment.systemPackages = with pkgs; [ eog firefox ntfs3g ];
 
   modules.nixos = {
+    archive.enable = true;
     qt.enable = true;
     catppuccin.enable = true;
     thunar.enable = true;

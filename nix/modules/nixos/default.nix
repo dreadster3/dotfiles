@@ -38,5 +38,6 @@
     ./printing.nix
     ./bluetooth.nix
     ./mobile.nix
+    ./archive.nix
   ];
 }

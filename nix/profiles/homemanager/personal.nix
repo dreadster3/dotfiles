@@ -55,6 +55,7 @@
     bat.enable = true;
     alacritty.enable = true;
     kitty.enable = true;
+    mpv.enable = true;
     zsh = {
       enable = true;
       dynamicEnvVariables = lib.mkDefault {

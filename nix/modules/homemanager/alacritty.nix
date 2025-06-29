@@ -46,5 +46,13 @@ in {
         text = replaceStrings [ "\\\\" ] [ "\\" ]
           (builtins.toJSON config.programs.alacritty.settings);
       };
+
+    xdg.configFile."xfce4/helpers.rc" =
+      mkDefault { text = "TerminalEmulator=alacritty"; };
+
+    xdg.mimeApps.defaultApplications = {
+      "x-scheme-handler/terminal" = mkDefault "Alacritty.desktop";
+      "application/x-terminal-emulator" = mkDefault "Alacritty.desktop";
+    };
   };
 }
