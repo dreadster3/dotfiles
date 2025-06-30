@@ -20,7 +20,6 @@ end, { desc = "Delete buffer" })
 noremap("n", "<leader>bo", function()
 	Snacks.bufdelete.other()
 end, { desc = "Delete other buffers" })
-noremap("n", "<C-a>", "ggVG")
 noremap("n", "<leader>cd", ":lua vim.cmd.cd(vim.fn.expand('%:p:h'))<CR>")
 
 noremap({ "i", "n", "s" }, "<esc>", function()
