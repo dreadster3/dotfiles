@@ -15,8 +15,10 @@ in {
 
   config = mkIf cfg.enable {
     services.hardware.openrgb = {
+      inherit (cfg) package;
       enable = true;
-      package = cfg.package;
     };
+
+    hardware.i2c.enable = true;
   };
 }
