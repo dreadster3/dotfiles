@@ -51,6 +51,7 @@ M.lsp_icons = {
 	Misc = "",
 	Copilot = "",
 	Codeium = "󰘦",
+	Supermaven = "",
 }
 
 return M

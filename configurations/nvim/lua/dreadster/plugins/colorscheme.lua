@@ -63,6 +63,7 @@ return {
 					CmpItemKindTypeParameter = { fg = colors.blue },
 					CmpItemKindCopilot = { fg = colors.green },
 					CmpItemKindCodeium = { fg = colors.green },
+					CmpItemKindSupermaven = { fg = colors.green },
 				}
 
 				for key, value in pairs(cmp_hl) do

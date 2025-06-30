@@ -6,9 +6,7 @@ return {
 		event = "InsertEnter",
 		cmd = { "Codeium" },
 		build = ":Codeium Auth",
-		enabled = function()
-			return not require("dreadster.utils").is_mac()
-		end,
+		enabled = false,
 		opts = {
 			enable_cmp_source = true,
 			virtual_text = {
