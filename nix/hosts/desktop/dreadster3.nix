@@ -34,6 +34,7 @@
 
       claude-code
       codex
+      warp-terminal
     ];
 
     modules.homemanager = {
