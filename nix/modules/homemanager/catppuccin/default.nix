@@ -42,6 +42,7 @@ in {
       alacritty.enable = true;
       rofi.enable = true;
       kvantum.enable = true;
+      lazygit.enable = true;
 
       tmux.enable = true;
 
