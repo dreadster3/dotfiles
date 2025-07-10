@@ -124,8 +124,8 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs lib; };
           modules = [
-            ./home/dreadster/steamdeck.nix
-            stylix.homeManagerModules.stylix
+            ./hosts/steamdeck/deck.nix
+            stylix.homeModules.stylix
             sops-nix.homeManagerModules.sops
             catppuccin.homeModules.catppuccin
           ];

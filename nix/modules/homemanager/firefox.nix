@@ -17,30 +17,27 @@ in {
 
     xdg = {
       mime.enable = true;
-      mimeApps = {
-        enable = true;
-        defaultApplications = {
-          "x-www-browser" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "text/html" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "x-scheme-handler/http" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "x-scheme-handler/https" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/x-extension-htm" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/x-extension-html" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/x-extension-shtml" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/xhtml+xml" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/xhtml_xml" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/x-extension-xhtml" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-          "application/x-extension-xht" =
-            mkDefault "${cfg.package.meta.mainProgram}.desktop";
-        };
+      mimeApps.defaultApplications = {
+        "x-www-browser" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "text/html" = mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "x-scheme-handler/http" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "x-scheme-handler/https" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/x-extension-htm" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/x-extension-html" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/x-extension-shtml" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/xhtml+xml" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/xhtml_xml" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/x-extension-xhtml" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
+        "application/x-extension-xht" =
+          mkDefault "${cfg.package.meta.mainProgram}.desktop";
       };
     };
   };

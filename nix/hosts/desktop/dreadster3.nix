@@ -94,7 +94,6 @@
     };
 
     programs.zen-browser.enable = true;
-
     xdg.mimeApps.defaultApplications = {
       "x-www-browser" = "zen-beta.desktop";
       "text/html" = "zen-beta.desktop";

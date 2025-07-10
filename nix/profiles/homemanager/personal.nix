@@ -86,5 +86,7 @@
     rofi.powermenu.enable = lib.mkDefault true;
   };
 
+  xdg.mimeApps.enable = lib.mkDefault true;
+
   systemd.user.startServices = "sd-switch";
 }
