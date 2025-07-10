@@ -24,7 +24,7 @@ in {
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       sessionVariables = { "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin"; };
-      initExtra = lib.concatStringsSep "\n" (dynamicEnvVariables
+      initContent = lib.concatStringsSep "\n" (dynamicEnvVariables
         ++ lib.optional cfg.sourceNix
         "source $HOME/.nix-profile/etc/profile.d/nix.sh");
       plugins = [

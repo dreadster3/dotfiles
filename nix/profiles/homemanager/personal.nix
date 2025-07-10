@@ -8,7 +8,6 @@
     fzf
     tldr
 
-    dig
     pciutils
     lshw
     usbutils

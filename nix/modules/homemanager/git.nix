@@ -10,10 +10,10 @@ in {
         default = pkgs.git;
       };
       username = mkOption {
-        type = types.string;
+        type = types.str;
         default = config.home.username;
       };
-      email = mkOption { type = types.string; };
+      email = mkOption { type = types.str; };
     };
   };
 

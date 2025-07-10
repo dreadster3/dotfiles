@@ -13,7 +13,6 @@
     ];
 
     home.packages = with pkgs; [
-      playerctl
       remmina
 
       wineWowPackages.stable
@@ -21,19 +20,21 @@
 
       betterdiscordctl
 
-      qalculate-gtk
-      gucharmap
-
+      # HTTP client
       postman
-      dbeaver-bin
 
-      shell-gpt
-
+      # IPTV
       hypnotix
-      pkgs.stable.rustdesk-flutter
 
+      # Remote desktop
+      # rustdesk-flutter INFO: waiting for https://github.com/hyprwm/xdg-desktop-portal-hyprland/issues/252
+
+      # AI companion
+      shell-gpt
       claude-code
       codex
+
+      # Terminal emulator
       warp-terminal
     ];
 

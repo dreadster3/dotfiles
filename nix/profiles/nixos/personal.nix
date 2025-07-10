@@ -12,7 +12,16 @@
     dconf.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ eog firefox ntfs3g ];
+  environment.systemPackages = with pkgs; [
+    eog # Image viewer
+    firefox # Web browser
+    ntfs3g # NTFS utilities
+    qalculate-gtk # Calculator
+    gucharmap # Character map
+    playerctl # Media player controller
+    dig # DNS lookup
+    gpu-screen-recorder-gtk # Screen recorder
+  ];
 
   modules.nixos = {
     archive.enable = true;
