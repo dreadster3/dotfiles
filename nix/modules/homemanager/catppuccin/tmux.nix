@@ -16,7 +16,6 @@ in {
           set -agF status-right "#{E:@catppuccin_status_cpu}"
           set -ag status-right "#{E:@catppuccin_status_session}"
           set -ag status-right "#{E:@catppuccin_status_uptime}"
-
         '';
       }];
 

@@ -15,33 +15,38 @@ in {
       terminal = "alacritty";
       focusEvents = true;
       escapeTime = 0;
-      plugins = with pkgs.tmuxPlugins; [
-        better-mouse-mode
-        vim-tmux-navigator
-        yank
-        {
-          plugin = tmux-thumbs;
-          extraConfig = ''
-            set -g @thumbs-unique enabled
-          '';
-        }
-        tmux-fzf
-        {
-          plugin = tmux-sessionx;
-          extraConfig = ''
-            set -g @sessionx-bind 'o'
-            set -g @sessionx-filter-current 'false'
-          '';
-        }
-        { plugin = resurrect; }
-        {
-          plugin = continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '10'
-          '';
-        }
-      ];
+      plugins = with pkgs.tmuxPlugins;
+        lib.mkMerge [
+          (lib.mkBefore [
+            better-mouse-mode
+            vim-tmux-navigator
+            yank
+            {
+              plugin = tmux-thumbs;
+              extraConfig = ''
+                set -g @thumbs-unique enabled
+              '';
+            }
+            tmux-fzf
+            {
+              plugin = tmux-sessionx;
+              extraConfig = ''
+                set -g @sessionx-bind 'o'
+                set -g @sessionx-filter-current 'false'
+              '';
+            }
+          ])
+          (lib.mkAfter [
+            resurrect
+            {
+              plugin = continuum;
+              extraConfig = ''
+                set -g @continuum-restore 'on'
+                set -g @continuum-save-interval '10'
+              '';
+            }
+          ])
+        ];
       extraConfig = ''
         bind-key v split-window -v -c '#{pane_current_path}'
         bind-key h split-window -h -c '#{pane_current_path}'
