@@ -57,6 +57,13 @@ return {
 		},
 	},
 	{
+		"lspconfig",
+		optional = true,
+		opts = {
+			rust_analyzer = { enabled = false },
+		},
+	},
+	{
 		"nvim-lint",
 		opts = {
 			linters_by_ft = {
@@ -69,6 +76,15 @@ return {
 		opts = {
 			formatters_by_ft = {
 				rust = { "rustfmt" },
+			},
+		},
+	},
+	{
+		"neotest",
+		optional = true,
+		opts = {
+			adapters = {
+				["rustaceanvim.neotest"] = {},
 			},
 		},
 	},
@@ -90,12 +106,15 @@ return {
 		},
 	},
 	{
-		"neotest",
+		"hrsh7th/nvim-cmp",
 		optional = true,
-		opts = {
-			adapters = {
-				["rustaceanvim.neotest"] = {},
-			},
-		},
+		dependencies = { "codeium" },
+		opts = function(_, opts)
+			table.insert(opts.sources, 1, {
+				name = "crates",
+				group_index = 1,
+				priority = 100,
+			})
+		end,
 	},
 }
