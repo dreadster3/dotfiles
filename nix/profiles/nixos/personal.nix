@@ -21,6 +21,8 @@
     playerctl # Media player controller
     dig # DNS lookup
     gpu-screen-recorder-gtk # Screen recorder
+
+    unixtools.net-tools # Network tools
   ];
 
   modules.nixos = {

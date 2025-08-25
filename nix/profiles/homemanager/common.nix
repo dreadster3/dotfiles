@@ -18,13 +18,14 @@
     packages = with pkgs; [ wget curl file tree ];
 
     sessionVariables = {
-      XDG_CACHE_DIR = "$HOME/.cache";
-      XDG_CONFIG_HOME = "$HOME/.config";
-      XDG_DATA_HOME = "$HOME/.local/share";
+      # XDG_CACHE_DIR = "$HOME/.cache";
+      # XDG_CONFIG_HOME = "$HOME/.config";
+      # XDG_DATA_HOME = "$HOME/.local/share";
       KUBECONFIG = "$HOME/.kube/config";
     };
   };
 
+  xdg.enable = true;
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
