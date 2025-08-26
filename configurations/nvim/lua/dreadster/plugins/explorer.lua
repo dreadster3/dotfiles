@@ -12,6 +12,7 @@ return {
     -- stylua: ignore
 		keys = {
 			{ "<leader>e", function() require("neo-tree.command").execute({ action = "focus", toggle = false, dir = vim.fn.getcwd() }) end, desc = "Focus neotree" },
+            { "<leader>be", function() require("neo-tree.command").execute({ source = "buffers", toggle = true }) end, desc = "Buffer Explorer", },
 		},
 		init = function()
 			-- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
@@ -43,9 +44,18 @@ return {
 				open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
 				auto_clean_after_session_restore = true,
 				filesystem = {
+					filtered_items = {
+						visible = true,
+					},
 					bind_to_cwd = true,
 					follow_current_file = { enabled = true },
 					use_libuv_file_watcher = true,
+					window = {
+						mappings = {
+							["/"] = { "fuzzy_finder", config = { keep_filter_on_submit = true } },
+							["D"] = { "fuzzy_finder_directory", config = { keep_filter_on_submit = true } },
+						},
+					},
 				},
 				default_component_configs = {
 					indent = {

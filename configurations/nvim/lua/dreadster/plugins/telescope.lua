@@ -14,6 +14,11 @@ return {
 		keys = {
 			{ "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
 			{
+				"<leader>fh",
+				"<cmd>Telescope find_files hidden=true file_ignore_patterns={'.git/'}<CR>",
+				desc = "Find files",
+			},
+			{
 				"<leader>fb",
 				"<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
 				desc = "Buffers",
