@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     feh
     kubectl
+    kubernetes-helm
     neofetch
     fzf
     tldr
