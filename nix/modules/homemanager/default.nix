@@ -70,5 +70,6 @@
     ./nh.nix
     ./ollama.nix
     ./mpv.nix
+    ./k9s.nix
   ];
 }

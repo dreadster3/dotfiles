@@ -3,8 +3,6 @@
 
   home.packages = with pkgs; [
     feh
-    kubectl
-    kubernetes-helm
     neofetch
     fzf
     tldr
@@ -18,6 +16,10 @@
     nix-init
 
     sops
+
+    # Kubernetes
+    kubectl
+    kubernetes-helm
   ];
 
   sops = {
@@ -81,6 +83,7 @@
     bitwarden.enable = true;
     zathura.enable = true;
     nh.enable = true;
+    k9s.enable = true;
 
     # Not enabled defaults
     polybar.tray.enable = lib.mkDefault true;
