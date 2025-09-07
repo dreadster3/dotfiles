@@ -37,6 +37,7 @@
     wireshark.enable = true;
     bluetooth.enable = true;
     mobile.enable = true;
+    wireguard.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;
@@ -57,10 +58,10 @@
 
   # Suspend on idle
   services = {
-    logind.extraConfig = ''
-      IdleAction=suspend
-      IdleActionSec=15min
-    '';
+    logind.settings.Login = {
+      IdleAction = "suspend";
+      IdleActionSec = "15min";
+    };
 
     onedrive.enable = true;
     flatpak.enable = true;

@@ -39,5 +39,6 @@
     ./bluetooth.nix
     ./mobile.nix
     ./archive.nix
+    ./wireguard.nix
   ];
 }
