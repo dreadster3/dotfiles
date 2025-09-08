@@ -8,8 +8,11 @@ in {
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
+      protontricks.enable = true;
     };
 
     environment.systemPackages = with pkgs; [ mangohud vulkan-tools ];
+
+    environment.variables = { STEAM_COMPAT_MOUNTS = "/games"; };
   };
 }
