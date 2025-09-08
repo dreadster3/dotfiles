@@ -28,6 +28,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/games" = {
+    device = "/dev/disk/by-label/GAMES";
+    fsType = "ext4";
+  };
+
   swapDevices = [{ device = "/dev/disk/by-label/SWAP"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
