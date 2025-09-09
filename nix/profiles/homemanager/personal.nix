@@ -20,6 +20,7 @@
     # Kubernetes
     kubectl
     kubernetes-helm
+    istioctl
   ];
 
   sops = {
