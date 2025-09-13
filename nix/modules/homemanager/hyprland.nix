@@ -15,12 +15,12 @@ in {
     modules.homemanager.hyprland = {
       enable = mkEnableOption "hyprland";
       package = mkOption {
-        type = types.package;
-        default = pkgs.hyprland;
+        type = types.nullOr types.package;
+        default = null;
       };
       portalPackage = mkOption {
-        type = types.package;
-        default = pkgs.xdg-desktop-portal-hyprland;
+        type = types.nullOr types.package;
+        default = null;
       };
       terminal = mkOption {
         type = types.nullOr types.package;
@@ -50,6 +50,8 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
+      inherit (cfg) package portalPackage;
+
       xwayland.enable = true;
       systemd = {
         enable = true;
@@ -332,6 +334,7 @@ in {
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
           vrr = 1; # Enable vsync
+          enable_anr_dialog = false;
         };
       };
 

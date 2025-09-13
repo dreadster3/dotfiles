@@ -40,5 +40,6 @@
     ./mobile.nix
     ./archive.nix
     ./wireguard.nix
+    ./nfs.nix
   ];
 }

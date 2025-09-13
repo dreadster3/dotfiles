@@ -30,24 +30,29 @@ in {
 
     services.hypridle = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       settings = {
         general = {
           after_sleep_cmd = "hyprctl dispatch dpms on";
-          before_sleep_cmd = "${hyprlock}/bin/hyprlock";
-          lock_cmd = "${hyprlock}/bin/hyprlock";
+          before_sleep_cmd = "loginctl lock-session";
+          lock_cmd = "pgrep hyprlock || ${hyprlock}/bin/hyprlock";
           ignore_dbus_inhibit = false;
         };
 
         listener = [
           {
-            timeout = 900;
-            on-timeout = "${hyprlock}/bin/hyprlock";
+            timeout = 600;
+            on-timeout = "notify-send 'Locking session in 5 minutes'";
+            on-resume = "notify-send 'Cancelling lockdown in 5 minutes'";
           }
           {
-            timeout = 1200;
-            on-timeout = "hyprctl dispatch dpms off";
+            timeout = 900;
+            on-timeout = "hyprctl dispatch dpms off & loginctl lock-session";
             on-resume = "hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 1800;
+            on-timeout = "systemctl suspend";
           }
         ];
       };

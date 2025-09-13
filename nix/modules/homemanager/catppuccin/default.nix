@@ -38,13 +38,12 @@ in {
       enable = true;
       inherit (cfg) flavor accent;
 
-      cursors.enable = true;
       alacritty.enable = true;
-      rofi.enable = true;
+      cursors.enable = true;
       kvantum.enable = true;
       lazygit.enable = true;
-
       tmux.enable = true;
+      rofi.enable = true;
 
       # Neovim configurations add the theme
       nvim.enable = false;

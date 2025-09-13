@@ -38,6 +38,7 @@
     bluetooth.enable = true;
     mobile.enable = true;
     wireguard.enable = true;
+    nfs.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;
