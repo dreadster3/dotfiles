@@ -12,6 +12,8 @@
     dconf.enable = true;
   };
 
+  powerManagement.enable = true;
+
   environment.systemPackages = with pkgs; [
     eog # Image viewer
     firefox # Web browser

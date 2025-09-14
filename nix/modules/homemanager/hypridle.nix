@@ -4,6 +4,10 @@ let
   cfg = config.modules.homemanager.hypridle;
 
   hyprlock = config.programs.hyprlock.package;
+  notify-send = "${pkgs.libnotify}/bin/notify-send";
+  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  loginctl = "${pkgs.systemd}/bin/loginctl";
+  systemctl = "${pkgs.systemd}/bin/systemctl";
 in {
   options = {
     modules.homemanager.hypridle = {
@@ -33,7 +37,7 @@ in {
       inherit (cfg) package;
       settings = {
         general = {
-          after_sleep_cmd = "hyprctl dispatch dpms on";
+          after_sleep_cmd = "${hyprctl} dispatch dpms on";
           before_sleep_cmd = "loginctl lock-session";
           lock_cmd = "pgrep hyprlock || ${hyprlock}/bin/hyprlock";
           ignore_dbus_inhibit = false;
@@ -42,17 +46,18 @@ in {
         listener = [
           {
             timeout = 600;
-            on-timeout = "notify-send 'Locking session in 5 minutes'";
-            on-resume = "notify-send 'Cancelling lockdown in 5 minutes'";
+            on-timeout = "${notify-send} 'Locking session in 5 minutes'";
+            on-resume = "${notify-send} 'Cancelling lockdown in 5 minutes'";
           }
           {
             timeout = 900;
-            on-timeout = "hyprctl dispatch dpms off & loginctl lock-session";
-            on-resume = "hyprctl dispatch dpms on";
+            on-timeout =
+              "${hyprctl} dispatch dpms off & ${loginctl} lock-session";
+            on-resume = "${hyprctl} dispatch dpms on";
           }
           {
             timeout = 1800;
-            on-timeout = "systemctl suspend";
+            on-timeout = "${systemctl} suspend";
           }
         ];
       };
