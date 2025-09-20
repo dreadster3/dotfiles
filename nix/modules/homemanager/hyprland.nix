@@ -59,7 +59,7 @@ in {
         variables = [ "--all" ];
       };
 
-      plugins = with pkgs.hyprlandPlugins; [ hyprspace ];
+      # plugins = with pkgs.hyprlandPlugins; [ hyprspace ];
 
       settings = {
         "$mainMod" = "SUPER";
@@ -239,7 +239,7 @@ in {
           "Alt, Tab, cyclenext"
           "Alt, Tab, bringactivetotop"
 
-          "$mainMod, Tab, overview:toggle,"
+          # "$mainMod, Tab, overview:toggle,"
 
           # Minimize
           "$mainMod, C, togglespecialworkspace, minimize"
@@ -334,7 +334,7 @@ in {
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
           vrr = 1; # Enable vsync
-          enable_anr_dialog = false;
+          # enable_anr_dialog = false;
         };
       };
 

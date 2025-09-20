@@ -44,6 +44,7 @@ in {
       lazygit.enable = true;
       tmux.enable = true;
       rofi.enable = true;
+      gtk.icon = { inherit (config.catppuccin) enable flavor accent; };
 
       # Neovim configurations add the theme
       nvim.enable = false;

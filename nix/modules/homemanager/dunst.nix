@@ -1,8 +1,6 @@
 { pkgs, config, lib, ... }:
 with lib;
-let
-  cfg = config.modules.homemanager.dunst;
-  colors = config.modules.homemanager.settings.theme.colors;
+let cfg = config.modules.homemanager.dunst;
 in {
   options = {
     modules.homemanager.dunst = { enable = mkEnableOption "dunst"; };

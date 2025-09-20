@@ -32,7 +32,6 @@ in {
           portalPackage = mkDefault config.programs.hyprland.portalPackage;
         };
         rofi.enable = mkDefault true;
-        rofi.package = mkDefault pkgs.rofi-wayland;
         waybar.enable = mkDefault true;
         wlogout.enable = mkDefault true;
         hypridle.enable = mkDefault true;
