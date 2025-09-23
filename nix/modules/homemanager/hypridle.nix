@@ -3,9 +3,9 @@ with lib;
 let
   cfg = config.modules.homemanager.hypridle;
 
-  hyprlock = config.programs.hyprlock.package;
+  hyprlock = "${config.programs.hyprlock.package}/bin/hyprlock";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   systemctl = "${pkgs.systemd}/bin/systemctl";
 in {
@@ -38,8 +38,8 @@ in {
       settings = {
         general = {
           after_sleep_cmd = "${hyprctl} dispatch dpms on";
-          before_sleep_cmd = "loginctl lock-session";
-          lock_cmd = "pgrep hyprlock || ${hyprlock}/bin/hyprlock";
+          before_sleep_cmd = "${loginctl} lock-session";
+          lock_cmd = "pgrep hyprlock || ${hyprlock}";
           ignore_dbus_inhibit = false;
         };
 
@@ -51,8 +51,11 @@ in {
           }
           {
             timeout = 900;
-            on-timeout =
-              "${hyprctl} dispatch dpms off & ${loginctl} lock-session";
+            on-timeout = "${loginctl} lock-session";
+          }
+          {
+            timeout = 1200;
+            on-timeout = "${hyprctl} dispatch dpms off";
             on-resume = "${hyprctl} dispatch dpms on";
           }
           {
