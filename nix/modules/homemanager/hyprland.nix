@@ -229,6 +229,7 @@ in {
           "$mainMod, M, exit,"
           "$mainMod, E, exec, ${getExe pkgs.alacritty} -e yazi"
           "$mainMod+Shift, E, exec, ${getExe pkgs.xfce.thunar}"
+          "$mainMod_CTRL, Q, exec, loginctl lock-session"
 
           # Mode keybinds
           "$mainMod, S, togglefloating,"

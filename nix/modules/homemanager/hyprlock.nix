@@ -25,8 +25,8 @@ in {
       }
     ];
 
-    wayland.windowManager.hyprland.settings.bind =
-      [ "$mainMod_CTRL, Q, exec, ${cfg.package}/bin/hyprlock" ];
+    # wayland.windowManager.hyprland.settings.bind =
+    #   [ "$mainMod_CTRL, Q, exec, ${cfg.package}/bin/hyprlock" ];
 
     programs.hyprlock = {
       enable = true;

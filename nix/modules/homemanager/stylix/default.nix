@@ -11,7 +11,14 @@ in {
       enable = true;
       autoEnable = false;
       targets = {
-        gtk.enable = true;
+        gtk = {
+          enable = true;
+          flatpakSupport.enable = true;
+          extraCss = ''
+            @define-color accent_color #cba6f7;
+            @define-color accent_bg_color #cba6f7;
+          '';
+        };
         feh.enable = true;
         mangohud.enable = true;
         i3.enable = true;
