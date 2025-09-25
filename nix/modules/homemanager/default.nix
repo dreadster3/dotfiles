@@ -71,5 +71,6 @@
     ./ollama.nix
     ./mpv.nix
     ./k9s.nix
+    ./obsidian.nix
   ];
 }

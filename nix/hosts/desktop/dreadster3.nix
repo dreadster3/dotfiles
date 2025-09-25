@@ -86,6 +86,7 @@
       pentest.enable = true;
       easyeffects.enable = true;
       ollama.enable = true;
+      obsidian.enable = true;
 
       # Hyprland
       hyprpaper.wallpapers = {
