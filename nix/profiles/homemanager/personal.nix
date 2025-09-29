@@ -16,11 +16,6 @@
     nix-init
 
     sops
-
-    # Kubernetes
-    kubectl
-    kubernetes-helm
-    istioctl
   ];
 
   sops = {
@@ -59,6 +54,7 @@
     alacritty.enable = true;
     kitty.enable = true;
     mpv.enable = true;
+    kubectl.enable = true;
     zsh = {
       enable = true;
       dynamicEnvVariables = lib.mkDefault {

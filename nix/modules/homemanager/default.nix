@@ -71,6 +71,8 @@
     ./ollama.nix
     ./mpv.nix
     ./k9s.nix
+    ./kubectl.nix
+    ./krew.nix
     ./obsidian.nix
   ];
 }
