@@ -11,28 +11,16 @@ return {
 		},
 		cmd = { "Telescope" },
 		event = { "VeryLazy" },
+		-- stylua: ignore
 		keys = {
 			{ "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-			{
-				"<leader>fh",
-				"<cmd>Telescope find_files hidden=true file_ignore_patterns={'.git/'}<CR>",
-				desc = "Find files",
-			},
-			{
-				"<leader>fb",
-				"<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
-				desc = "Buffers",
-			},
+			{ "<leader>fh", "<cmd>Telescope find_files hidden=true file_ignore_patterns={'.git/'}<CR>", desc = "Find files", },
+			{ "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>", desc = "Buffers", },
 			{ "<leader>fg", ":Telescope live_grep<CR>", desc = "Live grep" },
 			{ "<leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
 			{ "<leader>fs", "<cmd>Telescope <CR>", desc = "Status" },
-			{
-				"<leader>fm",
-				":Telescope media_files<CR>",
-				mode = "n",
-				desc = "Find media files",
-			},
-
+			{ "<leader>fm", ":Telescope media_files<CR>", mode = "n", desc = "Find media files", },
+            { "<leader>fo", ":Telescope lsp_document_symbols<CR>", mode = "n", desc = "Find symbols", },
 			-- Git
 			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
 			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
