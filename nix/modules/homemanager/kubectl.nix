@@ -12,7 +12,12 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ cfg.package kubernetes-helm istioctl ];
+    home.packages = with pkgs; [
+      cfg.package
+      kubernetes-helm
+      istioctl
+      talosctl
+    ];
 
     modules.homemanager = {
       k9s.enable = true;
