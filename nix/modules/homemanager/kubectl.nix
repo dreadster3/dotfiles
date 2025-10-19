@@ -15,6 +15,7 @@ in {
     home.packages = with pkgs; [
       cfg.package
       kubernetes-helm
+      kustomize
       istioctl
       talosctl
     ];
