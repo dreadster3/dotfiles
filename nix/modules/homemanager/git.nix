@@ -20,8 +20,12 @@ in {
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
-      userName = cfg.username;
-      userEmail = cfg.email;
+      settings = {
+        user = {
+          inherit (cfg) email;
+          name = cfg.username;
+        };
+      };
     };
   };
 }

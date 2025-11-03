@@ -203,7 +203,23 @@ return {
 			}
 		end,
 	},
-	{ "laytan/cloak.nvim", event = { "BufReadPre .env", "BufNewFile .env" }, opts = {} },
+	{
+		"laytan/cloak.nvim",
+		event = {
+			{ event = "BufReadPre", pattern = "*.env*" },
+			{ event = "BufNewFile", pattern = "*.env*" },
+		},
+		opts = {
+			cloak_on_leave = true,
+			patterns = {
+				{
+					file_pattern = "*.env*",
+					cloak_pattern = "=.+",
+					replace = nil,
+				},
+			},
+		},
+	},
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {

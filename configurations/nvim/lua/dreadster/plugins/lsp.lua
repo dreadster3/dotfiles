@@ -170,6 +170,7 @@ return {
 				{ "gxxx", ":Lspsaga show_workspace_diagnostics<CR>", desc = "Show Workspace Diagnostics" }
 			)
 			table.insert(keymaps, { "K", ":Lspsaga hover_doc<CR>", desc = "Lspsaga Hover Doc" })
+			table.insert(keymaps, { "gO", ":Lspsaga outline<CR>", desc = "Lspsaga Outline" })
 
 			return {
 				ui = {
