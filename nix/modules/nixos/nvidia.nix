@@ -12,8 +12,6 @@ in {
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    environment.systemPackages = with pkgs; [ glxinfo ];
-
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       open = false;

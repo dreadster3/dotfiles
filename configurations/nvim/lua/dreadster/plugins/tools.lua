@@ -78,7 +78,7 @@ return {
 		end,
 		opts = {
 			on_config_done = nil,
-			manual_mode = false,
+			manual_mode = true,
 			detection_methods = { "lsp", "pattern" },
 			patterns = {
 				".git",
