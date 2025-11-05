@@ -1,7 +1,11 @@
 { pkgs, ... }: {
   imports = [ ./common.nix ];
 
-  security.pki.certificateFiles = [ ../../../certificates/issuer.crt ];
+  security.pki.certificateFiles = [
+    ../../../certificates/rootca.crt
+    ../../../certificates/homeissuer.crt
+    ../../../certificates/truenasca.crt
+  ];
 
   # Run appimages directly
   programs = {
