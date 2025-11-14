@@ -87,7 +87,14 @@ return {
 
 			local capabilities = vim.tbl_deep_extend(
 				"force",
-				{},
+				{
+					textDocument = {
+						foldingRange = {
+							dynamicRegistration = false,
+							lineFoldingOnly = true,
+						},
+					},
+				},
 				vim.lsp.protocol.make_client_capabilities(),
 				has_cmp_nvim_lsp and cmp_nvim_lsp.default_capabilities() or {},
 				opts.capabilities or {}
