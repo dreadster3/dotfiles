@@ -58,8 +58,15 @@ in {
       settings = {
         mainBar = {
           layer = "top";
-          modules-left =
-            [ "custom/launcher" "hyprland/workspaces" "cpu" "memory" "disk" ];
+          modules-left = [
+            "custom/launcher"
+            "hyprland/workspaces"
+            "cpu"
+            "memory"
+            "disk#root"
+            "disk#home"
+            "disk#games"
+          ];
           modules-center = [ "clock" ];
           modules-right = optional cfg.battery.enable "battery"
             ++ optional cfg.brightness.enable "backlight"
@@ -98,12 +105,29 @@ in {
             max-length = 10;
             on-click = "alacritty -e btop";
           };
-          disk = {
+          "disk#root" = {
             interval = 30;
             format = "󰋊 {percentage_used}%";
             path = "/";
+            class = "disk";
             on-click = "thunar";
-            on-click-right = "alacritty -e yazi";
+            on-click-right = "alacritty -e yazi /";
+          };
+          "disk#home" = {
+            interval = 30;
+            format = "󰋊 {percentage_used}%";
+            path = "/home";
+            class = "disk";
+            on-click = "thunar";
+            on-click-right = "alacritty -e yazi /home/$USER";
+          };
+          "disk#games" = {
+            interval = 30;
+            format = "󰋊 {percentage_used}%";
+            path = "/games";
+            class = "disk";
+            on-click = "thunar";
+            on-click-right = "alacritty -e yazi /games/$USER";
           };
           clock = {
             format = "   {:%H:%M:%S} ";

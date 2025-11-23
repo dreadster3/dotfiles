@@ -13,10 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.file-roller = {
-      inherit (cfg) package;
-      enable = true;
-    };
+    environment.systemPackages = [ cfg.package ];
 
     home-manager.sharedModules = [{
       xdg.mimeApps.defaultApplications = {
