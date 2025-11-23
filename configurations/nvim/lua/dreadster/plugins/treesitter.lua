@@ -2,9 +2,12 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		main = "nvim-treesitter.configs",
-		dependencies = { "nvim-treesitter/playground" },
+		dependencies = {
+			"nvim-treesitter/playground",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
 		build = ":TSUpdate",
-		version = "*",
+		version = false,
 		event = { "BufReadPre", "BufWritePre", "BufNewFile", "VeryLazy" },
 		lazy = vim.fn.argc(-1) == 0,
 		init = function(plugin)
@@ -45,6 +48,32 @@ return {
 			context_commentstring = { enable = true },
 			playground = {
 				enable = true,
+			},
+			textobjects = {
+				move = {
+					enable = true,
+					set_jumps = true,
+					goto_next_start = {
+						["]f"] = "@function.outer",
+						["]c"] = "@class.outer",
+						["]a"] = "@parameter.inner",
+					},
+					goto_next_end = {
+						["]F"] = "@function.outer",
+						["]C"] = "@class.outer",
+						["]A"] = "@parameter.inner",
+					},
+					goto_previous_start = {
+						["[f"] = "@function.outer",
+						["[c"] = "@class.outer",
+						["[a"] = "@parameter.inner",
+					},
+					goto_previous_end = {
+						["[F"] = "@function.outer",
+						["[C"] = "@class.outer",
+						["[A"] = "@parameter.inner",
+					},
+				},
 			},
 		},
 	},

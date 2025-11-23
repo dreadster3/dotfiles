@@ -18,7 +18,7 @@ return {
 			{ "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Keymaps (which-key)" },
 		},
 		opts = {
-			presets = "helix",
+			presets = "modern",
 			spec = {
 				{
 					mode = { "n", "v" },

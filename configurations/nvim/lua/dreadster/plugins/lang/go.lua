@@ -66,7 +66,7 @@ return {
 			"lspconfig",
 			"nvim-treesitter",
 		},
-		version = "v0.9.0",
+		version = "*",
 		main = "go",
 		ft = { "go", "gomod" },
 		opts = {
