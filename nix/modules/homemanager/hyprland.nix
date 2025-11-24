@@ -237,8 +237,9 @@ in {
           "$mainMod, T, togglesplit, # dwindle"
           "$mainMod, P, pin"
 
-          "Alt, Tab, cyclenext"
-          "Alt, Tab, bringactivetotop"
+          # Clashes with windows keybinds
+          # "Alt, Tab, cyclenext"
+          # "Alt, Tab, bringactivetotop"
 
           # "$mainMod, Tab, overview:toggle,"
 

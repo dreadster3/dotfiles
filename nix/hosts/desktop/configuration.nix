@@ -17,10 +17,14 @@
     quickshell
     ddcutil
     goverlay
+
+    linuxPackages.usbip
+    moonlight-qt
   ];
 
   # Disable usb autosuspend
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+  boot.kernelModules = [ "usbip-core" "usbip-host" ];
 
   # Bootloader.
   modules.nixos = {
