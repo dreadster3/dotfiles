@@ -1,11 +1,15 @@
-{ config, ... }:
-let inherit (config) accent;
+{ catppuccin, settings, ... }:
+let inherit (catppuccin) accent;
 in ''
   * {
     border: none;
     border-radius: 0;
-    font-size: 13px;
+    font-size: ${toString (settings.font.size - 5)}px;
     min-height: 0;
+  }
+
+  window.HDMI-A-1 * {
+    font-size: ${toString ((settings.font.size / 2) + 2)}px;
   }
 
   window#waybar {
@@ -158,6 +162,7 @@ in ''
     border-width: 1.3px;
     border-color: @surface1;
     border-style: solid;
+    font-size: ${toString (settings.font.size * 2)}px;
   }
 
   #custom-playerctl {

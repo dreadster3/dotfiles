@@ -64,11 +64,7 @@ in {
       settings = {
         "$mainMod" = "SUPER";
 
-        monitor = mapAttrsToList (name: monitor:
-          "${name},${monitor.resolution},${monitor.position},${
-            toString monitor.zoom
-          }${transformToString monitor.transform}") monitors
-          ++ [ "Unknown-1,disable" ",preferred,auto,1.0" ];
+        monitor = [ ",preferred,auto,1.0" ];
 
         exec-once = cfg.startupPrograms;
 
@@ -85,7 +81,7 @@ in {
           gaps_workspaces = 50;
 
           border_size = 2;
-          resize_on_border = true;
+          resize_on_border = false;
           layout = "dwindle";
           no_focus_fallback = true;
           allow_tearing = true;
@@ -336,7 +332,7 @@ in {
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
           vrr = 1; # Enable vsync
-          # enable_anr_dialog = false;
+          enable_anr_dialog = false;
         };
       };
 

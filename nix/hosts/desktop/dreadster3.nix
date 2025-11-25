@@ -68,6 +68,7 @@
             };
           };
         };
+        font = { size = 22; };
       };
 
       openrgb = {

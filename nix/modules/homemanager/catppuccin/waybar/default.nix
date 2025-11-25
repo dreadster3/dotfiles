@@ -1,10 +1,13 @@
 { pkgs, lib, config, ... }:
 with lib;
-let cfg = config.catppuccin;
+let
+  catppuccin = config.catppuccin;
+  settings = config.modules.homemanager.settings;
 in {
   options = { };
 
-  config = mkIf cfg.enable {
-    programs.waybar.style = toString (import ./style.nix { config = cfg; });
+  config = mkIf catppuccin.enable {
+    programs.waybar.style =
+      toString (import ./style.nix { inherit catppuccin settings; });
   };
 }
