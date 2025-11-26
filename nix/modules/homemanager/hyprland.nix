@@ -331,7 +331,6 @@ in {
           allow_session_lock_restore = true;
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
-          vrr = 1; # Enable vsync
           enable_anr_dialog = false;
         };
       };
