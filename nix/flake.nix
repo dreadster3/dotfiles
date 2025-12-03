@@ -39,9 +39,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    spicetify = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, quickshell, nixpkgs, home-manager, catppuccin, stylix
+  outputs = { self, spicetify, nixpkgs, home-manager, catppuccin, stylix
     , sops-nix, nixos-wsl, ... }@inputs:
     let
       inherit (self) outputs;
@@ -57,9 +62,9 @@
 
       lib = nixpkgs.lib.extend
         (_: prev: (import ./lib { lib = prev; }) // home-manager.lib);
+
     in {
-      packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (system: nixpkgs.legacyPackages.${system});
 
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);

@@ -2,6 +2,6 @@
 pkgs.fetchFromGitHub {
   owner = "catppuccin";
   repo = "spicetify";
-  rev = "4294a61f54a044768c6e9db20e83c5b74da71091";
-  sha256 = "OHsauoCjj99aoIbq78xQf1ehYtLpIcUde5DmZSJFCXI=";
+  rev = "1ec645c4cf7f42f9792b9eeb1bb7930f94593277";
+  sha256 = "VK9JpXYFuLMkIuMftFkkMy6Y5+ttuxDUYoIiAPlx6YY=";
 }

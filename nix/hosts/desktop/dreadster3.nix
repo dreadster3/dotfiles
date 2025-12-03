@@ -10,6 +10,7 @@
     imports = [
       ../../profiles/homemanager/personal.nix
       inputs.zen-browser.homeModules.beta
+      inputs.spicetify.homeManagerModules.default
     ];
 
     home.packages = with pkgs; [
@@ -79,7 +80,6 @@
       spotify = {
         enable = true;
         spicetify.enable = true;
-        spicetify.package = pkgs.stable.spicetify-cli;
       };
       thunderbird.enable = true;
       gtk.enable = true;
