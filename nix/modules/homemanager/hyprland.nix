@@ -68,6 +68,8 @@ in {
 
         exec-once = cfg.startupPrograms;
 
+        xwayland = { force_zero_scaling = true; };
+
         input = {
           kb_layout = "us";
           follow_mouse = 1;

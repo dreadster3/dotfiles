@@ -11,6 +11,8 @@ in {
       protontricks.enable = true;
     };
 
+    programs.gamemode.enable = true;
+
     environment.systemPackages = with pkgs; [ mangohud vulkan-tools ];
 
     environment.variables = { STEAM_COMPAT_MOUNTS = "/games"; };

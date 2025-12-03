@@ -13,7 +13,6 @@
       enable = true;
       binfmt = true;
     };
-    dconf.enable = true;
   };
 
   powerManagement.enable = true;
@@ -33,6 +32,7 @@
 
   modules.nixos = {
     archive.enable = true;
+    dconf.enable = true;
     qt.enable = true;
     catppuccin.enable = true;
     thunar.enable = true;

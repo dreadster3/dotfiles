@@ -41,5 +41,6 @@
     ./archive.nix
     ./wireguard.nix
     ./nfs.nix
+    ./dconf.nix
   ];
 }

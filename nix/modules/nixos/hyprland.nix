@@ -7,7 +7,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ nwg-look nwg-displays ];
+    environment.systemPackages = with pkgs; [ nwg-look nwg-displays wlr-randr ];
 
     programs.hyprland = {
       enable = true;
