@@ -29,7 +29,10 @@
   # Bootloader.
   modules.nixos = {
     aio.enable = true;
-    openrgb.enable = true;
+    openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+    };
     nightlight.enable = true;
     flatpak.enable = true;
     nvidia.enable = true;

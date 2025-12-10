@@ -20,9 +20,8 @@ in {
     boot.loader = {
       grub = {
         enable = true;
-        device = cfg.device;
+        inherit (cfg) device useOSProber;
         efiSupport = cfg.device == "nodev";
-        useOSProber = cfg.useOSProber;
         default = "saved";
       };
       efi.canTouchEfiVariables = true;
