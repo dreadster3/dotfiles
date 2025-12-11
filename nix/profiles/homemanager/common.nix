@@ -1,5 +1,6 @@
-{ outputs, lib, pkgs, ... }: {
-  imports = [ outputs.homeManagerModules ];
+{ outputs, inputs, lib, pkgs, ... }: {
+  imports =
+    [ outputs.homeManagerModules inputs.spicetify.homeManagerModules.default ];
 
   nixpkgs = {
     overlays = [

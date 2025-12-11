@@ -10,7 +10,6 @@
     imports = [
       ../../profiles/homemanager/personal.nix
       inputs.zen-browser.homeModules.beta
-      inputs.spicetify.homeManagerModules.default
     ];
 
     home.packages = with pkgs; [
