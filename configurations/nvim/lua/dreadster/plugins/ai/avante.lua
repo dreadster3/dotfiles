@@ -2,10 +2,7 @@ return {
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
-		enabled = function()
-			local utils = require("dreadster.utils")
-			return not utils.is_mac()
-		end,
+		enabled = false,
 		version = false, -- set this if you want to always pull the latest change
 		---@class avante.Config
 		opts = {
