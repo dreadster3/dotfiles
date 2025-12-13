@@ -37,7 +37,7 @@
     flatpak.enable = true;
     nvidia.enable = true;
     steam.enable = true;
-    teamviewer.enable = true;
+    teamviewer.enable = false;
     oryx.enable = true;
     qmk.enable = true;
     zerotier.enable = true;
