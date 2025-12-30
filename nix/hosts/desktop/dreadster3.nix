@@ -12,6 +12,20 @@
       inputs.zen-browser.homeModules.beta
     ];
 
+    programs.lutris = {
+      enable = true;
+      extraPackages = with pkgs; [
+        # Genshin Impact
+        libadwaita
+        gtk4
+        polkit
+        mangohud
+
+        # General
+        vulkan-tools
+      ];
+    };
+
     home.packages = with pkgs; [
       prismlauncher
       remmina

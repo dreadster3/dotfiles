@@ -16,6 +16,7 @@
     nix-init
 
     sops
+    age
   ];
 
   sops = {

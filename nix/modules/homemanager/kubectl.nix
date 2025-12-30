@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       cfg.package
+      kubectx
       kubernetes-helm
       kustomize
       istioctl

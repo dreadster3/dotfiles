@@ -58,7 +58,13 @@
 
   programs.adb.enable = true;
 
-  networking.hostName = "nixos-desktop";
+  networking = {
+    hostName = "nixos-desktop";
+    hosts = {
+      "127.0.0.1" =
+        [ "log-upload-os.hoyoverse.com" "overseauspider.yuanshen.com" ];
+    };
+  };
   networking.interfaces.eno1.wakeOnLan = {
     enable = true;
     policy = [ "magic" ];
