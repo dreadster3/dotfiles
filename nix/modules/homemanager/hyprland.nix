@@ -329,11 +329,11 @@ in {
           enable_swallow = false;
           force_default_wallpaper = 0;
           disable_hyprland_logo = false;
-          new_window_takes_over_fullscreen = 2;
+          on_focus_under_fullscreen = 2;
           allow_session_lock_restore = true;
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
-          enable_anr_dialog = false;
+          enable_anr_dialog = true;
         };
       };
 

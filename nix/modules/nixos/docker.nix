@@ -14,8 +14,8 @@ in {
 
   config = mkIf cfg.enable {
     virtualisation.docker = {
+      inherit (cfg) package;
       enable = true;
-      package = cfg.package;
     };
   };
 }

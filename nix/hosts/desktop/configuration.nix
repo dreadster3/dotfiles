@@ -56,8 +56,6 @@
     printing.enable = true;
   };
 
-  programs.adb.enable = true;
-
   networking = {
     hostName = "nixos-desktop";
     hosts = {

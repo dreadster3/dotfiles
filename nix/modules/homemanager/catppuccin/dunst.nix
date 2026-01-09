@@ -1,8 +1,8 @@
 { pkgs, lib, config, ... }:
 with lib;
 let
-  cfg = config.services.dunst.catppuccin;
-  colors = config.catppuccin.colors;
+  cfg = config.catppuccin.dunst;
+  inherit (config.catppuccin) colors;
 in {
   options = { };
 

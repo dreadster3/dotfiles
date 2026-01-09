@@ -1,6 +1,6 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 with lib;
-let cfg = config.wayland.windowManager.hyprland.catppuccin;
+let cfg = config.catppuccin.hyprland;
 in {
   options = { };
 

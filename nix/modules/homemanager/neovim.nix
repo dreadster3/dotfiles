@@ -134,7 +134,7 @@ in {
           lazygit
           ripgrep
           dotnet-sdk
-          nixfmt-classic
+          nixfmt
           gnumake
           terraform
           glow
