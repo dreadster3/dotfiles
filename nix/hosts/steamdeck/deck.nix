@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [ ../../profiles/homemanager/personal.nix ];
 
   nix.package = pkgs.nix;

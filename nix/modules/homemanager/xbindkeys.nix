@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.xbindkeys;
@@ -12,7 +17,8 @@ let
 
   configFile = toConf cfg.settings;
 
-in {
+in
+{
   options = {
     modules.homemanager.xbindkeys = {
       enable = mkEnableOption "xbindkeys";
@@ -35,11 +41,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xsession.windowManager.bspwm.startupPrograms =
-      [ "${cfg.package}/bin/xbindkeys" ];
+    xsession.windowManager.bspwm.startupPrograms = [ "${cfg.package}/bin/xbindkeys" ];
 
-    home.packages = [ cfg.package ]
-      ++ (optional cfg.withGui pkgs.xbindkeys_config);
+    home.packages = [ cfg.package ] ++ (optional cfg.withGui pkgs.xbindkeys_config);
 
     home.file.".xbindkeysrc".text = configFile;
   };

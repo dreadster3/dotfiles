@@ -1,9 +1,18 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.wireguard;
-in {
+let
+  cfg = config.modules.nixos.wireguard;
+in
+{
   options = {
-    modules.nixos.wireguard = { enable = mkEnableOption "wireguard"; };
+    modules.nixos.wireguard = {
+      enable = mkEnableOption "wireguard";
+    };
   };
 
   config = mkIf cfg.enable {

@@ -1,20 +1,29 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.nixos.stylix;
   catppuccinConfig = config.catppuccin;
-  mkUpper = str:
-    (lib.toUpper (builtins.substring 0 1 str))
-    + (builtins.substring 1 (builtins.stringLength str) str);
-in {
-  options = { modules.nixos.stylix = { enable = mkEnableOption "stylix"; }; };
+  mkUpper =
+    str:
+    (lib.toUpper (builtins.substring 0 1 str)) + (builtins.substring 1 (builtins.stringLength str) str);
+in
+{
+  options = {
+    modules.nixos.stylix = {
+      enable = mkEnableOption "stylix";
+    };
+  };
 
   config = mkIf cfg.enable {
     stylix = {
       enable = true;
       image = ../../../wallpapers/furina.jpg;
-      base16Scheme =
-        "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
       fonts = {
         monospace = {
@@ -39,7 +48,6 @@ in {
       };
     };
 
-    home-manager.sharedModules =
-      [{ modules.homemanager.stylix.enable = mkDefault true; }];
+    home-manager.sharedModules = [ { modules.homemanager.stylix.enable = mkDefault true; } ];
   };
 }

@@ -1,20 +1,34 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.printing;
-in {
+let
+  cfg = config.modules.nixos.printing;
+in
+{
   options = {
-    modules.nixos.printing = { enable = mkEnableOption "printing"; };
+    modules.nixos.printing = {
+      enable = mkEnableOption "printing";
+    };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ hplipWithPlugin simple-scan ];
+    environment.systemPackages = with pkgs; [
+      hplipWithPlugin
+      simple-scan
+    ];
 
     services.printing = {
       enable = true;
       drivers = with pkgs; [ hplipWithPlugin ];
     };
 
-    services.avahi = { enable = true; };
+    services.avahi = {
+      enable = true;
+    };
 
     hardware.sane = {
       enable = true;

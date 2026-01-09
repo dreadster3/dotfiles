@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.wlogout;
-in {
+let
+  cfg = config.modules.homemanager.wlogout;
+in
+{
   options = {
     modules.homemanager.wlogout = {
       enable = mkEnableOption "wlogout";
@@ -14,13 +21,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    assertions = [{
-      assertion = config.wayland.windowManager.hyprland.enable;
-      message = "wlogout requires the hyprland window manager to be enabled";
-    }];
+    assertions = [
+      {
+        assertion = config.wayland.windowManager.hyprland.enable;
+        message = "wlogout requires the hyprland window manager to be enabled";
+      }
+    ];
 
-    wayland.windowManager.hyprland.settings.bind =
-      [ "$mainMod, Q, exec, pkill wlogout || ${cfg.package}/bin/wlogout" ];
+    wayland.windowManager.hyprland.settings.bind = [
+      "$mainMod, Q, exec, pkill wlogout || ${cfg.package}/bin/wlogout"
+    ];
 
     programs.wlogout = {
       enable = true;

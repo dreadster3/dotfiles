@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.yazi;
-in {
+let
+  cfg = config.modules.homemanager.yazi;
+in
+{
   options = {
     modules.homemanager.yazi = {
       enable = mkEnableOption "yazi";
@@ -31,7 +38,14 @@ in {
       shellWrapperName = "y";
       plugins = {
         inherit (pkgs.yaziPlugins)
-          diff git mount lsar chmod smart-enter smart-filter;
+          diff
+          git
+          mount
+          lsar
+          chmod
+          smart-enter
+          smart-filter
+          ;
       };
       initLua = builtins.readFile ./init.lua;
       settings = {
@@ -64,12 +78,18 @@ in {
             desc = "Mount manager";
           }
           {
-            on = [ "r" "n" ];
+            on = [
+              "r"
+              "n"
+            ];
             run = "rename";
             desc = "Rename the file";
           }
           {
-            on = [ "r" "m" ];
+            on = [
+              "r"
+              "m"
+            ];
             run = "plugin chmod";
             desc = "Chmod the file or folder";
           }
@@ -91,21 +111,22 @@ in {
           }
           {
             on = "<C-n>";
-            run =
-              ''shell -- ${getExe pkgs.dragon-drop} -x -i -T "$1" --confirm'';
+            run = ''shell -- ${getExe pkgs.dragon-drop} -x -i -T "$1" --confirm'';
             desc = "Drag and drop";
           }
           {
             on = "y";
             run = [
-              ''
-                shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list''
+              ''shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list''
               "yank"
             ];
             desc = "Yank and Copy file path to clipboard";
           }
           {
-            on = [ "g" "r" ];
+            on = [
+              "g"
+              "r"
+            ];
             run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
             desc = "cd to git root";
           }

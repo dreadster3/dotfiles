@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = [ ../users.nix ];
 
   home-manager.users.dreadster = {
@@ -17,4 +18,3 @@
     home.stateVersion = "24.11";
   };
 }
-

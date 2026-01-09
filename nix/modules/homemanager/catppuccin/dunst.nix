@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.catppuccin.dunst;
   inherit (config.catppuccin) colors;
-in {
+in
+{
   options = { };
 
   config = mkIf cfg.enable {

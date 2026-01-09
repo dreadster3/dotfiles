@@ -1,6 +1,15 @@
-{ outputs, inputs, lib, pkgs, ... }: {
-  imports =
-    [ outputs.homeManagerModules inputs.spicetify.homeManagerModules.default ];
+{
+  outputs,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    outputs.homeManagerModules
+    inputs.spicetify.homeManagerModules.default
+  ];
 
   nixpkgs = {
     overlays = [
@@ -16,7 +25,12 @@
     username = lib.mkDefault "dreadster";
     homeDirectory = lib.mkDefault "/home/dreadster";
 
-    packages = with pkgs; [ wget curl file tree ];
+    packages = with pkgs; [
+      wget
+      curl
+      file
+      tree
+    ];
 
     sessionVariables = {
       # XDG_CACHE_DIR = "$HOME/.cache";

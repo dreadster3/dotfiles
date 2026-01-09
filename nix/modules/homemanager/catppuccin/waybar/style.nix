@@ -1,6 +1,8 @@
 { catppuccin, settings, ... }:
-let inherit (catppuccin) accent;
-in ''
+let
+  inherit (catppuccin) accent;
+in
+''
   * {
     border: none;
     border-radius: 0;

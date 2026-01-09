@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.krew;
-in {
+let
+  cfg = config.modules.homemanager.krew;
+in
+{
   options = {
     modules.homemanager.krew = {
       enable = mkEnableOption "krew";

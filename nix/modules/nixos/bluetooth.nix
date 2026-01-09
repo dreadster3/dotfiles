@@ -1,16 +1,24 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.nixos.bluetooth;
-in {
+let
+  cfg = config.modules.nixos.bluetooth;
+in
+{
   options = {
-    modules.nixos.bluetooth = { enable = mkEnableOption "bluetooth"; };
+    modules.nixos.bluetooth = {
+      enable = mkEnableOption "bluetooth";
+    };
   };
 
   config = mkIf cfg.enable {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
-      settings = { General = { Experimental = true; }; };
+      settings = {
+        General = {
+          Experimental = true;
+        };
+      };
     };
 
     services.udev.extraRules = ''

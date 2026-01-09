@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [ ../users.nix ];
 
   home-manager.users.dreadster = {

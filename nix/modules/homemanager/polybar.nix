@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.polybar;
@@ -19,12 +24,21 @@ let
 
   modules_center = [ "date" ];
 
-  modules_right = optional cfg.tray.enable "tray"
-    ++ [ "alsa" "network" "cpu" "filesystem" "memory" ]
+  modules_right =
+    optional cfg.tray.enable "tray"
+    ++ [
+      "alsa"
+      "network"
+      "cpu"
+      "filesystem"
+      "memory"
+    ]
     ++ optional cfg.battery.enable "battery"
-    ++ optional cfg.brightness.enable "backlight" ++ [ "sysmenu" ];
+    ++ optional cfg.brightness.enable "backlight"
+    ++ [ "sysmenu" ];
 
-in {
+in
+{
   options = {
     modules.homemanager.polybar = {
       enable = mkEnableOption "polybar";
@@ -73,21 +87,27 @@ in {
       };
       battery = mkOption {
         type = types.submodule {
-          options = { enable = mkEnableOption "polybar.battery"; };
+          options = {
+            enable = mkEnableOption "polybar.battery";
+          };
         };
         default = { };
         description = "Battery module configuration";
       };
       brightness = mkOption {
         type = types.submodule {
-          options = { enable = mkEnableOption "polybar.brightness"; };
+          options = {
+            enable = mkEnableOption "polybar.brightness";
+          };
         };
         default = { };
         description = "Brightness module configuration";
       };
       tray = mkOption {
         type = types.submodule {
-          options = { enable = mkEnableOption "polybar.tray"; };
+          options = {
+            enable = mkEnableOption "polybar.tray";
+          };
         };
         default = { };
         description = "Tray module configuration";
@@ -101,35 +121,40 @@ in {
   };
   config = mkIf cfg.enable {
 
-    modules.homemanager.polybar.script = let
-      path_add = "";
-      monitors_reload = concatStringsSep "\n" (mapAttrsToList (name: monitor:
-        "MONITOR=${name} ${getExe cfg.package} --reload ${
-          if monitor.primary then "main" else "secondary"
-        } &") monitors);
-    in ''
-      export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
-      export XDG_DATA_DIRS=$XDG_DATA_DIRS:${config.home.homeDirectory}/.nix-profile/share
-      export QT_STYLE_OVERRIDE="${config.qt.style.name}"
-      export QT_QPA_PLATFORMTHEME="${config.qt.platformTheme.name}"
+    modules.homemanager.polybar.script =
+      let
+        path_add = "";
+        monitors_reload = concatStringsSep "\n" (
+          mapAttrsToList (
+            name: monitor:
+            "MONITOR=${name} ${getExe cfg.package} --reload ${
+              if monitor.primary then "main" else "secondary"
+            } &"
+          ) monitors
+        );
+      in
+      ''
+        export PATH=$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
+        export XDG_DATA_DIRS=$XDG_DATA_DIRS:${config.home.homeDirectory}/.nix-profile/share
+        export QT_STYLE_OVERRIDE="${config.qt.style.name}"
+        export QT_QPA_PLATFORMTHEME="${config.qt.platformTheme.name}"
 
-      ${monitors_reload}
-    '';
+        ${monitors_reload}
+      '';
 
     programs.zsh.shellAliases = {
-      polybar_all = "(pkill polybar || true) && ${
-          pkgs.writers.writeBash "polybar_all" cfg.script
-        }";
+      polybar_all = "(pkill polybar || true) && ${pkgs.writers.writeBash "polybar_all" cfg.script}";
     };
 
-    xsession.windowManager.i3.config.startup = [{
-      command = "systemctl --user restart polybar";
-      always = true;
-      notification = false;
-    }];
+    xsession.windowManager.i3.config.startup = [
+      {
+        command = "systemctl --user restart polybar";
+        always = true;
+        notification = false;
+      }
+    ];
 
-    xsession.windowManager.bspwm.startupPrograms =
-      [ "systemctl --user restart polybar" ];
+    xsession.windowManager.bspwm.startupPrograms = [ "systemctl --user restart polybar" ];
 
     services = {
       polybar = {
@@ -194,7 +219,12 @@ in {
             # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
             modules-left = modules_left;
             modules-center = modules_center;
-            modules-right = [ "alsa" "cpu" "memory" "sysmenu" ];
+            modules-right = [
+              "alsa"
+              "cpu"
+              "memory"
+              "sysmenu"
+            ];
           };
           "module/cpu" = {
             type = "internal/cpu";
@@ -364,8 +394,7 @@ in {
             format-disconnected-padding = "2";
 
             # Label Connected
-            label-connected =
-              "%{A1:networkmanager_dmenu &:} %upspeed%  %downspeed% %{A}";
+            label-connected = "%{A1:networkmanager_dmenu &:} %upspeed%  %downspeed% %{A}";
             label-connected-foreground = "\${colors.lavender}";
 
             # Label Disconnected
@@ -485,8 +514,7 @@ in {
             content-background = "\${colors.mantle}";
             content-foreground = "\${colors.${config.catppuccin.accent}}";
             content-padding = 2;
-            click-left =
-              "${getExe config.programs.rofi.finalPackage} -show drun";
+            click-left = "${getExe config.programs.rofi.finalPackage} -show drun";
           };
 
           "module/links" = {
@@ -512,8 +540,7 @@ in {
           "module/monitor" = {
             "inherit" = "module/links";
             content = "";
-            click-left =
-              "${getExe terminal} -e ${getExe config.programs.btop.package} &";
+            click-left = "${getExe terminal} -e ${getExe config.programs.btop.package} &";
           };
 
           "module/github" = {
@@ -542,12 +569,12 @@ in {
             content-padding = 2;
 
             click-left = ''
-              ${getExe config.programs.rofi.finalPackage} -show p -modi "p:${
-                getExe config.modules.homemanager.rofi.powermenu.package
-              }"
+              ${getExe config.programs.rofi.finalPackage} -show p -modi "p:${getExe config.modules.homemanager.rofi.powermenu.package}"
             '';
           };
-          "settings" = { screenchange-reload = true; };
+          "settings" = {
+            screenchange-reload = true;
+          };
         };
       };
     };

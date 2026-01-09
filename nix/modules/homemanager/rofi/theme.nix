@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let inherit (config.lib.formats.rasi) mkLiteral;
-in {
+let
+  inherit (config.lib.formats.rasi) mkLiteral;
+in
+{
   window = {
     enabled = true;
 
@@ -30,7 +32,10 @@ in {
     border-radius = mkLiteral "0px 0px 0px 0px";
     # border-color = mkLiteral "@selected";
     background-color = mkLiteral "transparent";
-    children = [ "inputbar" "listview" ];
+    children = [
+      "inputbar"
+      "listview"
+    ];
   };
 
   inputbar = {
@@ -43,7 +48,10 @@ in {
     # border-color = mkLiteral "@selected";
     # background-color = mkLiteral "@selected";
     # text-color = "@background";
-    children = [ "prompt" "entry" ];
+    children = [
+      "prompt"
+      "entry"
+    ];
   };
 
   prompt = {

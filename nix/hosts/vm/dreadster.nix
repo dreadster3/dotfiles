@@ -1,13 +1,27 @@
-{ inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
-let primaryMonitor = "Virtual1";
-in {
+{
+  inputs,
+  outputs,
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+let
+  primaryMonitor = "Virtual1";
+in
+{
 
   imports = [ ../users.nix ];
 
   home-manager.users.dreadster = {
     imports = [ ../../profiles/homemanager/personal.nix ];
 
-    home.packages = with pkgs; [ remmina openvpn warp-terminal ];
+    home.packages = with pkgs; [
+      remmina
+      openvpn
+      warp-terminal
+    ];
 
     modules.homemanager = {
       settings = {
@@ -15,7 +29,13 @@ in {
           x11 = {
             "${primaryMonitor}" = {
               primary = true;
-              workspaces = [ 1 2 3 4 5 ];
+              workspaces = [
+                1
+                2
+                3
+                4
+                5
+              ];
             };
           };
         };

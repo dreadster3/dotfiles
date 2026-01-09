@@ -1,9 +1,18 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.dunst;
-in {
+let
+  cfg = config.modules.homemanager.dunst;
+in
+{
   options = {
-    modules.homemanager.dunst = { enable = mkEnableOption "dunst"; };
+    modules.homemanager.dunst = {
+      enable = mkEnableOption "dunst";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -22,7 +31,9 @@ in {
           mouse_middle_click = "close_all";
         };
 
-        urgency_critical = { timeout = 0; };
+        urgency_critical = {
+          timeout = 0;
+        };
       };
     };
   };

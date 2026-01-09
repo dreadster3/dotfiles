@@ -1,6 +1,14 @@
-{ inputs, outputs, pkgs, ... }: {
-  imports =
-    [ inputs.home-manager.nixosModules.home-manager outputs.nixosModules ];
+{
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    outputs.nixosModules
+  ];
 
   nixpkgs = {
     overlays = [
@@ -18,11 +26,21 @@
   nix = {
     settings = {
       trusted-users = [ "@wheel" ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
-  environment.systemPackages = with pkgs; [ wget vim git curl unzip zip ];
+  environment.systemPackages = with pkgs; [
+    wget
+    vim
+    git
+    curl
+    unzip
+    zip
+  ];
 
   modules.nixos = {
     zsh.enable = true;

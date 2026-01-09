@@ -1,9 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.i3;
   monitors = config.modules.homemanager.settings.monitors.x11;
-in {
+in
+{
   options = {
     modules.homemanager.i3 = {
       enable = mkEnableOption "i3";
@@ -28,8 +34,10 @@ in {
         defaultWorkspace = "workspace 1";
 
         keybindings =
-          let modifier = config.xsession.windowManager.i3.config.modifier;
-          in mkOptionDefault {
+          let
+            modifier = config.xsession.windowManager.i3.config.modifier;
+          in
+          mkOptionDefault {
             "${modifier}+w" = "kill";
             "${modifier}+Control+q" = "exec loginctl lock-session";
 
@@ -73,16 +81,18 @@ in {
           smartGaps = true;
         };
 
-        workspaceOutputAssign = foldlAttrs (acc: name: monitor:
-          acc ++ (map (value: {
+        workspaceOutputAssign = foldlAttrs (
+          acc: name: monitor:
+          acc
+          ++ (map (value: {
             output = name;
             workspace = toString value;
-          }) monitor.workspaces)) [ ] monitors;
+          }) monitor.workspaces)
+        ) [ ] monitors;
 
         startup = [
           {
-            command =
-              "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+            command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
             notification = false;
             always = false;
           }

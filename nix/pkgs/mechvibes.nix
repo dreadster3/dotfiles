@@ -1,17 +1,21 @@
-{ appimageTools, lib, fetchurl }:
+{
+  appimageTools,
+  lib,
+  fetchurl,
+}:
 
 let
   pname = "mechvibes";
   version = "2.3.4";
 
   src = fetchurl {
-    url =
-      "https://github.com/hainguyents13/mechvibes/releases/download/v${version}/Mechvibes-${version}.AppImage";
+    url = "https://github.com/hainguyents13/mechvibes/releases/download/v${version}/Mechvibes-${version}.AppImage";
     sha256 = "sha256-imnXVchw85WREGGME/OMdRKuOfHYiSRoqUEy3ecRw1Y=";
   };
 
   appimageContents = appimageTools.extract { inherit pname version src; };
-in appimageTools.wrapType2 {
+in
+appimageTools.wrapType2 {
   inherit pname version src;
 
   extraInstallCommands = ''

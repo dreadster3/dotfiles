@@ -1,7 +1,9 @@
 # This file defines overlays
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev:
+  additions =
+    final: _prev:
     import ../pkgs {
       inherit inputs;
       inherit (final) pkgs;

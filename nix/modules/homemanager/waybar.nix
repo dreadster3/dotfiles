@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.waybar;
   monitors = config.modules.homemanager.settings.monitors.wayland;
-in {
+in
+{
   options = {
     modules.homemanager.waybar = {
       enable = mkEnableOption "waybar";
@@ -29,16 +35,20 @@ in {
         description = "Enable battery module";
         default = { };
         type = types.submodule {
-          options = { enable = mkEnableOption "waybar.battery"; };
+          options = {
+            enable = mkEnableOption "waybar.battery";
+          };
         };
       };
     };
   };
   config = mkIf cfg.enable {
-    assertions = [{
-      assertion = config.wayland.windowManager.hyprland.enable;
-      message = "waybar requires the hyprland window manager to be enabled";
-    }];
+    assertions = [
+      {
+        assertion = config.wayland.windowManager.hyprland.enable;
+        message = "waybar requires the hyprland window manager to be enabled";
+      }
+    ];
 
     home.packages = optional cfg.brightness.enable pkgs.brightnessctl;
 
@@ -68,14 +78,16 @@ in {
             "disk#games"
           ];
           modules-center = [ "clock" ];
-          modules-right = optional cfg.battery.enable "battery"
+          modules-right =
+            optional cfg.battery.enable "battery"
             ++ optional cfg.brightness.enable "backlight"
-            ++ [ "pulseaudio" "tray" ];
+            ++ [
+              "pulseaudio"
+              "tray"
+            ];
           "custom/launcher" = {
             format = "";
-            on-click = "pkill rofi || ${
-                getExe config.programs.rofi.finalPackage
-              } -show drun";
+            on-click = "pkill rofi || ${getExe config.programs.rofi.finalPackage} -show drun";
             tooltip = false;
           };
           "hyprland/workspaces" = {
@@ -90,8 +102,7 @@ in {
             };
 
             active-only = false;
-            persistent-workspaces =
-              mapAttrs (_: value: value.workspaces) monitors;
+            persistent-workspaces = mapAttrs (_: value: value.workspaces) monitors;
           };
           cpu = {
             interval = 10;
@@ -164,7 +175,11 @@ in {
               phone = "";
               portable = "";
               car = "";
-              default = [ "" "" " " ];
+              default = [
+                ""
+                ""
+                " "
+              ];
             };
             on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             on-click-right = "pavucontrol";
@@ -174,13 +189,13 @@ in {
           backlight = {
             device = "intel_backlight";
             format = "{percent}% {icon}";
-            format-icons = [ "󰃞" "󰃟" "󰃠" ];
-            on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set ${
-                toString cfg.brightness.step
-              }%+";
-            on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set ${
-                toString cfg.brightness.step
-              }%-";
+            format-icons = [
+              "󰃞"
+              "󰃟"
+              "󰃠"
+            ];
+            on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set ${toString cfg.brightness.step}%+";
+            on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set ${toString cfg.brightness.step}%-";
             min-length = 4;
           };
           battery = {
@@ -192,7 +207,19 @@ in {
             format = "{capacity}% {icon}";
             format-alt = "{time} {icon}";
             format-icons = {
-              default = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+              default = [
+                "󰂎"
+                "󰁺"
+                "󰁻"
+                "󰁼"
+                "󰁽"
+                "󰁾"
+                "󰁿"
+                "󰂀"
+                "󰂁"
+                "󰂂"
+                "󰁹"
+              ];
               charging = "󰂄";
               plugged = "󰂄";
             };

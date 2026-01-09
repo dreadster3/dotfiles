@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.mpv;
-in {
+let
+  cfg = config.modules.homemanager.mpv;
+in
+{
   options = {
     modules.homemanager.mpv = {
       enable = mkEnableOption "mpv";

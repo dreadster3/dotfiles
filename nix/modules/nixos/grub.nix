@@ -1,7 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.grub;
-in {
+let
+  cfg = config.modules.nixos.grub;
+in
+{
   options = {
     modules.nixos.grub = {
       enable = mkEnableOption "GRUB";

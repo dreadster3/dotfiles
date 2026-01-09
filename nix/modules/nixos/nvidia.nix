@@ -1,8 +1,20 @@
-{ pkgs, pkgs-unstable, lib, config, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.nvidia;
-in {
-  options = { modules.nixos.nvidia = { enable = mkEnableOption "nvidia"; }; };
+let
+  cfg = config.modules.nixos.nvidia;
+in
+{
+  options = {
+    modules.nixos.nvidia = {
+      enable = mkEnableOption "nvidia";
+    };
+  };
 
   config = mkIf cfg.enable {
     hardware.graphics = {
@@ -23,9 +35,9 @@ in {
       };
     };
 
-    home-manager.sharedModules = [{
-      wayland.windowManager.hyprland.settings.env =
-        mkIf config.programs.hyprland.enable [
+    home-manager.sharedModules = [
+      {
+        wayland.windowManager.hyprland.settings.env = mkIf config.programs.hyprland.enable [
           "LIBVA_DRIVER_NAME,nvidia"
           "GBM_BACKEND,nvidia-drm"
           "__GLX_VENDOR_LIBRARY_NAME,nvidia"
@@ -33,6 +45,7 @@ in {
           "__GL_VRR_ALLOWED,0"
           "ELECTRON_OZONE_PLATFORM_HINT,auto"
         ];
-    }];
+      }
+    ];
   };
 }

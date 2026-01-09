@@ -1,4 +1,9 @@
-{ stdenv, lib, pkgs, fetchFromGitHub }:
+{
+  stdenv,
+  lib,
+  pkgs,
+  fetchFromGitHub,
+}:
 
 with lib;
 
@@ -12,9 +17,16 @@ stdenv.mkDerivation {
     sha256 = "sldoJPf3wLu7oI69FuAVlfilE+3C6vVCEi/4x3faMSY=";
   };
 
-  nativeBuildInputs = with pkgs.buildPackages; [ cmake gcc gnumake ];
+  nativeBuildInputs = with pkgs.buildPackages; [
+    cmake
+    gcc
+    gnumake
+  ];
 
-  buildInputs = with pkgs.buildPackages; [ xorg.libX11 xorg.libX11.dev ];
+  buildInputs = with pkgs.buildPackages; [
+    xorg.libX11
+    xorg.libX11.dev
+  ];
 
   installPhase = ''
     cmake --build /build/source/build --target install

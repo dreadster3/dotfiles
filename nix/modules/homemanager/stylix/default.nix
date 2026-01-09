@@ -1,9 +1,18 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.stylix;
-in {
+let
+  cfg = config.modules.homemanager.stylix;
+in
+{
   options = {
-    modules.homemanager.stylix = { enable = mkEnableOption "stylix"; };
+    modules.homemanager.stylix = {
+      enable = mkEnableOption "stylix";
+    };
   };
 
   config = mkIf cfg.enable {

@@ -1,9 +1,18 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.autolock;
-in {
+let
+  cfg = config.modules.homemanager.autolock;
+in
+{
   options = {
-    modules.homemanager.autolock = { enable = mkEnableOption "autolock"; };
+    modules.homemanager.autolock = {
+      enable = mkEnableOption "autolock";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -15,10 +24,8 @@ in {
       timers = [
         {
           delay = 5 * 60;
-          command =
-            "${pkgs.libnotify}/bin/notify-send 'Inactive' 'Locking session in 5 minutes'";
-          canceller =
-            "${pkgs.libnotify}/bin/notify-send 'Activity detected' 'Lock session cancelled'";
+          command = "${pkgs.libnotify}/bin/notify-send 'Inactive' 'Locking session in 5 minutes'";
+          canceller = "${pkgs.libnotify}/bin/notify-send 'Activity detected' 'Lock session cancelled'";
         }
         {
           # Lock the session after 10 min idle

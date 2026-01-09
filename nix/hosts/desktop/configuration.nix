@@ -2,7 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     # Include the results of the hardware scan.
     ../../profiles/nixos/personal.nix
@@ -24,7 +25,10 @@
 
   # Disable usb autosuspend
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
-  boot.kernelModules = [ "usbip-core" "usbip-host" ];
+  boot.kernelModules = [
+    "usbip-core"
+    "usbip-host"
+  ];
 
   # Bootloader.
   modules.nixos = {
@@ -59,8 +63,10 @@
   networking = {
     hostName = "nixos-desktop";
     hosts = {
-      "127.0.0.1" =
-        [ "log-upload-os.hoyoverse.com" "overseauspider.yuanshen.com" ];
+      "127.0.0.1" = [
+        "log-upload-os.hoyoverse.com"
+        "overseauspider.yuanshen.com"
+      ];
     };
   };
   networking.interfaces.eno1.wakeOnLan = {

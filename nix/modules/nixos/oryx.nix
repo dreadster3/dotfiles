@@ -1,8 +1,19 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.oryx;
-in {
-  options = { modules.nixos.oryx = { enable = mkEnableOption "oryx"; }; };
+let
+  cfg = config.modules.nixos.oryx;
+in
+{
+  options = {
+    modules.nixos.oryx = {
+      enable = mkEnableOption "oryx";
+    };
+  };
 
   config = mkIf cfg.enable {
     users.groups.plugdev = { };
@@ -34,6 +45,6 @@ in {
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
     '';
 
-    home-manager.sharedModules = [{ home.packages = with pkgs; [ chromium ]; }];
+    home-manager.sharedModules = [ { home.packages = with pkgs; [ chromium ]; } ];
   };
 }

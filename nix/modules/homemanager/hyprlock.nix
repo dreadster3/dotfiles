@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.hyprlock;
-in {
+let
+  cfg = config.modules.homemanager.hyprlock;
+in
+{
   options = {
     modules.homemanager.hyprlock = {
       enable = mkEnableOption "hyprlock";
@@ -47,7 +54,9 @@ in {
         Environment = "DISPLAY=:0";
         ExecStart = "${cfg.package}/bin/hyprlock";
       };
-      Install = { WantedBy = [ "sleep.target" ]; };
+      Install = {
+        WantedBy = [ "sleep.target" ];
+      };
     };
   };
 }

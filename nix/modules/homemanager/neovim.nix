@@ -1,19 +1,45 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.neovim;
 
-  tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive)
-      scheme-medium pdfx xmpincl fontawesome5 markdown paralist csvsimple
-      tcolorbox environ tikzfill enumitem dashrule ifmtarg multirow changepage
-      biblatex paracol roboto fontaxes lato;
-    #(setq org-latex-compiler "lualatex")
-    #(setq org-preview-latex-default-process 'dvisvgm)
-  });
+  tex = (
+    pkgs.texlive.combine {
+      inherit (pkgs.texlive)
+        scheme-medium
+        pdfx
+        xmpincl
+        fontawesome5
+        markdown
+        paralist
+        csvsimple
+        tcolorbox
+        environ
+        tikzfill
+        enumitem
+        dashrule
+        ifmtarg
+        multirow
+        changepage
+        biblatex
+        paracol
+        roboto
+        fontaxes
+        lato
+        ;
+      #(setq org-latex-compiler "lualatex")
+      #(setq org-preview-latex-default-process 'dvisvgm)
+    }
+  );
 
-  goPackages = optionals cfg.go.enable ([ cfg.go.package ]
-    ++ optional cfg.go.languageServer.enable cfg.go.languageServer.package);
+  goPackages = optionals cfg.go.enable (
+    [ cfg.go.package ] ++ optional cfg.go.languageServer.enable cfg.go.languageServer.package
+  );
 
   rustPackages = optionals cfg.rust.enable [
     cfg.rust.package
@@ -24,16 +50,22 @@ let
   ];
 
   pythonPackages = optionals cfg.python.enable [
-    (cfg.python.package.withPackages (ps: with ps; [ ruff mypy debugpy ]))
+    (cfg.python.package.withPackages (
+      ps: with ps; [
+        ruff
+        mypy
+        debugpy
+      ]
+    ))
     pkgs.basedpyright
     pkgs.djhtml
   ];
 
-  poetryPackage =
-    cfg.python.poetry.package.override { python3 = cfg.python.package; };
+  poetryPackage = cfg.python.poetry.package.override { python3 = cfg.python.package; };
 
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
-in {
+in
+{
   options = {
     modules.homemanager.neovim = {
       enable = mkEnableOption "neovim";
@@ -122,7 +154,8 @@ in {
       enable = true;
       package = cfg.package;
       defaultEditor = true;
-      extraPackages = with pkgs;
+      extraPackages =
+        with pkgs;
         [
           # Depependencies
           unzip
@@ -163,10 +196,16 @@ in {
 
           # markdown
           marksman
-        ] ++ goPackages ++ rustPackages ++ pythonPackages;
+        ]
+        ++ goPackages
+        ++ rustPackages
+        ++ pythonPackages;
     };
 
-    home.packages = with pkgs; [ openssl pkg-config ];
+    home.packages = with pkgs; [
+      openssl
+      pkg-config
+    ];
     home.sessionVariables = {
       PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     };
@@ -179,7 +218,10 @@ in {
       terminal = false;
       type = "Application";
       icon = "nvim";
-      categories = [ "Utility" "TextEditor" ];
+      categories = [
+        "Utility"
+        "TextEditor"
+      ];
     };
   };
 }

@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.x11eventcallbacks;
-in {
+let
+  cfg = config.modules.homemanager.x11eventcallbacks;
+in
+{
   options = {
     modules.homemanager.x11eventcallbacks = {
       enable = mkEnableOption "Enable x11 event callbacks";
@@ -23,10 +30,13 @@ in {
         PartOf = [ "graphical-session.target" ];
       };
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
 
       Service = {
-        ExecStart = "${cfg.package}/bin/x11_event_callbacks "
+        ExecStart =
+          "${cfg.package}/bin/x11_event_callbacks "
           + pkgs.writers.writeBash "restart_polybar.sh" ''
             nitrogen --restore 2> /dev/null
             systemctl --user restart polybar

@@ -1,9 +1,18 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.guake;
-in {
+let
+  cfg = config.modules.homemanager.guake;
+in
+{
   options = {
-    modules.homemanager.guake = { enable = mkEnableOption "guake"; };
+    modules.homemanager.guake = {
+      enable = mkEnableOption "guake";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -16,7 +25,9 @@ in {
         PartOf = [ "graphical-session.target" ];
       };
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
 
       Service = {
         ExecStart = "${pkgs.guake}/bin/guake";

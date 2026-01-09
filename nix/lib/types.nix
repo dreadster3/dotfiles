@@ -1,5 +1,6 @@
 { lib, ... }:
-with lib; rec {
+with lib;
+rec {
   monitor = types.submodule {
     options = {
       primary = mkOption {

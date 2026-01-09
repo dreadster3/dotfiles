@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.virtualisation.waydroid.host;
-in {
+let
+  cfg = config.modules.nixos.virtualisation.waydroid.host;
+in
+{
   options = {
     modules.nixos.virtualisation.waydroid.host = {
       enable = mkEnableOption "virtualisation.waydroid.host";

@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.direnv;
-in {
+let
+  cfg = config.modules.homemanager.direnv;
+in
+{
   options = {
     modules.homemanager.direnv = {
       enable = mkEnableOption "direnv";

@@ -1,1 +1,12 @@
-{ config, lib, pkgs, ... }: { imports = [ ./guest.nix ./host.nix ]; }
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./guest.nix
+    ./host.nix
+  ];
+}

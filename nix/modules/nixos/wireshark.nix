@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.wireshark;
-in {
+let
+  cfg = config.modules.nixos.wireshark;
+in
+{
   options = {
     modules.nixos.wireshark = {
       enable = mkEnableOption "wireshark";

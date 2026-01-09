@@ -1,9 +1,15 @@
-{ stdenv, lib, pkgs, fetchFromGitHub }:
+{
+  stdenv,
+  lib,
+  pkgs,
+  fetchFromGitHub,
+}:
 
 with lib;
 
 let
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   name = "obsmic";
 
   src = fetchFromGitHub {

@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.openrgb;
-in {
+let
+  cfg = config.modules.nixos.openrgb;
+in
+{
   options = {
     modules.nixos.openrgb = {
       enable = mkEnableOption "openrgb";

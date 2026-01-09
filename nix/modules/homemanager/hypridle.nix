@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.hypridle;
@@ -8,7 +13,8 @@ let
   hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   systemctl = "${pkgs.systemd}/bin/systemctl";
-in {
+in
+{
   options = {
     modules.homemanager.hypridle = {
       enable = mkEnableOption "hypridle";

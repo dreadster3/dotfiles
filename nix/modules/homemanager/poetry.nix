@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.poetry;
-in {
+let
+  cfg = config.modules.homemanager.poetry;
+in
+{
   options = {
     modules.homemanager.poetry = {
       enable = mkEnableOption "poetry";

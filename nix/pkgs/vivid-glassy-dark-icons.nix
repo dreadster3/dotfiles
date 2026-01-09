@@ -1,4 +1,10 @@
-{ lib, fetchFromGitHub, stdenvNoCC, gtk3, ... }:
+{
+  lib,
+  fetchFromGitHub,
+  stdenvNoCC,
+  gtk3,
+  ...
+}:
 stdenvNoCC.mkDerivation rec {
   pname = "Vivid-Glassy-Dark-Icons";
   version = "unstable-2024-07-23";

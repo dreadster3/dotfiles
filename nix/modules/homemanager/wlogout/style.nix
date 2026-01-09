@@ -12,7 +12,8 @@ let
   reboot_hover_image = toString ./restart-hover.png;
 
   colors = config.modules.homemanager.settings.theme.colors;
-in ''
+in
+''
   window {
       font-family: monospace;
       font-size: 14pt;

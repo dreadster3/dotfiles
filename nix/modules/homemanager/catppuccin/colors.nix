@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.catppuccin;
@@ -32,7 +37,8 @@ let
       crust = "#11111b";
     };
   };
-in {
+in
+{
   options = {
     catppuccin = {
       colors = mkOption {

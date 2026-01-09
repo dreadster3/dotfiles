@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.bspwm;
   monitors = config.modules.homemanager.settings.monitors.x11 // cfg.monitors;
-in {
+in
+{
   options = {
     modules.homemanager.bspwm = {
       enable = mkEnableOption "bspwm";
@@ -23,10 +29,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    assertions = [{
-      assertion = monitors != { };
-      message = "No monitors configured";
-    }];
+    assertions = [
+      {
+        assertion = monitors != { };
+        message = "No monitors configured";
+      }
+    ];
 
     services.polybar.config."bar/main".wm-restack = "bspwm";
 
@@ -52,9 +60,7 @@ in {
         "xsetroot -cursor_name left_ptr"
       ];
 
-      monitors = mapAttrs
-        (name: monitor: (map (value: toString value) monitor.workspaces))
-        monitors;
+      monitors = mapAttrs (name: monitor: (map (value: toString value) monitor.workspaces)) monitors;
 
       rules = {
         "Pavucontrol" = {
@@ -66,8 +72,12 @@ in {
           sticky = true;
           center = true;
         };
-        "Zathura" = { state = "tiled"; };
-        "GeForce NOW" = { state = "fullscreen"; };
+        "Zathura" = {
+          state = "tiled";
+        };
+        "GeForce NOW" = {
+          state = "fullscreen";
+        };
       };
     };
   };

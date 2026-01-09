@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.easyeffects;
-in {
+let
+  cfg = config.modules.homemanager.easyeffects;
+in
+{
   options = {
     modules.homemanager.easyeffects = {
       enable = mkEnableOption "easyeffects";
@@ -12,5 +19,9 @@ in {
     };
   };
 
-  config = mkIf cfg.enable { services.easyeffects = { enable = true; }; };
+  config = mkIf cfg.enable {
+    services.easyeffects = {
+      enable = true;
+    };
+  };
 }

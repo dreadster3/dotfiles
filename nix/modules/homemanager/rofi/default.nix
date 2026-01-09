@@ -1,11 +1,18 @@
-{ config, lib, pkgs, username, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  username,
+  ...
+}:
 with lib;
 let
   inherit (config.lib.formats.rasi) mkLiteral;
   cfg = config.modules.homemanager.rofi;
   packagePath = getExe config.programs.rofi.finalPackage;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
-in {
+in
+{
   options = {
     modules.homemanager.rofi = {
       enable = mkEnableOption "rofi";
@@ -40,8 +47,7 @@ in {
     services.sxhkd.keybindings = {
       "super + @space" = "${packagePath} -show drun";
       "super + d" = "${packagePath} -show run";
-      "super + q" =
-        "${packagePath} -show p -modi 'p:${getExe cfg.powermenu.package}'";
+      "super + q" = "${packagePath} -show p -modi 'p:${getExe cfg.powermenu.package}'";
     };
 
     wayland.windowManager.hyprland.settings.bind = [
@@ -50,12 +56,13 @@ in {
     ];
 
     xsession.windowManager.i3.config.keybindings =
-      let modifier = config.xsession.windowManager.i3.config.modifier;
-      in mkOptionDefault {
+      let
+        modifier = config.xsession.windowManager.i3.config.modifier;
+      in
+      mkOptionDefault {
         "${modifier}+space" = "exec pkill rofi || ${packagePath} -show drun";
-        "${modifier}+q" = "exec pkill rofi || ${packagePath} -show p -modi 'p:${
-            getExe cfg.powermenu.package
-          }'";
+        "${modifier}+q" =
+          "exec pkill rofi || ${packagePath} -show p -modi 'p:${getExe cfg.powermenu.package}'";
       };
 
     programs.rofi = {
@@ -75,6 +82,8 @@ in {
       };
     };
 
-    xdg.configFile."rofi/powermenu.rasi" = { source = ./powermenu.rasi; };
+    xdg.configFile."rofi/powermenu.rasi" = {
+      source = ./powermenu.rasi;
+    };
   };
 }

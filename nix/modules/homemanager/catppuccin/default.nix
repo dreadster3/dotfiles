@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.catppuccin;
-in {
+let
+  cfg = config.modules.homemanager.catppuccin;
+in
+{
   imports = [
     ./hyprland.nix
     ./waybar

@@ -1,11 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.modules.homemanager.zsh;
 
-  dynamicEnvVariables = lib.mapAttrsToList
-    (name: value: "export ${lib.toUpper name}=$(cat ${value})")
-    cfg.dynamicEnvVariables;
-in {
+  dynamicEnvVariables = lib.mapAttrsToList (
+    name: value: "export ${lib.toUpper name}=$(cat ${value})"
+  ) cfg.dynamicEnvVariables;
+in
+{
   options = {
     modules.homemanager.zsh = {
       enable = lib.mkEnableOption "zsh";
@@ -23,10 +29,12 @@ in {
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
-      sessionVariables = { "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin"; };
-      initContent = lib.concatStringsSep "\n" (dynamicEnvVariables
-        ++ lib.optional cfg.sourceNix
-        "source $HOME/.nix-profile/etc/profile.d/nix.sh");
+      sessionVariables = {
+        "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin";
+      };
+      initContent = lib.concatStringsSep "\n" (
+        dynamicEnvVariables ++ lib.optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
+      );
       plugins = [
         {
           name = "zsh-nix-shell";
@@ -43,7 +51,8 @@ in {
           src = ../../../configurations/powerlevel10k;
           file = "p10k.zsh";
         }
-      ] ++ lib.optional (!config.programs.zoxide.enable) {
+      ]
+      ++ lib.optional (!config.programs.zoxide.enable) {
         name = "zsh-z";
         file = "share/zsh-z/zsh-z.plugin.zsh";
         src = pkgs.zsh-z;
@@ -66,10 +75,8 @@ in {
       };
       shellAliases = {
         n = "nvim";
-        zshconfig =
-          "nvim ~/Documents/projects/github/dotfiles/nix/modules/homemanager/zsh.nix";
-        nvimconfig =
-          "nvim ~/Documents/projects/github/dotfiles/configurations/nvim";
+        zshconfig = "nvim ~/Documents/projects/github/dotfiles/nix/modules/homemanager/zsh.nix";
+        nvimconfig = "nvim ~/Documents/projects/github/dotfiles/configurations/nvim";
         nixconfig = "nvim ~/Documents/projects/github/dotfiles";
         ssh = "TERM=xterm-256color ${pkgs.openssh}/bin/ssh";
       };

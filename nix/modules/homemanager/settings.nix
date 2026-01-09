@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.settings;
 
-  mkFontOption = style:
+  mkFontOption =
+    style:
     mkOption {
       type = types.submodule {
         options = {
@@ -56,7 +62,8 @@ let
     };
   };
 
-in {
+in
+{
   options = {
     modules.homemanager.settings = {
       enable = mkEnableOption "settings";
@@ -76,18 +83,46 @@ in {
           x11 = {
             DP-0 = {
               primary = true;
-              workspaces = [ 1 2 3 4 5 ];
+              workspaces = [
+                1
+                2
+                3
+                4
+                5
+              ];
             };
 
-            HDMI-A-0 = { workspaces = [ 6 7 8 9 10 ]; };
+            HDMI-A-0 = {
+              workspaces = [
+                6
+                7
+                8
+                9
+                10
+              ];
+            };
           };
           wayland = {
             DP-0 = {
               primary = true;
-              workspaces = [ 1 2 3 4 5 ];
+              workspaces = [
+                1
+                2
+                3
+                4
+                5
+              ];
             };
 
-            HDMI-A-0 = { workspaces = [ 6 7 8 9 10 ]; };
+            HDMI-A-0 = {
+              workspaces = [
+                6
+                7
+                8
+                9
+                10
+              ];
+            };
           };
         };
       };
@@ -128,8 +163,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    modules.homemanager.settings.theme.colors =
-      themes.${cfg.theme.name}.${cfg.theme.variant};
+    modules.homemanager.settings.theme.colors = themes.${cfg.theme.name}.${cfg.theme.variant};
     modules.homemanager.settings.font = { };
   };
 }

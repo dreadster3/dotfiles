@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.polkit;
@@ -9,7 +14,8 @@ let
   };
 
   getExecutable = pkg: executable."${toString pkg.pname}";
-in {
+in
+{
   options = {
     modules.homemanager.polkit = {
       enable = mkEnableOption "polkit";
@@ -27,7 +33,9 @@ in {
         PartOf = [ "graphical-session.target" ];
         After = [ "graphical-session-pre.target" ];
       };
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
       Service = {
         Type = "simple";
         ExecStart = "${cfg.package}/libexec/${getExecutable cfg.package}";

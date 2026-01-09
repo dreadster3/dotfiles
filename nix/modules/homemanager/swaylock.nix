@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.swaylock;
-in {
+let
+  cfg = config.modules.homemanager.swaylock;
+in
+{
   options = {
     modules.homemanager.swaylock = {
       enable = mkEnableOption "swaylock";
@@ -25,13 +32,16 @@ in {
       }
     ];
 
-    wayland.windowManager.hyprland.settings.bind =
-      [ "$mainMod_CTRL, Q, exec, ${cfg.package}/bin/swaylock" ];
+    wayland.windowManager.hyprland.settings.bind = [
+      "$mainMod_CTRL, Q, exec, ${cfg.package}/bin/swaylock"
+    ];
 
     programs.swaylock = {
       enable = true;
       package = cfg.package;
-      settings = { image = toString ../../../wallpapers/city_mountains.jpg; };
+      settings = {
+        image = toString ../../../wallpapers/city_mountains.jpg;
+      };
     };
 
     systemd.user.services.swaylock-suspend = {
@@ -44,7 +54,9 @@ in {
         Environment = "DISPLAY=:0";
         ExecStart = "${cfg.package}/bin/swaylock";
       };
-      Install = { WantedBy = [ "sleep.target" ]; };
+      Install = {
+        WantedBy = [ "sleep.target" ];
+      };
     };
   };
 }

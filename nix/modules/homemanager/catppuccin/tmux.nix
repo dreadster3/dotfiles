@@ -1,23 +1,32 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.catppuccin.tmux;
   inherit (config.catppuccin) accent enable;
-in {
+in
+{
   options = { };
 
   config = mkIf (cfg.enable && enable) {
-    programs.tmux.plugins = with pkgs.tmuxPlugins;
-      lib.mkAfter [{
-        plugin = cpu;
-        extraConfig = ''
-          set -g status-right "#{E:@catppuccin_status_host}"
-          set -ag status-right "#{E:@catppuccin_status_application}"
-          set -agF status-right "#{E:@catppuccin_status_cpu}"
-          set -ag status-right "#{E:@catppuccin_status_session}"
-          set -ag status-right "#{E:@catppuccin_status_uptime}"
-        '';
-      }];
+    programs.tmux.plugins =
+      with pkgs.tmuxPlugins;
+      lib.mkAfter [
+        {
+          plugin = cpu;
+          extraConfig = ''
+            set -g status-right "#{E:@catppuccin_status_host}"
+            set -ag status-right "#{E:@catppuccin_status_application}"
+            set -agF status-right "#{E:@catppuccin_status_cpu}"
+            set -ag status-right "#{E:@catppuccin_status_session}"
+            set -ag status-right "#{E:@catppuccin_status_uptime}"
+          '';
+        }
+      ];
 
     programs.tmux.extraConfig = ''
       set -g status-right-length 100

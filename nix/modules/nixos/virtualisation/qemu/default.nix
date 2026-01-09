@@ -1,1 +1,9 @@
-{ config, lib, pkgs, ... }: { imports = [ ./virtmanager.nix ]; }
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [ ./virtmanager.nix ];
+}

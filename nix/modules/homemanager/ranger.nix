@@ -1,19 +1,33 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.ranger;
-in {
+let
+  cfg = config.modules.homemanager.ranger;
+in
+{
   options = {
     modules.homemanager.ranger = {
       enable = mkEnableOption "ranger";
       previewMethod = mkOption {
-        type = types.enum [ "iterm2" "ueberzug" ];
+        type = types.enum [
+          "iterm2"
+          "ueberzug"
+        ];
         default = "iterm2";
       };
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs;
-      [ ranger trash-cli ]
+    home.packages =
+      with pkgs;
+      [
+        ranger
+        trash-cli
+      ]
       ++ lib.optionals (cfg.previewMethod == "ueberzug") [ ueberzug ];
 
     xdg.configFile."ranger/rc.conf" = {

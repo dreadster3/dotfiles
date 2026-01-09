@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.ssh;
-in {
+let
+  cfg = config.modules.nixos.ssh;
+in
+{
   options = {
     modules.nixos.ssh = {
       enable = mkEnableOption "ssh";

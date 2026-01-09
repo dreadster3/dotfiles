@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.swayidle;
   locker_cmd = "${pkgs.swaylock}/bin/swaylock -fF";
-in {
+in
+{
   options = {
     modules.homemanager.swayidle = {
       enable = mkEnableOption "swayidle";

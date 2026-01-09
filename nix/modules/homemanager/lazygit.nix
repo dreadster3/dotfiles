@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.lazygit;
-in {
+let
+  cfg = config.modules.homemanager.lazygit;
+in
+{
   options = {
     modules.homemanager.lazygit = {
       enable = mkEnableOption "lazygit";

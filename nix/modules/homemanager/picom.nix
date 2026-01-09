@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.picom;
-in {
+let
+  cfg = config.modules.homemanager.picom;
+in
+{
   options = {
     modules.homemanager.picom = {
       enable = mkEnableOption "picom";
@@ -10,7 +17,12 @@ in {
         default = pkgs.picom;
       };
       backend = mkOption {
-        type = types.enum [ "glx" "xrender" "xr_glx_hybrid" "egl" ];
+        type = types.enum [
+          "glx"
+          "xrender"
+          "xr_glx_hybrid"
+          "egl"
+        ];
         default = "glx";
       };
     };
@@ -31,11 +43,20 @@ in {
       vSync = true;
 
       shadow = true;
-      shadowOffsets = [ (-7) (-7) ];
-      shadowExclude = [ "name = 'Notification'" "class_g = 'Dunst'" ];
+      shadowOffsets = [
+        (-7)
+        (-7)
+      ];
+      shadowExclude = [
+        "name = 'Notification'"
+        "class_g = 'Dunst'"
+      ];
 
       fade = true;
-      fadeSteps = [ 3.0e-2 3.0e-2 ];
+      fadeSteps = [
+        3.0e-2
+        3.0e-2
+      ];
 
       inactiveOpacity = 0.95;
       opacityRules = [
@@ -91,7 +112,9 @@ in {
           shadow = false;
           clip-shadow-above = false;
         };
-        dnd = { shadow = false; };
+        dnd = {
+          shadow = false;
+        };
       };
     };
 

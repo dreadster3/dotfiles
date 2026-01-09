@@ -1,9 +1,18 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.gammastep;
-in {
+let
+  cfg = config.modules.homemanager.gammastep;
+in
+{
   options = {
-    modules.homemanager.gammastep = { enable = mkEnableOption "gammastep"; };
+    modules.homemanager.gammastep = {
+      enable = mkEnableOption "gammastep";
+    };
   };
 
   config = mkIf cfg.enable {

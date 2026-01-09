@@ -1,8 +1,19 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.sound;
-in {
-  options = { modules.nixos.sound = { enable = mkEnableOption "sound"; }; };
+let
+  cfg = config.modules.nixos.sound;
+in
+{
+  options = {
+    modules.nixos.sound = {
+      enable = mkEnableOption "sound";
+    };
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ pavucontrol ];

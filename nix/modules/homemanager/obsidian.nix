@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.obsidian;
-in {
+let
+  cfg = config.modules.homemanager.obsidian;
+in
+{
   options = {
     modules.homemanager.obsidian = {
       enable = mkEnableOption "obsidian";

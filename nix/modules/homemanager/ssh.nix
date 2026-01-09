@@ -1,8 +1,19 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.ssh;
-in {
-  options = { modules.homemanager.ssh = { enable = mkEnableOption "ssh"; }; };
+let
+  cfg = config.modules.homemanager.ssh;
+in
+{
+  options = {
+    modules.homemanager.ssh = {
+      enable = mkEnableOption "ssh";
+    };
+  };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ cloudflared ];
 

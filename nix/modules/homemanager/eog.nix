@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.eog;
-in {
+let
+  cfg = config.modules.homemanager.eog;
+in
+{
   options = {
     modules.homemanager.eog = {
       enable = mkEnableOption "eog";

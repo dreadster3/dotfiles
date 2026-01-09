@@ -1,8 +1,19 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.thunar;
-in {
-  options = { modules.nixos.thunar = { enable = mkEnableOption "thunar"; }; };
+let
+  cfg = config.modules.nixos.thunar;
+in
+{
+  options = {
+    modules.nixos.thunar = {
+      enable = mkEnableOption "thunar";
+    };
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ xfce.exo ];
@@ -11,7 +22,10 @@ in {
 
     programs.thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
     };
 
     services = {

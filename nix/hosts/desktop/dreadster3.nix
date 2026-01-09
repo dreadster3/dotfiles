@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [ ../users.nix ];
 
   users.users.dreadster.extraGroups = [ "dialout" ];
@@ -59,9 +60,23 @@
           x11 = {
             DP-0 = {
               primary = true;
-              workspaces = [ 1 2 3 4 5 ];
+              workspaces = [
+                1
+                2
+                3
+                4
+                5
+              ];
             };
-            HDMI-0 = { workspaces = [ 6 7 8 9 10 ]; };
+            HDMI-0 = {
+              workspaces = [
+                6
+                7
+                8
+                9
+                10
+              ];
+            };
           };
 
           wayland = {
@@ -70,19 +85,33 @@
               resolution = "preferred";
               position = "1080x0";
               transform = null;
-              workspaces = [ 1 2 3 4 5 ];
+              workspaces = [
+                1
+                2
+                3
+                4
+                5
+              ];
               zoom = "auto";
             };
             HDMI-A-1 = {
               resolution = "preferred";
               position = "0x0";
               transform = 1;
-              workspaces = [ 6 7 8 9 10 ];
+              workspaces = [
+                6
+                7
+                8
+                9
+                10
+              ];
               zoom = "auto";
             };
           };
         };
-        font = { size = 22; };
+        font = {
+          size = 22;
+        };
       };
 
       openrgb = {

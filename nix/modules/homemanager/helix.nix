@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.helix;
@@ -6,7 +11,9 @@ let
 in
 {
   options = {
-    modules.homemanager.helix = { enable = mkEnableOption "helix"; };
+    modules.homemanager.helix = {
+      enable = mkEnableOption "helix";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -25,7 +32,9 @@ in
             select = "underline";
           };
 
-          indent-guides = { render = true; };
+          indent-guides = {
+            render = true;
+          };
         };
       };
       themes = {
@@ -132,11 +141,18 @@ in
             "markup.heading.5" = pink;
             "markup.heading.6" = teal;
             "markup.list" = mauve;
-            "markup.bold" = { modifiers = [ "bold" ]; };
-            "markup.italic" = { modifiers = [ "italic" ]; };
+            "markup.bold" = {
+              modifiers = [ "bold" ];
+            };
+            "markup.italic" = {
+              modifiers = [ "italic" ];
+            };
             "markup.link.url" = {
               fg = blue;
-              modifiers = [ "italic" "underlined" ];
+              modifiers = [
+                "italic"
+                "underlined"
+              ];
             };
             "markup.link.text" = blue;
             "markup.raw" = flamingo;
@@ -151,8 +167,12 @@ in
               fg = text;
               bg = base;
             };
-            "ui.linenr" = { fg = surface1; };
-            "ui.linenr.selected" = { fg = lavender; };
+            "ui.linenr" = {
+              fg = surface1;
+            };
+            "ui.linenr.selected" = {
+              fg = lavender;
+            };
             "ui.statusline" = {
               fg = subtext1;
               bg = mantle;
@@ -180,7 +200,9 @@ in
               fg = text;
               bg = surface0;
             };
-            "ui.window" = { fg = crust; };
+            "ui.window" = {
+              fg = crust;
+            };
             "ui.help" = {
               fg = overlay2;
               bg = surface0;
@@ -197,22 +219,30 @@ in
                 style = "line";
               };
             };
-            "ui.bufferline.background" = { bg = crust; };
+            "ui.bufferline.background" = {
+              bg = crust;
+            };
             "ui.text" = text;
             "ui.text.focus" = {
               fg = text;
               bg = surface0;
               modifiers = [ "bold" ];
             };
-            "ui.text.inactive" = { fg = overlay1; };
+            "ui.text.inactive" = {
+              fg = overlay1;
+            };
             "ui.virtual" = overlay0;
-            "ui.virtual.ruler" = { bg = surface0; };
+            "ui.virtual.ruler" = {
+              bg = surface0;
+            };
             "ui.virtual.indent-guide" = surface0;
             "ui.virtual.inlay-hint" = {
               fg = surface1;
               bg = mantle;
             };
-            "ui.selection" = { bg = surface1; };
+            "ui.selection" = {
+              bg = surface1;
+            };
             "ui.cursor" = {
               fg = base;
               bg = secondary_cursor;
@@ -249,7 +279,9 @@ in
               fg = base;
               bg = secondary_cursor;
             };
-            "ui.cursorline.primary" = { bg = cursorline; };
+            "ui.cursorline.primary" = {
+              bg = cursorline;
+            };
             "ui.highlight" = {
               bg = surface1;
               modifiers = [ "bold" ];

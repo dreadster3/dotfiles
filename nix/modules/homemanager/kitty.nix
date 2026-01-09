@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.kitty;
-in {
+let
+  cfg = config.modules.homemanager.kitty;
+in
+{
   options = {
     modules.homemanager.kitty = {
       enable = mkEnableOption "kitty";

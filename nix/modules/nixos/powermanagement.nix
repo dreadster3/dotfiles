@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.powermanagement;
-in {
+let
+  cfg = config.modules.nixos.powermanagement;
+in
+{
   options = {
     modules.nixos.powermanagement = {
       enable = mkEnableOption "powermanagement";

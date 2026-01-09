@@ -2,7 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ hostname, config, pkgs, lib, ... }: {
+{
+  hostname,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ../../profiles/nixos/personal.nix
     ./dreadster.nix

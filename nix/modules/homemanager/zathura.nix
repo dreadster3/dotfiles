@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.zathura;
-in {
+let
+  cfg = config.modules.homemanager.zathura;
+in
+{
   options = {
     modules.homemanager.zathura = {
       enable = mkEnableOption "zathura";

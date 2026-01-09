@@ -1,9 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.qt;
+let
+  cfg = config.modules.nixos.qt;
 
-in {
-  options = { modules.nixos.qt = { enable = mkEnableOption "qt"; }; };
+in
+{
+  options = {
+    modules.nixos.qt = {
+      enable = mkEnableOption "qt";
+    };
+  };
   config = mkIf cfg.enable {
     qt = {
       enable = true;
@@ -11,7 +22,6 @@ in {
       style = "kvantum";
     };
 
-    home-manager.sharedModules =
-      [{ modules.homemanager.qt.enable = mkDefault true; }];
+    home-manager.sharedModules = [ { modules.homemanager.qt.enable = mkDefault true; } ];
   };
 }

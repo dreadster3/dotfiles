@@ -1,8 +1,19 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.steam;
-in {
-  options = { modules.nixos.steam = { enable = mkEnableOption "steam"; }; };
+let
+  cfg = config.modules.nixos.steam;
+in
+{
+  options = {
+    modules.nixos.steam = {
+      enable = mkEnableOption "steam";
+    };
+  };
 
   config = mkIf cfg.enable {
     programs.steam = {
@@ -13,8 +24,13 @@ in {
 
     programs.gamemode.enable = true;
 
-    environment.systemPackages = with pkgs; [ mangohud vulkan-tools ];
+    environment.systemPackages = with pkgs; [
+      mangohud
+      vulkan-tools
+    ];
 
-    environment.variables = { STEAM_COMPAT_MOUNTS = "/games"; };
+    environment.variables = {
+      STEAM_COMPAT_MOUNTS = "/games";
+    };
   };
 }

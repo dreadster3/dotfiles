@@ -45,8 +45,18 @@
     };
   };
 
-  outputs = { self, spicetify, nixpkgs, home-manager, catppuccin, stylix
-    , sops-nix, nixos-wsl, ... }@inputs:
+  outputs =
+    {
+      self,
+      spicetify,
+      nixpkgs,
+      home-manager,
+      catppuccin,
+      stylix,
+      sops-nix,
+      nixos-wsl,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
 
@@ -59,14 +69,13 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      lib = nixpkgs.lib.extend
-        (_: prev: (import ./lib { lib = prev; }) // home-manager.lib);
+      lib = nixpkgs.lib.extend (_: prev: (import ./lib { lib = prev; }) // home-manager.lib);
 
-    in {
+    in
+    {
       packages = forAllSystems (system: nixpkgs.legacyPackages.${system});
 
-      formatter =
-        forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
       overlays = import ./overlays { inherit inputs; };
 

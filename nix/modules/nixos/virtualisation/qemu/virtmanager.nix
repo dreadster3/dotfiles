@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.virtualisation.qemu.host;
-in {
+let
+  cfg = config.modules.nixos.virtualisation.qemu.host;
+in
+{
   options = {
     modules.nixos.virtualisation.qemu.host = {
       enable = mkEnableOption "virtualisation.qemu.host";
@@ -15,7 +22,11 @@ in {
     };
     programs.virt-manager.enable = true;
 
-    users.extraUsers.dreadster.extraGroups = [ "libvirtd" "kvm" "input" ];
+    users.extraUsers.dreadster.extraGroups = [
+      "libvirtd"
+      "kvm"
+      "input"
+    ];
 
     boot.extraModprobeConfig = ''
       options kvm_intel nested=1
@@ -25,23 +36,23 @@ in {
 
     environment.etc = {
       "ovmf/edk2-x86_64-secure-code.fd" = {
-        source = config.virtualisation.libvirtd.qemu.package
-          + "/share/qemu/edk2-x86_64-secure-code.fd";
+        source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-x86_64-secure-code.fd";
       };
 
       "ovmf/edk2-i386-vars.fd" = {
-        source = config.virtualisation.libvirtd.qemu.package
-          + "/share/qemu/edk2-i386-vars.fd";
+        source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-i386-vars.fd";
       };
     };
 
-    home-manager.sharedModules = [{
-      dconf.settings = {
-        "org/virt-manager/virt-manager/connections" = {
-          autoconnect = [ "qemu:///system" ];
-          uris = [ "qemu:///system" ];
+    home-manager.sharedModules = [
+      {
+        dconf.settings = {
+          "org/virt-manager/virt-manager/connections" = {
+            autoconnect = [ "qemu:///system" ];
+            uris = [ "qemu:///system" ];
+          };
         };
-      };
-    }];
+      }
+    ];
   };
 }

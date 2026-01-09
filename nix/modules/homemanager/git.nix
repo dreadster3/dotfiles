@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.git;
-in {
+let
+  cfg = config.modules.homemanager.git;
+in
+{
   options = {
     modules.homemanager.git = {
       enable = mkEnableOption "git";

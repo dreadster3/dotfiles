@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.nh;
 
   flake = "${config.home.homeDirectory}/Documents/projects/github/dotfiles/nix";
-in {
+in
+{
   options = {
     modules.homemanager.nh = {
       enable = mkEnableOption "nh";
@@ -15,7 +21,9 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.sessionVariables = { NH_FLAKE = flake; };
+    home.sessionVariables = {
+      NH_FLAKE = flake;
+    };
 
     programs.nh = {
       inherit (cfg) package;

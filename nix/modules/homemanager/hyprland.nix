@@ -1,16 +1,20 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.homemanager.hyprland;
 
-  transformToString = transform:
-    if transform == null then "" else ",transform,${toString transform}";
+  transformToString = transform: if transform == null then "" else ",transform,${toString transform}";
 
-  monitors = config.modules.homemanager.settings.monitors.wayland
-    // cfg.monitors;
+  monitors = config.modules.homemanager.settings.monitors.wayland // cfg.monitors;
 
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
-in {
+in
+{
   options = {
     modules.homemanager.hyprland = {
       enable = mkEnableOption "hyprland";
@@ -41,12 +45,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    assertions = [{
-      assertion = monitors != { };
-      message = "No monitors configured.";
-    }];
+    assertions = [
+      {
+        assertion = monitors != { };
+        message = "No monitors configured.";
+      }
+    ];
 
-    home.packages = with pkgs; [ wl-clipboard grimblast ];
+    home.packages = with pkgs; [
+      wl-clipboard
+      grimblast
+    ];
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -68,7 +77,9 @@ in {
 
         exec-once = cfg.startupPrograms;
 
-        xwayland = { force_zero_scaling = true; };
+        xwayland = {
+          force_zero_scaling = true;
+        };
 
         input = {
           kb_layout = "us";
@@ -216,9 +227,10 @@ in {
           "pin, initialTitle:^(.*)([Pp]opout)(.*)$"
         ];
 
-        workspace = foldlAttrs (acc: name: monitor:
-          acc ++ (map (workspace: "${toString workspace},monitor:${name}")
-            monitor.workspaces)) [ ] monitors;
+        workspace = foldlAttrs (
+          acc: name: monitor:
+          acc ++ (map (workspace: "${toString workspace},monitor:${name}") monitor.workspaces)
+        ) [ ] monitors;
 
         bind = [
           "$mainMod, Return, exec, ${getExe terminal}"

@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.spotify;
-in {
+let
+  cfg = config.modules.homemanager.spotify;
+in
+{
 
   options = {
     modules.homemanager.spotify = {
@@ -13,7 +20,9 @@ in {
       };
       spicetify = mkOption {
         type = types.submodule {
-          options = { enable = mkEnableOption "spotify.spicetify"; };
+          options = {
+            enable = mkEnableOption "spotify.spicetify";
+          };
         };
       };
     };

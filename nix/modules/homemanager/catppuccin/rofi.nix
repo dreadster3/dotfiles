@@ -1,11 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   inherit (config.lib.formats.rasi) mkLiteral;
   cfg = config.catppuccin.rofi;
   accent = mkLiteral "@${config.catppuccin.accent}";
   inherit (config.catppuccin) enable;
-in {
+in
+{
   options = { };
 
   config = mkIf (cfg.enable && enable) {

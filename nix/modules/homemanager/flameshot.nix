@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.flameshot;
-in {
+let
+  cfg = config.modules.homemanager.flameshot;
+in
+{
   options = {
     modules.homemanager.flameshot = {
       enable = mkEnableOption "flameshot";
@@ -13,7 +20,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.sxhkd.keybindings = { "Print" = "${getExe cfg.package} gui"; };
+    services.sxhkd.keybindings = {
+      "Print" = "${getExe cfg.package} gui";
+    };
 
     services.flameshot = {
       inherit (cfg) package;

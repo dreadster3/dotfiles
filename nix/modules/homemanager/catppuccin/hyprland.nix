@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.catppuccin.hyprland;
-in {
+let
+  cfg = config.catppuccin.hyprland;
+in
+{
   options = { };
 
   config = mkIf cfg.enable {

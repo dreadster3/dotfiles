@@ -1,1 +1,13 @@
-{ config, lib, pkgs, ... }: { imports = [ ./vmware ./qemu ./waydroid.nix ]; }
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./vmware
+    ./qemu
+    ./waydroid.nix
+  ];
+}

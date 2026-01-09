@@ -1,7 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.zoxide;
-in {
+let
+  cfg = config.modules.homemanager.zoxide;
+in
+{
   options = {
     modules.homemanager.zoxide = {
       enable = mkEnableOption "zoxide";
@@ -19,4 +26,3 @@ in {
     };
   };
 }
-

@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.virtualisation.vmware.host;
-in {
+let
+  cfg = config.modules.nixos.virtualisation.vmware.host;
+in
+{
   options = {
     modules.nixos.virtualisation.vmware.host = {
       enable = mkEnableOption "virtualisation.vmware.host";

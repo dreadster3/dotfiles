@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.nixos.qmk;
-in {
+let
+  cfg = config.modules.nixos.qmk;
+in
+{
   options = {
     modules.nixos.qmk = {
       enable = mkEnableOption "qmk";
@@ -14,7 +21,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ cfg.package via ];
+    environment.systemPackages = with pkgs; [
+      cfg.package
+      via
+    ];
     services.udev.packages = [ pkgs.via ];
     hardware.keyboard.qmk.enable = true;
     services.udev.extraRules = ''

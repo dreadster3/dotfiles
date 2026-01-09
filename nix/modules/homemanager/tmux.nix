@@ -1,8 +1,19 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.modules.homemanager.tmux;
-in {
-  options = { modules.homemanager.tmux = { enable = mkEnableOption "tmux"; }; };
+let
+  cfg = config.modules.homemanager.tmux;
+in
+{
+  options = {
+    modules.homemanager.tmux = {
+      enable = mkEnableOption "tmux";
+    };
+  };
 
   config = mkIf cfg.enable {
     programs.tmux = {
@@ -15,7 +26,8 @@ in {
       terminal = "alacritty";
       focusEvents = true;
       escapeTime = 0;
-      plugins = with pkgs.tmuxPlugins;
+      plugins =
+        with pkgs.tmuxPlugins;
         lib.mkMerge [
           (lib.mkBefore [
             better-mouse-mode
