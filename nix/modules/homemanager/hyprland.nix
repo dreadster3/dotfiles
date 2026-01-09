@@ -53,6 +53,8 @@ in
     ];
 
     home.packages = with pkgs; [
+      hyprsysteminfo
+
       wl-clipboard
       grimblast
     ];
