@@ -3,9 +3,9 @@
   imports = [ ./common.nix ];
 
   security.pki.certificateFiles = [
-    ../../../certificates/rootca.crt
-    ../../../certificates/homeissuer.crt
-    ../../../certificates/truenasca.crt
+    ../../../certificates/home-root-ca.crt
+    ../../../certificates/home-issuer.crt
+    ../../../certificates/truenas-intermediate-ca.crt
   ];
 
   # Run appimages directly
