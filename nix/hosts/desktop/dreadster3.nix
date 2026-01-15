@@ -52,6 +52,9 @@
 
       # Terminal emulator
       warp-terminal
+
+      # Note Self Hosted App
+      affine
     ];
 
     modules.homemanager = {
