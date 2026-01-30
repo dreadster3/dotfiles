@@ -190,43 +190,76 @@ in
           smart_resizing = false;
         };
 
-        windowrulev2 = [
-          # Animations
-          "animation slide, class:^(wofi)$"
-          "animation slide, class:^(rofi)$"
+        windowrule = [
+          {
+            name = "Wofi Slide In Animation";
+            animation = "slide";
+            "match:class" = "wofi";
+          }
+          {
+            name = "Rofi Slide In Animation";
+            animation = "slide";
+            "match:class" = "rofi";
+          }
 
           # pavucontrol
-          "float, class:^(org.pulseaudio.pavucontrol)$"
-          "size 45%, class:^(org.pulseaudio.pavucontrol)$"
-          "center%, class:^(org.pulseaudio.pavucontrol)$"
-
-          # Tile
-          "tile,initialTitle:^(ErgoDox EZ Configurator)$"
-          "tile,initialTitle:^(Excalidraw)$"
-
-          # xwaylandvideobridge
-          "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
-          "noanim,class:^(xwaylandvideobridge)$"
-          "nofocus,class:^(xwaylandvideobridge)$"
-          "noinitialfocus,class:^(xwaylandvideobridge)$"
-
-          # steam
-          "stayfocused, title:^()$,class:^(steam)$"
-          "minsize 1 1, title:^()$,class:^(steam)$"
-          "immediate, class:^(steam_app)"
-          "immediate, title:.*.exe"
-
-          # Picture-in-Picture
-          "move 73% 72%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$ "
-          "size 25%, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
-          "float, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
-          "pin, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
-
-          # Popout
-          "move 73% 72%, initialTitle:^(.*)([Pp]opout)(.*)$"
-          "size 25%, initialTitle:^(.*)([Pp]opout)(.*)$"
-          "float, initialTitle:^(.*)([Pp]opout)(.*)$"
-          "pin, initialTitle:^(.*)([Pp]opout)(.*)$"
+          {
+            name = "pavucontrol";
+            "match:class" = "^(org.pulseaudio.pavucontrol)$";
+            float = "on";
+            size = "(monitor_w * 0.4) (monitor_h * 0.4)";
+            center = "on";
+          }
+          {
+            name = "XWayland Video Bridge";
+            "match:class" = "^(xwaylandvideobridge)$";
+            opacity = "0.0 override 0.0 override";
+            no_anim = "on";
+            no_focus = "on";
+            no_initial_focus = "on";
+          }
+          {
+            name = "Steam";
+            "match:class" = "^(steam)$";
+            "match:title" = "^()$";
+            stay_focused = "on";
+          }
+          {
+            name = "Steam Apps";
+            "match:class" = "^(steam_app)$";
+            immediate = "on";
+          }
+          {
+            name = "Windows Executables";
+            "match:title" = ".*.exe";
+            immediate = "on";
+          }
+          {
+            name = "Picture-in-Picture";
+            "match:title" = "^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$";
+            move = "(monitor_w * 0.73) (monitor_h * 0.72)";
+            size = "(monitor_w * 0.25) (monitor_h * 0.25)";
+            float = "on";
+            pin = "on";
+          }
+          {
+            name = "Popout";
+            "match:initial_title" = "^([Pp]opout)(.*)$";
+            move = "(monitor_w * 0.73) (monitor_h * 0.72)";
+            size = "(monitor_w * 0.25) (monitor_h * 0.25)";
+            float = "on";
+            pin = "on";
+          }
+          {
+            name = "Tile ErgoDox";
+            "match:initial_title" = "^(ErgoDox EZ Configurator)$";
+            tile = "on";
+          }
+          {
+            name = "Tile Excalidraw";
+            "match:initial_title" = "^(Excalidraw)$";
+            tile = "on";
+          }
         ];
 
         workspace = foldlAttrs (

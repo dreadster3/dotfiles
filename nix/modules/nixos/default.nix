@@ -48,5 +48,6 @@
     ./wireguard.nix
     ./nfs.nix
     ./dconf.nix
+    ./libreoffice.nix
   ];
 }

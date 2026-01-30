@@ -55,6 +55,7 @@
 
       # Note Self Hosted App
       affine
+      joplin-desktop
     ];
 
     modules.homemanager = {

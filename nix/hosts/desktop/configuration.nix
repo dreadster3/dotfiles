@@ -49,6 +49,7 @@
     bluetooth.enable = true;
     mobile.enable = true;
     wireguard.enable = true;
+    libreoffice.enable = true;
     nfs.enable = true;
 
     virtualisation = {
