@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -57,7 +57,11 @@
       # vmware.host.enable = true;
       waydroid.host.enable = true;
     };
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    };
     printing.enable = true;
   };
 

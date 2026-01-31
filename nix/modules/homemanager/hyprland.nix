@@ -2,13 +2,12 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.homemanager.hyprland;
-
-  transformToString = transform: if transform == null then "" else ",transform,${toString transform}";
 
   monitors = config.modules.homemanager.settings.monitors.wayland // cfg.monitors;
 
@@ -70,7 +69,7 @@ in
         variables = [ "--all" ];
       };
 
-      # plugins = with pkgs.hyprlandPlugins; [ hyprspace ];
+      plugins = [ inputs.hyprspace.packages.${pkgs.system}.Hyprspace ];
 
       settings = {
         "$mainMod" = "SUPER";
@@ -206,59 +205,61 @@ in
           {
             name = "pavucontrol";
             "match:class" = "^(org.pulseaudio.pavucontrol)$";
-            float = "on";
+            float = true;
             size = "(monitor_w * 0.4) (monitor_h * 0.4)";
-            center = "on";
+            center = true;
           }
           {
             name = "XWayland Video Bridge";
             "match:class" = "^(xwaylandvideobridge)$";
-            opacity = "0.0 override 0.0 override";
-            no_anim = "on";
-            no_focus = "on";
-            no_initial_focus = "on";
+            no_anim = true;
+            no_focus = true;
+            no_initial_focus = true;
+            no_blur = true;
+            max_size = "1 1";
+            opacity = "0.0";
           }
           {
             name = "Steam";
             "match:class" = "^(steam)$";
             "match:title" = "^()$";
-            stay_focused = "on";
+            stay_focused = true;
           }
           {
             name = "Steam Apps";
             "match:class" = "^(steam_app)$";
-            immediate = "on";
+            immediate = true;
           }
           {
             name = "Windows Executables";
             "match:title" = ".*.exe";
-            immediate = "on";
+            immediate = true;
           }
           {
             name = "Picture-in-Picture";
             "match:title" = "^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$";
             move = "(monitor_w * 0.73) (monitor_h * 0.72)";
             size = "(monitor_w * 0.25) (monitor_h * 0.25)";
-            float = "on";
-            pin = "on";
+            float = true;
+            pin = true;
           }
           {
             name = "Popout";
             "match:initial_title" = "^([Pp]opout)(.*)$";
             move = "(monitor_w * 0.73) (monitor_h * 0.72)";
             size = "(monitor_w * 0.25) (monitor_h * 0.25)";
-            float = "on";
-            pin = "on";
+            float = true;
+            pin = true;
           }
           {
             name = "Tile ErgoDox";
             "match:initial_title" = "^(ErgoDox EZ Configurator)$";
-            tile = "on";
+            tile = true;
           }
           {
             name = "Tile Excalidraw";
             "match:initial_title" = "^(Excalidraw)$";
-            tile = "on";
+            tile = true;
           }
         ];
 
@@ -287,6 +288,7 @@ in
           # "Alt, Tab, bringactivetotop"
 
           # "$mainMod, Tab, overview:toggle,"
+          "$mainMod, Tab, overview:toggle,"
 
           # Minimize
           "$mainMod, C, togglespecialworkspace, minimize"
@@ -381,6 +383,12 @@ in
           initial_workspace_tracking = 0; # Disabled
           vfr = true;
           enable_anr_dialog = true;
+        };
+
+        plugin = {
+          overview = {
+            affectStrut = false;
+          };
         };
       };
 

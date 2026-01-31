@@ -12,6 +12,14 @@ in
   options = {
     modules.nixos.hyprland = {
       enable = mkEnableOption "Hyprland";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.hyprland;
+      };
+      portalPackage = mkOption {
+        type = types.package;
+        default = pkgs.xdg-desktop-portal-hyprland;
+      };
     };
   };
 
@@ -20,11 +28,15 @@ in
       nwg-look
       nwg-displays
       wlr-randr
+
+      qt5.qtwayland
+      qt6.qtwayland
     ];
 
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
+      inherit (cfg) package portalPackage;
     };
 
     modules.nixos.sddm.enable = true;
