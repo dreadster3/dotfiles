@@ -192,13 +192,13 @@ in
         windowrule = [
           {
             name = "Wofi Slide In Animation";
-            animation = "slide";
             "match:class" = "wofi";
+            animation = "slide";
           }
           {
             name = "Rofi Slide In Animation";
-            animation = "slide";
             "match:class" = "rofi";
+            animation = "slide";
           }
 
           # pavucontrol
