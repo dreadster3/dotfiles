@@ -33,12 +33,15 @@ return {
 				end,
 			})
 		end,
+		---@return neotree.Config
 		opts = function()
 			local function on_move(data)
 				Snacks.rename.on_rename_file(data.source, data.destination)
 			end
 
 			local events = require("neo-tree.events")
+
+			---@type neotree.Config
 			return {
 				close_if_last_window = true,
 				open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
@@ -54,6 +57,52 @@ return {
 						mappings = {
 							["/"] = { "fuzzy_finder", config = { keep_filter_on_submit = true } },
 							["D"] = { "fuzzy_finder_directory", config = { keep_filter_on_submit = true } },
+							["<C-y>"] = {
+								function(state)
+									-- NeoTree is based on [NuiTree](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree)
+									-- The node is based on [NuiNode](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree#nuitreenode)
+									local node = state.tree:get_node()
+									local filepath = node:get_id()
+									local filename = node.name
+									local modify = vim.fn.fnamemodify
+
+									local results = {
+										filepath,
+										modify(filepath, ":."),
+										modify(filepath, ":~"),
+										filename,
+										modify(filename, ":r"),
+										modify(filename, ":e"),
+									}
+									local options = {
+										{ label = "Absolute path", value = results[1] },
+										{ label = "Path relative to CWD", value = results[2] },
+										{ label = "Path relative to HOME", value = results[3] },
+										{ label = "Filename", value = results[4] },
+										{ label = "Filename without extension", value = results[5] },
+										{ label = "Extension of the filename", value = results[6] },
+									}
+
+									local prompt = "Choose to copy to clipboard:"
+
+									-- absolute path to clipboard
+									vim.ui.select(options, {
+										prompt = prompt,
+										format_item = function(item)
+											return item.label .. ": " .. item.value
+										end,
+									}, function(choice)
+										if not choice then
+											print("No choice made")
+											return
+										end
+
+										vim.fn.setreg("+", choice.value)
+										vim.notify("Copied: " .. choice.value)
+									end)
+								end,
+								desc = "Copy Path to Clipboard with options",
+							},
 						},
 					},
 				},
@@ -79,8 +128,9 @@ return {
 						["Y"] = {
 							function(state)
 								local node = state.tree:get_node()
-								local path = node:get_id()
-								vim.fn.setreg("+", path, "c")
+								local name = node.name
+								vim.fn.setreg("+", name, "c")
+								vim.notify("Copied: " .. name)
 							end,
 							desc = "Copy Path to Clipboard",
 						},
