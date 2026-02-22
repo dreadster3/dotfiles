@@ -29,6 +29,7 @@ in
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
+      dotDir = "${config.xdg.configHome}/zsh";
       initContent = lib.concatStringsSep "\n" (
         dynamicEnvVariables ++ lib.optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
       );

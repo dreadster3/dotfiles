@@ -15,7 +15,6 @@
   environment.systemPackages = with pkgs; [
     vlc
     libvlc
-    quickshell
     ddcutil
     goverlay
 

@@ -69,7 +69,7 @@ in
         variables = [ "--all" ];
       };
 
-      plugins = [ inputs.hyprspace.packages.${pkgs.system}.Hyprspace ];
+      plugins = [ ];
 
       settings = {
         "$mainMod" = "SUPER";
@@ -274,13 +274,13 @@ in
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, E, exec, ${getExe pkgs.alacritty} -e yazi"
-          "$mainMod+Shift, E, exec, ${getExe pkgs.xfce.thunar}"
+          "$mainMod+Shift, E, exec, ${getExe pkgs.thunar}"
           "$mainMod_CTRL, Q, exec, loginctl lock-session"
 
           # Mode keybinds
           "$mainMod, S, togglefloating,"
           "$mainMod, F, fullscreen"
-          "$mainMod, T, togglesplit, # dwindle"
+          "$mainMod, T, togglesplit"
           "$mainMod, P, pin"
 
           # Clashes with windows keybinds
@@ -288,7 +288,6 @@ in
           # "Alt, Tab, bringactivetotop"
 
           # "$mainMod, Tab, overview:toggle,"
-          "$mainMod, Tab, overview:toggle,"
 
           # Minimize
           "$mainMod, C, togglespecialworkspace, minimize"
@@ -386,9 +385,9 @@ in
         };
 
         plugin = {
-          overview = {
-            affectStrut = false;
-          };
+          # overview = {
+          #   affectStrut = false;
+          # };
         };
       };
 

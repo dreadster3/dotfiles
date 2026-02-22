@@ -38,7 +38,7 @@
       prismlauncher
       remmina
 
-      wineWowPackages.stable
+      wineWow64Packages.stable
       winetricks
 
       betterdiscordctl
@@ -61,7 +61,6 @@
       warp-terminal
 
       # Note Self Hosted App
-      affine
       joplin-desktop
     ];
 

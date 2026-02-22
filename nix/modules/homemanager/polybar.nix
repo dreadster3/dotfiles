@@ -64,7 +64,7 @@ in
       };
       filemanager = mkOption {
         type = types.package;
-        default = pkgs.xfce.thunar;
+        default = pkgs.thunar;
         description = "The filemanager to use";
       };
       networkInterface = mkOption {
