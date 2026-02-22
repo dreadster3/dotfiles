@@ -280,7 +280,7 @@ in
           # Mode keybinds
           "$mainMod, S, togglefloating,"
           "$mainMod, F, fullscreen"
-          "$mainMod, T, togglesplit"
+          "$mainMod, T, layoutmsg, togglesplit # dwindle"
           "$mainMod, P, pin"
 
           # Clashes with windows keybinds

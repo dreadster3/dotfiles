@@ -148,7 +148,11 @@
       };
     };
 
-    programs.zen-browser.enable = true;
+    programs.zen-browser = {
+      enable = true;
+      suppressXdgMigrationWarning = true;
+    };
+
     xdg.mimeApps.defaultApplications = {
       "x-www-browser" = "zen-beta.desktop";
       "text/html" = "zen-beta.desktop";
