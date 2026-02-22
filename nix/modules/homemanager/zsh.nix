@@ -29,9 +29,6 @@ in
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
-      sessionVariables = {
-        "PATH" = "$PATH:$HOME/go/bin:$HOME/.cargo/bin";
-      };
       initContent = lib.concatStringsSep "\n" (
         dynamicEnvVariables ++ lib.optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
       );

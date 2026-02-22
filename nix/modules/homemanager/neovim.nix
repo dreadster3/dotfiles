@@ -8,34 +8,32 @@ with lib;
 let
   cfg = config.modules.homemanager.neovim;
 
-  tex = (
-    pkgs.texlive.combine {
-      inherit (pkgs.texlive)
-        scheme-medium
-        pdfx
-        xmpincl
-        fontawesome5
-        markdown
-        paralist
-        csvsimple
-        tcolorbox
-        environ
-        tikzfill
-        enumitem
-        dashrule
-        ifmtarg
-        multirow
-        changepage
-        biblatex
-        paracol
-        roboto
-        fontaxes
-        lato
-        ;
-      #(setq org-latex-compiler "lualatex")
-      #(setq org-preview-latex-default-process 'dvisvgm)
-    }
-  );
+  tex = pkgs.texlive.combine {
+    inherit (pkgs.texlive)
+      scheme-medium
+      pdfx
+      xmpincl
+      fontawesome5
+      markdown
+      paralist
+      csvsimple
+      tcolorbox
+      environ
+      tikzfill
+      enumitem
+      dashrule
+      ifmtarg
+      multirow
+      changepage
+      biblatex
+      paracol
+      roboto
+      fontaxes
+      lato
+      ;
+    #(setq org-latex-compiler "lualatex")
+    #(setq org-preview-latex-default-process 'dvisvgm)
+  };
 
   goPackages = optionals cfg.go.enable (
     [ cfg.go.package ] ++ optional cfg.go.languageServer.enable cfg.go.languageServer.package
@@ -149,6 +147,8 @@ in
       enable = true;
       package = poetryPackage;
     };
+
+    programs.uv.enable = true;
 
     programs.neovim = {
       enable = true;

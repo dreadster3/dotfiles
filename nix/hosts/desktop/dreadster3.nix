@@ -14,6 +14,12 @@
       inputs.zen-browser.homeModules.beta
     ];
 
+    home.sessionPath = [
+      "$HOME/go/bin"
+      "$HOME/.cargo/bin"
+      "$HOME/.local/bin"
+    ];
+
     programs.lutris = {
       enable = true;
       extraPackages = with pkgs; [
