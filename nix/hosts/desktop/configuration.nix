@@ -7,7 +7,7 @@
   imports = [
     # Include the results of the hardware scan.
     ../../profiles/nixos/personal.nix
-    ./dreadster3.nix
+    ./dreadster.nix
 
     ./hardware-configuration.nix
   ];

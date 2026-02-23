@@ -62,6 +62,9 @@
 
       # Note Self Hosted App
       joplin-desktop
+
+      # Modern alternative to make
+      go-task
     ];
 
     modules.homemanager = {
