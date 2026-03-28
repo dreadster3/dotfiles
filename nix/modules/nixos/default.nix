@@ -1,7 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }:
 {
@@ -49,5 +46,6 @@
     ./nfs.nix
     ./dconf.nix
     ./libreoffice.nix
+    ./netbird.nix
   ];
 }

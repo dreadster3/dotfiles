@@ -43,12 +43,13 @@
     teamviewer.enable = false;
     oryx.enable = true;
     qmk.enable = true;
-    zerotier.enable = true;
     wireshark.enable = true;
     bluetooth.enable = true;
     mobile.enable = true;
     wireguard.enable = true;
     libreoffice.enable = true;
+    netbird.enable = true;
+    zerotier.enable = false;
     nfs.enable = true;
 
     virtualisation = {
