@@ -136,13 +136,18 @@
         enable = true;
         spicetify.enable = true;
       };
+      fastfetch.enable = true;
       thunderbird.enable = true;
       gtk.enable = true;
       mangohud.enable = true;
       pentest.enable = true;
       easyeffects.enable = true;
-      ollama.enable = true;
+      ollama.enable = false;
       obsidian.enable = true;
+
+      # NOTE: Temporarily using ashell due to issues with netbird ui - https://github.com/fyne-io/fyne/issues/4843
+      waybar.enable = false;
+      ashell.enable = true;
 
       # Hyprland
       hyprpaper.wallpapers = {
@@ -151,10 +156,7 @@
       };
     };
 
-    programs.zen-browser = {
-      enable = true;
-      suppressXdgMigrationWarning = true;
-    };
+    programs.zen-browser.enable = true;
 
     xdg.mimeApps.defaultApplications = {
       "x-www-browser" = "zen-beta.desktop";

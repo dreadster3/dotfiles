@@ -12,12 +12,14 @@ in
   options = {
     modules.homemanager.bat = {
       enable = mkEnableOption "bat";
+      package = mkPackageOption pkgs "bat" { };
     };
   };
 
   config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
+      inherit (cfg) package;
     };
   };
 }

@@ -75,5 +75,7 @@
     ./kubectl.nix
     ./krew.nix
     ./obsidian.nix
+    ./fastfetch.nix
+    ./ashell.nix
   ];
 }

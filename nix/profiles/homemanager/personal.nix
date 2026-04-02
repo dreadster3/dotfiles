@@ -13,7 +13,6 @@
 
   home.packages = with pkgs; [
     feh
-    neofetch
     fzf
     tldr
 
