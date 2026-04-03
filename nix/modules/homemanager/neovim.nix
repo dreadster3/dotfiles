@@ -152,7 +152,7 @@ in
 
     programs.neovim = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       defaultEditor = true;
       extraPackages =
         with pkgs;
@@ -162,8 +162,7 @@ in
           gcc
           cmake
           luarocks
-          nodejs_20
-          nodePackages.npm
+          nodejs
           lazygit
           ripgrep
           dotnet-sdk
@@ -202,12 +201,14 @@ in
         ++ pythonPackages;
     };
 
-    home.packages = with pkgs; [
-      openssl
-      pkg-config
-    ];
-    home.sessionVariables = {
-      PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    home = {
+      packages = with pkgs; [
+        openssl
+        pkg-config
+      ];
+      sessionVariables = {
+        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+      };
     };
 
     xdg.desktopEntries.neovim = {

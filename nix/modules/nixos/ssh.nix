@@ -24,9 +24,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 22 ];
-
     services.sshguard.enable = true;
+
+    programs.ssh.startAgent = true;
+
     services.openssh = {
       enable = true;
       settings = {

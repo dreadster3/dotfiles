@@ -13,11 +13,7 @@ in
   options = {
     modules.homemanager.waybar = {
       enable = mkEnableOption "waybar";
-      package = mkOption {
-        type = types.package;
-        default = pkgs.waybar;
-        description = "The waybar package to use.";
-      };
+      package = mkPackageOption pkgs "waybar" { };
       brightness = mkOption {
         description = "Enable brightness module";
         default = { };

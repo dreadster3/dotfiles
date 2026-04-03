@@ -98,6 +98,7 @@
   };
 
   xdg.mimeApps.enable = lib.mkDefault true;
+  xdg.userDirs.setSessionVariables = true;
 
   systemd.user.startServices = "sd-switch";
 }

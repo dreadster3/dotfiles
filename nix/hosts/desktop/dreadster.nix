@@ -1,4 +1,10 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [ ../users.nix ];
 
@@ -54,7 +60,7 @@
 
       # AI companion
       shell-gpt
-      claude-code
+      stable.claude-code
       codex
 
       # Terminal emulator
@@ -145,9 +151,11 @@
       ollama.enable = false;
       obsidian.enable = true;
 
-      # NOTE: Temporarily using ashell due to issues with netbird ui - https://github.com/fyne-io/fyne/issues/4843
-      waybar.enable = false;
-      ashell.enable = true;
+      git.signing = {
+        enable = true;
+        format = "ssh";
+        key = "${config.home-manager.users.dreadster.home.homeDirectory}/.ssh/id_ed25519.pub";
+      };
 
       # Hyprland
       hyprpaper.wallpapers = {

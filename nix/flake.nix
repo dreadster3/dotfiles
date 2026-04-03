@@ -4,7 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     stylix = {
       url = "github:nix-community/stylix";
@@ -60,7 +60,6 @@
   outputs =
     {
       self,
-      spicetify,
       nixpkgs,
       home-manager,
       catppuccin,
