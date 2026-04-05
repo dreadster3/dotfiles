@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.nixos.aio;
@@ -10,5 +15,12 @@ in
     };
   };
 
-  config = mkIf cfg.enable { programs.coolercontrol.enable = true; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      lm_sensors
+      liquidctl
+    ];
+
+    programs.coolercontrol.enable = true;
+  };
 }

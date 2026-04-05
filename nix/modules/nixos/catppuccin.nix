@@ -26,6 +26,8 @@ in
     in
     mkIf cfg.enable {
       catppuccin = catppuccinConfig // {
+        cache.enable = true;
+
         gitea.enable = false;
         forgejo.enable = false;
         fcitx5.enable = false;

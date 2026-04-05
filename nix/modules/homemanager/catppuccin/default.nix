@@ -43,6 +43,8 @@ in
 
     catppuccin = {
       enable = true;
+      cache.enable = true;
+
       inherit (cfg) flavor accent;
 
       alacritty.enable = true;
