@@ -380,7 +380,7 @@ in
           on_focus_under_fullscreen = 2;
           allow_session_lock_restore = true;
           initial_workspace_tracking = 0; # Disabled
-          vfr = true;
+          # vfr = true;
           enable_anr_dialog = true;
         };
 

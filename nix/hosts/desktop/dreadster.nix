@@ -60,7 +60,7 @@
 
       # AI companion
       shell-gpt
-      stable.claude-code
+      claude-code
       codex
 
       # Terminal emulator
