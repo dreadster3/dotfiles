@@ -53,10 +53,12 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		name = "render-markdown",
-		dependencies = { "nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
+		dependencies = {
+			"icons",
+		},
 		ft = { "markdown" },
 		---@module 'render-markdown'
-		---@type render.md.UserConfig
+		---@type render.md.UserConfig | nil
 		opts = {
 			file_types = { "markdown" },
 		},

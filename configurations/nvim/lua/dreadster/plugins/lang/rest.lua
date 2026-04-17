@@ -1,9 +1,6 @@
 return {
 	{
 		"mistweaverco/kulala.nvim",
-		dependencies = {
-			"nvim-treesitter",
-		},
 		ft = "http",
         -- stylua: ignore
 		keys = {

@@ -48,7 +48,9 @@ return {
 	{
 		"nvim-lint",
 		opts = {
-			go = { "trivy" },
+			linters_by_ft = {
+				go = { "trivy", "golangci-lint" },
+			},
 		},
 	},
 	{
@@ -64,7 +66,6 @@ return {
 		dependencies = {
 			"ray-x/guihua.lua",
 			"lspconfig",
-			"nvim-treesitter",
 		},
 		version = "*",
 		main = "go",

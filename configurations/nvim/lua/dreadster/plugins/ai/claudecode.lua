@@ -2,6 +2,7 @@ return {
 	{
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
+		version = "*",
 		keys = {
 			{ "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
 			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },

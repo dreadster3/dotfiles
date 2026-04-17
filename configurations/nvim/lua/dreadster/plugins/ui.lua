@@ -189,35 +189,6 @@ return {
 		},
 	},
 	{
-		"echasnovski/mini.icons",
-		name = "icons",
-		main = "mini.icons",
-		lazy = true,
-		opts = function()
-			return {
-				file = {
-					[".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
-					["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
-				},
-				filetype = {
-					dotenv = { glyph = "", hl = "MiniIconsYellow" },
-				},
-				lsp_icons = {
-					folder = { glyph = "", hl = "MiniIconsAccent" },
-				},
-				default = {
-					directory = { glyph = "󰉋", hl = "MiniIconsAccent" },
-				},
-			}
-		end,
-		init = function()
-			package.preload["nvim-web-devicons"] = function()
-				require("mini.icons").mock_nvim_web_devicons()
-				return package.loaded["nvim-web-devicons"]
-			end
-		end,
-	},
-	{
 		"sindrets/diffview.nvim",
 		name = "diffview",
 		cmd = {

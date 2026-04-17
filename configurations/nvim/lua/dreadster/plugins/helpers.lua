@@ -143,7 +143,6 @@ return {
 			ignore_terminal = true,
 		},
 	},
-	{ "echasnovski/mini.move", event = { "BufReadPost", "BufWritePost", "BufNewFile" }, version = "*", opts = {} },
 	{
 		"m4xshen/hardtime.nvim",
 		event = { "VeryLazy" },
