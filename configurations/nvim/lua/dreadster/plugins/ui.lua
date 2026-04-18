@@ -121,11 +121,19 @@ return {
 			},
 		},
 	},
-	{ "levouh/tint.nvim", event = "VeryLazy", name = "tint", opts = {} },
+	{
+		"tadaa/vimade",
+		version = "*",
+		event = "VeryLazy",
+		opts = {
+			recipe = { "default", { animate = true } },
+			fadelevel = 0.75,
+		},
+	},
 	{
 		"folke/noice.nvim",
-		event = "VeryLazy",
 		version = "*",
+		event = "VeryLazy",
 		dependencies = { "notify", "MunifTanjim/nui.nvim" },
 		config = function(_, opts)
 			-- HACK: noice shows messages from before it was enabled,

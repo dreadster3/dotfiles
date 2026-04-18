@@ -61,41 +61,6 @@ return {
 		},
 	},
 	{
-		"ahmedkhalf/project.nvim",
-		name = "project",
-		event = "VeryLazy",
-		cmd = { "ProjectRoot" },
-		keys = {
-			{
-				"<leader>fp",
-				"<cmd>Telescope projects<CR>",
-				desc = "Find projects",
-			},
-		},
-		config = function(_, opts)
-			require("project_nvim").setup(opts)
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("projects")
-		end,
-		opts = {
-			on_config_done = nil,
-			manual_mode = true,
-			detection_methods = { "lsp", "pattern" },
-			patterns = {
-				".git",
-				"_darcs",
-				".hg",
-				".bzr",
-				".svn",
-				"Makefile",
-				"package.json",
-			},
-			show_hidden = false,
-			silent_chdir = false,
-			ignore_lsp = {},
-			datapath = vim.fn.stdpath("data"),
-		},
-	},
-	{
 		"stevearc/overseer.nvim",
 		name = "overseer",
 		cmd = {
