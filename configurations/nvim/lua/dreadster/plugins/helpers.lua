@@ -2,7 +2,7 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		name = "autopairs",
-		event = { "InsertEnter" },
+		event = { "InsertEnter", "BufReadPost" },
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300

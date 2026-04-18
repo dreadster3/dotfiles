@@ -109,12 +109,13 @@ return {
 					fields = { "kind", "abbr", "menu" },
 				},
 				sources = cmp.config.sources({
-					{ name = "lazydev", group_index = 1 },
-					{ name = "nvim_lsp", group_index = 1 },
-					{ name = "path", group_index = 1 },
-					{ name = "emoji", group_index = 1, trigger_characters = { ":" } },
-					{ name = "git", group_index = 1 },
-					{ name = "buffer", group_index = 1, max_item_count = 5 },
+					{ name = "lazydev" },
+					{ name = "nvim_lsp" },
+					{ name = "path" },
+				}, {
+					{ name = "emoji", trigger_characters = { ":" } },
+					{ name = "git" },
+					{ name = "buffer", max_item_count = 5 },
 				}),
 				experimental = {
 					ghost_text = {

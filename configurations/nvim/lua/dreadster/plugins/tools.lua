@@ -176,19 +176,6 @@ return {
 		},
 	},
 	{
-		"pwntester/octo.nvim",
-		name = "octo",
-		cmd = "Octo",
-		event = { { event = "BufReadCmd", pattern = "octo://*" } },
-		dependencies = { "telescope.nvim", "nvim-lua/plenary.nvim", "icons" },
-		opts = {
-			enable_builtin = true,
-			default_to_projects_v2 = true,
-			default_merge_method = "squash",
-			picker = "telescope",
-		},
-	},
-	{
 		"lervag/vimtex",
 		name = "vimtex",
 		lazy = false,
@@ -271,23 +258,6 @@ return {
 			scroll = { enable = true },
 			words = { enable = true },
 			zen = { enable = true },
-		},
-	},
-	-- NOTE: plugin still early in development, check once matured
-	{
-		"marcocofano/excalidraw.nvim",
-		enabled = false,
-		name = "excalidraw",
-		ft = { "markdown" },
-		cmd = "Excalidraw",
-		opts = {
-			storage_dir = "~/.excalidraw",
-			templates_dir = "~/.excalidraw/templates",
-			open_on_create = true,
-			relative_path = true,
-			picker = {
-				link_scene_mapping = "<C-l>",
-			},
 		},
 	},
 }

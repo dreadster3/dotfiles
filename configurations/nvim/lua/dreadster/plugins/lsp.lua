@@ -161,6 +161,7 @@ return {
 	{
 		"mason-org/mason.nvim",
 		name = "mason",
+		build = ":MasonUpdate",
 		version = "*",
 		opts = {},
 	},

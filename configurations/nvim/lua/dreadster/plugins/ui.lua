@@ -1,24 +1,5 @@
 return {
 	{
-		"rcarriga/nvim-notify",
-		name = "notify",
-		lazy = false,
-		init = function()
-			vim.notify = require("notify")
-		end,
-		opts = {
-			background_colour = "#000000",
-			render = "compact",
-			max_width = 50,
-			top_down = false,
-			max_height = 3,
-		},
-		config = function(_, opts)
-			require("notify").setup(opts)
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("notify")
-		end,
-	},
-	{
 		"petertriho/nvim-scrollbar",
 		name = "scrollbar",
 		dependencies = { "gitsigns" },
