@@ -195,6 +195,9 @@ in
 
           # markdown
           marksman
+
+          # For tree-sitter
+          tree-sitter
         ]
         ++ goPackages
         ++ rustPackages

@@ -63,13 +63,14 @@ return {
 	},
 	{
 		"ray-x/go.nvim",
+		enabled = false,
 		dependencies = {
 			"ray-x/guihua.lua",
 			"lspconfig",
 		},
 		version = "*",
 		main = "go",
-		ft = { "go", "gomod" },
+		ft = { "go", "gomod", "gowork", "gotmpl" },
 		opts = {
 			lsp_inlay_hints = {
 				enable = false,

@@ -79,6 +79,38 @@ return {
 	-- 	},
 	-- },
 	{
+		"romus204/tree-sitter-manager.nvim",
+		dependencies = {}, -- tree-sitter CLI must be installed system-wide
+		event = { "BufReadPre" },
+		cmd = { "TSManager" },
+		config = function()
+			require("tree-sitter-manager").setup({
+				-- Default Options
+				ensure_installed = {
+					"bash",
+					"diff",
+					"json",
+					"lua",
+					"markdown",
+					"markdown_inline",
+					"printf",
+					"python",
+					"query",
+					"regex",
+					"vim",
+					"vimdoc",
+					"yaml",
+				},
+				auto_install = true, -- if enabled, install missing parsers when editing a new file
+				-- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
+				-- highlight = true, -- treesitter highlighting is enabled by default
+				-- languages = {}, -- override or add new parser sources
+				-- parser_dir = vim.fn.stdpath("data") .. "/site/parser",
+				-- query_dir = vim.fn.stdpath("data") .. "/site/queries",
+			})
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter-context",
 		name = "treesitter-context",
 		cmd = { "TSContextEnable", "TSContextDisable", "TSContextToggle" },
