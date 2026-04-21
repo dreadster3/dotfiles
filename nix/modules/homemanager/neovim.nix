@@ -154,6 +154,7 @@ in
       enable = true;
       inherit (cfg) package;
       defaultEditor = true;
+      sideloadInitLua = true;
       extraPackages =
         with pkgs;
         [
@@ -163,6 +164,7 @@ in
           cmake
           luarocks
           nodejs
+          pnpm
           lazygit
           ripgrep
           dotnet-sdk

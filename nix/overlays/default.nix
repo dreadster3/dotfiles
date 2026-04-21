@@ -14,6 +14,7 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: _prev: {
     quickshell = inputs.quickshell.packages."${final.system}".default;
+    llm-agents = inputs.llm-agents.packages."${final.system}";
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });

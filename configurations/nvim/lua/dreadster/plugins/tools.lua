@@ -18,7 +18,7 @@ return {
 		keys = {
 			{
 				"<C-\\>",
-				'<CMD>execute v:count . "ToggleTerm direction=horizontal"<CR>',
+				'<CMD>execute v:count . "ToggleTerm direction=tab"<CR>',
 				mode = { "n", "t", "x" },
 				desc = "Toggle terminal horizontal",
 			},

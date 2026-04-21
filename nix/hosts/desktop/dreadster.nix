@@ -57,11 +57,8 @@
 
       # Remote desktop
       # rustdesk-flutter INFO: waiting for https://github.com/hyprwm/xdg-desktop-portal-hyprland/issues/252
-
-      # AI companion
-      shell-gpt
-      claude-code
-      codex
+      pkgs.llm-agents.claude-code
+      pkgs.llm-agents.pi
 
       # Terminal emulator
       warp-terminal

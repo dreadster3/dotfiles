@@ -2,13 +2,10 @@ local au = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
 local term_group = augroup("term", { clear = false })
-au("BufEnter", {
+au({ "BufEnter", "TermOpen" }, {
 	group = term_group,
-	pattern = "*",
+	pattern = "term://*",
 	callback = function()
-		local buftype = vim.opt.buftype:get()
-		if buftype == "terminal" then
-			vim.cmd("startinsert")
-		end
+		vim.cmd("startinsert")
 	end,
 })
