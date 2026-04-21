@@ -6,21 +6,12 @@
 }:
 let
   cfg = config.modules.homemanager.zsh;
-
-  dynamicEnvVariables = lib.mapAttrsToList (
-    name: value: "export ${lib.toUpper name}=$(cat ${value})"
-  ) cfg.dynamicEnvVariables;
 in
 {
   options = {
     modules.homemanager.zsh = {
       enable = lib.mkEnableOption "zsh";
       sourceNix = lib.mkEnableOption "zsh.sourceNix";
-
-      dynamicEnvVariables = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
-        default = { };
-      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -31,7 +22,7 @@ in
       enableCompletion = true;
       dotDir = "${config.xdg.configHome}/zsh";
       initContent = lib.concatStringsSep "\n" (
-        dynamicEnvVariables ++ lib.optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
+        lib.optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
       );
       plugins = [
         {

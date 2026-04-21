@@ -67,11 +67,6 @@
     kubectl.enable = true;
     zsh = {
       enable = true;
-      dynamicEnvVariables = lib.mkDefault {
-        openai_api_key = config.sops.secrets.openai_api_key.path;
-        anthropic_api_key = config.sops.secrets.anthropic_api_key.path;
-        gemini_api_key = config.sops.secrets.gemini_api_key.path;
-      };
     };
     neovim = {
       enable = true;
