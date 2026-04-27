@@ -195,8 +195,9 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		name = "refactoring",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		branch = "1.0",
 		main = "refactoring",
-    -- stylua: ignore
+        -- stylua: ignore
 		keys = {
 			{ "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
 			{ "<leader>rs", function() require("telescope").extensions.refactoring.refactors() end, mode = { "n", "x", "v" }, desc = "Refactor" },
