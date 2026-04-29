@@ -77,5 +77,6 @@
     ./obsidian.nix
     ./fastfetch.nix
     ./ashell.nix
+    ./agentic.nix
   ];
 }
