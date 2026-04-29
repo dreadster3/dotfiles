@@ -16,6 +16,12 @@
 [window]
 option_as_alt = "Both"
 
+[keyboard]
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b[13;2u"
+
 [colors]
 [colors.bright]
 black = "#585b70"

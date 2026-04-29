@@ -63,6 +63,8 @@ in
         bind-key v split-window -v -c '#{pane_current_path}'
         bind-key h split-window -h -c '#{pane_current_path}'
         set -ga terminal-features '*:clipboard:strikethrough:usstyle:RGB'
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
       '';
     };
   };

@@ -58,11 +58,6 @@
       # Remote desktop
       # rustdesk-flutter INFO: waiting for https://github.com/hyprwm/xdg-desktop-portal-hyprland/issues/252
 
-      # AI companion
-      shell-gpt
-      claude-code
-      codex
-
       # Terminal emulator
       warp-terminal
 
@@ -150,6 +145,7 @@
       easyeffects.enable = true;
       ollama.enable = false;
       obsidian.enable = true;
+      agentic.enable = true;
 
       git.signing = {
         enable = true;
