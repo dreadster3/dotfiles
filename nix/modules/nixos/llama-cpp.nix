@@ -39,9 +39,8 @@ in
             "qwen3.6-35b-a3b" = {
               cmd = lib.concatStringsSep " " [
                 llama-server
-                # "--hf-repo dreadster3/Qwen3.6-35B-A3B-Q4_K_M-GGUF"
-                # "--hf-file qwen3.6-35b-a3b-q4_k_m.gguf"
-                "--model /opt/models/qwen3.6-35b-a3b-q4_k_m.gguf"
+                "--model /opt/models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
+                "--mmproj /opt/models/Qwen3.6-35B-A3B-UD-Q4_K_M-mmproj_BF16.gguf"
                 "--port \${PORT}"
                 "--alias qwen3.6-35b-a3b"
                 "-c 131072"
