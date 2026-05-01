@@ -6,7 +6,7 @@ return {
 			return vim.tbl_deep_extend("force", opts or {}, {
 				servers = {
 					jsonls = {
-						filetypes = { "json", "jsonc", "json5" },
+						filetypes = { "json", "jsonc" },
 						-- lazy-load schemastore when needed
 						before_init = function(_, new_config)
 							new_config.settings.json.schemas = new_config.settings.json.schemas or {}

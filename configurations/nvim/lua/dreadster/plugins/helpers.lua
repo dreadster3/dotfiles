@@ -95,7 +95,11 @@ return {
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
 		end,
 	},
-	{ "rhysd/git-messenger.vim", cmd = { "GitMessenger" }, opts = {} },
+	{
+		"rhysd/git-messenger.vim",
+		cmd = { "GitMessenger" },
+		opts = {},
+	},
 	{
 		"rmagatti/auto-session",
 		lazy = false,

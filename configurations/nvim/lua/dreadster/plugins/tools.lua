@@ -61,35 +61,6 @@ return {
 		},
 	},
 	{
-		"stevearc/overseer.nvim",
-		name = "overseer",
-		cmd = {
-			"OverseerOpen",
-			"OverseerClose",
-			"OverseerToggle",
-			"OverseerSaveBundle",
-			"OverseerLoadBundle",
-			"OverseerDeleteBundle",
-			"OverseerRunCmd",
-			"OverseerRun",
-			"OverseerInfo",
-			"OverseerBuild",
-			"OverseerQuickAction",
-			"OverseerTaskAction",
-			"OverseerClearCache",
-		},
-		keys = {
-			{ "<leader>ow", "<cmd>OverseerToggle<cr>", desc = "Task list" },
-			{ "<leader>oo", "<cmd>OverseerRun<cr>", desc = "Run task" },
-			{ "<leader>oq", "<cmd>OverseerQuickAction<cr>", desc = "Action recent task" },
-			{ "<leader>oi", "<cmd>OverseerInfo<cr>", desc = "Overseer Info" },
-			{ "<leader>ob", "<cmd>OverseerBuild<cr>", desc = "Task builder" },
-			{ "<leader>ot", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
-			{ "<leader>oc", "<cmd>OverseerClearCache<cr>", desc = "Clear cache" },
-		},
-		opts = {},
-	},
-	{
 		"danymat/neogen",
 		name = "neogen",
 		cmd = "Neogen",
@@ -141,21 +112,6 @@ return {
 		},
 	},
 	{
-		"lervag/vimtex",
-		name = "vimtex",
-		lazy = false,
-		init = function()
-			-- Vimtex settings
-			vim.g.vimtex_quickfix_open_on_warning = 0
-			vim.g.vimtex_view_method = "zathura"
-			vim.g.vimtex_compiler_latexmk = {
-				build_dir = "build",
-				aux_dir = "build",
-				out_dir = "build",
-			}
-		end,
-	},
-	{
 		"laytan/cloak.nvim",
 		event = {
 			{ event = "BufReadPre", pattern = "*.env*" },
@@ -193,16 +149,6 @@ return {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim",
-		name = "nvim_comment",
-		keys = {
-			{ "<C-/>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line", mode = "n" },
-			{ "<C-/>", "<Plug>(comment_toggle_linewise_visual)", desc = "Toggle comment for line visual", mode = "v" },
-			{ "<C-_>", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment for line", mode = "n" },
-			{ "<C-_>", "<Plug>(comment_toggle_linewise_visual)", desc = "Toggle comment for line visual", mode = "v" },
-		},
-	},
-	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
@@ -211,12 +157,19 @@ return {
             -- { "<leader>gg",  function() Snacks.lazygit() end, desc = "Lazygit" },
             { "<leader>z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
 			{ "<leader>Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+            { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+            { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+            { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+            { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+            { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
 		},
 		---@type snacks.Config
 		opts = {
 			buffer = { enabled = true },
 			indent = { enabled = true },
 			input = { enabled = true },
+			gh = { enabled = true },
+			gitbrowse = { enabled = true },
 			lazygit = { enabled = false },
 			rename = { enabled = true },
 			scope = { enabled = true },
@@ -224,5 +177,29 @@ return {
 			words = { enable = true },
 			zen = { enable = true },
 		},
+	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+        -- stylua: ignore
+        keys = {
+          { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+          { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+          { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+          { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+          { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+          -- Simulate nvim-treesitter incremental selection
+          { "<c-space>", mode = { "n", "o", "x" },
+            function()
+              require("flash").treesitter({
+                actions = {
+                  ["<c-space>"] = "next",
+                  ["<BS>"] = "prev"
+                }
+              }) 
+            end, desc = "Treesitter Incremental Selection" },
+        },
 	},
 }

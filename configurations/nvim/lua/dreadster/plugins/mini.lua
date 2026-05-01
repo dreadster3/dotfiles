@@ -67,4 +67,40 @@ return {
 			end
 		end,
 	},
+	{
+		"nvim-mini/mini.comment",
+		version = "*",
+		event = "VeryLazy",
+		dependencies = {
+			{
+				"folke/ts-comments.nvim",
+				opts = {},
+			},
+		},
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.diff",
+		event = "VeryLazy",
+		version = "*",
+		keys = {
+			{
+				"<leader>go",
+				function()
+					require("mini.diff").toggle_overlay(0)
+				end,
+				desc = "Toggle mini.diff overlay",
+			},
+		},
+		opts = {
+			view = {
+				style = "sign",
+				signs = {
+					add = "▎",
+					change = "▎",
+					delete = "",
+				},
+			},
+		},
+	},
 }

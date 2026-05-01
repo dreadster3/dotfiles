@@ -1,11 +1,5 @@
 return {
 	{
-		"folke/ts-comments.nvim",
-		enabled = vim.fn.has("nvim-0.10.0") == 1,
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
 		"conform",
 		optional = true,
 		opts = {
@@ -43,5 +37,15 @@ return {
 			},
 		},
 		opts = { check_ts = true },
+	},
+	{
+		"nvim-mini/mini.comment",
+		optional = true,
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+		opts = {
+			custom_commentstring = function()
+				return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
+			end,
+		},
 	},
 }

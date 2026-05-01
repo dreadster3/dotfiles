@@ -1,16 +1,5 @@
 return {
 	{
-		"petertriho/nvim-scrollbar",
-		name = "scrollbar",
-		dependencies = { "gitsigns" },
-		event = "VeryLazy",
-		config = function(_, opts)
-			require("scrollbar").setup(opts)
-			require("scrollbar.handlers.gitsigns").setup()
-		end,
-		opts = { handlers = { cursor = false } },
-	},
-	{
 		"lewis6991/gitsigns.nvim",
 		name = "gitsigns",
 		opts = { current_line_blame = true },
@@ -227,5 +216,10 @@ return {
 			vim.g.nvmark_hovered = true
 			require("nvchad.colorify").run()
 		end,
+	},
+	{
+		"sphamba/smear-cursor.nvim",
+		event = "VeryLazy",
+		opts = {},
 	},
 }

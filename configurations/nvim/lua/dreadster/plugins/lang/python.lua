@@ -4,7 +4,8 @@ return {
 		optional = true,
 		opts = {
 			servers = {
-				basedpyright = { mason = false, single_file_support = true },
+				-- basedpyright = { mason = false, single_file_support = true },
+				ty = {},
 				ruff = { mason = false },
 			},
 		},
