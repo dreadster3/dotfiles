@@ -260,6 +260,13 @@ in
             "match:initial_title" = "^(Excalidraw)$";
             tile = true;
           }
+          {
+            name = "Float HoyoPlay";
+            "match:initial_title" = "^(HoYoPlay)$";
+            float = true;
+            size = "(monitor_w * 0.25) (monitor_h * 0.25)";
+            move = "(monitor_w * 0.50) (monitor_h * 0.50)";
+          }
         ];
 
         workspace = foldlAttrs (
