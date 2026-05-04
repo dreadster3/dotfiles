@@ -4,9 +4,8 @@ return {
 		optional = true,
 		opts = {
 			servers = {
-				-- basedpyright = { mason = false, single_file_support = true },
 				ty = {},
-				ruff = { mason = false },
+				ruff = {},
 			},
 		},
 	},
@@ -15,7 +14,7 @@ return {
 		optional = true,
 		opts = {
 			linters_by_ft = {
-				python = { "ruff", "mypy" },
+				python = { "ruff" },
 			},
 		},
 	},

@@ -50,12 +50,9 @@ let
   pythonPackages = optionals cfg.python.enable [
     (cfg.python.package.withPackages (
       ps: with ps; [
-        ruff
-        mypy
         debugpy
       ]
     ))
-    pkgs.basedpyright
     pkgs.djhtml
   ];
 
@@ -133,15 +130,37 @@ in
     };
   };
   config = mkIf cfg.enable {
-    home.sessionVariables = {
-      EDITOR = "nvim";
-      DOTNET_ROOT = "${pkgs.dotnet-sdk}";
+    home = {
+      # Glogal dependencies
+      packages = with pkgs; [
+        openssl
+        pkg-config
+        pnpm
+        nodejs
+        gh
+        ripgrep
+      ];
+
+      sessionVariables = {
+        EDITOR = "nvim";
+        DOTNET_ROOT = "${pkgs.dotnet-sdk}";
+        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+        PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
+        BUN_INSTALL = "${config.home.homeDirectory}/.local/share/bun";
+        NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.local/share/npm";
+      };
+
+      sessionPath = [
+        config.home.sessionVariables.PNPM_HOME
+        "${config.home.sessionVariables.BUN_INSTALL}/bin"
+        "${config.home.sessionVariables.NPM_CONFIG_PREFIX}/bin"
+      ];
     };
 
     # With nix flakes, this cannot be used as updates will not work
-    # xdg.configFile."nvim" = {
-    #   source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
-    # };
+    xdg.configFile."nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
+    };
 
     modules.homemanager.poetry = mkIf cfg.python.poetry.enable {
       enable = true;
@@ -149,6 +168,7 @@ in
     };
 
     programs.uv.enable = true;
+    programs.bun.enable = true;
 
     programs.neovim = {
       enable = true;
@@ -163,18 +183,11 @@ in
           gcc
           cmake
           luarocks
-          nodejs
-          pnpm
-          lazygit
-          ripgrep
           dotnet-sdk
           nixfmt
           gnumake
           terraform
           glow
-
-          # For octo plugin
-          gh
 
           # Install mason
           wget
@@ -203,17 +216,8 @@ in
         ]
         ++ goPackages
         ++ rustPackages
-        ++ pythonPackages;
-    };
-
-    home = {
-      packages = with pkgs; [
-        openssl
-        pkg-config
-      ];
-      sessionVariables = {
-        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
-      };
+        ++ pythonPackages
+        ++ lib.optionals (!config.programs.lazygit.enable) [ pkgs.lazygit ];
     };
 
     xdg.desktopEntries.neovim = {

@@ -21,7 +21,6 @@
     usbutils
     ethtool
 
-    pnpm-shell-completion
     nix-init
 
     sops
