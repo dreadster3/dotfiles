@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-pinned.url = "github:NixOS/nixpkgs/4bd9165a9165d7b5e33ae57f3eecbcb28fb231c9";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     llm-agents = {
@@ -31,12 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";

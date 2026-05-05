@@ -13,8 +13,9 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: _prev: {
-    quickshell = inputs.quickshell.packages."${final.system}".default;
     llm-agents = inputs.llm-agents.packages."${final.system}";
+    inherit (inputs.nixpkgs-pinned.legacyPackages."${final.system}") wireshark lutris;
+
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });

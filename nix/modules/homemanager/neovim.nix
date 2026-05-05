@@ -154,6 +154,8 @@ in
         config.home.sessionVariables.PNPM_HOME
         "${config.home.sessionVariables.BUN_INSTALL}/bin"
         "${config.home.sessionVariables.NPM_CONFIG_PREFIX}/bin"
+        "${config.home.homeDirectory}/go/bin"
+        "${config.home.homeDirectory}/.cargo/bin"
       ];
     };
 
