@@ -2,6 +2,8 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		name = "gitsigns",
+		event = "VeryLazy",
+		cmd = { "Gitsigns" },
 		opts = { current_line_blame = true },
 	},
 	{
