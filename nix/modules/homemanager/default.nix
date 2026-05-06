@@ -78,5 +78,6 @@
     ./fastfetch.nix
     ./ashell.nix
     ./agentic.nix
+    ./ghostty.nix
   ];
 }

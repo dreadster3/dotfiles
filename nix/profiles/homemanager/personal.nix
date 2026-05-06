@@ -42,7 +42,6 @@
     settings = {
       enable = true;
       font = {
-        normal.style = "Bold";
         italic.family = "VictorMono Nerd Font";
       };
     };
@@ -60,7 +59,6 @@
     stylix.enable = true;
     direnv.enable = true;
     bat.enable = true;
-    alacritty.enable = true;
     kitty.enable = true;
     mpv.enable = true;
     kubectl.enable = true;

@@ -279,7 +279,7 @@ in
 
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
-          "$mainMod, E, exec, ${getExe pkgs.alacritty} -e yazi"
+          "$mainMod, E, exec, ${getExe terminal} -e yazi"
           "$mainMod+Shift, E, exec, ${getExe pkgs.thunar}"
           "$mainMod_CTRL, Q, exec, loginctl lock-session"
 

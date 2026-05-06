@@ -45,11 +45,6 @@ in
             mods = "Control|Shift";
             action = "SpawnNewInstance";
           }
-          {
-            key = "Return";
-            mods = "Shift";
-            chars = "\\u001b[13;2u";
-          }
         ];
       };
     };

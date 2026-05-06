@@ -7,6 +7,14 @@
 with lib;
 let
   cfg = config.modules.homemanager.tmux;
+  inherit (config.modules.homemanager.settings) terminal;
+  terminalName = terminal.meta.mainProgram;
+
+  terms = {
+    alacritty = "alacritty";
+    ghostty = "xterm-ghostty";
+    kitty = "xterm-kitty";
+  };
 in
 {
   options = {
@@ -23,9 +31,10 @@ in
       prefix = "C-b";
       newSession = true;
       mouse = true;
-      terminal = "alacritty";
+      terminal = terms.${terminalName};
       focusEvents = true;
       escapeTime = 0;
+      sensibleOnTop = true;
       plugins =
         with pkgs.tmuxPlugins;
         lib.mkMerge [

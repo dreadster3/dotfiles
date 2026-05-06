@@ -117,10 +117,14 @@
             };
           };
         };
+        terminal = config.home-manager.users.dreadster.modules.homemanager.ghostty.package;
         font = {
           size = 22;
         };
       };
+
+      alacritty.enable = true;
+      ghostty.enable = true;
 
       openrgb = {
         enable = true;
@@ -168,6 +172,8 @@
       "application/xhtml_xml" = "zen-beta.desktop";
       "application/x-extension-xhtml" = "zen-beta.desktop";
       "application/x-extension-xht" = "zen-beta.desktop";
+      "x-scheme-handler/terminal" = "ghostty.desktop";
+      "application/x-terminal-emulator" = "ghostty.desktop";
     };
 
     home.stateVersion = "23.11";

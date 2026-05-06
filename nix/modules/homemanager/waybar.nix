@@ -7,7 +7,10 @@
 with lib;
 let
   cfg = config.modules.homemanager.waybar;
-  monitors = config.modules.homemanager.settings.monitors.wayland;
+  settings = config.modules.homemanager.settings;
+  monitors = settings.monitors.wayland;
+  terminal = settings.terminal;
+  terminalExe = getExe terminal;
 in
 {
   options = {
@@ -104,13 +107,13 @@ in
             interval = 10;
             format = " {usage}%";
             max-length = 10;
-            on-click = "alacritty -e btop";
+            on-click = "${terminalExe} -e btop";
           };
           memory = {
             interval = 30;
             format = " {}%";
             max-length = 10;
-            on-click = "alacritty -e btop";
+            on-click = "${terminalExe} -e btop";
           };
           "disk#root" = {
             interval = 30;
@@ -118,7 +121,7 @@ in
             path = "/";
             class = "disk";
             on-click = "thunar";
-            on-click-right = "alacritty -e yazi /";
+            on-click-right = "${terminalExe} -e yazi /";
           };
           "disk#home" = {
             interval = 30;
@@ -126,7 +129,7 @@ in
             path = "/home";
             class = "disk";
             on-click = "thunar";
-            on-click-right = "alacritty -e yazi /home/$USER";
+            on-click-right = "${terminalExe} -e yazi /home/$USER";
           };
           "disk#games" = {
             interval = 30;
@@ -134,7 +137,7 @@ in
             path = "/games";
             class = "disk";
             on-click = "thunar";
-            on-click-right = "alacritty -e yazi /games/$USER";
+            on-click-right = "${terminalExe} -e yazi /games/$USER";
           };
           clock = {
             format = "   {:%H:%M:%S} ";

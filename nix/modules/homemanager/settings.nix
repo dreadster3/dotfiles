@@ -69,7 +69,6 @@ in
       enable = mkEnableOption "settings";
       terminal = mkOption {
         type = types.package;
-        default = pkgs.alacritty;
         description = "The terminal emulator to use.";
       };
       monitors = mkOption {
@@ -164,6 +163,5 @@ in
   };
   config = mkIf cfg.enable {
     modules.homemanager.settings.theme.colors = themes.${cfg.theme.name}.${cfg.theme.variant};
-    modules.homemanager.settings.font = { };
   };
 }

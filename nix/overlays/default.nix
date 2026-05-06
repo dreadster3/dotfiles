@@ -14,6 +14,8 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: _prev: {
     llm-agents = inputs.llm-agents.packages."${final.system}";
+    spicetifyPackages = inputs.spicetify.legacyPackages.${final.system};
+
     inherit (inputs.nixpkgs-pinned.legacyPackages."${final.system}") wireshark lutris;
 
     # example = prev.example.overrideAttrs (oldAttrs: rec {
