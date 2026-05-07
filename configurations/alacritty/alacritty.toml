@@ -110,7 +110,7 @@ style = "Italic"
 
 [font.normal]
 family = "Mononoki Nerd Font"
-style = "Bold"
+style = "Regular"
 
 [window.padding]
 x = 20
