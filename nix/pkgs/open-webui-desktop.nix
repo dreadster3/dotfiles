@@ -111,18 +111,36 @@ buildNpmPackage rec {
 
     # ----------------------------------------------------------------
     # Wrapper binary
-    # We set ELECTRON_FORCE_IS_PACKAGED so the app knows it's in
-    # production mode (disables auto-devtools, enables update checks).
-    # ELECTRON_DISABLE_SANDBOX is set upstream in electron.vite.config.ts
-    # for Linux and is required on NixOS where chrome-sandbox is absent.
-    # --no-sandbox is also passed as a CLI flag as a belt-and-suspenders
-    # measure — some environments need both the env var AND the flag.
+    #
+    # Environment variables:
+    #   ELECTRON_FORCE_IS_PACKAGED=1    — tells the app it's in production
+    #                                     (disables auto-devtools, enable update checks)
+    #   ELECTRON_DISABLE_SANDBOX=1      — required on NixOS (no chrome-sandbox setuid)
+    #
+    # CLI flags:
+    #   --no-sandbox                     — belt-and-suspenders with the env var;
+    #                                     some environments need both
+    #   --ozone-platform-hint=auto       — native Wayland when available, X11 fallback
+    #   --enable-features=WaylandWindowDecorations
+    #                                    — client-side decorations on Wayland
+    #   --enable-features=UseOzonePlatform
+    #                                    — ensures the Ozone backend is used (needed
+    #                                     for Wayland + NVIDIA to avoid software render)
+    #   --enable-gpu-rasterization       — use the GPU for tile rasterization
+    #   --enable-zero-copy               — reduce GPU→CPU copies for smoother scrolling
+    #
+    # The Wayland flags are gated behind NIXOS_OZONE_WL (set by
+    # environment.sessionVariables.NIXOS_OZONE_WL in the NixOS module)
+    # so that X11-only setups aren't affected.
     # ----------------------------------------------------------------
     mkdir -p "$out/bin"
-    makeWrapper ${lib.getExe electron} "$out/bin/open-webui" \
+    makeWrapper ${lib.getExe electron} "$out/bin/open-webui-desktop" \
       --add-flags "$appDir" \
       --add-flags "--no-sandbox" \
-      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,UseOzonePlatform}}" \
+      --add-flags "--enable-features=UseOzonePlatform" \
+      --add-flags "--enable-gpu-rasterization" \
+      --add-flags "--enable-zero-copy" \
       --add-flags ${lib.escapeShellArg commandLineArgs} \
       --set ELECTRON_FORCE_IS_PACKAGED 1 \
       --set ELECTRON_DISABLE_SANDBOX 1 \
@@ -134,7 +152,7 @@ buildNpmPackage rec {
   desktopItems = [
     (makeDesktopItem {
       name = "open-webui";
-      exec = "open-webui %U";
+      exec = "open-webui-desktop %U";
       icon = "open-webui";
       desktopName = "Open WebUI";
       genericName = "AI Chat Client";
@@ -160,10 +178,10 @@ buildNpmPackage rec {
   };
 
   meta = with lib; {
-    description = "Open WebUI as a native desktop app — run models locally or connect to any server";
+    description = "Open WebUI as a native desktop app — run and connect to Open WebUI instances from your desktop";
     homepage = "https://github.com/open-webui/desktop";
     license = licenses.agpl3Only;
-    mainProgram = "open-webui";
+    mainProgram = "open-webui-desktop";
     maintainers = [ ];
     platforms = electron.meta.platforms or platforms.linux;
     sourceProvenance = with sourceTypes; [ fromSource ];
