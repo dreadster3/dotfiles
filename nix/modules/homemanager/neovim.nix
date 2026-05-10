@@ -161,7 +161,7 @@ in
 
     # With nix flakes, this cannot be used as updates will not work
     xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink ../../../configurations/nvim;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/projects/github/dotfiles/configurations/nvim";
     };
 
     modules.homemanager.poetry = mkIf cfg.python.poetry.enable {
