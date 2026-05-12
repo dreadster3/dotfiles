@@ -21,6 +21,7 @@ in
     programs.ghostty = {
       enable = true;
       inherit (cfg) package;
+      enableZshIntegration = false;
 
       settings = {
         font-size = settings.font.size;
