@@ -1,3 +1,9 @@
+macos-option-as-alt = true
+macos-titlebar-style = native
+macos-non-native-fullscreen = false
+macos-window-buttons = visible
+window-decoration = true
+
 background-opacity = 0.800000
 font-family = Mononoki Nerd Font
 font-family-italic = VictorMono Nerd Font
@@ -5,7 +11,6 @@ font-size = 22
 font-style = Regular
 font-style-italic = Italic
 theme = light:catppuccin-mocha,dark:catppuccin-mocha
-window-decoration = none
 window-inherit-working-directory = false
 window-padding-balance = true
 window-padding-x = 20
