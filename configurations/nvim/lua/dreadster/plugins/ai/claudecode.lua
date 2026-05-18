@@ -2,10 +2,7 @@ return {
 	{
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
-		enabled = function()
-			local utils = require("dreadster.utils")
-			return not utils.is_mac() and vim.fn.executable("claude") == 1
-		end,
+		enabled = false,
 		version = "*",
         -- stylua: ignore
 		keys = {
