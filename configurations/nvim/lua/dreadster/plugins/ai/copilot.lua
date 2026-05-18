@@ -111,7 +111,7 @@ return {
 						opts = function(_, opts)
 							table.insert(opts.sources, 1, {
 								name = "copilot",
-								priority = 100,
+								priority = 1100,
 								group_index = 1,
 							})
 						end,

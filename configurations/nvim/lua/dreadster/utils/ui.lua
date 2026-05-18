@@ -52,6 +52,10 @@ M.lsp_icons = {
 	Copilot = "",
 	Codeium = "󰘦",
 	Supermaven = "",
+
+	-- source icons
+	Git = "",
+	Emoji = "",
 }
 
 return M

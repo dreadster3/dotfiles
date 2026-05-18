@@ -111,11 +111,11 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		optional = true,
-		dependencies = { "codeium" },
+		dependencies = { "Saecki/crates.nvim" },
 		opts = function(_, opts)
 			table.insert(opts.sources, 1, {
 				name = "crates",
-				priority = 100,
+				priority = 1100,
 			})
 		end,
 	},

@@ -90,4 +90,6 @@ function M.get_pkg_path(pkg, path, opts)
 	return ret
 end
 
+M.strings = require("dreadster.utils.strings")
+
 return M

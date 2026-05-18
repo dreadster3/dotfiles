@@ -92,6 +92,14 @@ return {
 						-- The function below will be called before any actual modifications from lspkind
 						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
 						before = function(entry, item)
+							local source_name = entry.source.name
+
+							if source_name == "git" then
+								item.kind = "Git"
+							elseif source_name == "emoji" then
+								item.kind = "Emoji"
+							end
+
 							local icon = kind_icons[item.kind] or ""
 							local kind = item.kind or ""
 
@@ -109,13 +117,13 @@ return {
 					fields = { "kind", "abbr", "menu" },
 				},
 				sources = cmp.config.sources({
-					{ name = "lazydev" },
-					{ name = "nvim_lsp" },
-					{ name = "path" },
+					{ name = "lazydev", priority = 1000 },
+					{ name = "nvim_lsp", priority = 1000 },
+					{ name = "git", priority = 900, max_item_count = 5 },
+					{ name = "emoji", priority = 800, max_item_count = 5 },
 				}, {
-					{ name = "emoji", trigger_characters = { ":" } },
-					{ name = "git" },
-					{ name = "buffer", max_item_count = 5 },
+					{ name = "path", priority = 700 },
+					{ name = "buffer", priority = 700, max_item_count = 5 },
 				}),
 				experimental = {
 					ghost_text = {
@@ -128,5 +136,10 @@ return {
 				sorting = defaults.sorting,
 			}
 		end,
+	},
+	{
+		"petertriho/cmp-git",
+		lazy = true,
+		opts = {},
 	},
 }

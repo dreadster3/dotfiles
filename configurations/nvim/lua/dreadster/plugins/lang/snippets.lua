@@ -31,7 +31,7 @@ return {
 					require("luasnip").lsp_expand(args.body)
 				end,
 			}
-			table.insert(opts.sources, { name = "luasnip", group_index = 1, max_item_count = 10, priority = 1 })
+			table.insert(opts.sources, { name = "luasnip", group_index = 1, max_item_count = 10, priority = 950 })
 
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
