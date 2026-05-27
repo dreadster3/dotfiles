@@ -14,7 +14,7 @@ return {
 		optional = true,
 		opts = {
 			servers = {
-				ts_ls = {},
+				ts_ls = { mason = false },
 				eslint = { mason = false, settings = { format = false } },
 			},
 		},

@@ -4,11 +4,15 @@ return {
 		optional = true,
 		opts = {
 			servers = {
-				neocmake = {},
+				neocmake = {
+					mason = false,
+				},
 				qmlls = {
+					mason = false,
 					cmd = { "qmlls", "-E" },
 				},
 				clangd = {
+					mason = false,
 					cmd = {
 						"clangd",
 						"--background-index",

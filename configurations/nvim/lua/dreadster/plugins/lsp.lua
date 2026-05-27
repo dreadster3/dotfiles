@@ -10,59 +10,83 @@ return {
 				version = "*",
 			},
 			"hrsh7th/cmp-nvim-lsp",
+			"glepnir/lspsaga.nvim",
 		},
 		event = { "BufReadPre", "BufNewFile" },
-		keys = {
-			{
-				"<leader>lr",
-				function()
-					vim.notify("Lsp Restarted")
-					vim.cmd([[LspRestart]])
-				end,
-				desc = "Restart Lsp",
+		keys = {},
+		opts = {
+			diagnostics = {
+				underline = true,
+				update_in_insert = false,
+				virtual_text = {
+					spacing = 4,
+					source = "if_many",
+					prefix = "●",
+				},
+				severity_sort = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN] = "",
+						[vim.diagnostic.severity.HINT] = "",
+						[vim.diagnostic.severity.INFO] = "",
+					},
+				},
+			},
+			inlay_hints = {
+				enabled = true,
+				exclude = {},
+			},
+			codelens = {
+				enabled = true,
+				exclude = {},
+			},
+			setup = {},
+			servers = {
+				["*"] = {
+                    -- stylua: ignore
+					keys = {
+                        { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+                        { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
+                        { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+                        { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+                        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+                        {"gO", ":Lspsaga outline<CR>", desc = "Outline" },
+                        { "K", ":Lspsaga hover_doc<CR>", desc = "Hover" },
+                        { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
+                        { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+                        { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+                        { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+                        { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+                        { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+                        { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight", desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end },
+                        { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight", desc = "Prev Reference", cond = function() return Snacks.words.is_enabled() end },
+                        {"gx", ":Lspsaga show_line_diagnostics<CR>", desc = "Show Line Diagnostics" },
+                        {"gxx", ":Lspsaga show_buf_diagnostics<CR>", desc = "Show Buffer Diagnostics" },
+                        {"gxxx", ":Lspsaga show_workspace_diagnostics<CR>", desc = "Show Workspace Diagnostics" },
+                    },
+					capabilities = {
+						workspace = {
+							fileOperations = {
+								didRename = true,
+								willRename = true,
+							},
+						},
+					},
+				},
 			},
 		},
-		opts = function()
-			return {
-				capabilities = {
-					workspace = {
-						fileOperations = {
-							didRename = true,
-							willRename = true,
-						},
-					},
-				},
-				diagnostics = {
-					underline = true,
-					update_in_insert = false,
-					virtual_text = {
-						spacing = 4,
-						source = "if_many",
-						prefix = "●",
-					},
-					severity_sort = true,
-					signs = {
-						text = {
-							[vim.diagnostic.severity.ERROR] = "",
-							[vim.diagnostic.severity.WARN] = "",
-							[vim.diagnostic.severity.HINT] = "",
-							[vim.diagnostic.severity.INFO] = "",
-						},
-					},
-				},
-				servers = {
-					texlab = { mason = false },
-					bashls = {},
-					eslint = { mason = false, settings = { format = false } },
-				},
-				setup = {
-					clangd = function(_, opts)
-						opts.capabilities.offsetEncoding = "utf-8"
-					end,
-				},
-			}
-		end,
 		config = function(_, opts)
+			-- Keymaps
+			local names = vim.tbl_keys(opts.servers) ---@type string[]
+			table.sort(names)
+			for _, server in ipairs(names) do
+				local server_opts = opts.servers[server]
+				if type(server_opts) == "table" and server_opts.keys then
+					require("dreadster.utils.lsp").set({ name = server ~= "*" and server or nil }, server_opts.keys)
+				end
+			end
+
 			-- Diagnostics
 			if type(opts.diagnostics.signs) ~= "boolean" then
 				for severity, icon in pairs(opts.diagnostics.signs.text) do
@@ -72,88 +96,94 @@ return {
 				end
 			end
 
-			vim.diagnostic.config(opts.diagnostics)
+			-- diagnostics
+			if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
+				opts.diagnostics.virtual_text.prefix = function(diagnostic)
+					local icons = opts.diagnostics.signs.text
+					for d, icon in pairs(icons) do
+						if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+							return icon
+						end
+					end
+					return "●"
+				end
+			end
+			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-			require("dreadster.utils.lsp").on_attach(function(client, buffer)
-				require("dreadster.utils.keymaps").on_attach(client, buffer)
-			end)
+			-- inlay hints
+			if opts.inlay_hints.enabled then
+				Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
+					if
+						vim.api.nvim_buf_is_valid(buffer)
+						and vim.bo[buffer].buftype == ""
+						and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+					then
+						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+					end
+				end)
+			end
 
-			-- Enable inlay hints
-			vim.lsp.inlay_hint.enable()
+			if opts.codelens.enabled then
+				Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
+					if
+						vim.api.nvim_buf_is_valid(buffer)
+						and vim.bo[buffer].buftype == ""
+						and not vim.tbl_contains(opts.codelens.exclude, vim.bo[buffer].filetype)
+					then
+						vim.lsp.codelens.enable(true, {
+							bufnr = buffer,
+						})
+					end
+				end)
+			end
+
+			if opts.servers["*"] then
+				vim.lsp.config("*", opts.servers["*"])
+			end
 
 			-- Servers
 			local servers = opts.servers
-			local has_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-
-			local capabilities = vim.tbl_deep_extend(
-				"force",
-				{
-					textDocument = {
-						foldingRange = {
-							dynamicRegistration = false,
-							lineFoldingOnly = true,
-						},
-					},
-				},
-				vim.lsp.protocol.make_client_capabilities(),
-				has_cmp_nvim_lsp and cmp_nvim_lsp.default_capabilities() or {},
-				opts.capabilities or {}
-			)
 
 			-- get all the servers that are available thourgh mason-lspconfig
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
-			local all_mslp_servers = {}
+			local all_mlsp_servers = {}
 			if have_mason then
-				all_mslp_servers =
+				all_mlsp_servers =
 					vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
 			end
+			local mason_exclude = {} ---@type string[]
 
-			--- @param server string
-			--- @return boolean isSetup Whether the server needs setup or not
+			---@return boolean? exclude automatic setup
 			local function configure(server)
-				local server_opts = vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(capabilities or {}),
-				}, servers[server] or {})
+				if server == "*" then
+					return false
+				end
+				local sopts = servers[server]
+				sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts
 
-				if server_opts.enabled == false then
-					return true
+				if sopts.enabled == false then
+					mason_exclude[#mason_exclude + 1] = server
+					return
 				end
 
-				if opts.setup[server] then
-					if opts.setup[server](server, server_opts) then
-						return true
-					end
-				elseif opts.setup["*"] then
-					if opts.setup["*"](server, server_opts) then
-						return true
-					end
-				end
-				vim.lsp.config(server, server_opts)
-
-				if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-					vim.lsp.enable(server)
-					return true
-				end
-
-				return false
-			end
-
-			---@type string[]
-			local exclude_automatic_enable = {}
-			---@type string[]
-			local ensure_installed = {} ---@type string[]
-			for server, _ in pairs(servers) do
-				if configure(server) then
-					exclude_automatic_enable[#exclude_automatic_enable + 1] = server
+				local use_mason = sopts.mason ~= false and vim.tbl_contains(all_mlsp_servers, server)
+				local setup = opts.setup[server] or opts.setup["*"]
+				if setup and setup(server, sopts) then
+					mason_exclude[#mason_exclude + 1] = server
 				else
-					ensure_installed[#ensure_installed + 1] = server
+					vim.lsp.config(server, sopts) -- configure the server
+					if not use_mason then
+						vim.lsp.enable(server)
+					end
 				end
+				return use_mason
 			end
 
+			local install = vim.tbl_filter(configure, vim.tbl_keys(servers))
 			if have_mason then
 				mlsp.setup({
-					automatic_enable = true,
-					ensure_installed = ensure_installed,
+					ensure_installed = install,
+					automatic_enable = { exclude = mason_exclude },
 				})
 			end
 		end,
@@ -167,28 +197,16 @@ return {
 	},
 	{
 		"glepnir/lspsaga.nvim",
+		lazy = true,
 		dependencies = {
 			"icons",
 		},
-		event = { "LspAttach" },
-		opts = function()
-			local keymaps = require("dreadster.utils.keymaps").get()
-			table.insert(keymaps, { "gx", ":Lspsaga show_line_diagnostics<CR>", desc = "Show Line Diagnostics" })
-			table.insert(keymaps, { "gxx", ":Lspsaga show_buf_diagnostics<CR>", desc = "Show Buffer Diagnostics" })
-			table.insert(
-				keymaps,
-				{ "gxxx", ":Lspsaga show_workspace_diagnostics<CR>", desc = "Show Workspace Diagnostics" }
-			)
-			table.insert(keymaps, { "K", ":Lspsaga hover_doc<CR>", desc = "Lspsaga Hover Doc" })
-			table.insert(keymaps, { "gO", ":Lspsaga outline<CR>", desc = "Lspsaga Outline" })
-
-			return {
-				ui = {
-					kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-				},
-				outline = { layout = "float" },
-			}
-		end,
+		opts = {
+			ui = {
+				kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+			},
+			outline = { layout = "float" },
+		},
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",

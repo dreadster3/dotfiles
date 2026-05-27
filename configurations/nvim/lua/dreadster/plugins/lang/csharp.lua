@@ -6,6 +6,7 @@ return {
 		opts = {
 			servers = {
 				omnisharp = {
+					mason = false,
 					handlers = {
 						["textDocument/definition"] = function(...)
 							local utils = require("dreadster.utils")

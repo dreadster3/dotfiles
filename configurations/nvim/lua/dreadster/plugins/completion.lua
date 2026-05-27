@@ -22,6 +22,9 @@ return {
 			end
 		end,
 		opts = function()
+			-- register lsp capabilities
+			vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+
 			local kind_icons = require("dreadster.utils.ui").lsp_icons
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -37,8 +40,8 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-u>"] = cmp.mapping.scroll_docs(-4),
+					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping(function(_)
 						if cmp.visible() then
 							cmp.abort()
@@ -46,8 +49,9 @@ return {
 							cmp.complete()
 						end
 					end, { "i", "s" }),
-					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
+					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					["<S-CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
 					["<Up>"] = cmp.mapping.select_prev_item(),
 					["<Down>"] = cmp.mapping.select_next_item(),
 					["<Tab>"] = cmp.mapping(function(fallback)

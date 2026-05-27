@@ -14,4 +14,13 @@ return {
 			}
 		end,
 	},
+	{
+		"lspconfig",
+		optional = true,
+		opts = {
+			servers = {
+				texlab = { mason = false },
+			},
+		},
+	},
 }

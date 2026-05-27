@@ -175,6 +175,7 @@ return {
 			scope = { enabled = true },
 			scroll = { enable = true },
 			words = { enable = true },
+			util = { enable = true },
 			zen = { enable = true },
 		},
 	},
