@@ -59,6 +59,7 @@ return {
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
+		version = "*",
 		optional = true,
 		opts = {
 			handlers = {

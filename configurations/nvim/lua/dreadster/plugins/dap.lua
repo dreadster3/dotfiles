@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		version = "*",
 		name = "dap",
 		dependencies = {
 			"mason-dap",
@@ -57,6 +58,7 @@ return {
 	{
 		"jay-babu/mason-nvim-dap.nvim",
 		name = "mason-dap",
+		version = "*",
 		lazy = true,
 		dependencies = { "mason" },
 		cmd = { "DapInstall", "DapUninstall" },
@@ -68,6 +70,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		version = "*",
 		name = "dapui",
 		dependencies = { "nvim-neotest/nvim-nio" },
     -- stylua: ignore

@@ -2,6 +2,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		name = "gitsigns",
+		version = "*",
 		event = "VeryLazy",
 		cmd = { "Gitsigns" },
 		opts = { current_line_blame = true },
@@ -9,6 +10,7 @@ return {
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
+		version = "*",
 		keys = {
 			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
 			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
@@ -49,6 +51,7 @@ return {
 	},
 	{
 		"akinsho/bufferline.nvim",
+		version = "*",
 		name = "bufferline",
 		dependencies = { "icons" },
 		event = "BufReadPost",
@@ -170,6 +173,7 @@ return {
 	},
 	{
 		"sindrets/diffview.nvim",
+		commit = "4516612fe98ff56ae0415a259ff6361a89419b0a",
 		name = "diffview",
 		cmd = {
 			"DiffviewOpen",
@@ -183,6 +187,7 @@ return {
 	},
 	{
 		"kevinhwang91/nvim-ufo",
+		version = "*",
 		name = "ufo",
 		main = "ufo",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
@@ -198,19 +203,6 @@ return {
 		opts = {},
 	},
 	{
-		"nvzone/minty",
-		dependencies = { "nvzone/volt" },
-		cmd = { "Huefy", "Shades" },
-		opts = {
-			huefy = {
-				border = false,
-			},
-			shades = {
-				border = false,
-			},
-		},
-	},
-	{
 		"NvChad/ui",
 		name = "nvchad-ui",
 		lazy = false,
@@ -221,6 +213,7 @@ return {
 	},
 	{
 		"sphamba/smear-cursor.nvim",
+		version = "*",
 		event = "VeryLazy",
 		opts = {},
 	},

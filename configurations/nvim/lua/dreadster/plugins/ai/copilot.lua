@@ -57,6 +57,7 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		name = "copilot",
+		version = "*",
 		build = ":Copilot auth",
 		enabled = function()
 			local utils = require("dreadster.utils")

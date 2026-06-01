@@ -58,7 +58,7 @@ return {
 			},
 		},
 	},
-	{ "folke/todo-comments.nvim", event = "BufReadPre", opts = {} },
+	{ "folke/todo-comments.nvim", version = "*", event = "BufReadPre", opts = {} },
 	{
 		"gbprod/yanky.nvim",
 		name = "yanky",
@@ -97,6 +97,7 @@ return {
 	},
 	{
 		"rhysd/git-messenger.vim",
+		commit = "fd124457378a295a5d1036af4954b35d6b807385",
 		cmd = { "GitMessenger" },
 		opts = {},
 	},
@@ -118,15 +119,15 @@ return {
 	},
 	{
 		"hiphish/rainbow-delimiters.nvim",
+		version = "*",
 		name = "rainbow-delimiters",
 		main = "rainbow-delimiters.setup",
-		version = "*",
 		event = { "BufReadPre", "BufWritePre", "BufNewFile" },
 		opts = {},
 	},
 	{
 		"johnfrankmorgan/whitespace.nvim",
-		name = "whitespace",
+		version = "*",
 		event = { "BufReadPre", "BufWritePre", "BufNewFile" },
 		cmd = { "WhitespaceTrim" },
 		init = function()
@@ -145,20 +146,6 @@ return {
 				"gitcommit",
 			},
 			ignore_terminal = true,
-		},
-	},
-	{
-		"m4xshen/hardtime.nvim",
-		event = { "VeryLazy" },
-		version = "*",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = {
-			disable_mouse = false,
-			restriction_mode = "hint",
-			disabled_filetypes = {
-				lazy = false, -- Enable Hardtime in lazy filetype
-				["dapui*"] = false, -- Enable Hardtime in filetype starting with dapui
-			},
 		},
 	},
 }

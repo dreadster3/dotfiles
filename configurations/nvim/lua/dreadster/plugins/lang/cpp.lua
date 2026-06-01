@@ -49,6 +49,7 @@ return {
 	},
 	{
 		"Civitasv/cmake-tools.nvim",
+		commit = "f9a3eb2be0b8148df470244e5c25aede3a3a28a5",
 		lazy = true,
 		ft = { "cmake", "cpp" },
 		dependencies = { "nvim-lua/plenary.nvim", "telescope.nvim" },

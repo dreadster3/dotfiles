@@ -53,6 +53,7 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		name = "render-markdown",
+		version = "*",
 		dependencies = {
 			"icons",
 		},

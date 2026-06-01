@@ -2,6 +2,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		name = "conform",
+		version = "*",
 		dependencies = { "mason" },
 		cmd = { "ConformInfo", "Format", "FormatDisable", "FormatEnable" },
 		event = { "BufWritePre" },

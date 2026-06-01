@@ -2,6 +2,7 @@ return {
 	{
 		"lervag/vimtex",
 		name = "vimtex",
+		version = "*",
 		lazy = false,
 		init = function()
 			-- Vimtex settings

@@ -40,6 +40,7 @@ return {
 	},
 	{
 		"nvim-mini/mini.icons",
+		version = "*",
 		name = "icons",
 		main = "mini.icons",
 		lazy = true,

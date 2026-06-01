@@ -93,6 +93,7 @@ return {
 	},
 	{
 		"Saecki/crates.nvim",
+		version = "*",
 		event = { "BufRead Cargo.toml" },
 		opts = {
 			completion = {

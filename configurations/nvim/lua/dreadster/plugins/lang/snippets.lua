@@ -1,6 +1,7 @@
 return {
 	{
 		"L3MON4D3/LuaSnip",
+		version = "*",
 		name = "luasnip",
 		dependencies = {
 			{
@@ -14,7 +15,6 @@ return {
 			},
 		},
 		lazy = true,
-		version = "*",
 		build = "make install_jsregexp",
 		opts = {
 			history = true,

@@ -12,8 +12,8 @@ return {
 			"lualine",
 			"christoomey/vim-tmux-navigator", -- Sets the keybinds to navigate between windows
 		},
-		name = "toggleterm",
 		version = "*",
+		name = "toggleterm",
 		cmd = "ToggleTerm",
 		keys = {
 			{
@@ -87,32 +87,8 @@ return {
 ,
 	},
 	{
-		"cshuaimin/ssr.nvim",
-		name = "ssr",
-		keys = {
-			{
-				"<leader>sR",
-				"<CMD>lua require('ssr').open()<CR>",
-				desc = "Search and Replace",
-			},
-		},
-		opts = {
-			border = "rounded",
-			min_width = 50,
-			min_height = 5,
-			max_width = 120,
-			max_height = 25,
-			keymaps = {
-				close = "q",
-				next_match = "n",
-				prev_match = "N",
-				replace_confirm = "<cr>",
-				replace_all = "<leader><cr>",
-			},
-		},
-	},
-	{
 		"laytan/cloak.nvim",
+		commit = "648aca6d33ec011dc3166e7af3b38820d01a71e4",
 		event = {
 			{ event = "BufReadPre", pattern = "*.env*" },
 			{ event = "BufNewFile", pattern = "*.env*" },
@@ -130,6 +106,7 @@ return {
 	},
 	{
 		"christoomey/vim-tmux-navigator",
+		commit = "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
 		cmd = {
 			"TmuxNavigateLeft",
 			"TmuxNavigateDown",
@@ -150,6 +127,7 @@ return {
 	},
 	{
 		"folke/snacks.nvim",
+		version = "*",
 		priority = 1000,
 		lazy = false,
 		-- stylua: ignore
@@ -181,6 +159,7 @@ return {
 	},
 	{
 		"folke/flash.nvim",
+		version = "*",
 		event = "VeryLazy",
 		---@type Flash.Config
 		opts = {},

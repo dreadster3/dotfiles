@@ -1,6 +1,7 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
+		version = "*",
 		name = "cmp",
 		event = { "InsertEnter" },
 		dependencies = {
@@ -143,6 +144,7 @@ return {
 	},
 	{
 		"petertriho/cmp-git",
+		commit = "e645f69b93eede43fb644bb1a0b1db3eef1108a3",
 		lazy = true,
 		opts = {},
 	},

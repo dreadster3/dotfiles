@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		name = "neotree",
-		branch = "v3.x",
+		version = "*",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"icons", -- not strictly required, but recommended

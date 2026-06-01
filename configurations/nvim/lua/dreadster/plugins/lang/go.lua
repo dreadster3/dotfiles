@@ -104,7 +104,7 @@ return {
 		"neotest",
 		optional = true,
 		dependencies = {
-			"fredrikaverpil/neotest-golang",
+			{ "fredrikaverpil/neotest-golang", version = "*" },
 		},
 		opts = {
 			adapters = {

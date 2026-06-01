@@ -1,5 +1,5 @@
 return {
-	{ "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
+	{ "Hoffs/omnisharp-extended-lsp.nvim", commit = "51e407a46ddb15e49727139b5b1ae3650cd6a069", lazy = true },
 	{
 		"lspconfig",
 		optional = true,
