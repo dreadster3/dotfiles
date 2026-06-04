@@ -45,6 +45,7 @@ in
       targets = {
         grub.enable = false;
         qt.enable = false;
+        kmscon.enable = false;
       };
     };
 

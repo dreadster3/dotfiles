@@ -2,28 +2,37 @@
 with lib;
 let
   cfg = config.catppuccin.hyprland;
+  mkInline = lib.generators.mkLuaInline;
 in
 {
   options = { };
 
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      decoration.shadow.color = "$base";
-      general = {
-        "col.active_border" = "$accent";
-        "col.inactive_border" = "$surface1";
-      };
-      group = {
-        "col.border_active" = "$accent";
-        "col.border_inactive" = "$surface1";
-        "col.border_locked_active" = "$teal";
-        groupbar = {
-          text_color = "$text";
-          "col.active" = "$accent";
-          "col.inactive" = "$surface1";
+      config = {
+        decoration.shadow.color = mkInline "colors.base";
+        general = {
+          col = {
+            active_border = mkInline "colors.accent";
+            inactive_border = mkInline "colors.surface1";
+          };
         };
+        group = {
+          col = {
+            border_active = mkInline "colors.accent";
+            border_inactive = mkInline "colors.surface1";
+            border_locked_active = mkInline "colors.teal";
+          };
+          groupbar = {
+            col = {
+              active = mkInline "colors.accent";
+              inactive = mkInline "colors.surface1";
+            };
+            text_color = mkInline "colors.text";
+          };
+        };
+        misc.background_color = mkInline "colors.base";
       };
-      misc.background_color = "$base";
     };
   };
 }

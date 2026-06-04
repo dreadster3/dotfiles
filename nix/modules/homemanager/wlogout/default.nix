@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.modules.homemanager.wlogout;
+  mkInline = lib.generators.mkLuaInline;
 in
 {
   options = {
@@ -29,7 +30,12 @@ in
     ];
 
     wayland.windowManager.hyprland.settings.bind = [
-      "$mainMod, Q, exec, pkill wlogout || ${cfg.package}/bin/wlogout"
+      {
+        _args = [
+          "SUPER + Q"
+          (mkInline ''hl.dsp.exec_cmd("pkill wlogout || ${getBin cfg.package}")'')
+        ];
+      }
     ];
 
     programs.wlogout = {

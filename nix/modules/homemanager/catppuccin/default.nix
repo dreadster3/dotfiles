@@ -43,6 +43,7 @@ in
 
     catppuccin = {
       enable = true;
+      autoEnable = true;
       cache.enable = true;
 
       inherit (cfg) flavor accent;
@@ -54,6 +55,7 @@ in
       tmux.enable = true;
       rofi.enable = true;
       gtk.icon = { inherit (config.catppuccin) enable flavor accent; };
+      mangohud.enable = true;
 
       # Neovim configurations add the theme
       nvim.enable = false;

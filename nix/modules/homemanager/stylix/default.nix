@@ -29,11 +29,8 @@ in
           '';
         };
         feh.enable = true;
-        mangohud.enable = true;
         i3.enable = true;
       };
     };
-
-    programs.mangohud.settings.background_alpha = mkForce 0.5;
   };
 }

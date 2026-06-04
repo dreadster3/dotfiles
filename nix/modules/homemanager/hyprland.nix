@@ -11,7 +11,10 @@ let
 
   monitors = config.modules.homemanager.settings.monitors.wayland // cfg.monitors;
 
+  mkInline = lib.generators.mkLuaInline;
+
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
+  terminalBin = getExe terminal;
 in
 {
   options = {
@@ -61,6 +64,7 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
       inherit (cfg) package portalPackage;
+      configType = "lua";
 
       xwayland.enable = true;
       systemd = {
@@ -69,343 +73,878 @@ in
         variables = [ "--all" ];
       };
 
-      plugins = [ ];
+      extraConfig = ''
+        -- Import nwg-displays configuration
+        require("monitors")
+      '';
 
       settings = {
-        "$mainMod" = "SUPER";
-
-        monitor = [ ",preferred,auto,1.0" ];
-
-        exec-once = cfg.startupPrograms;
-
-        xwayland = {
-          force_zero_scaling = true;
-        };
-
-        input = {
-          kb_layout = "us";
-          follow_mouse = 1;
-          mouse_refocus = false;
-          sensitivity = 0;
-        };
-
-        general = {
-          gaps_in = 4;
-          gaps_out = 5;
-          gaps_workspaces = 50;
-
-          border_size = 2;
-          resize_on_border = false;
-          layout = "dwindle";
-          no_focus_fallback = true;
-          allow_tearing = true;
-        };
-
+        # ── Environment variables ───────────────────────────────
         env = [
-          # GTK Variables
-          "GDK_BACKEND,wayland,x11,*"
-
-          # QT Variables
-          "QT_QPA_PLATFORM,wayland;xcb"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+          {
+            _args = [
+              "GDK_BACKEND"
+              "wayland,x11,*"
+            ];
+          }
+          {
+            _args = [
+              "QT_QPA_PLATFORM"
+              "wayland;xcb"
+            ];
+          }
+          {
+            _args = [
+              "QT_WAYLAND_DISABLE_WINDOWDECORATION"
+              "1"
+            ];
+          }
+          {
+            _args = [
+              "QT_AUTO_SCREEN_SCALE_FACTOR"
+              "1"
+            ];
+          }
         ];
 
-        decoration = {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+        # ── Beziers ──────────────────────────────────────────────
+        curve = [
+          {
+            _args = [
+              "linear"
+              (mkInline ''{ type = "bezier", points = { {0, 0},      {1, 1}       } }'')
+            ];
+          }
+          {
+            _args = [
+              "md3_standard"
+              (mkInline ''{ type = "bezier", points = { {0.2, 0},    {0, 1}       } }'')
+            ];
+          }
+          {
+            _args = [
+              "md3_decel"
+              (mkInline ''{ type = "bezier", points = { {0.05, 0.7}, {0.1, 1}     } }'')
+            ];
+          }
+          {
+            _args = [
+              "md3_accel"
+              (mkInline ''{ type = "bezier", points = { {0.3, 0},    {0.8, 0.15}  } }'')
+            ];
+          }
+          {
+            _args = [
+              "overshot"
+              (mkInline ''{ type = "bezier", points = { {0.05, 0.9}, {0.1, 1.1}   } }'')
+            ];
+          }
+          {
+            _args = [
+              "crazyshot"
+              (mkInline ''{ type = "bezier", points = { {0.1, 1.5},  {0.76, 0.92} } }'')
+            ];
+          }
+          {
+            _args = [
+              "hyprnostretch"
+              (mkInline ''{ type = "bezier", points = { {0.05, 0.9}, {0.1, 1.0}   } }'')
+            ];
+          }
+          {
+            _args = [
+              "menu_decel"
+              (mkInline ''{ type = "bezier", points = { {0.1, 1},    {0, 1}       } }'')
+            ];
+          }
+          {
+            _args = [
+              "menu_accel"
+              (mkInline ''{ type = "bezier", points = { {0.38, 0.04},{1, 0.07}    } }'')
+            ];
+          }
+          {
+            _args = [
+              "easeInOutCirc"
+              (mkInline ''{ type = "bezier", points = { {0.85, 0},   {0.15, 1}    } }'')
+            ];
+          }
+          {
+            _args = [
+              "easeOutCirc"
+              (mkInline ''{ type = "bezier", points = { {0, 0.55},   {0.45, 1}    } }'')
+            ];
+          }
+          {
+            _args = [
+              "easeOutExpo"
+              (mkInline ''{ type = "bezier", points = { {0.16, 1},   {0.3, 1}     } }'')
+            ];
+          }
+          {
+            _args = [
+              "softAcDecel"
+              (mkInline ''{ type = "bezier", points = { {0.26, 0.26},{0.15, 1}    } }'')
+            ];
+          }
+          {
+            _args = [
+              "md2"
+              (mkInline ''{ type = "bezier", points = { {0.4, 0},    {0.2, 1}     } }'')
+            ];
+          }
+        ];
 
-          rounding = 20;
-
-          blur = {
+        # ── Animations ───────────────────────────────────────────
+        animation = [
+          {
+            leaf = "windows";
             enabled = true;
-            xray = true;
-            new_optimizations = true; # Needed by xray
-            size = 14;
-            passes = 4;
-            brightness = 1;
-            noise = 1.0e-2;
-            contrast = 1;
-            popups = true;
-            popups_ignorealpha = 0.6;
+            speed = 3;
+            bezier = "md3_decel";
+            style = "popin 60%";
+          }
+          {
+            leaf = "windowsIn";
+            enabled = true;
+            speed = 3;
+            bezier = "md3_decel";
+            style = "popin 60%";
+          }
+          {
+            leaf = "windowsOut";
+            enabled = true;
+            speed = 3;
+            bezier = "md3_accel";
+            style = "popin 60%";
+          }
+          {
+            leaf = "border";
+            enabled = true;
+            speed = 10;
+            bezier = "default";
+          }
+          {
+            leaf = "fade";
+            enabled = true;
+            speed = 3;
+            bezier = "md3_decel";
+          }
+          {
+            leaf = "layersIn";
+            enabled = true;
+            speed = 3;
+            bezier = "menu_decel";
+            style = "slide";
+          }
+          {
+            leaf = "layersOut";
+            enabled = true;
+            speed = 1.6;
+            bezier = "menu_accel";
+          }
+          {
+            leaf = "fadeLayersIn";
+            enabled = true;
+            speed = 2;
+            bezier = "menu_decel";
+          }
+          {
+            leaf = "fadeLayersOut";
+            enabled = true;
+            speed = 0.5;
+            bezier = "menu_accel";
+          }
+          {
+            leaf = "workspaces";
+            enabled = true;
+            speed = 7;
+            bezier = "menu_decel";
+            style = "slide";
+          }
+          {
+            leaf = "specialWorkspace";
+            enabled = true;
+            speed = 3;
+            bezier = "md3_decel";
+            style = "slidevert";
+          }
+        ];
+
+        # ── Main config ──────────────────────────────────────────
+        config = {
+          general = {
+            allow_tearing = true;
+            border_size = 2;
+            gaps_in = 4;
+            gaps_out = 5;
+            gaps_workspaces = 50;
+            layout = "dwindle";
+            no_focus_fallback = true;
+            resize_on_border = false;
           };
 
-          shadow = {
+          input = {
+            follow_mouse = 1;
+            kb_layout = "us";
+            mouse_refocus = false;
+            sensitivity = 0;
+          };
+
+          misc = {
+            allow_session_lock_restore = true;
+            disable_hyprland_logo = false;
+            enable_anr_dialog = true;
+            enable_swallow = false;
+            force_default_wallpaper = 0;
+            initial_workspace_tracking = 0;
+            on_focus_under_fullscreen = 2;
+          };
+
+          decoration = {
+            blur = {
+              brightness = 1;
+              contrast = 1;
+              enabled = true;
+              new_optimizations = true;
+              noise = 0.01;
+              passes = 4;
+              popups = true;
+              popups_ignorealpha = 0.6;
+              size = 14;
+              xray = true;
+            };
+            rounding = 20;
+            shadow = {
+              enabled = true;
+              offset = [
+                0
+                2
+              ];
+              range = 20;
+              render_power = 4;
+            };
+          };
+
+          dwindle = {
+            preserve_split = true;
+            smart_resizing = false;
+            smart_split = true;
+          };
+
+          animations = {
             enabled = true;
-            offset = "0 2";
-            range = 20;
-            render_power = 4;
+          };
+
+          xwayland = {
+            force_zero_scaling = true;
           };
         };
 
-        animations = {
-          enabled = true;
-
-          # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-
-          bezier = [
-            # "myBezier, 0.05, 0.9, 0.1, 1.05"
-            "linear, 0, 0, 1, 1"
-            "md3_standard, 0.2, 0, 0, 1"
-            "md3_decel, 0.05, 0.7, 0.1, 1"
-            "md3_accel, 0.3, 0, 0.8, 0.15"
-            "overshot, 0.05, 0.9, 0.1, 1.1"
-            "crazyshot, 0.1, 1.5, 0.76, 0.92 "
-            "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
-            "menu_decel, 0.1, 1, 0, 1"
-            "menu_accel, 0.38, 0.04, 1, 0.07"
-            "easeInOutCirc, 0.85, 0, 0.15, 1"
-            "easeOutCirc, 0, 0.55, 0.45, 1"
-            "easeOutExpo, 0.16, 1, 0.3, 1"
-            "softAcDecel, 0.26, 0.26, 0.15, 1"
-            "md2, 0.4, 0, 0.2, 1"
-          ];
-
-          animation = [
-            # "windows, 1, 7, myBezier"
-            # "windowsOut, 1, 7, default, popin 80%"
-            # "border, 1, 10, default"
-            # "borderangle, 1, 8, default"
-            # "fade, 1, 7, default"
-            # "workspaces, 1, 6, default"
-            "windows, 1, 3, md3_decel, popin 60%"
-            "windowsIn, 1, 3, md3_decel, popin 60%"
-            "windowsOut, 1, 3, md3_accel, popin 60%"
-            "border, 1, 10, default"
-            "fade, 1, 3, md3_decel"
-            "layersIn, 1, 3, menu_decel, slide"
-            "layersOut, 1, 1.6, menu_accel"
-            "fadeLayersIn, 1, 2, menu_decel"
-            "fadeLayersOut, 1, 0.5, menu_accel"
-            "workspaces, 1, 7, menu_decel, slide"
-            "specialWorkspace, 1, 3, md3_decel, slidevert"
-          ];
+        # ── Monitor ──────────────────────────────────────────────
+        monitor = {
+          output = "";
+          mode = "preferred";
+          position = "auto";
+          scale = 1.0;
         };
 
-        dwindle = {
-          # pseudotile = true;
-          preserve_split = true;
-          smart_split = true;
-          smart_resizing = false;
-        };
-
-        windowrule = [
+        # ── Window rules ─────────────────────────────────────────
+        window_rule = [
           {
             name = "Wofi Slide In Animation";
-            "match:class" = "wofi";
+            match = {
+              class = "wofi";
+            };
             animation = "slide";
           }
           {
             name = "Rofi Slide In Animation";
-            "match:class" = "rofi";
+            match = {
+              class = "rofi";
+            };
             animation = "slide";
           }
-
-          # pavucontrol
           {
             name = "pavucontrol";
-            "match:class" = "^(org.pulseaudio.pavucontrol)$";
+            match = {
+              class = "^(org.pulseaudio.pavucontrol)$";
+            };
             float = true;
-            size = "(monitor_w * 0.4) (monitor_h * 0.4)";
             center = true;
+            size = [
+              "monitor_w * 0.4"
+              "monitor_h * 0.4"
+            ];
           }
           {
             name = "XWayland Video Bridge";
-            "match:class" = "^(xwaylandvideobridge)$";
+            match = {
+              class = "^(xwaylandvideobridge)$";
+            };
+            opacity = "0.0";
             no_anim = true;
+            no_blur = true;
             no_focus = true;
             no_initial_focus = true;
-            no_blur = true;
-            max_size = "1 1";
-            opacity = "0.0";
+            max_size = [
+              1
+              1
+            ];
           }
           {
             name = "Steam";
-            "match:class" = "^(steam)$";
-            "match:title" = "^()$";
+            match = {
+              class = "^(steam)$";
+              title = "^()$";
+            };
             stay_focused = true;
           }
           {
             name = "Steam Apps";
-            "match:class" = "^(steam_app)$";
+            match = {
+              class = "^(steam_app)$";
+            };
             immediate = true;
           }
           {
             name = "Windows Executables";
-            "match:title" = ".*.exe";
+            match = {
+              title = ".*.exe";
+            };
             immediate = true;
           }
           {
             name = "Picture-in-Picture";
-            "match:title" = "^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$";
-            move = "(monitor_w * 0.73) (monitor_h * 0.72)";
-            size = "(monitor_w * 0.25) (monitor_h * 0.25)";
+            match = {
+              title = "^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$";
+            };
             float = true;
             pin = true;
+            move = [
+              "monitor_w * 0.73"
+              "monitor_h * 0.72"
+            ];
+            size = [
+              "monitor_w * 0.25"
+              "monitor_h * 0.25"
+            ];
           }
           {
             name = "Popout";
-            "match:initial_title" = "^([Pp]opout)(.*)$";
-            move = "(monitor_w * 0.73) (monitor_h * 0.72)";
-            size = "(monitor_w * 0.25) (monitor_h * 0.25)";
+            match = {
+              initial_title = "^([Pp]opout)(.*)$";
+            };
             float = true;
             pin = true;
+            move = [
+              "monitor_w * 0.73"
+              "monitor_h * 0.72"
+            ];
+            size = [
+              "monitor_w * 0.25"
+              "monitor_h * 0.25"
+            ];
           }
           {
             name = "Tile ErgoDox";
-            "match:initial_title" = "^(ErgoDox EZ Configurator)$";
+            match = {
+              initial_title = "^(ErgoDox EZ Configurator)$";
+            };
             tile = true;
           }
           {
             name = "Tile Excalidraw";
-            "match:initial_title" = "^(Excalidraw)$";
+            match = {
+              initial_title = "^(Excalidraw)$";
+            };
             tile = true;
           }
           {
             name = "Float HoyoPlay";
-            "match:initial_title" = "^(HoYoPlay)$";
+            match = {
+              initial_title = "^(HoYoPlay)$";
+            };
             float = true;
-            size = "(monitor_w * 0.25) (monitor_h * 0.25)";
-            move = "(monitor_w * 0.50) (monitor_h * 0.50)";
+            move = [
+              "monitor_w * 0.50"
+              "monitor_h * 0.50"
+            ];
+            size = [
+              "monitor_w * 0.25"
+              "monitor_h * 0.25"
+            ];
           }
         ];
 
-        workspace = foldlAttrs (
-          acc: name: monitor:
-          acc ++ (map (workspace: "${toString workspace},monitor:${name}") monitor.workspaces)
-        ) [ ] monitors;
+        # ── Workspace rules ──────────────────────────────────────
+        workspace_rule = [
+          {
+            workspace = "1";
+            monitor = "DP-1";
+          }
+          {
+            workspace = "2";
+            monitor = "DP-1";
+          }
+          {
+            workspace = "3";
+            monitor = "DP-1";
+          }
+          {
+            workspace = "4";
+            monitor = "DP-1";
+          }
+          {
+            workspace = "5";
+            monitor = "DP-1";
+          }
+          {
+            workspace = "6";
+            monitor = "HDMI-A-1";
+          }
+          {
+            workspace = "7";
+            monitor = "HDMI-A-1";
+          }
+          {
+            workspace = "8";
+            monitor = "HDMI-A-1";
+          }
+          {
+            workspace = "9";
+            monitor = "HDMI-A-1";
+          }
+          {
+            workspace = "10";
+            monitor = "HDMI-A-1";
+          }
+        ];
 
+        # ── Keybinds: App launches ────────────────────────────────
         bind = [
-          "$mainMod, Return, exec, ${getExe terminal}"
+          {
+            _args = [
+              "SUPER + Return"
+              (mkInline ''hl.dsp.exec_cmd("${terminalBin}")'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + W"
+              (mkInline "hl.dsp.window.close()")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + M"
+              (mkInline "hl.dsp.exit()")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + E"
+              (mkInline ''hl.dsp.exec_cmd("${terminalBin} -e yazi")'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + E"
+              (mkInline ''hl.dsp.exec_cmd("${getExe pkgs.thunar}")'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + CTRL + Q"
+              (mkInline ''hl.dsp.exec_cmd("loginctl lock-session")'')
+            ];
+          }
 
-          "$mainMod, W, killactive,"
-          "$mainMod, M, exit,"
-          "$mainMod, E, exec, ${getExe terminal} -e yazi"
-          "$mainMod+Shift, E, exec, ${getExe pkgs.thunar}"
-          "$mainMod_CTRL, Q, exec, loginctl lock-session"
+          # Window management
+          {
+            _args = [
+              "SUPER + S"
+              (mkInline "hl.dsp.window.float()")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + F"
+              (mkInline "hl.dsp.window.fullscreen()")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + T"
+              (mkInline ''hl.dsp.layout("togglesplit")'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + P"
+              (mkInline "hl.dsp.window.pin()")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + C"
+              (mkInline ''hl.dsp.workspace.toggle_special("minimize")'')
+            ];
+          }
 
-          # Mode keybinds
-          "$mainMod, S, togglefloating,"
-          "$mainMod, F, fullscreen"
-          "$mainMod, T, layoutmsg, togglesplit # dwindle"
-          "$mainMod, P, pin"
+          # Screenshots
+          {
+            _args = [
+              "Print"
+              (mkInline ''hl.dsp.exec_cmd("${getExe pkgs.grimblast} copysave output")'')
+            ];
+          }
+          {
+            _args = [
+              "SHIFT + Print"
+              (mkInline ''hl.dsp.exec_cmd("${getExe pkgs.grimblast} copysave area")'')
+            ];
+          }
+          {
+            _args = [
+              "CTRL + SHIFT + Print"
+              (mkInline ''hl.dsp.exec_cmd("${getExe pkgs.grimblast} copysave screen")'')
+            ];
+          }
 
-          # Clashes with windows keybinds
-          # "Alt, Tab, cyclenext"
-          # "Alt, Tab, bringactivetotop"
+          # Focus movement
+          {
+            _args = [
+              "SUPER + Left"
+              (mkInline ''hl.dsp.focus({ direction = "l" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + Right"
+              (mkInline ''hl.dsp.focus({ direction = "r" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + Up"
+              (mkInline ''hl.dsp.focus({ direction = "u" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + Down"
+              (mkInline ''hl.dsp.focus({ direction = "d" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + H"
+              (mkInline ''hl.dsp.focus({ direction = "l" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + L"
+              (mkInline ''hl.dsp.focus({ direction = "r" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + K"
+              (mkInline ''hl.dsp.focus({ direction = "u" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + J"
+              (mkInline ''hl.dsp.focus({ direction = "d" })'')
+            ];
+          }
 
-          # "$mainMod, Tab, overview:toggle,"
+          # Window movement
+          {
+            _args = [
+              "SUPER + SHIFT + Left"
+              (mkInline ''hl.dsp.window.move({ direction = "l" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + Right"
+              (mkInline ''hl.dsp.window.move({ direction = "r" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + Up"
+              (mkInline ''hl.dsp.window.move({ direction = "u" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + Down"
+              (mkInline ''hl.dsp.window.move({ direction = "d" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + H"
+              (mkInline ''hl.dsp.window.move({ direction = "l" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + L"
+              (mkInline ''hl.dsp.window.move({ direction = "r" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + K"
+              (mkInline ''hl.dsp.window.move({ direction = "u" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + J"
+              (mkInline ''hl.dsp.window.move({ direction = "d" })'')
+            ];
+          }
 
-          # Minimize
-          "$mainMod, C, togglespecialworkspace, minimize"
-          "$mainMod, C, movetoworkspace, +0"
-          "$mainMod, C, togglespecialworkspace, minimize"
-          "$mainMod, C, movetoworkspace, special:minimize"
-          "$mainMod, C, togglespecialworkspace, minimize"
+          # Workspace navigation
+          {
+            _args = [
+              "SUPER + CTRL + Left"
+              (mkInline ''hl.dsp.focus({ workspace = "r-1" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + CTRL + Right"
+              (mkInline ''hl.dsp.focus({ workspace = "r+1" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 1"
+              (mkInline "hl.dsp.focus({ workspace = 1 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 2"
+              (mkInline "hl.dsp.focus({ workspace = 2 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 3"
+              (mkInline "hl.dsp.focus({ workspace = 3 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 4"
+              (mkInline "hl.dsp.focus({ workspace = 4 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 5"
+              (mkInline "hl.dsp.focus({ workspace = 5 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 6"
+              (mkInline "hl.dsp.focus({ workspace = 6 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 7"
+              (mkInline "hl.dsp.focus({ workspace = 7 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 8"
+              (mkInline "hl.dsp.focus({ workspace = 8 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 9"
+              (mkInline "hl.dsp.focus({ workspace = 9 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + 0"
+              (mkInline "hl.dsp.focus({ workspace = 10 })")
+            ];
+          }
 
-          # Print screen keybinds
-          ", Print, exec, ${pkgs.grimblast}/bin/grimblast copysave output"
-          "Shift, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave area"
-          "Ctrl+Shift, Print, exec, ${pkgs.grimblast}/bin/grimblast copysave screen"
+          # Move window to workspace
+          {
+            _args = [
+              "SUPER + SHIFT + 1"
+              (mkInline "hl.dsp.window.move({ workspace = 1 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 2"
+              (mkInline "hl.dsp.window.move({ workspace = 2 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 3"
+              (mkInline "hl.dsp.window.move({ workspace = 3 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 4"
+              (mkInline "hl.dsp.window.move({ workspace = 4 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 5"
+              (mkInline "hl.dsp.window.move({ workspace = 5 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 6"
+              (mkInline "hl.dsp.window.move({ workspace = 6 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 7"
+              (mkInline "hl.dsp.window.move({ workspace = 7 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 8"
+              (mkInline "hl.dsp.window.move({ workspace = 8 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 9"
+              (mkInline "hl.dsp.window.move({ workspace = 9 })")
+            ];
+          }
+          {
+            _args = [
+              "SUPER + SHIFT + 0"
+              (mkInline "hl.dsp.window.move({ workspace = 10 })")
+            ];
+          }
 
-          # Move arrow keybinds
-          "$mainMod, left, movefocus, l"
-          "$mainMod, right, movefocus, r"
-          "$mainMod, up, movefocus, u"
-          "$mainMod, down, movefocus, d"
+          # Mouse wheel workspace switching
+          {
+            _args = [
+              "SUPER + mouse_down"
+              (mkInline ''hl.dsp.focus({ workspace = "m+1" })'')
+            ];
+          }
+          {
+            _args = [
+              "SUPER + mouse_up"
+              (mkInline ''hl.dsp.focus({ workspace = "m-1" })'')
+            ];
+          }
 
-          "$mainMod+Shift, left, movewindow, l"
-          "$mainMod+Shift, right, movewindow, r"
-          "$mainMod+Shift, up, movewindow, u"
-          "$mainMod+Shift, down, movewindow, d"
+          # Volume (locked + repeating)
+          {
+            _args = [
+              "XF86AudioRaiseVolume"
+              (mkInline ''hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+")'')
+              {
+                locked = true;
+                repeating = true;
+              }
+            ];
+          }
+          {
+            _args = [
+              "XF86AudioLowerVolume"
+              (mkInline ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")'')
+              {
+                locked = true;
+                repeating = true;
+              }
+            ];
+          }
 
-          # Move vim keybinds
-          "$mainMod, h, movefocus, l"
-          "$mainMod, l, movefocus, r"
-          "$mainMod, k, movefocus, u"
-          "$mainMod, j, movefocus, d"
+          # Media keys (locked)
+          {
+            _args = [
+              "XF86AudioPlay"
+              (mkInline ''hl.dsp.exec_cmd("playerctl --player spotify play-pause")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "XF86AudioPause"
+              (mkInline ''hl.dsp.exec_cmd("playerctl --player spotify play-pause")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "XF86AudioPrev"
+              (mkInline ''hl.dsp.exec_cmd("playerctl --player spotify previous")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "XF86AudioNext"
+              (mkInline ''hl.dsp.exec_cmd("playerctl --player spotify next")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "XF86AudioMute"
+              (mkInline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "XF86AudioMicMute"
+              (mkInline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle")'')
+              { locked = true; }
+            ];
+          }
 
-          "$mainMod+Shift, h, movewindow, l"
-          "$mainMod+Shift, l, movewindow, r"
-          "$mainMod+Shift, k, movewindow, u"
-          "$mainMod+Shift, j, movewindow, d"
-
-          # Workspace keybinds
-          "$mainMod+Ctrl, left, workspace, r-1"
-          "$mainMod+Ctrl, right, workspace, r+1"
-
-          "$mainMod, 1, workspace, 1"
-          "$mainMod, 2, workspace, 2"
-          "$mainMod, 3, workspace, 3"
-          "$mainMod, 4, workspace, 4"
-          "$mainMod, 5, workspace, 5"
-          "$mainMod, 6, workspace, 6"
-          "$mainMod, 7, workspace, 7"
-          "$mainMod, 8, workspace, 8"
-          "$mainMod, 9, workspace, 9"
-          "$mainMod, 0, workspace, 10"
-
-          "$mainMod+Shift, 1, movetoworkspace, 1"
-          "$mainMod+Shift, 2, movetoworkspace, 2"
-          "$mainMod+Shift, 3, movetoworkspace, 3"
-          "$mainMod+Shift, 4, movetoworkspace, 4"
-          "$mainMod+Shift, 5, movetoworkspace, 5"
-          "$mainMod+Shift, 6, movetoworkspace, 6"
-          "$mainMod+Shift, 7, movetoworkspace, 7"
-          "$mainMod+Shift, 8, movetoworkspace, 8"
-          "$mainMod+Shift, 9, movetoworkspace, 9"
-          "$mainMod+Shift, 0, movetoworkspace, 10"
-
-          "$mainMod, mouse_down, workspace, m+1"
-          "$mainMod, mouse_up, workspace, m-1"
-
+          # Mouse binds
+          {
+            _args = [
+              "SUPER + mouse:272"
+              (mkInline "hl.dsp.window.drag()")
+              { mouse = true; }
+            ];
+          }
+          {
+            _args = [
+              "SUPER + mouse:273"
+              (mkInline "hl.dsp.window.resize()")
+              { mouse = true; }
+            ];
+          }
         ];
-
-        bindel = [
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ];
-
-        bindl = [
-          ", XF86AudioPlay, exec, playerctl --player spotify play-pause"
-          ", XF86AudioPause, exec, playerctl --player spotify play-pause"
-          ", XF86AudioPrev, exec, playerctl --player spotify previous"
-          ", XF86AudioNext, exec, playerctl --player spotify next"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ];
-
-        bindm = [
-          "$mainMod, mouse:272, movewindow"
-          "$mainMod, mouse:273, resizewindow"
-        ];
-
-        misc = {
-          enable_swallow = false;
-          force_default_wallpaper = 0;
-          disable_hyprland_logo = false;
-          on_focus_under_fullscreen = 2;
-          allow_session_lock_restore = true;
-          initial_workspace_tracking = 0; # Disabled
-          # vfr = true;
-          enable_anr_dialog = true;
-        };
-
-        plugin = {
-          # overview = {
-          #   affectStrut = false;
-          # };
-        };
       };
-
-      extraConfig = ''
-        bind = $mainMod, Escape, submap, clean
-        submap = clean
-        bind = $mainMod, Escape, submap, reset
-        submap = reset
-
-        source = $HOME/.config/hypr/monitors.conf
-        source = $HOME/.config/hypr/startup.conf
-      '';
     };
   };
 }

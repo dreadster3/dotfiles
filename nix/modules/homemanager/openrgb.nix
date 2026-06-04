@@ -38,7 +38,7 @@ in
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
 
-    xsession.windowManager.bspwm.startupPrograms = mkIf cfg.startup.enable [ command ];
-    wayland.windowManager.hyprland.settings.exec-once = mkIf cfg.startup.enable [ command ];
+    # xsession.windowManager.bspwm.startupPrograms = mkIf cfg.startup.enable [ command ];
+    # wayland.windowManager.hyprland.settings.exec-once = mkIf cfg.startup.enable [ command ];
   };
 }

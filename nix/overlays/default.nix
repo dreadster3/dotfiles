@@ -13,10 +13,10 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: _prev: {
-    llm-agents = inputs.llm-agents.packages."${final.system}";
-    spicetifyPackages = inputs.spicetify.legacyPackages.${final.system};
+    llm-agents = inputs.llm-agents.packages."${final.stdenv.hostPlatform.system}";
+    spicetifyPackages = inputs.spicetify.legacyPackages.${final.stdenv.hostPlatform.system};
 
-    inherit (inputs.nixpkgs-pinned.legacyPackages."${final.system}") wireshark lutris;
+    # inherit (inputs.nixpkgs-pinned.legacyPackages."${final.system}") wireshark lutris;
 
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...

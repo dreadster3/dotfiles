@@ -38,8 +38,6 @@
       prismlauncher
       remmina
 
-      open-webui-desktop
-
       wineWow64Packages.stable
       winetricks
 

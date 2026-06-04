@@ -38,12 +38,42 @@ in
     home-manager.sharedModules = [
       {
         wayland.windowManager.hyprland.settings.env = mkIf config.programs.hyprland.enable [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "NVD_BACKEND,direct"
-          "__GL_VRR_ALLOWED,0"
-          "ELECTRON_OZONE_PLATFORM_HINT,auto"
+          {
+            _args = [
+              "ELECTRON_OZONE_PLATFORM_HINT"
+              "auto"
+            ];
+          }
+          {
+            _args = [
+              "LIBVA_DRIVER_NAME"
+              "nvidia"
+            ];
+          }
+          {
+            _args = [
+              "GBM_BACKEND"
+              "nvidia-drm"
+            ];
+          }
+          {
+            _args = [
+              "__GLX_VENDOR_LIBRARY_NAME"
+              "nvidia"
+            ];
+          }
+          {
+            _args = [
+              "NVD_BACKEND"
+              "direct"
+            ];
+          }
+          {
+            _args = [
+              "__GL_VRR_ALLOWED"
+              "0"
+            ];
+          }
         ];
       }
     ];

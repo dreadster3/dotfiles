@@ -3,7 +3,7 @@
   stdenv,
   buildNpmPackage,
   fetchFromGitHub,
-  electron_39,
+  electron_41,
   makeWrapper,
   makeDesktopItem,
   copyDesktopItems,
@@ -16,7 +16,7 @@
 }:
 
 let
-  electron = electron_39;
+  electron = electron_41;
 in
 buildNpmPackage rec {
   pname = "open-webui-desktop";
@@ -187,3 +187,4 @@ buildNpmPackage rec {
     sourceProvenance = with sourceTypes; [ fromSource ];
   };
 }
+

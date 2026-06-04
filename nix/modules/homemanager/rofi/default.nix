@@ -2,12 +2,12 @@
   config,
   lib,
   pkgs,
-  username,
   ...
 }:
 with lib;
 let
-  inherit (config.lib.formats.rasi) mkLiteral;
+  # inherit (config.lib.formats.rasi) mkLiteral;
+  mkInline = lib.generators.mkLuaInline;
   cfg = config.modules.homemanager.rofi;
   packagePath = getExe config.programs.rofi.finalPackage;
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
@@ -51,8 +51,18 @@ in
     };
 
     wayland.windowManager.hyprland.settings.bind = [
-      "$mainMod, D, exec, pkill rofi || ${packagePath} -show drun"
-      "$mainMod, Space, exec, pkill rofi || ${packagePath} -show drun"
+      {
+        _args = [
+          "SUPER + D"
+          (mkInline ''hl.dsp.exec_cmd("pkill rofi || ${packagePath} -show drun")'')
+        ];
+      }
+      {
+        _args = [
+          "SUPER + Space"
+          (mkInline ''hl.dsp.exec_cmd("pkill rofi || ${packagePath} -show drun")'')
+        ];
+      }
     ];
 
     xsession.windowManager.i3.config.keybindings =

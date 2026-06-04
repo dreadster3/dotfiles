@@ -177,6 +177,8 @@ in
       inherit (cfg) package;
       defaultEditor = true;
       sideloadInitLua = true;
+      withRuby = false;
+      withPython3 = false;
       extraPackages =
         with pkgs;
         [
