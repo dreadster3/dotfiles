@@ -59,6 +59,11 @@
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
+
+    tssp = {
+      url = "github:nukdokplex/tssp-nix/ea999343fe2885ac9c815439446d2f4279c38560";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -70,6 +75,7 @@
       stylix,
       sops-nix,
       nixos-wsl,
+      tssp,
       ...
     }@inputs:
     let
@@ -126,6 +132,7 @@
             ./hosts/desktop/configuration.nix
             catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
+            tssp.nixosModules.default
           ];
         };
         nixvps = nixpkgs.lib.nixosSystem {

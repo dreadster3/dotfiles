@@ -1,0 +1,289 @@
+# Catppuccin Minimal - 3.5" Landscape
+# Designed for a 480x320 Turing Smart Screen using the Catppuccin Mocha palette.
+# Layout:
+#   ┌──────────────────────────────────────────────┐
+#   │  14:23:08            Wed 14 May              │   <- Time + Date
+#   │                      UP 3d 04:12             │   <- Uptime
+#   │  ─────────────────────────────────────────── │
+#   │  CPU  ████████░░░░░░  47%    52°C            │
+#   │  GPU  ██████░░░░░░░░  23%    52°C            │   <- mem%/temp
+#   │  MEM  ██████████░░░░  62%    9.9G / 16G      │
+#   │  DISK ██████░░░░░░░░  234G free  41%          │   <- free / used%
+#   └──────────────────────────────────────────────┘
+
+author: "@catppuccin-minimal"
+
+display:
+  DISPLAY_SIZE: 3.5"
+  DISPLAY_ORIENTATION: landscape
+  # Mauve (Catppuccin Mocha) for the backplate RGB LED
+  DISPLAY_RGB_LED: 203, 166, 247
+
+static_images:
+  BACKGROUND:
+    PATH: background.png
+    X: 0
+    Y: 0
+    WIDTH: 480
+    HEIGHT: 320
+
+static_text:
+  # Section divider under the header (1px line using text trick = a thin static label is overkill,
+  # so we skip it; the background image already provides the dark canvas).
+
+  # Legend labels on the left
+  CPU_LABEL:
+    TEXT: "CPU"
+    X: 22
+    Y: 90
+    FONT: roboto-mono/RobotoMono-Bold.ttf
+    FONT_SIZE: 13
+    FONT_COLOR: 166, 173, 200 # Subtext0
+    BACKGROUND_IMAGE: background.png
+    ALIGN: left
+    ANCHOR: lt
+  GPU_LABEL:
+    TEXT: "GPU"
+    X: 22
+    Y: 140
+    FONT: roboto-mono/RobotoMono-Bold.ttf
+    FONT_SIZE: 13
+    FONT_COLOR: 166, 173, 200
+    BACKGROUND_IMAGE: background.png
+    ALIGN: left
+    ANCHOR: lt
+  MEM_LABEL:
+    TEXT: "MEM"
+    X: 22
+    Y: 190
+    FONT: roboto-mono/RobotoMono-Bold.ttf
+    FONT_SIZE: 13
+    FONT_COLOR: 166, 173, 200
+    BACKGROUND_IMAGE: background.png
+    ALIGN: left
+    ANCHOR: lt
+  DISK_LABEL:
+    TEXT: "DISK"
+    X: 22
+    Y: 240
+    FONT: roboto-mono/RobotoMono-Bold.ttf
+    FONT_SIZE: 13
+    FONT_COLOR: 166, 173, 200
+    BACKGROUND_IMAGE: background.png
+    ALIGN: left
+    ANCHOR: lt
+
+  # # Date in the header
+  # DATE_TEXT:
+  #   TEXT: "Wed 14 May"
+  #   X: 460
+  #   Y: 24
+  #   FONT: roboto-mono/RobotoMono-Bold.ttf
+  #   FONT_SIZE: 12
+  #   FONT_COLOR: 137, 180, 250 # Blue
+  #   BACKGROUND_IMAGE: background.png
+  #   ALIGN: right
+  #   ANCHOR: rt
+
+STATS:
+  CPU:
+    PERCENTAGE:
+      INTERVAL: 1
+      TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 90
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 14
+        FONT_COLOR: 249, 226, 175 # Yellow
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rt
+      GRAPH:
+        SHOW: True
+        X: 72
+        Y: 97
+        WIDTH: 330
+        HEIGHT: 6
+        MIN_VALUE: 0
+        MAX_VALUE: 100
+        BAR_COLOR: 249, 226, 175 # Yellow
+        BAR_OUTLINE: False
+        BACKGROUND_IMAGE: background.png
+    TEMPERATURE:
+      INTERVAL: 5
+      TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 90
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 9
+        FONT_COLOR: 250, 179, 135 # Peach
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rb # second line, right-aligned beneath the %
+
+  GPU:
+    INTERVAL: 2
+    PERCENTAGE:
+      TEXT:
+        SHOW: False
+    MEMORY_PERCENT:
+      TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 140
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 14
+        FONT_COLOR: 116, 199, 236 # Sapphire
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rt
+      GRAPH:
+        SHOW: True
+        X: 72
+        Y: 147
+        WIDTH: 330
+        HEIGHT: 6
+        MIN_VALUE: 0
+        MAX_VALUE: 100
+        BAR_COLOR: 116, 199, 236 # Sapphire
+        BAR_OUTLINE: False
+        BACKGROUND_IMAGE: background.png
+    TEMPERATURE:
+      INTERVAL: 5
+      TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 140
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 9
+        FONT_COLOR: 250, 179, 135 # Peach
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rb
+    MEMORY_USED:
+      TEXT:
+        SHOW: False
+
+  MEMORY:
+    INTERVAL: 5
+    VIRTUAL:
+      PERCENT_TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 190
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 14
+        FONT_COLOR: 166, 227, 161 # Green
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rt
+      GRAPH:
+        SHOW: True
+        X: 72
+        Y: 197
+        WIDTH: 330
+        HEIGHT: 6
+        MIN_VALUE: 0
+        MAX_VALUE: 100
+        BAR_COLOR: 166, 227, 161 # Green
+        BAR_OUTLINE: False
+        BACKGROUND_IMAGE: background.png
+      USED:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 190
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 9
+        FONT_COLOR: 249, 226, 175 # Yellow
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rb
+
+  DISK:
+    INTERVAL: 10
+    USED:
+      GRAPH:
+        SHOW: True
+        X: 72
+        Y: 247
+        WIDTH: 330
+        HEIGHT: 6
+        MIN_VALUE: 0
+        MAX_VALUE: 100
+        BAR_COLOR: 245, 194, 231 # Pink
+        BAR_OUTLINE: False
+        BACKGROUND_IMAGE: background.png
+      TEXT:
+        SHOW: False
+      PERCENT_TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 240
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 14
+        FONT_COLOR: 245, 194, 231 # Pink
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rt
+    FREE:
+      TEXT:
+        SHOW: True
+        SHOW_UNIT: True
+        X: 460
+        Y: 240
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 9
+        FONT_COLOR: 137, 220, 235 # Sky
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rb
+
+  DATE:
+    INTERVAL: 1
+    HOUR:
+      TEXT:
+        FORMAT: "HH:mm:ss"
+        SHOW: True
+        X: 22
+        Y: 18
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 26
+        FONT_COLOR: 180, 190, 254 # Lavender
+        BACKGROUND_IMAGE: background.png
+        ALIGN: left
+        ANCHOR: lt
+    DAY:
+      TEXT:
+        FORMAT: "EEE d MMM"
+        SHOW: True
+        X: 460
+        Y: 18
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 13
+        FONT_COLOR: 166, 173, 200
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rt
+
+  UPTIME:
+    INTERVAL: 1
+    FORMATTED:
+      TEXT:
+        SHOW: True
+        X: 460
+        Y: 46
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 12
+        FONT_COLOR: 137, 220, 235 # Sky
+        BACKGROUND_IMAGE: background.png
+        ALIGN: right
+        ANCHOR: rt

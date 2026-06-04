@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, config, ... }:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -90,6 +90,50 @@
 
     onedrive.enable = true;
     flatpak.enable = true;
+  };
+
+  # GPUtil (used for NVIDIA GPU stats) shells out to `nvidia-smi`, which isn't
+  # on the service's PATH by default. Add it so GPU monitoring actually works.
+  systemd.services.turing-smart-screen-python.path = [
+    config.hardware.nvidia.package.bin
+  ];
+
+  services.turing-smart-screen-python = {
+    enable = true;
+    stopOnSleep = true;
+    startOnResume = true;
+    fonts = with pkgs.tsspPackages.resources.fonts; [
+      geforce
+      generale-mono
+      jetbrains-mono
+      racespace
+      roboto
+      roboto-mono
+    ];
+    themes =
+      with pkgs.tsspPackages.resources.themes;
+      [
+        NZXT_C
+        LandscapeModernDevice35
+      ]
+      ++ (with pkgs.tssp-custom-themes; [
+        CatppuccinMinimal35
+      ]);
+    settings = {
+      config = {
+        COM_PORT = "AUTO";
+        THEME = "CatppuccinMinimal35";
+        HW_SENSORS = "PYTHON";
+        ETH = "eno1";
+        WLO = "wlp0s20f3";
+        CPU_FAN = "AUTO";
+      };
+      display = {
+        REVISION = "A";
+        BRIGHTNESS = 20;
+        DISPLAY_REVERSE = false;
+      };
+    };
   };
 
   system.stateVersion = "23.11";
