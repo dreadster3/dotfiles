@@ -9,7 +9,8 @@ let
   cfg = config.modules.homemanager.waybar;
   settings = config.modules.homemanager.settings;
   monitors = settings.monitors.wayland;
-  terminal = settings.terminal;
+
+  inherit (settings) terminal;
   terminalExe = getExe terminal;
 in
 {
@@ -91,8 +92,8 @@ in
           };
           "hyprland/workspaces" = {
             on-click = "activate";
-            on-scroll-down = "hyprctl dispatch workspace r-1";
-            on-scroll-up = "hyprctl dispatch workspace r+1";
+            on-scroll-up = "hyprctl dispatch 'hl.dsp.focus({ workspace = \"r+1\" })'";
+            on-scroll-down = "hyprctl dispatch 'hl.dsp.focus({ workspace = \"r-1\" })'";
             format = "{icon}";
             format-icons = {
               active = "";

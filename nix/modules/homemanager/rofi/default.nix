@@ -77,9 +77,9 @@ in
 
     programs.rofi = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       cycle = true;
-      plugins = [ ] ++ optional cfg.powermenu.enable cfg.powermenu.package;
+      plugins = optional cfg.powermenu.enable cfg.powermenu.package;
       terminal = getExe terminal;
       location = "center";
       theme = import ./theme.nix { inherit config lib; };
