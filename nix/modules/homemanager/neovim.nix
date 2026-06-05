@@ -203,6 +203,7 @@ in
           # Latex
           tex
           texlab
+          biber
 
           # Bash
           beautysh
@@ -217,6 +218,11 @@ in
 
           # For tree-sitter
           tree-sitter
+
+          # Snacks.Image
+          imagemagick
+          mermaid-cli
+          ghostscript
         ]
         ++ goPackages
         ++ rustPackages

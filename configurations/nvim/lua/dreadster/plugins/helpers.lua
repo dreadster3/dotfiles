@@ -106,6 +106,9 @@ return {
 		lazy = false,
 		name = "autosession",
 		main = "auto-session",
+		init = function()
+			vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+		end,
 		opts = {
 			bypass_save_filetypes = { "neo-tree" },
 			session_lens = {

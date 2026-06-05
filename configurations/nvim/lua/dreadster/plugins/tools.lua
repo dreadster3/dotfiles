@@ -149,6 +149,7 @@ return {
 			gh = { enabled = true },
 			gitbrowse = { enabled = true },
 			lazygit = { enabled = false },
+			image = { enabled = true },
 			rename = { enabled = true },
 			scope = { enabled = true },
 			scroll = { enable = true },
