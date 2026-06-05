@@ -1,4 +1,5 @@
 return {
+	-- TODO: replace with Snacks.picker
 	{
 		"nvim-telescope/telescope.nvim",
 		version = "*",
@@ -7,7 +8,6 @@ return {
 			"nvim-telescope/telescope-media-files.nvim",
 			"nvim-telescope/telescope-symbols.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			"nvim-telescope/telescope-media-files.nvim",
 		},
 		cmd = { "Telescope" },
 		event = { "VeryLazy" },
@@ -19,7 +19,6 @@ return {
 			{ "<leader>fg", ":Telescope live_grep<CR>", desc = "Live grep" },
 			{ "<leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
 			{ "<leader>fs", "<cmd>Telescope <CR>", desc = "Status" },
-			{ "<leader>fm", ":Telescope media_files<CR>", mode = "n", desc = "Find media files", },
             { "<leader>fo", ":Telescope lsp_document_symbols<CR>", mode = "n", desc = "Find symbols", },
 			-- Git
 			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
@@ -28,7 +27,6 @@ return {
 		config = function(_, opts)
 			require("telescope").setup(opts)
 			require("telescope").load_extension("ui-select")
-			require("telescope").load_extension("media_files")
 		end,
 		opts = function()
 			local opts = {
