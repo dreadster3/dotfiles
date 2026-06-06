@@ -38,10 +38,10 @@ return {
             { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
 
             -- Github
-            { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
-            { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
-            { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
-            { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
+            { "<leader>gi", function() Snacks.picker.gh_issue({ focus = "list" }) end, desc = "GitHub Issues (open)" },
+            { "<leader>gI", function() Snacks.picker.gh_issue({ focus = "list", state = "all" }) end, desc = "GitHub Issues (all)" },
+            { "<leader>gp", function() Snacks.picker.gh_pr({ focus = "list" }) end, desc = "GitHub Pull Requests (open)" },
+            { "<leader>gP", function() Snacks.picker.gh_pr({ focus = "list", state = "all" }) end, desc = "GitHub Pull Requests (all)" },
 
             -- Zen
             { "<leader>z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
