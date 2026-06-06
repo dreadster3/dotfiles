@@ -1,12 +1,5 @@
 return {
 	{
-		"kdheepak/lazygit.nvim",
-		name = "lazygit",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		cmd = "LazyGit",
-		keys = { { "<leader>gg", "<CMD>LazyGit<CR>", desc = "Lazygit" } },
-	},
-	{
 		"akinsho/toggleterm.nvim",
 		dependencies = {
 			"lualine",
@@ -124,39 +117,6 @@ return {
 		init = function()
 			vim.g.tmux_navigator_no_mappings = 1
 		end,
-	},
-	{
-		"folke/snacks.nvim",
-		version = "*",
-		priority = 1000,
-		lazy = false,
-		-- stylua: ignore
-		keys = {
-            -- { "<leader>gg",  function() Snacks.lazygit() end, desc = "Lazygit" },
-            { "<leader>z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
-			{ "<leader>Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-            { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-            { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
-            { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
-            { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
-            { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
-		},
-		---@type snacks.Config
-		opts = {
-			buffer = { enabled = true },
-			indent = { enabled = true },
-			input = { enabled = true },
-			gh = { enabled = true },
-			gitbrowse = { enabled = true },
-			lazygit = { enabled = false },
-			image = { enabled = true },
-			rename = { enabled = true },
-			scope = { enabled = true },
-			scroll = { enable = true },
-			words = { enable = true },
-			util = { enable = true },
-			zen = { enable = true },
-		},
 	},
 	{
 		"folke/flash.nvim",

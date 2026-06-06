@@ -5,12 +5,12 @@ return {
 		version = "*",
 		dependencies = {
 			"mason",
+			"folke/snacks.nvim",
 			{
 				"mason-org/mason-lspconfig.nvim",
 				version = "*",
 			},
 			"hrsh7th/cmp-nvim-lsp",
-			"glepnir/lspsaga.nvim",
 		},
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {},
@@ -46,24 +46,23 @@ return {
 				["*"] = {
                     -- stylua: ignore
 					keys = {
-                        { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-                        { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-                        { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-                        { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-                        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-                        {"gO", ":Lspsaga outline<CR>", desc = "Outline" },
-                        { "K", ":Lspsaga hover_doc<CR>", desc = "Hover" },
+                        { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+                        { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+                        { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+                        { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+                        { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+                        { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+                        { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+                        { "K", function() vim.lsp.buf.hover() end, desc = "Hover" },
                         { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
                         { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+                        { "<leader>cd", function() vim.diagnostic.open_float() end, mode = "n",  desc = "Line Diagnostics" },
                         { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
                         { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-                        { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
                         { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+                        { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
                         { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight", desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end },
                         { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight", desc = "Prev Reference", cond = function() return Snacks.words.is_enabled() end },
-                        {"gx", ":Lspsaga show_line_diagnostics<CR>", desc = "Show Line Diagnostics" },
-                        {"gxx", ":Lspsaga show_buf_diagnostics<CR>", desc = "Show Buffer Diagnostics" },
-                        {"gxxx", ":Lspsaga show_workspace_diagnostics<CR>", desc = "Show Workspace Diagnostics" },
                     },
 					capabilities = {
 						workspace = {
@@ -194,19 +193,6 @@ return {
 		build = ":MasonUpdate",
 		version = "*",
 		opts = {},
-	},
-	{
-		"glepnir/lspsaga.nvim",
-		lazy = true,
-		dependencies = {
-			"icons",
-		},
-		opts = {
-			ui = {
-				kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-			},
-			outline = { layout = "float" },
-		},
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",

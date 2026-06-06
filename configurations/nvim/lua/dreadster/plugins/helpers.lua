@@ -58,7 +58,16 @@ return {
 			},
 		},
 	},
-	{ "folke/todo-comments.nvim", version = "*", event = "BufReadPre", opts = {} },
+	{
+		"folke/todo-comments.nvim",
+		version = "*",
+		-- stylua: ignore
+		keys = {
+			{ "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
+		},
+		event = "BufReadPost",
+		opts = {},
+	},
 	{
 		"gbprod/yanky.nvim",
 		name = "yanky",
@@ -94,12 +103,6 @@ return {
 			require("yanky").setup(opts)
 			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
 		end,
-	},
-	{
-		"rhysd/git-messenger.vim",
-		commit = "fd124457378a295a5d1036af4954b35d6b807385",
-		cmd = { "GitMessenger" },
-		opts = {},
 	},
 	{
 		"rmagatti/auto-session",
