@@ -107,19 +107,33 @@ return {
 	{
 		"rmagatti/auto-session",
 		lazy = false,
-		main = "auto-session",
+        -- stylua: ignore
+        keys = {
+            { "<leader>fs", ":AutoSession search<CR>", desc = "Search sessions" },
+        },
 		init = function()
 			vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 		end,
+		---@module "auto-session"
+		---@type AutoSession.Config
 		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/", "/tmp" },
 			bypass_save_filetypes = { "neo-tree" },
+			close_filetypes_on_save = { "checkhealth", "neo-tree", "toggle-term" },
 			session_lens = {
-				load_on_setup = false,
+				picker = "snacks",
+				load_on_setup = true,
+				picker_opts = {
+					focus = "list",
+				},
 			},
-			post_restore_cmds = {
-				-- Forces treesitter to reload
-				"e",
-			},
+			-- 10 days
+			purge_after_minutes = 14400,
+
+			-- post_restore_cmds = {
+			-- 	-- Forces treesitter to reload
+			-- 	"e",
+			-- },
 		},
 	},
 	{
