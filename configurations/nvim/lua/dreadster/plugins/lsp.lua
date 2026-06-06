@@ -38,7 +38,11 @@ return {
 				exclude = {},
 			},
 			codelens = {
-				enabled = true,
+				enabled = false,
+				exclude = {},
+			},
+			folds = {
+				enable = true,
 				exclude = {},
 			},
 			setup = {},
@@ -46,23 +50,23 @@ return {
 				["*"] = {
                     -- stylua: ignore
 					keys = {
-                        { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-                        { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
-                        { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-                        { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-                        { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-                        { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
-                        { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
-                        { "K", function() vim.lsp.buf.hover() end, desc = "Hover" },
-                        { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
-                        { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-                        { "<leader>cd", function() vim.diagnostic.open_float() end, mode = "n",  desc = "Line Diagnostics" },
-                        { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-                        { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-                        { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-                        { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-                        { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight", desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end },
-                        { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight", desc = "Prev Reference", cond = function() return Snacks.words.is_enabled() end },
+                        { "gd",          function() Snacks.picker.lsp_definitions() end,          desc = "Goto Definition" },
+                        { "gD",          function() Snacks.picker.lsp_declarations() end,         desc = "Goto Declaration" },
+                        { "gr",          function() Snacks.picker.lsp_references() end,           desc = "References", nowait = true},
+                        { "gI",          function() Snacks.picker.lsp_implementations() end,      desc = "Goto Implementation" },
+                        { "gy",          function() Snacks.picker.lsp_type_definitions() end,     desc = "Goto T[y]pe Definition" },
+                        { "gai",         function() Snacks.picker.lsp_incoming_calls() end,       desc = "C[a]lls Incoming" },
+                        { "gao",         function() Snacks.picker.lsp_outgoing_calls() end,       desc = "C[a]lls Outgoing" },
+                        { "K",           function() vim.lsp.buf.hover() end,                      desc = "Hover" },
+                        { "gK",          function() return vim.lsp.buf.signature_help() end,      desc = "Signature Help", has = "signatureHelp" },
+                        { "<c-k>",       function() return vim.lsp.buf.signature_help() end,      desc = "Signature Help", mode = "i", has = "signatureHelp" },
+                        { "<leader>cd",  function() vim.diagnostic.open_float() end,              desc = "Line Diagnostics", mode = "n" },
+                        { "<leader>ca",  function() vim.lsp.buf.code_action() end,                desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+                        { "<leader>cc",  function() vim.lsp.codelens.run() end,                   desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+                        { "<leader>cr",  function() vim.lsp.buf.rename() end,                     desc = "Rename", has = "rename" },
+                        { "<leader>cR",  function() Snacks.rename.rename_file() end,              desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+                        { "]]",          function() Snacks.words.jump(vim.v.count1) end,   desc = "Next Reference", has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end },
+                        { "[[",          function() Snacks.words.jump(-vim.v.count1) end,  desc = "Prev Reference", has = "documentHighlight",  cond = function() return Snacks.words.is_enabled() end },
                     },
 					capabilities = {
 						workspace = {
@@ -136,6 +140,22 @@ return {
 				end)
 			end
 
+			if opts.folds.enabled then
+				Snacks.util.lsp.on({ method = "textDocument/foldingRange" }, function(buffer)
+					if
+						vim.api.nvim_buf_is_valid(buffer)
+						and vim.bo[buffer].buftype == ""
+						and not vim.tbl_contains(opts.folds.exclude, vim.bo[buffer].filetype)
+					then
+						vim.api.nvim_set_option_value(
+							"foldexpr",
+							"v:lua.vim.lsp.foldexpr()",
+							{ scope = "win", buf = buffer }
+						)
+					end
+				end)
+			end
+
 			if opts.servers["*"] then
 				vim.lsp.config("*", opts.servers["*"])
 			end
@@ -198,29 +218,20 @@ return {
 		"ThePrimeagen/refactoring.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		name = "refactoring",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		branch = "1.0",
+		dependencies = { "lewis6991/async.nvim" },
 		main = "refactoring",
         -- stylua: ignore
 		keys = {
-			{ "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
-			{ "<leader>rs", function() require("telescope").extensions.refactoring.refactors() end, mode = { "n", "x", "v" }, desc = "Refactor" },
-			{ "<leader>ri", function() require("refactoring").refactor("Inline Variable") end, mode = { "n", "v" }, desc = "Inline Variable" },
-			{ "<leader>rb", function() require("refactoring").refactor("Extract Block") end, desc = "Extract Block" },
-			{ "<leader>rf", function() require("refactoring").refactor("Extract Block To File") end, desc = "Extract Block To File" },
-			{ "<leader>rP", function() require("refactoring").debug.printf({ below = false }) end, desc = "Debug Print" },
-			{ "<leader>rp", function() require("refactoring").debug.print_var({ normal = true }) end, desc = "Debug Print Variable" },
-			{ "<leader>rc", function() require("refactoring").debug.cleanup({}) end, desc = "Debug Cleanup" },
-			{ "<leader>rf", function() require("refactoring").refactor("Extract Function") end, mode = "v", desc = "Extract Function" },
-			{ "<leader>rF", function() require("refactoring").refactor("Extract Function To File") end, mode = "v", desc = "Extract Function To File" },
-			{ "<leader>rx", function() require("refactoring").refactor("Extract Variable") end, mode = "v", desc = "Extract Variable" },
-			{ "<leader>rp", function() require("refactoring").debug.print_var({}) end, mode = "v", desc = "Debug Print Variable" },
+			{ "<leader>r", "", desc = "+refactor", mode = { "n", "x" } },
+			{ "<leader>rs", function() return require("refactoring").select_refactor() end, mode = { "n", "x" }, desc = "Select Refactor" },
+			{ "<leader>ri", function() return require("refactoring").inline_var() end, mode = { "n", "x" }, desc = "Inline Variable", expr = true },
+			{ "<leader>rP", function() return require("refactoring.debug").print_loc({ output_location = "below" }) end, desc = "Debug Print Location", expr = true },
+			{ "<leader>rp", function() return require("refactoring.debug").print_var({ output_location = "below" }) .. "iw" end, mode = { "n", "x" }, desc = "Debug Print Variable", expr = true },
+			{ "<leader>rc", function() return require("refactoring.debug").cleanup({ restore_view = true }) .. "ag" end, desc = "Debug Cleanup", expr = true },
+			{ "<leader>rf", function() return require("refactoring").extract_func() end, mode = { "n", "x" }, desc = "Extract Function", expr = true },
+			{ "<leader>rF", function() return require("refactoring").extract_func_to_file() end, mode = { "n", "x" }, desc = "Extract Function To File", expr = true },
+			{ "<leader>rx", function() return require("refactoring").extract_var() end, mode = { "n", "x" }, desc = "Extract Variable", expr = true },
 		},
-		config = function(_, opts)
-			require("refactoring").setup(opts)
-
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("refactoring")
-		end,
 		opts = {},
 	},
 }

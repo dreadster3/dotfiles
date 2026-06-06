@@ -150,23 +150,6 @@ return {
 		opts = {},
 	},
 	{
-		"kevinhwang91/nvim-ufo",
-		version = "*",
-		name = "ufo",
-		main = "ufo",
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		dependencies = { "kevinhwang91/promise-async" },
-        -- stylua: ignore
-		keys = {
-            { "zR", function() require("ufo").openAllFolds() end, desc = "Open All Folds" },
-			{ "zM", function() require("ufo").closeAllFolds() end, desc = "Close All Folds" },
-			{ "zr", function() require("ufo").openFoldsExceptKinds() end, desc = "Open Folds Except Kinds" },
-			{ "zm", function() require("ufo").closeFoldsWith() end, desc = "Close Folds With" },
-            { "zK", function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek Folded Lines Under Cursor" },
-		},
-		opts = {},
-	},
-	{
 		"NvChad/ui",
 		name = "nvchad-ui",
 		lazy = false,

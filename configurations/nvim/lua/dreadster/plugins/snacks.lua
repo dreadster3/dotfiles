@@ -11,7 +11,7 @@ return {
             { "<leader>,", function() Snacks.picker.buffers({ focus = "list" }) end, desc = "Buffers" },
             { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
             { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-            { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+            { "<leader>n", function() Snacks.picker.notifications({focus = "list"}) end, desc = "Notification History" },
             { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"} },
 
             -- find
@@ -66,6 +66,8 @@ return {
 				win = {
 					input = {
 						keys = {
+							["<a-f>"] = { "preview_scroll_left", mode = { "i", "n" } },
+							["<a-b>"] = { "preview_scroll_right", mode = { "i", "n" } },
 							["<c-x>"] = { "edit_split", mode = { "i", "n" } },
 						},
 					},
