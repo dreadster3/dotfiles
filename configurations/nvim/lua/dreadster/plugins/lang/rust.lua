@@ -8,13 +8,13 @@ return {
 		end,
 		opts = {
 			server = {
-				on_attach = function(_, bufnr)
+				on_attach = function(_, buffer)
 					vim.keymap.set("n", "<leader>cR", function()
 						vim.cmd.RustLsp("codeAction")
-					end, { desc = "Code Action", buffer = bufnr })
+					end, { desc = "Code Action", buffer = buffer })
 					vim.keymap.set("n", "<leader>dr", function()
 						vim.cmd.RustLsp("debuggables")
-					end, { desc = "Rust Debuggables", buffer = bufnr })
+					end, { desc = "Rust Debuggables", buffer = buffer })
 				end,
 				default_settings = {
 					-- rust-analyzer language server configuration

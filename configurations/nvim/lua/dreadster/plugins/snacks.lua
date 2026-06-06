@@ -47,13 +47,6 @@ return {
             { "<leader>z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
             { "<leader>Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
 		},
-		config = function(_, opts)
-			local notify = vim.notify
-			require("snacks").setup(opts)
-			-- HACK: restore vim.notify after snacks setup and let noice.nvim take over
-			-- this is needed to have early notifications show up in noice history
-			vim.notify = notify
-		end,
 		---@type snacks.Config
 		opts = {
 			buffer = { enabled = true },

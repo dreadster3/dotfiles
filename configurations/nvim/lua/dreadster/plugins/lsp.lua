@@ -42,7 +42,7 @@ return {
 				exclude = {},
 			},
 			folds = {
-				enable = true,
+				enabled = true,
 				exclude = {},
 			},
 			setup = {},
@@ -147,11 +147,14 @@ return {
 						and vim.bo[buffer].buftype == ""
 						and not vim.tbl_contains(opts.folds.exclude, vim.bo[buffer].filetype)
 					then
-						vim.api.nvim_set_option_value(
-							"foldexpr",
-							"v:lua.vim.lsp.foldexpr()",
-							{ scope = "win", buf = buffer }
-						)
+						local windows = vim.fn.win_findbuf(buffer)
+						for _, win in ipairs(windows) do
+							vim.api.nvim_set_option_value(
+								"foldexpr",
+								"v:lua.vim.lsp.foldexpr()",
+								{ scope = "local", win = win }
+							)
+						end
 					end
 				end)
 			end
