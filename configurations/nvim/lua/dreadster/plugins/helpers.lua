@@ -124,7 +124,7 @@ return {
 				picker = "snacks",
 				load_on_setup = true,
 				picker_opts = {
-					focus = "list",
+					preview = true,
 				},
 			},
 			-- 10 days

@@ -90,6 +90,17 @@ return {
 						},
 					},
 				},
+				sources = {
+					buffers = {
+						win = {
+							input = {
+								keys = {
+									["dd"] = { "bufdelete", mode = { "n" } },
+								},
+							},
+						},
+					},
+				},
 			},
 			rename = { enabled = true },
 			scope = { enabled = true },
