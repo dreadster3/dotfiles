@@ -21,6 +21,10 @@ noremap({ "i", "n", "s" }, "<esc>", function()
 	if vim.snippet then
 		vim.snippet.stop()
 	end
+	local luasnip = require("luasnip")
+	if luasnip.expand_or_jumpable() then
+		luasnip.unlink_current()
+	end
 	return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 

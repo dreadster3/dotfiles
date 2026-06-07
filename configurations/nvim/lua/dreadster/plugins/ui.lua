@@ -167,13 +167,29 @@ return {
 		opts = {},
 	},
 	{
-		"NvChad/ui",
-		name = "nvchad-ui",
-		lazy = false,
-		init = function()
-			vim.g.nvmark_hovered = true
-			require("nvchad.colorify").run()
-		end,
+		"catgoose/nvim-colorizer.lua",
+		commit = "664c0b7cea1de71f8b65dfe951b7996fc3e6ccde",
+		event = { "BufReadPre" },
+		opts = {
+			options = {
+				parsers = {
+					css = true,
+					css_fn = true,
+					tailwind = {
+						enable = true,
+						lsp = {
+							enable = true,
+						},
+					},
+				},
+				display = {
+					mode = "virtualtext",
+					virtualtext = {
+						position = "before",
+					},
+				},
+			},
+		},
 	},
 	{
 		"sphamba/smear-cursor.nvim",

@@ -45,7 +45,6 @@ return {
 			require("template").register("{{_dir_}}", function()
 				vim.fn.expand("%:p:h")
 			end)
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("find_template")
 		end,
 		opts = {
 			author = "dreadster3",
