@@ -4,18 +4,16 @@ return {
 		version = "*",
 		name = "luasnip",
 		dependencies = {
-			{
-				"rafamadriz/friendly-snippets",
-				config = function()
-					require("luasnip.loaders.from_vscode").lazy_load()
-					require("luasnip.loaders.from_vscode").lazy_load({
-						paths = { vim.fn.stdpath("config") .. "/snippets" },
-					})
-				end,
-			},
+			"rafamadriz/friendly-snippets",
 		},
 		lazy = true,
 		build = "make install_jsregexp",
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load({
+				paths = { vim.fn.stdpath("config") .. "/snippets" },
+			})
+		end,
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",
