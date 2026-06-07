@@ -26,6 +26,7 @@ in
       settings = {
         os.editPreset = "nvim-remote";
         gui.nerdFontsVersion = 3;
+        git.overrideGpg = true;
       };
     };
   };
