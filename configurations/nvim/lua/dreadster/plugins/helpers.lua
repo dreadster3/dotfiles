@@ -71,7 +71,9 @@ return {
 	{
 		"gbprod/yanky.nvim",
 		name = "yanky",
+		dependencies = { "folke/snacks.nvim" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        -- stylua: ignore
 		keys = {
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
 			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
@@ -90,19 +92,11 @@ return {
 			{ "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
 			{ "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
 			{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
+            { "<leader>p", function() Snacks.picker.yanky({ focus = "list" }) end, desc = "Yank History" },
 		},
 		opts = {
 			highlight = { timer = 150 },
-			picker = {
-				telescope = {
-					use_default_mappings = true,
-				},
-			},
 		},
-		config = function(_, opts)
-			require("yanky").setup(opts)
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
-		end,
 	},
 	{
 		"rmagatti/auto-session",
