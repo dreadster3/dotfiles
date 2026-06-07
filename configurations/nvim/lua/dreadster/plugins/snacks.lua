@@ -16,8 +16,8 @@ return {
 
             -- find
             { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-            { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
             { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+            { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
             { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
             { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
             { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
@@ -100,6 +100,9 @@ return {
 							},
 						},
 					},
+				},
+				debug = {
+					scores = true,
 				},
 			},
 			rename = { enabled = true },
