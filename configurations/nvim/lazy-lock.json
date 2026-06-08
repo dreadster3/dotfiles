@@ -77,7 +77,7 @@
   "template": { "branch": "main", "commit": "308f6f8f0bf98cb7c71855ffa8a3019a5642d1cd" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "toggleterm": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
-  "tree-sitter-manager.nvim": { "branch": "main", "commit": "077f39966bd95df5772a22840da7eb1f54ca80c2" },
+  "tree-sitter-manager.nvim": { "branch": "main", "commit": "30b6dd8d14bf4a3870dc44ccefdc228a9a760e71" },
   "treesitter-context": { "branch": "master", "commit": "ed1cf48d5af252248c55f50b9427e8ce883a2c6b" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "ts-comments.nvim": { "branch": "main", "commit": "123a9fb12e7229342f807ec9e6de478b1102b041" },
