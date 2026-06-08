@@ -131,4 +131,18 @@ return {
           { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
         },
 	},
+	{
+		-- TODO: research to see if this is safe and maintained
+		"kawre/leetcode.nvim",
+		enabled = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"folke/snacks.nvim",
+		},
+		cmd = { "Leet" },
+		opts = {
+			lang = "rust",
+		},
+	},
 }
