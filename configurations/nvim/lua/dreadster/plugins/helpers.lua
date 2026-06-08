@@ -11,7 +11,6 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		version = "*",
 		event = "VeryLazy",
     -- stylua: ignore
 		keys = {
@@ -60,7 +59,6 @@ return {
 	},
 	{
 		"folke/todo-comments.nvim",
-		version = "*",
 		-- stylua: ignore
 		keys = {
 			{ "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },

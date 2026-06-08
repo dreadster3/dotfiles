@@ -1,7 +1,6 @@
 return {
 	{
 		"folke/snacks.nvim",
-		version = "*",
 		priority = 1000,
 		lazy = false,
 		-- stylua: ignore
@@ -108,7 +107,13 @@ return {
 			rename = { enabled = true },
 			scope = { enabled = true },
 			scroll = { enable = true },
-			statuscolumn = { enable = true },
+			statuscolumn = {
+				enable = true,
+				folds = {
+					open = true,
+					git_hl = true,
+				},
+			},
 			words = { enable = true },
 			util = { enable = true },
 			zen = { enable = true },

@@ -102,7 +102,6 @@ return {
 	},
 	{
 		"folke/noice.nvim",
-		version = "*",
 		event = "VeryLazy",
 		dependencies = { "folke/snacks.nvim", "MunifTanjim/nui.nvim" },
 		config = function(_, opts)
