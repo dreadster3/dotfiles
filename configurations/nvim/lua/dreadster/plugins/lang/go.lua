@@ -63,7 +63,6 @@ return {
 	},
 	{
 		"ray-x/go.nvim",
-		enabled = false,
 		dependencies = {
 			"ray-x/guihua.lua",
 			"lspconfig",
@@ -74,7 +73,6 @@ return {
 		opts = {
 			lsp_inlay_hints = {
 				enable = false,
-				style = "inlay",
 			},
 		},
 		event = { "CmdlineEnter" },
