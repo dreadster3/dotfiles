@@ -180,6 +180,9 @@ return {
 							enable = true,
 						},
 					},
+					names = {
+						enable = false,
+					},
 				},
 				display = {
 					mode = "virtualtext",
