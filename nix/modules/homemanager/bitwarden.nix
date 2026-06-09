@@ -16,9 +16,14 @@ in
   };
 
   config = mkIf cfg.enable {
+    # TODO: remove this when upstream fix is released
+    nixpkgs.config.permittedInsecurePackages = [
+      "electron-39.8.10"
+    ];
+
     home.packages = with pkgs; [
       bitwarden-cli
-      # (bitwarden-desktop.override { electron_39 = pkgs.electron_41; })
+      bitwarden-desktop
     ];
   };
 
