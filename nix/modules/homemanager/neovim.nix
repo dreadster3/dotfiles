@@ -179,6 +179,18 @@ in
       sideloadInitLua = true;
       withRuby = false;
       withPython3 = false;
+
+      # Make libsqlite3.so discoverable by LuaJIT ffi.load("sqlite3")
+      # needed for snacks.nvim picker frecency DB on NixOS
+      extraWrapperArgs = [
+        "--suffix"
+        "LD_LIBRARY_PATH"
+        ":"
+        "${lib.makeLibraryPath [
+          pkgs.sqlite.out
+        ]}"
+      ];
+
       extraPackages =
         with pkgs;
         [

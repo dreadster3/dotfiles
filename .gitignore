@@ -5,3 +5,4 @@ result
 configurations/tmux/plugins
 configurations/lazygit/state.yml
 /configurations/hypr/.luarc.json
+/configurations/nvim/.pi

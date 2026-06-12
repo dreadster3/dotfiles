@@ -62,6 +62,11 @@ return {
 		---@type render.md.UserConfig | nil
 		opts = {
 			file_types = { "markdown" },
+			completions = {
+				lsp = {
+					enabled = true,
+				},
+			},
 		},
 	},
 }

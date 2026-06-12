@@ -31,17 +31,4 @@ return {
 			},
 		},
 	},
-	{
-		"telescope.nvim",
-		optional = true,
-		specs = {
-			{
-				"ANGkeith/telescope-terraform-doc.nvim",
-				ft = { "terraform", "hcl" },
-				config = function()
-					require("dreadster.utils.lazy").lazy_load_telescope_extension("terraform_doc")
-				end,
-			},
-		},
-	},
 }

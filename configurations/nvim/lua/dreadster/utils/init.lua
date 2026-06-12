@@ -92,4 +92,6 @@ end
 
 M.strings = require("dreadster.utils.strings")
 
+M.lazy = require("dreadster.utils.lazy")
+
 return M

@@ -16,16 +16,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs.llm-agents; [
       # Coding Agents
-      llm-agents.claude-code
-      llm-agents.pi
+      claude-code
+      pi
 
       # Code Review
-      llm-agents.coderabbit-cli
+      coderabbit-cli
 
       # Utilities
-      # llm-agents.agent-browser
+      # agent-browser
+      rtk
+
+      # Pi Sandboxing
+      pkgs.bubblewrap
+      pkgs.socat
     ];
   };
 }

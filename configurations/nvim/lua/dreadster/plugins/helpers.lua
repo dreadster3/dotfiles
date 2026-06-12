@@ -11,7 +11,6 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		version = "*",
 		event = "VeryLazy",
     -- stylua: ignore
 		keys = {
@@ -58,11 +57,21 @@ return {
 			},
 		},
 	},
-	{ "folke/todo-comments.nvim", version = "*", event = "BufReadPre", opts = {} },
+	{
+		"folke/todo-comments.nvim",
+		-- stylua: ignore
+		keys = {
+			{ "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
+		},
+		event = "BufReadPost",
+		opts = {},
+	},
 	{
 		"gbprod/yanky.nvim",
 		name = "yanky",
+		dependencies = { "folke/snacks.nvim" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        -- stylua: ignore
 		keys = {
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
 			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
@@ -81,43 +90,42 @@ return {
 			{ "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
 			{ "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
 			{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
+            { "<leader>p", function() Snacks.picker.yanky({ focus = "list" }) end, desc = "Yank History" },
 		},
 		opts = {
 			highlight = { timer = 150 },
-			picker = {
-				telescope = {
-					use_default_mappings = true,
-				},
-			},
 		},
-		config = function(_, opts)
-			require("yanky").setup(opts)
-			require("dreadster.utils.lazy").lazy_load_telescope_extension("yank_history")
-		end,
-	},
-	{
-		"rhysd/git-messenger.vim",
-		commit = "fd124457378a295a5d1036af4954b35d6b807385",
-		cmd = { "GitMessenger" },
-		opts = {},
 	},
 	{
 		"rmagatti/auto-session",
 		lazy = false,
-		name = "autosession",
-		main = "auto-session",
+        -- stylua: ignore
+        keys = {
+            { "<leader>fs", ":AutoSession search<CR>", desc = "Search sessions" },
+        },
 		init = function()
 			vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 		end,
+		---@module "auto-session"
+		---@type AutoSession.Config
 		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/", "/tmp" },
 			bypass_save_filetypes = { "neo-tree" },
+			close_filetypes_on_save = { "checkhealth", "neo-tree", "toggle-term" },
 			session_lens = {
-				load_on_setup = false,
+				picker = "snacks",
+				load_on_setup = true,
+				picker_opts = {
+					preview = true,
+				},
 			},
-			post_restore_cmds = {
-				-- Forces treesitter to reload
-				"e",
-			},
+			-- 10 days
+			purge_after_minutes = 14400,
+
+			-- post_restore_cmds = {
+			-- 	-- Forces treesitter to reload
+			-- 	"e",
+			-- },
 		},
 	},
 	{
