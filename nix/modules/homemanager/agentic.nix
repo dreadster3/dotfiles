@@ -27,6 +27,10 @@ in
       # Utilities
       # agent-browser
       rtk
+
+      # Pi Sandboxing
+      pkgs.bubblewrap
+      pkgs.socat
     ];
   };
 }
