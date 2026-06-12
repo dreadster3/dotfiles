@@ -16,7 +16,7 @@ in
       package = mkOption {
         type = types.package;
         default = pkgs.swayidle;
-        description = "The hyprlock package to use";
+        description = "The swayidle package to use";
       };
     };
   };

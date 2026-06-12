@@ -21,7 +21,7 @@ in
       package = mkOption {
         type = types.package;
         default = pkgs.hypridle;
-        description = "The hyprlock package to use";
+        description = "The hypridle package to use";
       };
     };
   };

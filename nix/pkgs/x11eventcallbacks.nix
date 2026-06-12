@@ -1,14 +1,14 @@
 {
   stdenv,
   lib,
-  pkgs,
   fetchFromGitHub,
+  cmake,
+  xorg,
 }:
 
-with lib;
-
 stdenv.mkDerivation {
-  name = "x11eventcallbacks";
+  pname = "x11eventcallbacks";
+  version = "0.1.0";
 
   src = fetchFromGitHub {
     owner = "dreadster3";
@@ -17,18 +17,15 @@ stdenv.mkDerivation {
     sha256 = "sldoJPf3wLu7oI69FuAVlfilE+3C6vVCEi/4x3faMSY=";
   };
 
-  nativeBuildInputs = with pkgs.buildPackages; [
-    cmake
-    gcc
-    gnumake
-  ];
+  nativeBuildInputs = [ cmake ];
 
-  buildInputs = with pkgs.buildPackages; [
-    xorg.libX11
-    xorg.libX11.dev
-  ];
+  buildInputs = [ xorg.libX11 ];
 
-  installPhase = ''
-    cmake --build /build/source/build --target install
-  '';
+  meta = {
+    description = "X11 event callback utility";
+    homepage = "https://github.com/dreadster3/x11_event_callbacks";
+    license = lib.licenses.mit;
+    mainProgram = "x11eventcallbacks";
+    platforms = lib.platforms.unix;
+  };
 }

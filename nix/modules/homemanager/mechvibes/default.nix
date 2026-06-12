@@ -7,7 +7,6 @@
 with lib;
 let
   cfg = config.modules.homemanager.mechvibes;
-  mechvibes = pkgs.callPackage ./derivation.nix { };
 in
 {
   options = {
