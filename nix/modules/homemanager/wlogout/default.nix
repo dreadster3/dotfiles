@@ -68,7 +68,7 @@ in
         {
           label = "logout";
           text = "Logout";
-          action = "hyprctl dispacth exit";
+          action = "hyprctl dispatch exit";
           keybind = "o";
         }
       ];

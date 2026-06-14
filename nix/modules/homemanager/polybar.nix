@@ -187,7 +187,6 @@ in
             font-1 = "Iosevka Nerd Font:pixelsize=14;4";
 
             # Modules
-            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = modules_right;
@@ -216,7 +215,6 @@ in
             font-1 = "Iosevka Nerd Font:pixelsize=14;4";
 
             # Modules
-            # modules-left = "launcher workspaces ranger github reddit firefox azure monitor";
             modules-left = modules_left;
             modules-center = modules_center;
             modules-right = [

@@ -7,8 +7,6 @@
 with lib;
 let
   cfg = config.modules.homemanager.nh;
-
-  flake = "${config.home.homeDirectory}/Documents/projects/github/dotfiles/nix";
 in
 {
   options = {
@@ -18,16 +16,17 @@ in
         type = types.package;
         default = pkgs.nh;
       };
+      flake = mkOption {
+        type = types.str;
+        default = "${config.home.homeDirectory}/Documents/projects/github/dotfiles/nix";
+        description = "Flake path used by nh";
+      };
     };
   };
   config = mkIf cfg.enable {
-    home.sessionVariables = {
-      NH_FLAKE = flake;
-    };
-
     programs.nh = {
       inherit (cfg) package;
-      inherit flake;
+      flake = cfg.flake;
 
       enable = true;
     };

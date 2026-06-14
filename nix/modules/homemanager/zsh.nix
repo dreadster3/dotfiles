@@ -4,25 +4,26 @@
   pkgs,
   ...
 }:
+with lib;
 let
   cfg = config.modules.homemanager.zsh;
 in
 {
   options = {
     modules.homemanager.zsh = {
-      enable = lib.mkEnableOption "zsh";
-      sourceNix = lib.mkEnableOption "zsh.sourceNix";
+      enable = mkEnableOption "zsh";
+      sourceNix = mkEnableOption "zsh.sourceNix";
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       dotDir = "${config.xdg.configHome}/zsh";
-      initContent = lib.concatStringsSep "\n" (
-        lib.optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
+      initContent = concatStringsSep "\n" (
+        optional cfg.sourceNix "source $HOME/.nix-profile/etc/profile.d/nix.sh"
       );
       plugins = [
         {
@@ -41,7 +42,7 @@ in
           file = "p10k.zsh";
         }
       ]
-      ++ lib.optional (!config.programs.zoxide.enable) {
+      ++ optional (!config.programs.zoxide.enable) {
         name = "zsh-z";
         file = "share/zsh-z/zsh-z.plugin.zsh";
         src = pkgs.zsh-z;

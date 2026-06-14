@@ -4,7 +4,6 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-pinned.url = "github:NixOS/nixpkgs/4bd9165a9165d7b5e33ae57f3eecbcb28fb231c9";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     llm-agents = {
@@ -32,11 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,11 +49,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     tssp = {
       url = "github:nukdokplex/tssp-nix/ea999343fe2885ac9c815439446d2f4279c38560";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,7 +63,6 @@
       catppuccin,
       stylix,
       sops-nix,
-      nixos-wsl,
       tssp,
       ...
     }@inputs:
@@ -94,38 +82,14 @@
 
     in
     {
-      packages = forAllSystems (system: nixpkgs.legacyPackages.${system});
-
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       overlays = import ./overlays { inherit inputs; };
 
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/homemanager;
+      nixosModules = (import ./modules/nixos) { };
+      homeManagerModules = (import ./modules/homemanager) { };
 
       nixosConfigurations = {
-        devbox = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            hostname = "devbox";
-            inherit inputs outputs lib;
-          };
-          modules = [
-            ./hosts/vm/configuration.nix
-            catppuccin.nixosModules.catppuccin
-            stylix.nixosModules.stylix
-          ];
-        };
-        pentestbox = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            hostname = "pentestbox";
-            inherit inputs outputs lib;
-          };
-          modules = [
-            ./hosts/vm/configuration.nix
-            catppuccin.nixosModules.catppuccin
-            stylix.nixosModules.stylix
-          ];
-        };
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs lib; };
           modules = [
@@ -141,15 +105,6 @@
             ./hosts/vps/configuration.nix
             catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
-          ];
-        };
-        nixwsl = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs lib; };
-          modules = [
-            ./hosts/wsl/configuration.nix
-            catppuccin.nixosModules.catppuccin
-            stylix.nixosModules.stylix
-            nixos-wsl.nixosModules.default
           ];
         };
       };
