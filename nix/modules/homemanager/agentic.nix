@@ -18,7 +18,6 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs.llm-agents; [
       # Coding Agents
-      claude-code
       pi
 
       # Code Review
@@ -31,6 +30,8 @@ in
       # Pi Sandboxing
       pkgs.bubblewrap
       pkgs.socat
+      # Fetch open source code
+      pkgs.opensrc
     ];
   };
 }
