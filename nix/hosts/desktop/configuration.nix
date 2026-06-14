@@ -94,7 +94,6 @@
     };
 
     onedrive.enable = true;
-    flatpak.enable = true;
   };
 
   # GPUtil (used for NVIDIA GPU stats) shells out to `nvidia-smi`, which isn't

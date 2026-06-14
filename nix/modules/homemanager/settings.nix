@@ -57,7 +57,7 @@ let
         pink = "#f5c2e7";
         flamingo = "#f2cdcd";
         rosewater = "#f5e0dc";
-        transparent = "#FF00000";
+        transparent = "#FF000000";
       };
     };
   };
@@ -69,6 +69,7 @@ in
       enable = mkEnableOption "settings";
       terminal = mkOption {
         type = types.package;
+        default = pkgs.kitty;
         description = "The terminal emulator to use.";
       };
       monitors = mkOption {

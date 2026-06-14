@@ -54,8 +54,5 @@ in
         coolercontrold.wantedBy = [ "multi-user.target" ];
       };
     };
-
-    # INFO: Does not allow setting package
-    # programs.coolercontrol.enable = true;
   };
 }

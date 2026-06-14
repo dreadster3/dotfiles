@@ -19,7 +19,6 @@ in
     padding = mkLiteral "0px";
     border = mkLiteral "1px solid";
     border-radius = mkLiteral "12px";
-    # border-color = mkLiteral "@selected";
     cursor = mkLiteral "default";
   };
 
@@ -30,7 +29,6 @@ in
     padding = mkLiteral "0px";
     border = mkLiteral "0px solid";
     border-radius = mkLiteral "0px 0px 0px 0px";
-    # border-color = mkLiteral "@selected";
     background-color = mkLiteral "transparent";
     children = [
       "inputbar"
@@ -45,9 +43,6 @@ in
     padding = mkLiteral "15px";
     border = mkLiteral "0px solid";
     border-radius = mkLiteral "0px";
-    # border-color = mkLiteral "@selected";
-    # background-color = mkLiteral "@selected";
-    # text-color = "@background";
     children = [
       "prompt"
       "entry"
@@ -65,12 +60,10 @@ in
     expand = false;
     str = "::";
     background-color = mkLiteral "inherit";
-    # text-color = "inherit";
   };
   entry = {
     enabled = true;
     background-color = mkLiteral "inherit";
-    # text-color = mkLiteral "inherit";
     cursor = mkLiteral "text";
     placeholder = "Search...";
     placeholder-color = mkLiteral "inherit";
@@ -93,17 +86,13 @@ in
     padding = mkLiteral "0px";
     border = mkLiteral "0px solid";
     border-radius = mkLiteral "0px";
-    # border-color = mkLiteral "@selected";
     background-color = mkLiteral "transparent";
-    # text-color = mkLiteral "@foreground";
     cursor = mkLiteral "default";
   };
 
   scrollbar = {
     handle-width = mkLiteral "5px";
-    # handle-color = mkLiteral "@selected";
     border-radius = mkLiteral "0px";
-    # background-color = mkLiteral "@alternate-normal-background";
   };
 
   element = {
@@ -113,28 +102,19 @@ in
     padding = mkLiteral "8px";
     border = mkLiteral "0px solid";
     border-radius = mkLiteral "0px";
-    # border-color = mkLiteral "@selected";
     background-color = mkLiteral "transparent";
-    # text-color = mkLiteral "@foreground";
     cursor = mkLiteral "pointer";
   };
   "element normal.normal" = {
-    # background-color = "@background";
-    # text-color = "@foreground";
   };
   "element selected.normal" = {
     background-color = mkLiteral "@blue";
-    # text-color = "@foreground";
   };
   element-icon = {
-    # background-color = "transparent";
-    # text-color = "inherit";
     size = mkLiteral "32px";
     cursor = mkLiteral "inherit";
   };
   element-text = {
-    # background-color = "transparent";
-    # text-color = "inherit";
     highlight = mkLiteral "inherit";
     cursor = mkLiteral "inherit";
     vertical-align = mkLiteral "0.5";
@@ -145,13 +125,8 @@ in
     padding = mkLiteral "15px";
     border = mkLiteral "2px solid";
     border-radius = mkLiteral "12px";
-    # border-color = mkLiteral "@selected";
-    # background-color = mkLiteral "@background";
-    # text-color = mkLiteral "@foreground";
   };
   textbox = {
-    # background-color = mkLiteral "@background";
-    # text-color = mkLiteral "@foreground";
     vertical-align = mkLiteral "0.5";
     horizontal-align = mkLiteral "0.0";
     highlight = mkLiteral "none";

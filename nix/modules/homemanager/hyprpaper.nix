@@ -7,7 +7,6 @@
 with lib;
 let
   cfg = config.modules.homemanager.hyprpaper;
-  # mappedAttrs = mapAttrs (monitor: wallpaper: toString wallpaper) cfg.wallpapers;
 in
 {
   options = {
@@ -24,6 +23,17 @@ in
         };
         description = "The wallpapers to use";
       };
+      fitMode = mkOption {
+        type = types.nullOr (types.enum [
+          "fill"
+          "contain"
+          "cover"
+          "tile"
+          "stretch"
+        ]);
+        default = null;
+        description = "fit_mode applied to every wallpaper; null omits the key";
+      };
     };
   };
 
@@ -37,12 +47,13 @@ in
 
     services.hyprpaper = {
       enable = true;
-      # NOTE: not working due to configuration breaking change
-      #
-      # settings = {
-      #   preload = attrValues mappedAttrs;
-      #   wallpaper = mapAttrsToList (monitor: wallpaper: "${monitor},${wallpaper}") mappedAttrs;
-      # };
+      settings = {
+        splash = false;
+        wallpaper = mapAttrsToList (monitor: path: {
+          inherit monitor;
+          path = toString path;
+        } // lib.optionalAttrs (cfg.fitMode != null) { fit_mode = cfg.fitMode; }) cfg.wallpapers;
+      };
     };
   };
 }

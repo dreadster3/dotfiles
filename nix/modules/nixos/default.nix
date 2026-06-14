@@ -6,10 +6,7 @@
     ./openrgb.nix
     ./x11.nix
     ./grub.nix
-    ./bspwm.nix
     ./zsh.nix
-    ./powermanagement.nix
-    ./xrdp.nix
     ./steam.nix
     ./docker.nix
     ./nvidia.nix
@@ -18,7 +15,6 @@
     ./zerotier.nix
     ./teamviewer.nix
     ./network.nix
-    ./kubernetes.nix
     ./ssh.nix
     ./sound.nix
     ./nightlight.nix
@@ -29,7 +25,6 @@
     ./rustdesk.nix
     ./qmk.nix
     ./oryx.nix
-    ./xfce.nix
     ./i3.nix
     ./sddm.nix
     ./virtualisation

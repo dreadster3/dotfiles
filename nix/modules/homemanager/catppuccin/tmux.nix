@@ -61,11 +61,5 @@ in
       set -g @catppuccin_window_status_style "rounded"
     '';
 
-    # set -g @catppuccin_window_left_separator "#[fg=#{@_ctp_status_bg},bg=default,reverse]#[none]"
-    # set -g @catppuccin_window_middle_separator " "
-    # set -g @catppuccin_window_right_separator "#[fg=#{@_ctp_status_bg},bg=default,reverse]#[none]"
-    # set -g status-bg default
-    # set -g status-style bg=default
-
   };
 }

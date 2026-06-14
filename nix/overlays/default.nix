@@ -16,8 +16,6 @@
     llm-agents = inputs.llm-agents.packages."${final.stdenv.hostPlatform.system}";
     spicetifyPackages = inputs.spicetify.legacyPackages.${final.stdenv.hostPlatform.system};
 
-    # inherit (inputs.nixpkgs-pinned.legacyPackages."${final.system}") wireshark lutris;
-
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
