@@ -33,7 +33,7 @@ in
       {
         _args = [
           "SUPER + Q"
-          (mkInline ''hl.dsp.exec_cmd("pkill wlogout || ${getBin cfg.package}")'')
+          (mkInline ''hl.dsp.exec_cmd("pkill wlogout || ${getExe cfg.package}")'')
         ];
       }
     ];
