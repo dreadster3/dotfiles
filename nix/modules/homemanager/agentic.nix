@@ -21,7 +21,7 @@ in
       pi
 
       # Code Review
-      # coderabbit-cli # paid
+      coderabbit-cli
 
       # Utilities
       # agent-browser

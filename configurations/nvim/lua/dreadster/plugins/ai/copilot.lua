@@ -5,8 +5,10 @@ return {
 		cmd = { "CopilotChat", "CopilotChatAgents", "CopilotChatModels", "CopilotChatExplain" },
 		version = "*",
 		enabled = function()
-			local utils = require("dreadster.utils")
-			return utils.is_mac()
+			-- TODO: remove if plan to keep copilot
+			-- local utils = require("dreadster.utils")
+			-- return utils.is_mac()
+			return true
 		end,
 		dependencies = {
 			{ "copilot" }, -- or github/copilot.vim
@@ -60,8 +62,9 @@ return {
 		version = "*",
 		build = ":Copilot auth",
 		enabled = function()
-			local utils = require("dreadster.utils")
-			return utils.is_mac()
+			-- local utils = require("dreadster.utils")
+			-- return utils.is_mac()
+			return true
 		end,
 		cmd = { "Copilot" },
 		event = { "BufReadPost" },
@@ -80,45 +83,21 @@ return {
 			},
 		},
 	},
-
+	{
+		"zbirenbaum/copilot-cmp",
+		lazy = true,
+		opts = {},
+	},
 	{
 		"hrsh7th/nvim-cmp",
 		optional = true,
-		dependencies = {
-			{
-				"zbirenbaum/copilot-cmp",
-				name = "copilotcmp",
-				enabled = function()
-					local utils = require("dreadster.utils")
-					return utils.is_mac()
-				end,
-				main = "copilot_cmp",
-				lazy = true,
-				dependencies = { "copilot" },
-				opts = {},
-				config = function(_, opts)
-					local copilot_cmp = require("copilot_cmp")
-					copilot_cmp.setup(opts)
-
-					require("dreadster.utils.lsp").on_attach(function(_)
-						copilot_cmp._on_insert_enter({})
-					end, "copilot")
-				end,
-				specs = {
-					{
-						"hrsh7th/nvim-cmp",
-						optional = true,
-						---@param opts cmp.ConfigSchema
-						opts = function(_, opts)
-							table.insert(opts.sources, 1, {
-								name = "copilot",
-								priority = 1100,
-								group_index = 1,
-							})
-						end,
-					},
-				},
-			},
-		},
+		dependencies = { "zbirenbaum/copilot-cmp" },
+		opts = function(_, opts)
+			table.insert(opts.sources, 1, {
+				name = "copilot",
+				priority = 1100,
+				group_index = 1,
+			})
+		end,
 	},
 }

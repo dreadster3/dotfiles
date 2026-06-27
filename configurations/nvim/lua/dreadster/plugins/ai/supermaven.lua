@@ -5,7 +5,8 @@ return {
 		name = "supermaven",
 		event = "InsertEnter",
 		enabled = function()
-			return not require("dreadster.utils").is_mac()
+			-- return not require("dreadster.utils").is_mac()
+			return false
 		end,
 		opts = {
 			disable_inline_completion = true,
