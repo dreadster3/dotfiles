@@ -22,6 +22,11 @@ in
     programs.mpv = {
       inherit (cfg) package;
       enable = true;
+      # config = {
+      #   demuxer-lavf-o = "hls_live_restart=0";
+      #   hr-seek = "no";
+      #   demuxer-readahead-secs = 10;
+      # };
     };
 
     xdg.mimeApps.defaultApplications = {
