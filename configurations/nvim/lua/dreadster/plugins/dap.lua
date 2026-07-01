@@ -1,7 +1,6 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		version = "*",
 		name = "dap",
 		dependencies = {
 			"mason-dap",
@@ -70,7 +69,6 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		version = "*",
 		name = "dapui",
 		dependencies = { "nvim-neotest/nvim-nio" },
     -- stylua: ignore
