@@ -19,7 +19,7 @@ return {
 			{ "<leader>RS", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats", ft = "http" },
 			{ "<leader>Rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body", ft = "http" },
             { "<leader>Re", "<cmd>lua require('kulala').set_selected_env()<cr>", desc = "Select environment", ft = "http" },
-            { "<leader>Ru", "<cmd>lua require('kulala.ui.auth_manager').open_auth_config()<cr>", desc = "Manage Auth Config", ft = "http" },
+            { "<leader>Ru", function() require("kulala.ui.auth_manager").open_auth_config() end, desc = "Manage Auth Config", ft = "http" },
 		},
 		opts = {},
 	},
