@@ -39,7 +39,10 @@ in
       CATPPUCCIN_ACCENT = cfg.accent;
     };
 
-    home.pointerCursor.gtk.enable = true;
+    home.pointerCursor = {
+      enable = true;
+      gtk.enable = true;
+    };
 
     catppuccin = {
       enable = true;

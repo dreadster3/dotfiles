@@ -26,6 +26,7 @@ in
       # Utilities
       # agent-browser
       rtk
+      pkgs.playwright-mcp
 
       # Pi Sandboxing
       pkgs.bubblewrap
