@@ -32,11 +32,18 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
-      openai_api_key = { };
-      anthropic_api_key = { };
-      gemini_api_key = { };
+      litellm_api_key = { };
     };
   };
+
+  # Export the sops-decrypted litellm key into the shell environment.
+  # `home.sessionVariables` is evaluated at build time and cannot read runtime
+  # sops files, so we read the secret file from the shell init instead.
+  programs.zsh.initContent = ''
+    if [[ -r "${config.sops.secrets.litellm_api_key.path}" ]]; then
+      export LITELLM_API_KEY="$(<"${config.sops.secrets.litellm_api_key.path}")"
+    fi
+  '';
 
   modules.homemanager = {
     settings = {
