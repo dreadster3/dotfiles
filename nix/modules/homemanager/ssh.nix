@@ -33,9 +33,6 @@ in
           ControlPath = "~/.ssh/master-%r@%n:%p";
           ControlPersist = "no";
         };
-        "vps.dreadster3.com" = {
-          ProxyCommand = "${getExe pkgs.cloudflared} access ssh --hostname %h";
-        };
       };
     };
   };
