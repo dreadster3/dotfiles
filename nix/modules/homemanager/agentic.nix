@@ -27,6 +27,7 @@ in
       # agent-browser
       rtk
       pkgs.playwright-mcp
+      pkgs.codebase-memory-mcp
 
       # Pi Sandboxing
       pkgs.bubblewrap
