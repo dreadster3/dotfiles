@@ -26,6 +26,7 @@ in
       # Utilities
       # agent-browser
       rtk
+      codegraph
       pkgs.playwright-mcp
       pkgs.codebase-memory-mcp
 
