@@ -56,8 +56,6 @@ let
     pkgs.djhtml
   ];
 
-  poetryPackage = cfg.python.poetry.package.override { python3 = cfg.python.package; };
-
   terminal = either cfg.terminal config.modules.homemanager.settings.terminal;
 in
 {
@@ -113,17 +111,6 @@ in
               type = types.package;
               default = pkgs.python3;
             };
-            poetry = mkOption {
-              type = types.submodule {
-                options = {
-                  enable = mkEnableOption "neovim.python.poetry";
-                  package = mkOption {
-                    type = types.package;
-                    default = pkgs.poetry;
-                  };
-                };
-              };
-            };
           };
         };
       };
@@ -162,11 +149,6 @@ in
     # With nix flakes, this cannot be used as updates will not work
     xdg.configFile."nvim" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/projects/github/dotfiles/configurations/nvim";
-    };
-
-    modules.homemanager.poetry = mkIf cfg.python.poetry.enable {
-      enable = true;
-      package = poetryPackage;
     };
 
     programs.uv.enable = true;

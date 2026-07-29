@@ -79,10 +79,7 @@
         languageServer.enable = true;
       };
       rust = lib.mkDefault { enable = true; };
-      python = lib.mkDefault {
-        enable = true;
-        poetry.enable = true;
-      };
+      python = lib.mkDefault { enable = true; };
     };
     yazi.enable = true;
     lazygit.enable = true;
