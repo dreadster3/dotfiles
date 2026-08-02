@@ -21,7 +21,8 @@ in
   config = mkIf cfg.enable {
     services.ollama = {
       enable = true;
-      acceleration = "cuda";
+      inherit (cfg) package;
+      acceleration = null;
     };
   };
 }

@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ exo ];
+    environment.systemPackages = with pkgs.stable; [ exo ];
 
     programs.xfconf.enable = true;
 

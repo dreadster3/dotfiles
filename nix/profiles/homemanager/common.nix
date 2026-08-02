@@ -36,6 +36,7 @@
       # XDG_CACHE_DIR = "$HOME/.cache";
       # XDG_CONFIG_HOME = "$HOME/.config";
       # XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_SCREENSHOTS_DIR = "$XDG_PICTURES_DIR/Screenshots";
       KUBECONFIG = "$HOME/.kube/config";
     };
   };
