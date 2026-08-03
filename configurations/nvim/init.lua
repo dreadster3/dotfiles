@@ -1,4 +1,4 @@
--- require('dreadster')
+require("dreadster.config.filetypes")
 require("dreadster.config.options")
 require("dreadster.config.autocmds")
 require("dreadster.config.commands")
