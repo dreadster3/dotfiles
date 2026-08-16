@@ -60,7 +60,7 @@
     ./nh.nix
     ./ollama.nix
     ./mpv.nix
-    ./k9s.nix
+    ./k9s
     ./kubectl.nix
     ./krew.nix
     ./obsidian.nix
