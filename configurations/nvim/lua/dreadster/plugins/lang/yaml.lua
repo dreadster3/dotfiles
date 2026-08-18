@@ -5,6 +5,13 @@ return {
 			return vim.tbl_deep_extend("force", opts or {}, {
 				servers = {
 					yamlls = {
+						filetypes = {
+							"yaml",
+							"yaml.docker-compose",
+							"yaml.gitlab",
+							"yaml.helm-values",
+							"yaml.ghaction",
+						},
 						-- Have to add this for yamlls to understand that we support line folding
 						capabilities = {
 							textDocument = {
