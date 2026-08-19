@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs.stable; [ exo ];
+    environment.systemPackages = with pkgs; [ xfce4-exo ];
 
     programs.xfconf.enable = true;
 
