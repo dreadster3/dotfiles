@@ -39,6 +39,7 @@
   # Export the sops-decrypted litellm key into the shell environment.
   # `home.sessionVariables` is evaluated at build time and cannot read runtime
   # sops files, so we read the secret file from the shell init instead.
+  # TODO: convert to function that takes list of secrets and exports them all
   programs.zsh.initContent = ''
     if [[ -r "${config.sops.secrets.litellm_api_key.path}" ]]; then
       export LITELLM_API_KEY="$(<"${config.sops.secrets.litellm_api_key.path}")"
