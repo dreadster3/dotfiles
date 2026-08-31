@@ -28,7 +28,6 @@ in
       rtk
       codegraph
       pkgs.playwright-mcp
-      pkgs.codebase-memory-mcp
 
       # Pi Sandboxing
       pkgs.bubblewrap
