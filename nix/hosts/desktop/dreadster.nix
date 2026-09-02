@@ -9,8 +9,7 @@
 
   users.users.dreadster.extraGroups = [ "dialout" ];
   users.users.dreadster.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDsZxq/uKw1n8bFeXo+Ez+YXbhWwu2AA2LHX3YD74MFU dreadster@termius"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC6akqtInNuSrkUIJFNHXRgzQhcWhuYBBp+nnwlkYmcS dreadster@termix"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrzLTSGIh8TVSFNpR3LlMA3wn02+fjXlCctkGMt7G0t dreadster@termix"
   ];
 
   home-manager.users.dreadster = {
