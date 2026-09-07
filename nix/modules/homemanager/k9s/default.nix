@@ -24,6 +24,7 @@ in
       fluxcd-operator
       jq
       less
+      flate
     ];
 
     programs.k9s = {
