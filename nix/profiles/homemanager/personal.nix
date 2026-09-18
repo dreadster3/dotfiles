@@ -27,6 +27,10 @@
     age
   ];
 
+  # ponytail: sops-nix HEAD builds sops-install-secrets with buildGo125Module,
+  # removed from nixpkgs-unstable; build it against stable until upstream bumps Go.
+  sops.package = (pkgs.stable.callPackage inputs.sops-nix { }).sops-install-secrets;
+
   sops = {
     defaultSopsFile = lib.mkDefault ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";

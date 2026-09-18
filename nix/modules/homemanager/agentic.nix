@@ -27,7 +27,7 @@ in
       # agent-browser
       rtk
       codegraph
-      pkgs.playwright-mcp
+      pkgs.stable.playwright-mcp
 
       # Pi Sandboxing
       pkgs.bubblewrap
