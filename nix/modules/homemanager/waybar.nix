@@ -103,6 +103,7 @@ in
 
             active-only = false;
             persistent-workspaces = mapAttrs (_: value: value.workspaces) monitors;
+            persistent-only = true;
           };
           cpu = {
             interval = 10;
