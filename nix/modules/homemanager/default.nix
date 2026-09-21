@@ -68,5 +68,6 @@
     ./ashell.nix
     ./agentic.nix
     ./ghostty.nix
+    ./pi-web.nix
   ];
 }

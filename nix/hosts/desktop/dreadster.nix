@@ -141,6 +141,12 @@
       easyeffects.enable = true;
       obsidian.enable = true;
       agentic.enable = true;
+      pi-web = {
+        enable = true;
+        environment = {
+          LITELLM_API_KEY = "$(cat ${config.home-manager.users.dreadster.sops.secrets.litellm_api_key.path})";
+        };
+      };
 
       git.signing = {
         enable = true;
