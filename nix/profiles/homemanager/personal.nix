@@ -66,7 +66,7 @@
 
     eog.enable = true;
     gtk.enable = true;
-    firefox.enable = true;
+    firefox.enable = lib.mkDefault true;
     ssh.enable = true;
     stylix.enable = true;
     direnv.enable = true;

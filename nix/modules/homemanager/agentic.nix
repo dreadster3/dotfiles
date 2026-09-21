@@ -29,9 +29,6 @@ in
       codegraph
       pkgs.stable.playwright-mcp
 
-      # Pi Sandboxing
-      pkgs.bubblewrap
-      pkgs.socat
       # Fetch open source code
       pkgs.opensrc
     ];

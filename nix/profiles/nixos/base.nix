@@ -53,10 +53,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   services.locate.enable = true;
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = [ ];
-  };
+  programs.nix-ld.enable = true;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };

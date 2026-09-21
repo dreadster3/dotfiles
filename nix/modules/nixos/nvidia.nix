@@ -23,6 +23,11 @@ in
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
+    programs.nix-ld = {
+      enable = true;
+      libraries = [ config.boot.kernelPackages.nvidia_x11 ];
+    };
+
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       open = true;

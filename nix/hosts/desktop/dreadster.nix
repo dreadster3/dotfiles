@@ -153,6 +153,8 @@
         "DP-1" = ../../../wallpapers/skirk.png;
         "HDMI-A-1" = ../../../wallpapers/gojo.png;
       };
+
+      firefox.enable = false;
     };
 
     programs.zen-browser.enable = true;
