@@ -60,6 +60,8 @@
       go-task
     ];
 
+    home.sessionVariables.TRITON_LIBCUDA_PATH = "/run/opengl-driver/lib";
+
     modules.homemanager = {
       settings = {
         monitors = {

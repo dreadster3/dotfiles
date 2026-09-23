@@ -7,6 +7,17 @@
 with lib;
 let
   cfg = config.modules.homemanager.pi-web;
+
+  # pi-subagents (and anything else using the same fallback) locates the host Pi
+  # package by walking up from process.argv[1]. Under pi-web that path is
+  # pi-web.js, which is not inside a @earendil-works/pi-coding-agent tree, so
+  # resolution fails closed and background children refuse to launch. Point it at
+  # the copy pi-web already bundles, which carries every peer alias they need
+  # (pi-agent-core, pi-ai, pi-tui, chord, typebox).
+  # ponytail: derived from the package layout, which is stable at this version.
+  # If a future release stops bundling pi-coding-agent, async subagents regress
+  # here and this needs revisiting.
+  piCodingAgentRoot = "${cfg.package}/lib/pi-web/node_modules/@earendil-works/pi-coding-agent";
 in
 {
   options = {
@@ -92,6 +103,7 @@ in
           # The UI is long-lived; don't let an idle timeout stop the service.
           "PI_WEB_IDLE_TIMEOUT_MS=0"
           "PI_WEB_SKIP_VERSION_CHECK=1"
+          "PI_SUBAGENTS_PI_CODING_AGENT_PACKAGE_ROOT=${piCodingAgentRoot}"
         ];
         Restart = "on-failure";
         RestartSec = 5;
