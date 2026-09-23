@@ -6,18 +6,18 @@
   makeWrapper,
 }:
 
-buildNpmPackage (finalAttrs: {
+buildNpmPackage rec {
   pname = "pi-web";
-  version = "0.9.1";
+  version = "0.9.3";
 
   src = fetchFromGitHub {
     owner = "agegr";
     repo = "pi-web";
-    rev = "v${finalAttrs.version}";
-    hash = "sha256-fuuFKezb58lO2P1t3yHIkHPnBe8D8es6TTsqOy7UL7w=";
+    rev = "v${version}";
+    hash = "sha256-EhoxOwmEIsN3G6MQImZbCSJM4QBnnzKzNV+gmuIUkN0=";
   };
 
-  npmDepsHash = "sha256-309IHTP/YC0OU8Z4SNUBksRbVFCUAhKsQjl3ef3d034=";
+  npmDepsHash = "sha256-8HJ2S5soReHvwXEKg31sd7iTKYQKbzMb/UpDRe/sR2E=";
   npmDepsFetcherVersion = 2;
 
   nodejs = nodejs_24;
@@ -56,4 +56,4 @@ buildNpmPackage (finalAttrs: {
     mainProgram = "pi-web";
     platforms = platforms.linux ++ platforms.darwin;
   };
-})
+}
