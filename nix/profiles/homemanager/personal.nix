@@ -77,15 +77,7 @@
     zsh = {
       enable = true;
     };
-    neovim = {
-      enable = true;
-      go = lib.mkDefault {
-        enable = true;
-        languageServer.enable = true;
-      };
-      rust = lib.mkDefault { enable = true; };
-      python = lib.mkDefault { enable = true; };
-    };
+    neovim.enable = true;
     yazi.enable = true;
     lazygit.enable = true;
     bitwarden.enable = true;
