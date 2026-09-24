@@ -30,8 +30,10 @@ in
     # in modules.homemanager.languages so pi-web and other host processes can
     # consume them from PATH, not just nvim's wrapper.
     modules.homemanager.languages = {
-      go.enable = mkDefault true;
-      go.languageServer.enable = mkDefault true;
+      go = {
+        enable = mkDefault true;
+        package = mkDefault pkgs.go_latest;
+      };
       rust.enable = mkDefault true;
       python.enable = mkDefault true;
       node.enable = mkDefault true;
