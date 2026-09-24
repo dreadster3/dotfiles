@@ -78,22 +78,6 @@
       enable = true;
     };
     neovim.enable = true;
-    languages = {
-      go = lib.mkDefault {
-        enable = true;
-        languageServer.enable = true;
-      };
-      rust = lib.mkDefault { enable = true; };
-      python = lib.mkDefault { enable = true; };
-      node = lib.mkDefault { enable = true; };
-      nix = lib.mkDefault { enable = true; };
-      lua = lib.mkDefault { enable = true; };
-      bash = lib.mkDefault { enable = true; };
-      markdown = lib.mkDefault { enable = true; };
-      latex = lib.mkDefault { enable = true; };
-      dotnet = lib.mkDefault { enable = true; };
-      terraform = lib.mkDefault { enable = true; };
-    };
     yazi.enable = true;
     lazygit.enable = true;
     bitwarden.enable = true;
