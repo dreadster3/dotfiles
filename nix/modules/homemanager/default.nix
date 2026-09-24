@@ -69,5 +69,6 @@
     ./agentic.nix
     ./ghostty.nix
     ./pi-web.nix
+    ./languages
   ];
 }
