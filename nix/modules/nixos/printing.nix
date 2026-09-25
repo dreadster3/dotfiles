@@ -18,7 +18,13 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       hplipWithPlugin
-      simple-scan
+      (pkgs.simple-scan.overrideAttrs {
+        preFixup = ''
+          gappsWrapperArgs+=(
+            --prefix LD_LIBRARY_PATH : /etc/sane-libs
+          )
+        '';
+      })
     ];
 
     services.printing = {
@@ -32,7 +38,9 @@ in
 
     hardware.sane = {
       enable = true;
-      extraBackends = with pkgs; [ hplipWithPlugin ];
+      extraBackends = with pkgs; [
+        hplipWithPlugin
+      ];
     };
   };
 }
