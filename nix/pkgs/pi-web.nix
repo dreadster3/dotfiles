@@ -11,13 +11,13 @@ buildNpmPackage rec {
   version = "0.9.3";
 
   src = fetchFromGitHub {
-    owner = "agegr";
+    owner = "dreadster3";
     repo = "pi-web";
     rev = "v${version}";
-    hash = "sha256-EhoxOwmEIsN3G6MQImZbCSJM4QBnnzKzNV+gmuIUkN0=";
+    hash = "sha256-MjZXQvvUXEZaGKf8RvwRnI/S1bssY+849CIIwwiMTg0=";
   };
 
-  npmDepsHash = "sha256-8HJ2S5soReHvwXEKg31sd7iTKYQKbzMb/UpDRe/sR2E=";
+  npmDepsHash = "sha256-7mam+HZENBmVUgvIvM9xM84gacFVE8mKmUZzK12rxfQ=";
   npmDepsFetcherVersion = 2;
 
   nodejs = nodejs_24;
