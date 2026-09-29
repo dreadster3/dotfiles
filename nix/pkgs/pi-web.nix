@@ -8,16 +8,16 @@
 
 buildNpmPackage rec {
   pname = "pi-web";
-  version = "0.0.1";
+  version = "0.0.2";
 
   src = fetchFromGitHub {
     owner = "dreadster3";
     repo = "pi-web";
     rev = "v${version}";
-    hash = "sha256-96WBdP4MwpJWpTjXyBRENBLtyN9N6SDkYMs/Fcxw824=";
+    hash = "sha256-7omdf/hrNENZkLZo+Lp8Iw9lwUc+ElsGXhGp4G4E28Y=";
   };
 
-  npmDepsHash = "sha256-w1HEPiAUIiJgOw2YQV0+OrxRsGFWiRL+VtQ2uMNfV1U=";
+  npmDepsHash = "sha256-mC/oqF64y86ppThFI7IOpVw8GmuAWrDfNOOIuV7A+hk=";
   npmDepsFetcherVersion = 2;
 
   nodejs = nodejs_24;
