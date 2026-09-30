@@ -15,6 +15,7 @@
   modifications = final: _prev: {
     llm-agents = inputs.llm-agents.packages."${final.stdenv.hostPlatform.system}";
     spicetifyPackages = inputs.spicetify.legacyPackages.${final.stdenv.hostPlatform.system};
+    pi-web = inputs.pi-web.packages."${final.stdenv.hostPlatform.system}".default;
 
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...

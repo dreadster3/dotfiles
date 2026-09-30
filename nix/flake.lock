@@ -767,6 +767,26 @@
         "type": "github"
       }
     },
+    "pi-web": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790763020,
+        "narHash": "sha256-dnYAg7Tr5QZ+MlRyH9AGfyQCRWE+JH2dlPXoOWRSfN0=",
+        "owner": "dreadster3",
+        "repo": "pi-web",
+        "rev": "cc437ff42fafca88601ad63eb3ff8a89e3d10185",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dreadster3",
+        "repo": "pi-web",
+        "type": "github"
+      }
+    },
     "pkgs-by-name-for-flake-parts": {
       "locked": {
         "lastModified": 1743779435,
@@ -813,6 +833,7 @@
         "llm-agents": "llm-agents",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
+        "pi-web": "pi-web",
         "sops-nix": "sops-nix",
         "spicetify": "spicetify",
         "stylix": "stylix",
