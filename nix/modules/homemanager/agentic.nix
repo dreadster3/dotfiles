@@ -16,21 +16,23 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs.llm-agents; [
+    home.packages = with pkgs; [
       # Coding Agents
       pi
 
       # Code Review
-      coderabbit-cli
+      llm-agents.coderabbit-cli
 
       # Utilities
       # agent-browser
-      rtk
-      codegraph
+      llm-agents.rtk
+      llm-agents.codegraph
       pkgs.stable.playwright-mcp
 
       # Fetch open source code
       pkgs.opensrc
     ];
+
+    modules.homemanager.pi-web.enable = true;
   };
 }

@@ -697,11 +697,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1790658851,
-        "narHash": "sha256-eAXfN6HiUUMTY5Le1PvnxZlGpxMO4RgTDPkr7xzPo4A=",
+        "lastModified": 1790746077,
+        "narHash": "sha256-I4O5GSbZgmvzV7dj8fZN8furV2UdEpahh4rvsZOfs/Q=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "a621acfa43a25731694a8ef64fcbd5a00241e085",
+        "rev": "af40d966859ec4075ecc172dbb39e53f474dc5d9",
         "type": "github"
       },
       "original": {
@@ -722,6 +722,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-darwin-x64": {
+      "locked": {
+        "lastModified": 1788334797,
+        "narHash": "sha256-nskSa8kDimM7F0VFSP8IdoSNo4G0vKzOtxwvOFpoGDI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c19db427a1fdfc7591c0b0baeb4665dcef2c61da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-26.05-darwin",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -767,6 +783,27 @@
         "type": "github"
       }
     },
+    "pi": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-darwin-x64": "nixpkgs-darwin-x64"
+      },
+      "locked": {
+        "lastModified": 1791033824,
+        "narHash": "sha256-DsLc+ShBMqRxFZP5R4HHf/pUpQ2mP6xPuvH9EUMJ2TQ=",
+        "owner": "earendil-works",
+        "repo": "pi",
+        "rev": "83692682f095528f8b71652ddacff7075e36e893",
+        "type": "github"
+      },
+      "original": {
+        "owner": "earendil-works",
+        "repo": "pi",
+        "type": "github"
+      }
+    },
     "pi-web": {
       "inputs": {
         "nixpkgs": [
@@ -774,11 +811,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790763020,
-        "narHash": "sha256-dnYAg7Tr5QZ+MlRyH9AGfyQCRWE+JH2dlPXoOWRSfN0=",
+        "lastModified": 1791056096,
+        "narHash": "sha256-fdR2QHNXOqpqOAqFl1nUh4Mj4v7z9Gnlnxk4xsrUt8I=",
         "owner": "dreadster3",
         "repo": "pi-web",
-        "rev": "cc437ff42fafca88601ad63eb3ff8a89e3d10185",
+        "rev": "1dac30c4220bab7c85b312d917d4850a6558074f",
         "type": "github"
       },
       "original": {
@@ -833,6 +870,7 @@
         "llm-agents": "llm-agents",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
+        "pi": "pi",
         "pi-web": "pi-web",
         "sops-nix": "sops-nix",
         "spicetify": "spicetify",
