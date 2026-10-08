@@ -52,16 +52,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprutils = {
-      url = "github:hyprwm/hyprutils/v0.14.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        hyprutils.follows = "hyprutils";
       };
     };
 
