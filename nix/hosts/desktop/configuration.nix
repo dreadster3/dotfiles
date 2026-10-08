@@ -93,6 +93,8 @@
     };
 
     onedrive.enable = true;
+    # eCard Readers
+    pcscd.enable = true;
   };
 
   # GPUtil (used for NVIDIA GPU stats) shells out to `nvidia-smi`, which isn't
