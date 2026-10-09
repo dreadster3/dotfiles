@@ -16,6 +16,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.sessionVariables = {
+      SYSTEMONE_ENDPOINT = "https://openrouter.ai/api/alpha/decisions";
+    };
+
     home.packages = with pkgs; [
       # Coding Agents
       pi
