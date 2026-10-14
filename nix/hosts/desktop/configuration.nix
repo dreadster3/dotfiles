@@ -69,6 +69,7 @@
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
     printing.enable = true;
+    keyring.enable = true;
   };
 
   networking = {

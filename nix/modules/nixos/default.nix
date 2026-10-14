@@ -43,5 +43,6 @@
     ./libreoffice.nix
     ./netbird.nix
     ./llama-cpp.nix
+    ./keyring.nix
   ];
 }
