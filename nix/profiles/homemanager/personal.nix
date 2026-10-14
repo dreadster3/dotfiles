@@ -37,6 +37,7 @@
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
       litellm_api_key = { };
+      litellm_base_url = { };
     };
   };
 
@@ -47,6 +48,9 @@
   programs.zsh.initContent = ''
     if [[ -r "${config.sops.secrets.litellm_api_key.path}" ]]; then
       export LITELLM_API_KEY="$(<"${config.sops.secrets.litellm_api_key.path}")"
+    fi
+    if [[ -r "${config.sops.secrets.litellm_base_url.path}" ]]; then
+      export SYSTEMONE_ENDPOINT="$(<"${config.sops.secrets.litellm_base_url.path}")/v1/systemone"
     fi
   '';
 

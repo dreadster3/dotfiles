@@ -22,7 +22,7 @@ in
 
     home.packages = with pkgs; [
       # Coding Agents
-      pi
+      llm-agents.pi
 
       # Code Review
       llm-agents.coderabbit-cli
