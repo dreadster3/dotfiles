@@ -20,6 +20,30 @@ in
       SYSTEMONE_ENDPOINT = "https://openrouter.ai/api/alpha/decisions";
     };
 
+    programs.herdr = {
+      enable = true;
+      settings = {
+        onboarding = false;
+        keys = {
+          prefix = "ctrl+b";
+        };
+        terminal = {
+          new_cwd = "follow";
+        };
+        theme = {
+          name = "catppuccin";
+        };
+        ui = {
+          toast = {
+            delivery = "herdr";
+            herdr = {
+              position = "top-right";
+            };
+          };
+        };
+      };
+    };
+
     home.packages = with pkgs; [
       # Coding Agents
       llm-agents.pi

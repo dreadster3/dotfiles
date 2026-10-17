@@ -804,11 +804,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792018956,
-        "narHash": "sha256-3g+2NEqPzg7o62RteqdKs69axaWjMUf09Em/CPSJaak=",
+        "lastModified": 1792171829,
+        "narHash": "sha256-Qmp4QWSartHblHQ9+ksvYqe8AJ9LeWa3ZveOWNZLgEY=",
         "owner": "dreadster3",
         "repo": "pi-web",
-        "rev": "672ce1d51adeb6e17c3d73a1928fb824528f6bd5",
+        "rev": "fdec46198c0bb28be68c95cc9b7723d3d3d252d7",
         "type": "github"
       },
       "original": {
