@@ -139,7 +139,6 @@
       thunderbird.enable = true;
       gtk.enable = true;
       mangohud.enable = true;
-      pentest.enable = true;
       easyeffects.enable = true;
       obsidian.enable = true;
       agentic.enable = true;
