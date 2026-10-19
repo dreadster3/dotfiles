@@ -43,6 +43,7 @@
 
       # HTTP client
       postman
+      insomnia
 
       # IPTV
       hypnotix

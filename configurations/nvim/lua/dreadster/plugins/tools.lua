@@ -65,18 +65,13 @@ return {
 		},
 	},
 	{
-		"nvim-pack/nvim-spectre",
-		cmd = "Spectre",
-		opts = { open_cmd = "noswapfile vnew" },
-		-- stylua: ignore
-		keys = {
-			{
-				"<leader>sr",
-				function() require("spectre").toggle() end,
-				desc = "Replace in files (Spectre)"
-			}
-		}
-,
+		"MagicDuck/grug-far.nvim",
+		cmd = { "GrugFar", "GrugFarWithin" },
+        -- stylua: ignore
+        keys = {
+            { "<leader>sr", function() require("grug-far").open({transient = true}) end, desc = "Replace in files (GrugFar)" },
+        },
+		opts = {},
 	},
 	{
 		"laytan/cloak.nvim",
