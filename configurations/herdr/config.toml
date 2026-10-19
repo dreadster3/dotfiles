@@ -1,0 +1,16 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+b"
+
+[terminal]
+new_cwd = "follow"
+
+[theme]
+name = "catppuccin"
+
+[ui.toast]
+delivery = "herdr"
+
+[ui.toast.herdr]
+position = "top-right"
