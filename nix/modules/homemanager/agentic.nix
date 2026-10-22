@@ -26,6 +26,11 @@ in
         onboarding = false;
         keys = {
           prefix = "ctrl+b";
+          goto = "prefix+s";
+          detach = "prefix+d";
+          switch_tab = "prefix+1..9";
+          switch_workspace = "prefix+shift+1..9";
+          focus_agent = "prefix+alt+1..9";
         };
         terminal = {
           new_cwd = "follow";

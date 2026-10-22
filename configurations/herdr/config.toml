@@ -1,13 +1,20 @@
 onboarding = false
 
 [keys]
+detach = "prefix+d"
+focus_agent = "prefix+alt+1..9"
+goto = "prefix+s"
 prefix = "ctrl+b"
+switch_tab = "prefix+1..9"
+switch_workspace = "prefix+shift+1..9"
 
 [terminal]
 new_cwd = "follow"
 
 [theme]
 name = "catppuccin"
+
+[ui]
 
 [ui.toast]
 delivery = "herdr"
