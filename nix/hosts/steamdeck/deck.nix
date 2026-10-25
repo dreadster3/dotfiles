@@ -18,7 +18,6 @@
     packages = with pkgs; [
       droidcam
       openvpn
-      betterdiscordctl
       unzip
       zip
       xclip

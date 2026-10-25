@@ -39,8 +39,6 @@
       wineWow64Packages.stable
       winetricks
 
-      betterdiscordctl
-
       # HTTP client
       postman
       insomnia
