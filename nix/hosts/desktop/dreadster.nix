@@ -39,6 +39,8 @@
       wineWow64Packages.stable
       winetricks
 
+      vesktop
+
       # HTTP client
       postman
       insomnia
