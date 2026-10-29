@@ -50,8 +50,13 @@ in
     };
 
     home.packages = with pkgs; [
+      # Sandboxing
+      ripgrep
+      socat
+      bubblewrap
+
       # Coding Agents
-      llm-agents.pi
+      pi
 
       # Code Review
       llm-agents.coderabbit-cli
@@ -65,7 +70,5 @@ in
       # Fetch open source code
       pkgs.opensrc
     ];
-
-    modules.homemanager.pi-web.enable = true;
   };
 }
