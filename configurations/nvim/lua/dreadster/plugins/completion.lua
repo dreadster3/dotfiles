@@ -31,6 +31,14 @@ return {
 			local lspkind = require("lspkind")
 			local defaults = require("cmp.config.default")()
 			-- local cmp_menu_max_screen_ratio = 1 / 2
+			-- minuet (LLM) entries float to the top of the menu
+			local minuet_first = function(entry1, entry2)
+				local m1 = entry1.source.name == "minuet"
+				local m2 = entry2.source.name == "minuet"
+				if m1 ~= m2 then
+					return m1
+				end
+			end
 			return {
 				completion = { completeopt = "menuone,noselect,noinsert" },
 				preselect = cmp.PreselectMode.Item,
@@ -138,7 +146,10 @@ return {
 				disabled_filetypes = {
 					"sagarename",
 				},
-				sorting = defaults.sorting,
+				sorting = {
+					priority_weight = defaults.sorting.priority_weight,
+					comparators = vim.list_extend({ minuet_first }, defaults.sorting.comparators),
+				},
 			}
 		end,
 	},

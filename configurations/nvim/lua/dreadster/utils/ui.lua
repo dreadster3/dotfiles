@@ -52,6 +52,7 @@ M.lsp_icons = {
 	Copilot = "",
 	Codeium = "󰘦",
 	Supermaven = "",
+	LiteLLM = "󰧑",
 
 	-- source icons
 	Git = "",

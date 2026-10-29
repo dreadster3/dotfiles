@@ -50,7 +50,7 @@
       export LITELLM_API_KEY="$(<"${config.sops.secrets.litellm_api_key.path}")"
     fi
     if [[ -r "${config.sops.secrets.litellm_base_url.path}" ]]; then
-      export SYSTEMONE_ENDPOINT="$(<"${config.sops.secrets.litellm_base_url.path}")/v1/systemone"
+      export LITELLM_BASE_URL="$(<"${config.sops.secrets.litellm_base_url.path}")"
     fi
   '';
 
