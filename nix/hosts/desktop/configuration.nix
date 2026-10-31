@@ -56,6 +56,7 @@
     netbird.enable = true;
     zerotier.enable = false;
     nfs.enable = true;
+    llama-cpp.enable = true;
 
     virtualisation = {
       qemu.host.enable = true;
