@@ -147,7 +147,7 @@
       git.signing = {
         enable = true;
         format = "ssh";
-        key = "${config.home-manager.users.dreadster.home.homeDirectory}/.ssh/id_ed25519.pub";
+        key = "${config.home-manager.users.dreadster.home.homeDirectory}/.ssh/id_ed25519_sign.pub";
       };
 
       # Hyprland
