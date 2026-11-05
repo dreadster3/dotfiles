@@ -7,7 +7,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
     pi = {
-      url = "github:earendil-works/pi/v1.4.0";
+      url = "github:earendil-works/pi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
