@@ -12,3 +12,5 @@ configurations/lazygit/state.yml
 id_*
 !id_*.pub
 /configurations/lazygit/github_pull_requests.json
+configurations/herdr
+!configurations/herdr/config.toml
