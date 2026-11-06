@@ -11,7 +11,11 @@
     "access": "readwrite"
   },
   "environment": {
-    "set_vars": { "NODE_OPTIONS": "--disable-warning=ExperimentalWarning" }
+    "set_vars": {
+      "NODE_OPTIONS": "--disable-warning=ExperimentalWarning",
+      "UV_TOOL_DIR": "/tmp/sandbox/.pi/uv/tools",
+      "FASTMCP_HOME": "/tmp/sandbox/.pi/fastmcp"
+    }
   },
   "filesystem": {
     "allow": ["/tmp"],
@@ -43,6 +47,7 @@
     { "name": "litellm_oauth_api", "provider": "litellm_oauth" }
   ],
   "network": {
+    "allow_domain": ["pi.dev"],
     "credentials": ["litellm", "hindsight", "litellm-gateway"],
     "open_port": [19876],
 
