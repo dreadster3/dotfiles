@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nolabs-ai/nono/refs/heads/main/crates/nono-cli/data/nono-profile.schema.json",
+  "extends": "nolabs-ai/pi",
+  "meta": {
+    "name": "pi"
+  },
+  "groups": {
+    "include": ["go_runtime", "go_runtime_linux", "go_runtime_macos"]
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "environment": {
+    "set_vars": { "NODE_OPTIONS": "--disable-warning=ExperimentalWarning" }
+  },
+  "filesystem": {
+    "allow": ["/tmp"],
+    "read": [
+      "~/Documents/projects/github/pi-config/config",
+      "~/.hindsight",
+      "~/.plannotator"
+    ]
+  },
+  "credential_providers": {
+    "litellm_oauth": {
+      "type": "oauth_capture",
+      "token_endpoints": [
+        {
+          "host": "https://litellm.<external-domain>",
+          "path": "/token",
+          "response_fields": [
+            { "path": "access_token", "kind": "opaque" },
+            { "path": "refresh_token", "kind": "opaque" }
+          ],
+          "request_body": "form",
+          "request_nonce_fields": ["refresh_token"]
+        }
+      ],
+      "api_hosts": ["https://litellm.<external-domain>"]
+    }
+  },
+  "credential_routes": [
+    { "name": "litellm_oauth_api", "provider": "litellm_oauth" }
+  ],
+  "network": {
+    "credentials": ["litellm", "hindsight", "litellm-gateway"],
+    "open_port": [19876],
+
+    "custom_credentials": {
+      "litellm": {
+        "upstream": "https://litellm.<internal-domain>",
+        "credential_key": "litellm",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "LITELLM_API_KEY"
+      },
+      "hindsight": {
+        "upstream": "https://hindsight.<internal-domain>",
+        "credential_key": "hindsight",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "HINDSIGHT_API_TOKEN"
+      },
+      "litellm-gateway": {
+        "upstream": "https://litellm.<external-domain>",
+        "credential_key": "litellm",
+        "inject_header": "x-litellm-api-key",
+        "credential_format": "Bearer {}",
+        "env_var": "LITELLM_API_KEY",
+        "proxy": {
+          "inject_mode": "header",
+          "inject_header": "x-litellm-api-key",
+          "credential_format": "Bearer {}"
+        }
+      }
+    }
+  }
+}
