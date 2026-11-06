@@ -49,11 +49,17 @@ in
       };
     };
 
+    programs.zsh.shellAliases = {
+      spi = "nono run --allow-cwd --profile pi -s -- pi $@";
+    };
+
     home.packages = with pkgs; [
       # Sandboxing
       ripgrep
       socat
       bubblewrap
+      libsecret
+      llm-agents.nono
 
       # Coding Agents
       pi
