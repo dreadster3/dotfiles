@@ -26,17 +26,18 @@ return {
 		opts = {
 			disable_inline_completion = true,
 		},
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		optional = true,
-		dependencies = { "supermaven" },
-		opts = function(_, opts)
-			table.insert(opts.sources, 1, {
-				name = "supermaven",
-				priority = 1100,
-				group_index = 1,
-			})
-		end,
+		specs = {
+			{
+				"hrsh7th/nvim-cmp",
+				optional = true,
+				opts = function(_, opts)
+					table.insert(opts.sources, 1, {
+						name = "supermaven",
+						priority = 1100,
+						group_index = 1,
+					})
+				end,
+			},
+		},
 	},
 }

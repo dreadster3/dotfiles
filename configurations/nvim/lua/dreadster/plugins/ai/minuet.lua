@@ -53,62 +53,62 @@ return {
 				},
 			},
 		},
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		name = "cmp",
-		optional = true,
-		dependencies = { "minuet" },
-		opts = function(_, opts)
-			-- minuet only self-triggers on ` @.([: by design; add alphanumerics
-			-- so any typed char triggers it (cmp checks this per-source override first)
-			local chars = { " ", "@", ".", "(", "[", ":" }
-			for c = string.byte("a"), string.byte("z") do
-				chars[#chars + 1] = string.char(c)
-			end
-			for c = string.byte("A"), string.byte("Z") do
-				chars[#chars + 1] = string.char(c)
-			end
-			for c = string.byte("0"), string.byte("9") do
-				chars[#chars + 1] = string.char(c)
-			end
+		specs = {
+			{
+				"hrsh7th/nvim-cmp",
+				name = "cmp",
+				optional = true,
+				opts = function(_, opts)
+					-- minuet only self-triggers on ` @.([: by design; add alphanumerics
+					-- so any typed char triggers it (cmp checks this per-source override first)
+					local chars = { " ", "@", ".", "(", "[", ":" }
+					for c = string.byte("a"), string.byte("z") do
+						chars[#chars + 1] = string.char(c)
+					end
+					for c = string.byte("A"), string.byte("Z") do
+						chars[#chars + 1] = string.char(c)
+					end
+					for c = string.byte("0"), string.byte("9") do
+						chars[#chars + 1] = string.char(c)
+					end
 
-			-- appended last, NOT first: cmp's render loop bails while the first
-			-- source is still fetching, so a first-position minuet would hold the
-			-- menu closed until the LLM responds; minuet_first keeps entries on top
-			table.insert(opts.sources, {
-				name = "minuet",
-				priority = 1100,
-				group_index = 1,
-				trigger_characters = chars,
-			})
+					-- appended last, NOT first: cmp's render loop bails while the first
+					-- source is still fetching, so a first-position minuet would hold the
+					-- menu closed until the LLM responds; minuet_first keeps entries on top
+					table.insert(opts.sources, {
+						name = "minuet",
+						priority = 1100,
+						group_index = 1,
+						trigger_characters = chars,
+					})
 
-			opts.performance = vim.tbl_deep_extend("force", opts.performance or {}, {
-				-- low: menu renders immediately from fast sources; minuet's streamed
-				-- entries splice in as chunks arrive (stream=true), no need to wait
-				fetching_timeout = 150,
-			})
-		end,
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		name = "lualine",
-		optional = true,
-		dependencies = { "minuet" },
-		opts = function(_, opts)
-			opts = vim.tbl_deep_extend("force", opts or {}, {
-				sections = {
-					lualine_x = {
-						{
-							require("minuet.lualine"),
+					opts.performance = vim.tbl_deep_extend("force", opts.performance or {}, {
+						-- low: menu renders immediately from fast sources; minuet's streamed
+						-- entries splice in as chunks arrive (stream=true), no need to wait
+						fetching_timeout = 150,
+					})
+				end,
+			},
+			{
+				"nvim-lualine/lualine.nvim",
+				name = "lualine",
+				optional = true,
+				opts = function(_, opts)
+					opts = vim.tbl_deep_extend("force", opts or {}, {
+						sections = {
+							lualine_x = {
+								{
+									require("minuet.lualine"),
+								},
+								"encoding",
+								"fileformat",
+								"filetype",
+							},
 						},
-						"encoding",
-						"fileformat",
-						"filetype",
-					},
-				},
-			})
-			return opts
-		end,
+					})
+					return opts
+				end,
+			},
+		},
 	},
 }

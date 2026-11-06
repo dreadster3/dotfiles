@@ -13,17 +13,19 @@ return {
 				enabled = false,
 			},
 		},
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		optional = true,
-		dependencies = { "codeium" },
-		opts = function(_, opts)
-			table.insert(opts.sources, 1, {
-				name = "codeium",
-				priority = 1100,
-				group_index = 1,
-			})
-		end,
+		specs = {
+			{
+				"hrsh7th/nvim-cmp",
+				optional = true,
+				dependencies = { "codeium" },
+				opts = function(_, opts)
+					table.insert(opts.sources, 1, {
+						name = "codeium",
+						priority = 1100,
+						group_index = 1,
+					})
+				end,
+			},
+		},
 	},
 }
