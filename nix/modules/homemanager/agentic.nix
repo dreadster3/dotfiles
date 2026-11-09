@@ -50,7 +50,7 @@ in
     };
 
     programs.zsh.shellAliases = {
-      spi = "nono run --allow-cwd --profile pi -s -- pi $@";
+      spi = ''env HERDR_AGENT=pi sh -c "nono run --allow-cwd --profile pi -s -- \"\$@\"; exit \$?" sh "pi"'';
     };
 
     home.packages = with pkgs; [
