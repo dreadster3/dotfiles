@@ -7,6 +7,23 @@
 with lib;
 let
   cfg = config.modules.homemanager.agentic;
+
+  spi = pkgs.writeShellScriptBin "spi" ''
+    # Split args: spi <pi args...> -- <extra nono run flags...>
+    sep=0
+    pi_args=()
+    extra=()
+    for a in "$@"; do
+      if [ "$sep" = 1 ]; then
+        extra+=("$a")
+      elif [ "$a" = "--" ]; then
+        sep=1
+      else
+        pi_args+=("$a")
+      fi
+    done
+    exec env HERDR_AGENT=pi nono run --allow-cwd --profile pi "''${extra[@]}" -s -- pi "''${pi_args[@]}"
+  '';
 in
 {
   options = {
@@ -49,12 +66,9 @@ in
       };
     };
 
-    programs.zsh.shellAliases = {
-      spi = ''env HERDR_AGENT=pi sh -c "nono run --allow-cwd --profile pi -s -- \"\$@\"; exit \$?" sh "pi"'';
-    };
-
     home.packages = with pkgs; [
       # Sandboxing
+      spi
       ripgrep
       socat
       bubblewrap
