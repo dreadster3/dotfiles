@@ -22,7 +22,15 @@ let
         pi_args+=("$a")
       fi
     done
-    exec env HERDR_AGENT=pi nono run --allow-cwd --profile pi "''${extra[@]}" -s -- pi "''${pi_args[@]}"
+    # Shell-quote the extra nono flags so they survive being embedded in the sh -c string.
+    extra_quoted=""
+    for f in "''${extra[@]}"; do
+      extra_quoted+=" $(printf '%q' "$f")"
+    done
+
+    # Keep the `sh -c "...; exit $?" sh pi` wrapper: HERDR reads this cmdline to detect pi.
+    cmd="nono run --allow-cwd --profile pi''${extra_quoted} -s -- \"\$@\"; exit \$?"
+    exec env HERDR_AGENT=pi sh -c "$cmd" sh pi "''${pi_args[@]}"
   '';
 in
 {
