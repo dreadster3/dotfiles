@@ -105,6 +105,11 @@
         "path": "$SSH_AUTH_SOCK",
         "mode": "connect",
         "env_var": "SSH_AUTH_SOCK"
+      },
+      "docker": {
+        "type": "local-socket",
+        "path": "/run/docker.sock",
+        "mode": "connect"
       }
     },
     "approval_backends": {
@@ -118,6 +123,45 @@
       "timeout_secs": 600
     },
     "commands": {
+      "docker": {
+        "from": {
+          "session": {
+            "sandbox": {
+              "use_credentials": ["docker"],
+              "network": { "allow_all": true },
+              "fs_read": [
+                ".",
+                "$HOME/.docker",
+                "/nix/store",
+                "$HOME/.local/state/nono"
+              ],
+              "fs_read_file": ["$HOME/.docker/config.json"],
+              "fs_write": [".", "$HOME/.docker/buildx"],
+              "exec_paths": ["/nix/store"],
+              "environment": {
+                "set_vars": { "DOCKER_HOST": "unix:///run/docker.sock" }
+              }
+            },
+            "invocation_policy": {
+              "default": "deny",
+              "allow": [
+                {
+                  "argv": { "prefix": ["build"] },
+                  "reason": "docker build is allowed for development"
+                },
+                {
+                  "argv": { "prefix": ["container", "ls"] },
+                  "reason": "docker container ls is allowed for development"
+                },
+                {
+                  "argv": { "prefix": ["info"] },
+                  "reason": "docker info is allowed"
+                }
+              ]
+            }
+          }
+        }
+      },
       "git": {
         "can_use": ["ssh"],
         "from": {
