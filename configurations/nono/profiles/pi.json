@@ -12,17 +12,20 @@
   },
   "environment": {
     "set_vars": {
-      "NODE_OPTIONS": "--disable-warning=ExperimentalWarning",
+      "NODE_USE_ENV_PROXY": "1",
+      "NODE_OPTIONS": "--disable-warning=ExperimentalWarning --disable-warning=Warning",
       "UV_TOOL_DIR": "/tmp/sandbox/.pi/uv/tools",
-      "FASTMCP_HOME": "/tmp/sandbox/.pi/fastmcp"
+      "FASTMCP_HOME": "/tmp/sandbox/.pi/fastmcp",
+      "KUBECONFIG": "$HOME/.kube/ai/debugger.yaml"
     }
   },
   "filesystem": {
-    "allow": ["/tmp"],
+    "allow": ["/tmp", "$HOME/.pi/agent/settings.json"],
     "read": [
-      "~/Documents/projects/github/pi-config/config",
-      "~/.hindsight",
-      "~/.plannotator"
+      "$HOME/Documents/projects/github/pi-config/config",
+      "$HOME/.hindsight",
+      "$HOME/.plannotator",
+      "$HOME/.kube/ai"
     ]
   },
   "credential_providers": {
@@ -46,9 +49,19 @@
   "credential_routes": [
     { "name": "litellm_oauth_api", "provider": "litellm_oauth" }
   ],
+  "linux": {
+    "sandbox_policy": "external"
+  },
   "network": {
-    "allow_domain": ["pi.dev"],
+    "allow_domain": [
+      "pi.dev",
+      "github.com",
+      "api.github.com",
+      "raw.githubusercontent.com",
+      "registry.npmjs.org"
+    ],
     "credentials": ["litellm", "hindsight", "litellm-gateway"],
+    "open_port_range": [[8377, 8396]],
     "open_port": [19876],
 
     "custom_credentials": {
@@ -64,7 +77,12 @@
         "credential_key": "hindsight",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}",
-        "env_var": "HINDSIGHT_API_TOKEN"
+        "env_var": "HINDSIGHT_API_TOKEN",
+        "proxy": {
+          "inject_mode": "header",
+          "inject_header": "Authorization",
+          "credential_format": "Bearer {}"
+        }
       },
       "litellm-gateway": {
         "upstream": "https://litellm.<external-domain>",
@@ -76,6 +94,80 @@
           "inject_mode": "header",
           "inject_header": "x-litellm-api-key",
           "credential_format": "Bearer {}"
+        }
+      }
+    }
+  },
+  "command_policies": {
+    "credentials": {
+      "ssh-agent": {
+        "type": "local-socket",
+        "path": "$SSH_AUTH_SOCK",
+        "mode": "connect",
+        "env_var": "SSH_AUTH_SOCK"
+      }
+    },
+    "approval_backends": {
+      "terminal": {
+        "type": "terminal",
+        "timeout_secs": 600
+      }
+    },
+    "approval_defaults": {
+      "backend": "terminal",
+      "timeout_secs": 600
+    },
+    "commands": {
+      "git": {
+        "can_use": ["ssh"],
+        "from": {
+          "session": {
+            "sandbox": {
+              "use_credentials": ["ssh-agent"],
+              "fs_read": ["."],
+              "fs_read_file": [
+                "$HOME/.config/git/config",
+                "$HOME/.config/git/ignore",
+                "$HOME/.config/git/attributes"
+              ],
+              "fs_write": [".", "$HOME/.pi/agent/worktrees"],
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "SSH_AUTH_SOCK"
+                ]
+              }
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": { "contains": ["--force"] },
+                  "reason": "force actions are not allowed"
+                },
+                {
+                  "argv": { "contains": ["-f"] },
+                  "reason": "force actions are not allowed"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ssh": {
+        "from": {
+          "git": {
+            "use_credentials": ["ssh-agent"],
+            "fs_read_file": ["$HOME/.ssh/known_hosts", "$HOME/.ssh/config"],
+            "fs_write_file": ["$HOME/.ssh/known_hosts"],
+            "network": { "allow_all": true },
+            "argv_prepend": ["-o", "ControlMaster=no", "-o", "ControlPath=none"]
+          }
         }
       }
     }
