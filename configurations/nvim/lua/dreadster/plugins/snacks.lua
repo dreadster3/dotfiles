@@ -1,3 +1,6 @@
+-- lazygit writes its cwd here on worktree/repo switches and on quit
+local lazygit_new_dir = vim.fn.tempname()
+
 return {
 	{
 		"folke/snacks.nvim",
@@ -24,7 +27,34 @@ return {
             { "<leader>fD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
 
             -- Lazygit
-            { "<leader>gg",  function() Snacks.lazygit() end, desc = "Lazygit" },
+            {
+            	"<leader>gg",
+            	function()
+            		Snacks.lazygit({
+            			env = { LAZYGIT_NEW_DIR_FILE = lazygit_new_dir },
+            			win = {
+            				-- follow worktree switches when the lazygit window closes
+            				on_close = function(term)
+            					local f = io.open(lazygit_new_dir, "r")
+            					if not f then return end
+            					local dir = f:read("*l")
+            					f:close()
+            					os.remove(lazygit_new_dir)
+            					if not dir or dir == vim.fn.getcwd() or vim.fn.isdirectory(dir) ~= 1 then return end
+            					vim.schedule(function()
+            						vim.cmd.cd(vim.fn.fnameescape(dir))
+            						Snacks.notify.info("cwd: " .. vim.fn.fnamemodify(dir, ":~"), { title = "lazygit" })
+            						-- kill a hidden instance still sitting in the old worktree
+            						if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
+            							vim.api.nvim_buf_delete(term.buf, { force = true })
+            						end
+            					end)
+            				end,
+            			},
+            		})
+            	end,
+            	desc = "Lazygit",
+            },
 
             -- Git
             { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
