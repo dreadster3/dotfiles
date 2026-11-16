@@ -1,0 +1,366 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nolabs-ai/nono/refs/heads/main/crates/nono-cli/data/nono-profile.schema.json",
+  "extends": ["nolabs-ai/pi"],
+  "meta": {
+    "name": "pi"
+  },
+  "groups": {
+    "include": ["go_runtime", "go_runtime_linux", "go_runtime_macos"]
+  },
+  "filesystem": {
+    "allow": ["/tmp", "$HOME/go/pkg"],
+    "read": [
+      "$HOME/Documents/projects/github/pi-config/config",
+      "$HOME/.plannotator",
+      "$HOME/.config/tfenv",
+      "$HOME/.terraformrc"
+    ]
+  },
+  "network": {
+    "network_profile": "enterprise",
+    "allow_domain": [
+      "pi.dev",
+      "github.com",
+      "api.github.com",
+      "raw.githubusercontent.com",
+      "registry.npmjs.org",
+      "sum.golang.org",
+      "proxy.golang.org"
+    ],
+    "credentials": ["litellm", "copilot", "jira", "confluence"],
+    "open_port": [19876],
+    "open_port_range": [[8377, 8380]],
+    "custom_credentials": {
+      "jira": {
+        "upstream": "https://jira.<enterprise-domain>",
+        "credential_key": "jira",
+        "inject_mode": "header",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "JIRA_TOKEN"
+      },
+      "copilot": {
+        "upstream": "https://api.githubcopilot.com",
+        "credential_key": "cmd://github_cli",
+        "inject_mode": "header",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "COPILOT_TOKEN",
+        "endpoint_rules": [
+          {
+            "method": "*",
+            "path": "/mcp/**"
+          },
+          {
+            "method": "*",
+            "path": "/mcp"
+          }
+        ]
+      },
+      "confluence": {
+        "upstream": "https://confluence.<enterprise-domain>",
+        "credential_key": "confluence",
+        "inject_mode": "header",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "CONFLUENCE_TOKEN"
+      },
+      "litellm": {
+        "upstream": "https://litellm.<extenal-domain>",
+        "credential_key": "litellm",
+        "inject_mode": "header",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "LITELLM_API_KEY"
+      }
+    },
+    "upstream_proxy": "127.0.0.1:9000",
+    "upstream_bypass": [
+      "jira.<enterprise-domain>",
+      "confluence.<enterprise-domain>"
+    ]
+  },
+  "environment": {
+    "set_vars": {
+      "NODE_OPTIONS": "--disable-warning=ExperimentalWarning",
+      "NODE_USE_ENV_PROXY": "1",
+      "FASTMCP_HOME": "/tmp/sandbox/.pi/fastmcp",
+      "UV_TOOL_DIR": "/tmp/sandbox/.pi/uv/tools"
+    }
+  },
+  "credential_capture": {
+    "github_cli": {
+      "command": ["gh", "auth", "token"],
+      "timeout_secs": 5,
+      "cache_ttl_secs": 600,
+      "output": "text"
+    }
+  },
+  "credential_providers": {
+    "pi_copilot": {
+      "type": "oauth_capture",
+      "token_endpoints": [
+        {
+          "host": "https://github.com",
+          "path": "/login/oauth/access_token",
+          "response_fields": [
+            {
+              "path": "access_token",
+              "kind": "opaque"
+            },
+            {
+              "path": "refresh_token",
+              "kind": "opaque"
+            }
+          ],
+          "request_body": "form"
+        },
+        {
+          "host": "https://api.github.com",
+          "path": "/copilot_internal/v2/token",
+          "response_fields": [
+            {
+              "path": "token",
+              "kind": "opaque",
+              "format": "proxy-ep=proxy.enterprise.githubcopilot.com;{}"
+            }
+          ],
+          "request_body": "auto"
+        }
+      ],
+      "api_hosts": [
+        "https://github.com",
+        "https://api.github.com",
+        "https://api.individual.githubcopilot.com",
+        "https://api.business.githubcopilot.com",
+        "https://api.enterprise.githubcopilot.com"
+      ],
+      "credential_store": {
+        "type": "file_json",
+        "path": "$HOME/.pi/agent/auth.json",
+        "phantom_fields": ["github-copilot.access", "github-copilot.refresh"]
+      }
+    }
+  },
+  "credential_routes": [
+    {
+      "name": "pi_copilot_oauth",
+      "provider": "pi_copilot"
+    }
+  ],
+  "workdir": {
+    "access": "readwrite"
+  },
+  "unsafe_macos_seatbelt_rules": ["(allow ipc-sysv-sem)"],
+  "command_policies": {
+    "credentials": {
+      "docker": {
+        "type": "local-socket",
+        "path": "/var/run/docker.sock",
+        "mode": "connect"
+      }
+    },
+    "commands": {
+      "git": {
+        "can_use": ["git-credential-manager"],
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "@git:common-dir",
+                "@git:hooks-path",
+                "/opt/homebrew/opt/git/libexec/git-core",
+                "/opt/homebrew/opt/pcre2/lib",
+                "/opt/homebrew/opt/gettext/lib"
+              ],
+              "fs_read_file": ["@git:config-files", "/bin/sh", "/bin/bash"],
+              "fs_write": ["."],
+              "network": {
+                "allow_domain": ["github.com", "api.github.com"]
+              },
+              "environment": {
+                "set_vars": {
+                  "GIT_TERMINAL_PROMPT": "0",
+                  "GIT_PAGER": ""
+                }
+              },
+              "argv_prepend": [
+                "--config-env=http.proxy=HTTPS_PROXY",
+                "--config-env=https.proxy=HTTPS_PROXY",
+                "-c",
+                "credential.helper=",
+                "-c",
+                "credential.https://github.com.helper=!git-credential-manager",
+                "-c",
+                "http.proxyAuthMethod=basic"
+              ],
+              "keychain_access": "read",
+              "unsafe_macos_seatbelt_rules": [
+                "(allow process-exec* (regex #\"^/opt/homebrew/Cellar/git/[^/]+/libexec/git-core/git-remote-http$\"))",
+                "(allow process-exec* (literal \"/bin/sh\"))",
+                "(allow process-exec* (literal \"/bin/bash\"))",
+                "(allow process-exec* (literal \"/private/var/select/sh\"))"
+              ]
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "contains": ["-f"]
+                  },
+                  "reason": "force flag is not allowed for git commands"
+                },
+                {
+                  "argv": {
+                    "contains": ["--force"]
+                  },
+                  "reason": "force flag is not allowed for git commands"
+                }
+              ]
+            }
+          },
+          "git-credential-manager": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "/opt/homebrew/opt/git/libexec/git-core",
+                "/opt/homebrew/opt/pcre2/lib",
+                "/opt/homebrew/opt/gettext/lib"
+              ],
+              "fs_read_file": ["@git:config-files"],
+              "argv_prepend": ["-c", "http.proxy="]
+            },
+            "invocation_policy": {
+              "default": "deny",
+              "allow": [
+                {
+                  "argv": {
+                    "prefix": ["config"]
+                  }
+                },
+                {
+                  "argv": {
+                    "exact": ["version"]
+                  }
+                },
+                {
+                  "argv": {
+                    "exact": ["--version"]
+                  }
+                },
+                {
+                  "argv": {
+                    "exact": ["rev-parse", "--absolute-git-dir"]
+                  }
+                },
+                {
+                  "argv": {
+                    "exact": ["remote", "-v", "show"]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "git-credential-manager": {
+        "can_use": ["git"],
+        "from": {
+          "session": "deny",
+          "git": {
+            "sandbox": {
+              "fs_read": [".", "/usr/local/share/gcm-core", "@git:common-dir"],
+              "fs_write": ["/tmp"],
+              "fs_read_file": ["@git:config-files"],
+              "network": {
+                "allow_domain": ["github.com", "api.github.com"]
+              },
+              "environment": {
+                "set_vars": {
+                  "GCM_INTERACTIVE": "false",
+                  "GCM_CREDENTIAL_STORE": "keychain"
+                }
+              },
+              "keychain_access": "readwrite"
+            },
+            "invocation_policy": {
+              "default": "deny",
+              "allow": [
+                {
+                  "argv": {
+                    "exact": ["get"]
+                  },
+                  "reason": "git-credential-manager get is allowed for git credential management"
+                },
+                {
+                  "argv": {
+                    "exact": ["store"]
+                  },
+                  "reason": "git-credential-manager store is allowed for git credential management"
+                },
+                {
+                  "argv": {
+                    "exact": ["erase"]
+                  },
+                  "reason": "git-credential-manager erase is allowed for git credential management"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "docker": {
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "$HOME/.docker",
+                "$HOME/.local/state/nono",
+                "$HOME/Library/Containers/com.docker.docker"
+              ],
+              "fs_write": [".", "$HOME/.docker/buildx"],
+              "fs_read_file": [
+                "/Applications/Docker.app/Contents/Library/SecretsEngine/docker-pass.app/Contents/MacOS/docker-pass"
+              ],
+              "use_credentials": ["docker"],
+              "network": {
+                "allow_all": true
+              },
+              "unsafe_macos_seatbelt_rules": [
+                "(allow process-exec* (subpath \"/Applications/Docker.app/Contents/Resources/cli-plugins\"))",
+                "(allow process-exec* (literal \"/Applications/Docker.app/Contents/Library/SecretsEngine/docker-pass.app/Contents/MacOS/docker-pass\"))",
+                "(allow process-exec* (regex #\"^/Users/[^/]+/[.]docker/modules/cli-plugins/docker-dhi$\"))"
+              ]
+            },
+            "invocation_policy": {
+              "default": "deny",
+              "allow": [
+                {
+                  "argv": {
+                    "prefix": ["build"]
+                  },
+                  "reason": "docker build is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["container", "ls"]
+                  },
+                  "reason": "docker container ls is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["info"]
+                  },
+                  "reason": "docker info is allowed"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
