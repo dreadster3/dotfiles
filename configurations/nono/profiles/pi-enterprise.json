@@ -168,6 +168,7 @@
             "sandbox": {
               "fs_read": [
                 ".",
+                "@git:worktree",
                 "@git:common-dir",
                 "@git:hooks-path",
                 "/opt/homebrew/opt/git/libexec/git-core",
@@ -175,7 +176,7 @@
                 "/opt/homebrew/opt/gettext/lib"
               ],
               "fs_read_file": ["@git:config-files", "/bin/sh", "/bin/bash"],
-              "fs_write": ["."],
+              "fs_write": [".", "@git:worktree"],
               "network": {
                 "allow_domain": ["github.com", "api.github.com"]
               },
@@ -225,6 +226,7 @@
             "sandbox": {
               "fs_read": [
                 ".",
+                "@git:common-dir",
                 "/opt/homebrew/opt/git/libexec/git-core",
                 "/opt/homebrew/opt/pcre2/lib",
                 "/opt/homebrew/opt/gettext/lib"
