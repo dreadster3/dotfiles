@@ -360,6 +360,114 @@
             }
           }
         }
+      },
+      "terraform": {
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "$WORKDIR",
+                "$HOME/go/bin",
+                "$HOME/.config/tfenv",
+                "$HOME/.terraform.d",
+                "/opt/homebrew/opt/tfenv",
+                "/opt/homebrew/opt/bash",
+                "/opt/homebrew/opt/readline/lib",
+                "/opt/homebrew/opt/ncurses/lib",
+                "/opt/homebrew/opt/gettext/lib",
+                "/opt/homebrew/opt/grep",
+                "/opt/homebrew/opt/pcre2/lib"
+              ],
+              "fs_read_file": [
+                "$HOME/.terraformrc",
+                "/bin/bash",
+                "/bin/cat",
+                "/usr/bin/env",
+                "/usr/bin/readlink",
+                "/usr/bin/dirname",
+                "/usr/bin/basename",
+                "/usr/bin/sed",
+                "/usr/bin/tr",
+                "/usr/bin/find",
+                "/usr/bin/tail",
+                "/usr/bin/sort",
+                "/usr/bin/grep",
+                "/usr/bin/head",
+                "/usr/bin/xargs",
+                "/usr/bin/uname"
+              ],
+              "fs_write": [".", "/tmp"],
+              "network": {
+                "allow_all": true
+              },
+              "environment": {
+                "set_vars": {
+                  "TFENV_AUTO_INSTALL": "false"
+                },
+                "allow_vars": [
+                  "HOME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TF_*",
+                  "AZURE_*"
+                ]
+              },
+              "unsafe_macos_seatbelt_rules": [
+                "(allow process-exec* (regex \"^/Users/[^/]+/go/bin/terraform-provider-[^/]+$\"))",
+                "(allow process-exec* (subpath \"/opt/homebrew/Cellar/tfenv\"))",
+                "(allow process-exec* (regex #\"^/opt/homebrew/Cellar/bash/[^/]+/bin/bash$\"))",
+                "(allow process-exec* (regex #\"^/opt/homebrew/Cellar/grep/[^/]+/bin/ggrep$\"))",
+                "(allow process-exec* (regex #\"^/Users/[^/]+/[.]config/tfenv/versions/[^/]+/terraform$\"))",
+                "(allow process-exec* (regex #\"^/usr/bin/(env|readlink|dirname|basename|sed|tr|find|tail|sort|grep|head|xargs|uname)$\"))",
+                "(allow process-exec* (regex #\"^/bin/(bash|cat)$\"))",
+                "(allow process-exec* (regex #\"^/private/var/folders/80/tjp630xn2psd2_bmkmtpq1qw0000gn/T/tfws[0-9]+/plugins/registry[.]terraform[.]io/hashicorp/cima/[^/]+/darwin_arm64/terraform-provider-[^/]+$\"))"
+              ]
+            },
+            "invocation_policy": {
+              "default": "deny",
+              "allow": [
+                {
+                  "argv": {
+                    "prefix": ["plan"]
+                  },
+                  "reason": "terroform plan is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["validate"]
+                  },
+                  "reason": "terraform validate is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["fmt"]
+                  },
+                  "reason": "terraform fmt is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["init"]
+                  },
+                  "reason": "terraform init is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["version"]
+                  },
+                  "reason": "terraform init is allowed for development"
+                },
+                {
+                  "argv": {
+                    "prefix": ["providers"]
+                  },
+                  "reason": "terraform providers is allowed for development"
+                }
+              ]
+            }
+          }
+        }
       }
     }
   }
