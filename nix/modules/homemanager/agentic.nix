@@ -32,6 +32,15 @@ let
     cmd="nono run --allow-cwd --profile pi''${extra_quoted} -s -- \"\$@\"; exit \$?"
     exec env HERDR_AGENT=pi sh -c "$cmd" sh pi "''${pi_args[@]}"
   '';
+
+  playwright-driver = pkgs.playwright-driver;
+  playwright-browsers = playwright-driver.browsers;
+  browsersJSON =
+    (builtins.fromJSON (builtins.readFile "${playwright-driver}/browsers.json")).browsers;
+  chromium-rev = (builtins.head (builtins.filter (x: x.name == "chromium") browsersJSON)).revision;
+  chromium-headless-rev =
+    (builtins.head (builtins.filter (x: x.name == "chromium-headless-shell") browsersJSON)).revision;
+  firefox-rev = (builtins.head (builtins.filter (x: x.name == "firefox") browsersJSON)).revision;
 in
 {
   options = {
@@ -74,6 +83,18 @@ in
       };
     };
 
+    home.sessionVariables = {
+      PLAYWRIGHT_BROWSERS_PATH = "${playwright-browsers}";
+      PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
+      PLAYWRIGHT_HOST_PLATFORM_OVERRIDE = "ubuntu-24.04";
+    };
+
+    home.sessionPath = [
+      "${pkgs.playwright-driver.browsers}/chromium-${chromium-rev}/chrome-linux64"
+      "${pkgs.playwright-driver.browsers}/firefox-${firefox-rev}/firefox"
+      "${pkgs.playwright-driver.browsers}/chromium_headless_shell-${chromium-headless-rev}/chrome-headless-shell-linux64"
+    ];
+
     home.packages = with pkgs; [
       # Sandboxing
       spi
@@ -93,7 +114,10 @@ in
       # agent-browser
       llm-agents.rtk
       llm-agents.codegraph
-      pkgs.stable.playwright-mcp
+
+      playwright-browsers
+      playwright-test
+      playwright-mcp
 
       # Fetch open source code
       pkgs.opensrc
