@@ -122,5 +122,22 @@ in
       # Fetch open source code
       pkgs.opensrc
     ];
+
+    systemd.user.services.playwright-mcp = {
+      Unit = {
+        Description = "Playwright Multi-Client Proxy";
+        After = [ "network.target" ];
+      };
+
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.playwright-mcp} --isolated --port 8931";
+        Restart = "always";
+        RestartSec = 5;
+      };
+    };
   };
 }
