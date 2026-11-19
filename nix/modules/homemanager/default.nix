@@ -67,6 +67,7 @@
     ./fastfetch.nix
     ./ashell.nix
     ./agentic.nix
+    ./playwright.nix
     ./ghostty.nix
     ./pi-web.nix
     ./languages
