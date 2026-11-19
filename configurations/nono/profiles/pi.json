@@ -49,6 +49,14 @@
   "credential_routes": [
     { "name": "litellm_oauth_api", "provider": "litellm_oauth" }
   ],
+  "credential_capture": {
+    "github_cli": {
+      "command": ["gh", "auth", "token"],
+      "timeout_secs": 5,
+      "cache_ttl_secs": 600,
+      "output": "text"
+    }
+  },
   "linux": {
     "sandbox_policy": "external"
   },
@@ -112,6 +120,14 @@
         "type": "local-socket",
         "path": "/run/docker.sock",
         "mode": "connect"
+      },
+      "github-cli": {
+        "type": "proxy",
+        "upstream": "https://api.github.com",
+        "credential_key": "cmd://github_cli",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
       }
     },
     "approval_backends": {
@@ -135,14 +151,11 @@
                 ".",
                 "$HOME/.docker",
                 "/nix/store",
-                "$HOME/.local/state/nono"
+                "$XDG_STATE_HOME/nono"
               ],
               "fs_read_file": ["$HOME/.docker/config.json"],
               "fs_write": [".", "$HOME/.docker/buildx"],
-              "exec_paths": ["/nix/store"],
-              "environment": {
-                "set_vars": { "DOCKER_HOST": "unix:///run/docker.sock" }
-              }
+              "exec_paths": ["/nix/store"]
             },
             "invocation_policy": {
               "default": "deny",
@@ -202,17 +215,90 @@
                 }
               ]
             }
+          },
+          "gh": {
+            "sandbox": {
+              "fs_read": [".", "@git:common-dir"],
+              "fs_read_file": ["@git:config-files"]
+            }
           }
         }
       },
       "ssh": {
         "from": {
+          "sandbox": "deny",
           "git": {
             "use_credentials": ["ssh-agent"],
             "fs_read_file": ["$HOME/.ssh/known_hosts", "$HOME/.ssh/config"],
             "fs_write_file": ["$HOME/.ssh/known_hosts"],
             "network": { "allow_all": true },
             "argv_prepend": ["-o", "ControlMaster=no", "-o", "ControlPath=none"]
+          }
+        }
+      },
+      "gh": {
+        "can_use": ["git"],
+        "from": {
+          "session": {
+            "sandbox": {
+              "credentials": [
+                {
+                  "name": "github-cli",
+                  "endpoint_policy": {
+                    "default": "allow"
+                  }
+                }
+              ],
+              "fs_read": [".", "$HOME/.config/gh", "/nix/store"],
+              "fs_read_file": [],
+              "fs_write": ["$XDG_CACHE_HOME/gh"],
+              "exec_paths": ["/nix/store"],
+              "network": {
+                "allow_domain": ["github.com", "api.github.com"]
+              },
+              "environment": {}
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "prefix": ["auth"]
+                  },
+                  "reason": "gh auth is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["ssh-key"]
+                  },
+                  "reason": "gh ssh-key is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["gpg-key"]
+                  },
+                  "reason": "gh gpg-key is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["extension"]
+                  },
+                  "reason": "gh extension is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["alias"]
+                  },
+                  "reason": "gh extension is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "contains": ["delete"]
+                  },
+                  "reason": "gh delete operations is not allowed for security reasons"
+                }
+              ]
+            }
           }
         }
       }

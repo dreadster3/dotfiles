@@ -8,13 +8,12 @@
     "include": ["go_runtime", "go_runtime_linux", "go_runtime_macos"]
   },
   "filesystem": {
-    "allow": ["/tmp", "$HOME/go/pkg"],
+    "allow": ["/tmp", "$TMPDIR", "$HOME/go/pkg"],
     "read": [
       "$HOME/Documents/projects/github/pi-config/config",
-      "$HOME/.plannotator",
-      "$HOME/.config/tfenv",
-      "$HOME/.terraformrc"
-    ]
+      "$HOME/.plannotator"
+    ],
+    "unix_socket_bind": ["$HOME/.pi/agent/intercom/broker.sock"]
   },
   "network": {
     "network_profile": "enterprise",
@@ -25,7 +24,12 @@
       "raw.githubusercontent.com",
       "registry.npmjs.org",
       "sum.golang.org",
-      "proxy.golang.org"
+      "proxy.golang.org",
+      "vuln.go.dev",
+      "127.0.0.1",
+      "localhost",
+      "api.exa.ai",
+      "mcp.exa.ai"
     ],
     "credentials": ["litellm", "copilot", "jira", "confluence"],
     "open_port": [19876],
@@ -158,6 +162,14 @@
         "type": "local-socket",
         "path": "/var/run/docker.sock",
         "mode": "connect"
+      },
+      "github-cli": {
+        "type": "proxy",
+        "upstream": "https://api.github.com",
+        "credential_key": "cmd://github_cli",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
       }
     },
     "commands": {
@@ -168,6 +180,7 @@
             "sandbox": {
               "fs_read": [
                 ".",
+                "$HOME/.config/git",
                 "@git:worktree",
                 "@git:common-dir",
                 "@git:hooks-path",
@@ -264,6 +277,18 @@
                 }
               ]
             }
+          },
+          "gh": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "@git:common-dir",
+                "/opt/homebrew/opt/git/libexec/git-core",
+                "/opt/homebrew/opt/pcre2/lib",
+                "/opt/homebrew/opt/gettext/lib"
+              ],
+              "fs_read_file": ["@git:config-files"]
+            }
           }
         }
       },
@@ -319,6 +344,7 @@
             "sandbox": {
               "fs_read": [
                 ".",
+                "$WORKDIR",
                 "$HOME/.docker",
                 "$HOME/.local/state/nono",
                 "$HOME/Library/Containers/com.docker.docker"
@@ -465,6 +491,71 @@
                     "prefix": ["providers"]
                   },
                   "reason": "terraform providers is allowed for development"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "gh": {
+        "can_use": ["git"],
+        "from": {
+          "session": {
+            "sandbox": {
+              "credentials": [
+                {
+                  "name": "github-cli",
+                  "endpoint_policy": {
+                    "default": "allow"
+                  }
+                }
+              ],
+              "fs_read": [".", "$HOME/.config/gh"],
+              "fs_read_file": [],
+              "fs_write": [],
+              "network": {
+                "allow_domain": ["github.com", "api.github.com"]
+              },
+              "environment": {}
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "prefix": ["auth"]
+                  },
+                  "reason": "gh auth is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["ssh-key"]
+                  },
+                  "reason": "gh ssh-key is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["gpg-key"]
+                  },
+                  "reason": "gh gpg-key is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["extension"]
+                  },
+                  "reason": "gh extension is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "prefix": ["alias"]
+                  },
+                  "reason": "gh extension is not allowed for security reasons"
+                },
+                {
+                  "argv": {
+                    "contains": ["delete"]
+                  },
+                  "reason": "gh delete operations is not allowed for security reasons"
                 }
               ]
             }
