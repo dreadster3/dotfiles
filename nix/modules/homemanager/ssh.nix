@@ -33,6 +33,13 @@ in
           ControlPath = "~/.ssh/master-%r@%n:%p";
           ControlPersist = "no";
         };
+        "github.com" = {
+          HostName = "github.com";
+          User = "git";
+          IdentityFile = "~/.ssh/id_ed25519";
+          IdentitiesOnly = true;
+          AddKeysToAgent = "yes";
+        };
       };
     };
 
