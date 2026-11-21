@@ -183,13 +183,15 @@
           "session": {
             "sandbox": {
               "use_credentials": ["ssh-agent"],
-              "fs_read": ["."],
-              "fs_read_file": [
-                "$HOME/.config/git/config",
-                "$HOME/.config/git/ignore",
-                "$HOME/.config/git/attributes"
+              "fs_read": [
+                ".",
+                "$HOME/.config/git",
+                "@git:worktree",
+                "@git:common-dir",
+                "@git:hooks-path"
               ],
-              "fs_write": [".", "$HOME/.pi/agent/worktrees"],
+              "fs_read_file": ["@git:config-files"],
+              "fs_write": [".", "@git:worktree", "$HOME/.pi/agent/worktrees"],
               "environment": {
                 "allow_vars": [
                   "PATH",
@@ -199,7 +201,12 @@
                   "LANG",
                   "LC_*",
                   "SSH_AUTH_SOCK"
-                ]
+                ],
+                "set_vars": {
+                  "GIT_PAGER": "",
+                  "GIT_TERMINAL_PROMPT": "0",
+                  "GIT_EDITOR": ":"
+                }
               }
             },
             "invocation_policy": {
